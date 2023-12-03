@@ -117,7 +117,7 @@
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 
     <!-- muestra de categorias -->
-    @if($categitem == 1)
+
     @if ($categorias->count())
 
     <div class="text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 md:p-8">
@@ -129,7 +129,7 @@
                 <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
                 <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
             </div>
-            <a href="#" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
+            <a href="{{route('verproductos', $categoria->nombre)}}" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
                 <div>
                     <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full">
                 </div>
@@ -148,56 +148,8 @@
         <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
     </div>
     @endif
-    @else
 
-    <!-- muestra productos que cumplenm con la condicion de búqueda    -->
 
-    
-    @if ($productos->count())
-
-    <div class="text-gray-700 grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-4 lg:grid-cols-6 p-4 md:p-8">
-
-        @foreach ($productos as $producto)
-
-        <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
-            <div class="flex h-[70%] items-start">
-                <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full" width="">
-            </div>
-
-            <div class="w-full p-4 font-bold text-xl xl:text-2xl">
-                <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
-                <p class="text-base font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
-                <p class="text-base font-normal text-lime-600">{{$producto->stock}}+ En existencias</p>
-                <div class="flex items-start mt-2">
-                    <span class="text-base font-normal mt-0.5 mr-0.5">US$</span>
-                    <span class="text-3xl font-normal"> {{intval($producto->precio);}}</strong></span>
-                    @php
-                    $decimal = substr($producto->precio, -2);
-                    @endphp
-                    @if ($decimal <> 0)
-                        <span class="mt-0.5 ml-0.5 text-base font-light">{{substr($producto->precio, -2);}}</span>
-                        @endif
-                </div>
-            </div>
-        </div>
-
-        @endforeach
-
-    </div>
-
-    @else
-    <div class="bg-white text-base font-semibold sm:px-10 px-2 py-2 shadow">
-        <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
-    </div>
-    @endif
-
-    @if ($productos->hasPages())
-    <div class="mx-4 md:mx-8 px-4 py-2 border border-gray-300 rounded-md text-center my-10">
-        {{$productos->onEachSide(0)->links()}}
-    </div>
-    @endif
-    @endif
-   
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
     <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-xs font-semibold">
