@@ -54,7 +54,7 @@
             <a href="{{ route('login') }}" class="flex items-end font-semibold mr-2 px-2 py-2 border border-transparent rounded-sm hover:border-white"><img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
             </a>
-            <a href="{{ route('carrito') }}" class="flex items-end font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
+            <a href="{{ route('carro') }}" class="flex items-end font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Carrito</p>
             </a>
         </div>

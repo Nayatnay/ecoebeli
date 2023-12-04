@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BuscarController;
+use App\Http\Controllers\CarroController;
 use App\Http\Controllers\EbeliController;
 use App\Http\Controllers\VerproductosController;
 use App\Livewire\Carrito\IndexCarrito;
@@ -28,6 +29,7 @@ Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
 Route::get('categorias', IndexCategorias::class)->name('categorias');
 Route::get('productos', IndexProductos::class)->name('productos');
 Route::get('carrito', IndexCarrito::class)->name('carrito');
+Route::get('carro', [CarroController::class, 'index'])->name('carro');
 
 
 Route::get('condiciones', function () {
