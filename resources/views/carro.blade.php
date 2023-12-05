@@ -13,7 +13,7 @@
 
 </head>
 
-<body class="antialised">
+<body class="antialised bg-gray-100">
     <div class="flex items-center justify-between bg-zinc-900 shadow text-white sm:px-10 px-2 py-1 w-full">
 
         <div class="mr-4 min-w-[140px]">
@@ -60,119 +60,151 @@
         </div>
     </div>
 
-    <div class="px-4 py-12">
-        <div class="max-w-7xl mx-auto">
+    <div class="p-4">
 
-            <div class="flex flex-col sm:flex-row items-start bg-white rounded shadow p-4 sm:p-8 ">
-                <img src="{{asset('img/car.png')}}" alt="Compras" title="Compras" width="200" class="p-4">
-                <div class="sm:text-2xl font-black px-6">
-                    <h2 class="mb-4">Tu carrito de Ebeli está vacío</h2>
-                    <a href="#" class="text-sm sm:text-lg font-bold bg-lime-500 hover:bg-lime-400 px-4 py-2 rounded-md">Compra las ofertas del día</a>
+        <div class="flex flex-col items-center sm:flex-row sm:items-start bg-white rounded shadow p-4 sm:p-8 ">
+            <div>
+                <img src="{{asset('img/carg.png')}}" alt="Compras" title="Compras" width="200" class="p-4">
+            </div>
+            <div class="sm:ml-8">
+                <h2 class="text-center sm:texl-left text-3xl font-semibold px-6 mb-4">Tu carrito de Ebeli está vacío</h2>
+
+                <a href="#" class="block text-center sm:texl-lef mx-6 text-sm sm:text-lg font-bold bg-lime-500 hover:bg-lime-400 px-4 py-2 rounded-md">Compra las ofertas del día</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="mt-4 text-xs font-semibold text-gray-700">
+            <p>El precio y la disponibilidad de los productos de Ebeli.com están sujetos a cambio.
+                En el carrito de compras puedes dejar temporalmente los productos que quieras.
+                Aparecerá el precio más reciente de cada producto.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="mt-10 p-4 bg-white">
+
+        <p class="mt-4 text-2xl font-bold">Recomendaciones y tendencias de compras</p>
+
+        <!-- muestra productos que cumplenm con la condicion de búqueda    -->
+
+
+        @if ($productos->count())
+
+        <div class="mt-4 text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-6">
+
+            @foreach ($productos as $producto)
+
+            <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
+                <div class="flex h-[70%] items-start ">
+                    <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                </div>
+
+                <div class="w-full p-4 font-bold text-xl ">
+                    <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
+                    <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
+                    <p class="mt-2 flex items-start text-sm font-bold">{{$producto->stock}}+ <strong class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong></p>
+                    <div class="flex items-start mt-4">
+                        <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
+                        <span class="text-3xl font-semibold"> {{intval($producto->precio);}}</strong></span>
+                        @php
+                        $decimal = substr($producto->precio, -2);
+                        @endphp
+                        @if ($decimal <> 0)
+                            <span class="mt-0.5 ml-0.5 text-sm font-normal">{{substr($producto->precio, -2);}}</span>
+                            @endif
+                    </div>
                 </div>
             </div>
+
+            @endforeach
+
+        </div>
+
+        @else
+        <div class="bg-white text-orange-700 text-base font-semibold sm:px-10 px-2 py-2 shadow">
+            <span>Sin Stock </span> " </span>
+        </div>
+        @endif
+
+        @if ($productos->hasPages())
+        <div class="px-4 py-2 border border-gray-300 rounded-md text-center my-10">
+            {{$productos->onEachSide(0)->links()}}
+        </div>
+        @endif
+
+    </div>
+
+    <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
+
+    <div class="border-y border-zinc-300 py-10 flex flex-col items-center text-xs font-semibold bg-white">
+        <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
+        <div>
+            <span>¿Eres un cliente nuevo?</span>
+            <a href="{{ route('register') }}" class="text-blue-700 hover:underline">Empieza aquí.</a>
+
         </div>
     </div>
-            <!-- muestra de categorias -->
 
-            @if ($categorias->count())
+    <footer class="bg-zinc-900 text-white text-xs p-8 text-center">
+        <p class="mb-2 text-sm font-semibold">Síguenos</p>
+        <div class="mb-10 text-white font-normal flex justify-center">
 
-            <div class="text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 md:p-8">
+            <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
+                <img src="{{asset('img/facebook.png')}}" width="24" height="auto" title="" alt="facebook">
+                <p class="w-20 text-left ml-2 text-sm">Facebook</p>
+            </a>
+            <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
+                <img src="{{asset('img/instagram.png')}}" width="24" height="auto" title="" alt="instagram">
+                <p class="w-20 text-left ml-2 text-sm">Instagram</p>
+            </a>
+        </div>
 
-                @foreach ($categorias as $categoria)
+        <div class="text-center font-semibold ">
+            <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline mr-2">Condiciones de uso</a>
+            <a href="{{ route('politicas') }}" target="_blank" class="hover:underline mr-2">Políticas de privacidad</a>
+            <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline  ">Aviso legal </a>
+            <p class="font-light">&copy; 2023 Ebeli™ - Todos los derechos reservados.</p>
+        </div>
 
-                <div class="flex flex-col items-center justify-between border rounded-lg bg-gray-100">
-                    <div class="w-full p-4 font-bold text-xl xl:text-2xl">
-                        <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
-                        <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
-                    </div>
-                    <a href="{{route('verproductos', $categoria->nombre)}}" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
-                        <div>
-                            <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full">
-                        </div>
-                        <div class="w-full p-4 font-bold">
-                            Ver más
-                        </div>
-                    </a>
-                </div>
+    </footer>
 
-                @endforeach
+    <!-- volver a la misma posicion al recargar la pagina -->
 
-            </div>
+    <script>
+        window.onload = function() {
+            var pos = window.name || 0;
+            window.scrollTo(0, pos);
+        }
+        window.onunload = function() {
+            window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
+        }
+    </script>
 
-            @else
-            <div class="bg-white text-base font-semibold sm:px-10 px-2 py-2 shadow">
-                <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
-            </div>
-            @endif
-
-
-            <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
-
-            <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-xs font-semibold">
-                <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-                <div>
-                    <span>¿Eres un cliente nuevo?</span>
-                    <a href="{{ route('register') }}" class="text-blue-700 hover:underline">Empieza aquí.</a>
-
-                </div>
-            </div>
-
-            <footer class="bg-zinc-900 text-white text-xs p-8 text-center">
-                <p class="mb-2 text-sm font-semibold">Síguenos</p>
-                <div class="mb-10 text-white font-normal flex justify-center">
-
-                    <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
-                        <img src="{{asset('img/facebook.png')}}" width="24" height="auto" title="" alt="facebook">
-                        <p class="w-20 text-left ml-2 text-sm">Facebook</p>
-                    </a>
-                    <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
-                        <img src="{{asset('img/instagram.png')}}" width="24" height="auto" title="" alt="instagram">
-                        <p class="w-20 text-left ml-2 text-sm">Instagram</p>
-                    </a>
-                </div>
-
-                <div class="text-center font-semibold ">
-                    <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline mr-2">Condiciones de uso</a>
-                    <a href="{{ route('politicas') }}" target="_blank" class="hover:underline mr-2">Políticas de privacidad</a>
-                    <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline  ">Aviso legal </a>
-                    <p class="font-light">&copy; 2023 Ebeli™ - Todos los derechos reservados.</p>
-                </div>
-
-            </footer>
-
-            <!-- volver a la misma posicion al recargar la pagina -->
-
-            <script>
-                window.onload = function() {
-                    var pos = window.name || 0;
-                    window.scrollTo(0, pos);
-                }
-                window.onunload = function() {
-                    window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
-                }
-            </script>
-
-            <!-- Resize del select 
+    <!-- Resize del select 
     <script src="https://unpkg.com/auto-resize-custom-select"></script>
     <script>
         customSelect();
     </script>
 -->
 
-            <script>
-                function ShowSelected() {
-                    /* Para obtener el valor */
-                    var cod = document.getElementById("categoria").value;
-                    //alert(cod);
+    <script>
+        function ShowSelected() {
+            /* Para obtener el valor */
+            var cod = document.getElementById("categoria").value;
+            //alert(cod);
 
-                    /* Para obtener el texto */
-                    var combo = document.getElementById("categoria");
-                    var selected = combo.options[combo.selectedIndex].text;
-                    //alert(selected);
-                    document.getElementById("buscar").value = selected;
-                    document.getElementById("buscar").focus();
-                }
-            </script>
+            /* Para obtener el texto */
+            var combo = document.getElementById("categoria");
+            var selected = combo.options[combo.selectedIndex].text;
+            //alert(selected);
+            document.getElementById("buscar").value = selected;
+            document.getElementById("buscar").focus();
+        }
+    </script>
 
 </body>
 

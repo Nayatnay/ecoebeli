@@ -54,7 +54,7 @@
             <a href="{{ route('login') }}" class="flex items-end font-semibold mr-2 px-2 py-2 border border-transparent rounded-sm hover:border-white"><img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
             </a>
-            <a href="{{ route('carrito') }}" class="flex items-end font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
+            <a href="{{ route('carro') }}" class="flex items-end font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Carrito</p>
             </a>
         </div>
@@ -69,7 +69,7 @@
 
     @if ($productos->count())
 
-    <div class="text-gray-700 grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-6 p-4 md:p-8">
+    <div class="text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-6 p-4 md:p-8">
 
         @foreach ($productos as $producto)
 
@@ -78,18 +78,18 @@
                 <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full" width="">
             </div>
 
-            <div class="w-full p-4 font-bold text-xl xl:text-2xl">
+            <div class="w-full p-4 font-bold text-xl">
                 <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
-                <p class="text-base font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
-                <p class="text-base font-normal text-lime-600">{{$producto->stock}}+ En existencias</p>
+                <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
+                <p class="mt-2 flex items-start text-sm font-bold">{{$producto->stock}}+ <strong class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong></p>
                 <div class="flex items-start mt-2">
-                    <span class="text-base font-normal mt-0.5 mr-0.5">US$</span>
-                    <span class="text-3xl font-normal"> {{intval($producto->precio);}}</strong></span>
+                    <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
+                    <span class="text-3xl font-semibold"> {{intval($producto->precio);}}</strong></span>
                     @php
                     $decimal = substr($producto->precio, -2);
                     @endphp
                     @if ($decimal <> 0)
-                        <span class="mt-0.5 ml-0.5 text-base font-light">{{substr($producto->precio, -2);}}</span>
+                        <span class="mt-0.5 ml-0.5 text-sm font-light">{{substr($producto->precio, -2);}}</span>
                         @endif
                 </div>
             </div>

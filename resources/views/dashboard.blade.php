@@ -18,7 +18,7 @@
     </x-slot>
 
     <div class="px-4 py-12">
-        <div class="max-w-7xl mx-auto">
+        <div class="">
             @livewire('principal.index-principal')
         </div>
     </div>
