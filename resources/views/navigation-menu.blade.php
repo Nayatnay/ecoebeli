@@ -88,7 +88,7 @@
                             </button>
                             @else
                             <span class="inline-flex rounded-md">
-                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium text-white hover:border-white transition ease-in-out duration-150">
+                                <button type="button" class="inline-flex items-center p-3 rounded border border-transparent text-sm leading-4 font-medium text-white hover:border-gray-400 focus:border-gray-400 transition ease-in-out duration-150">
                                     Hola {{ Auth::user()->name }}
 
                                     <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

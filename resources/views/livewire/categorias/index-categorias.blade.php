@@ -110,19 +110,19 @@
             </div>
 
             <p class="text-zinc-800">Imagen de la Categoría</p>
-            
+
             <div class="flex justify-between items-end mt-4">
                 @if ($imagenva)
-                
-                    <img src="{{$imagenva->temporaryUrl()}}" class="p-4 border border-zinc-500 rounded" width="240">
-                
+
+                <img src="{{$imagenva->temporaryUrl()}}" class="p-4 border border-zinc-500 rounded" width="240">
+
                 @else
-                
-                    <img src="{{asset('../storage/categorias/'.$imagen)}}" alt="" title="" class="p-4 border border-zinc-500 rounded" width="240">
-                
+
+                <img src="{{asset('../storage/categorias/'.$imagen)}}" alt="" title="" class="p-4 border border-zinc-500 rounded" width="240">
+
                 @endif
             </div>
-            
+
             <div class="text-zinc-800 text-xs text-left lg:text-sm ">
                 <label for="{{$identificador}}" class="cursor-pointer hover:underline">Seleccionar nueva Imagen</label>
                 <input id="{{$identificador}}" type="file" style="visibility:hidden;" name="imagenva" wire:model="imagenva" required />
@@ -221,6 +221,5 @@
         })
     </script>
     @endif
-
 
 </div>

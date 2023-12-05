@@ -96,7 +96,6 @@ class IndexProductos extends Component
         $this->reset(['open_edit', 'codigo', 'id_categoria', 'nombre', 'descripcion', 'imagen', 'stock', 'precio']);  //cierra el modal y limpia los campos del formulario
         $this->identificador = rand();
         $this->dispatch('index-productos');
-        
     }
 
 
@@ -114,10 +113,15 @@ class IndexProductos extends Component
         if ($request->categoria <> null) {
             $productos = Producto::where('id_categoria', '=', $request->categoria)
                 ->orderBy('id', 'desc')->paginate(6);
+            if (count($productos) == 0) {
+                $productos = Producto::where('nombre', 'LIKE', '%' . $buscar . '%')
+                    ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')
+                    ->orderBy('id', 'desc')->paginate(6);
+            }
         } else {
             $productos = Producto::where('nombre', 'LIKE', '%' . $buscar . '%')
                 ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')
-                ->orderBy('id', 'desc')->paginate(3);
+                ->orderBy('id', 'desc')->paginate(6);
         }
 
         return view('livewire.productos.index-productos', compact('productos', 'buscar', 'categ'));

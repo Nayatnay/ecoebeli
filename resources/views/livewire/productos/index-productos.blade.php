@@ -206,8 +206,7 @@
         </x-slot>
 
     </x-dialog-modal>
-
-
+   
     <script>
         function ShowSelected() {
             /* Para obtener el valor */
