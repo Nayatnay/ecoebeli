@@ -98,7 +98,7 @@ class IndexCategorias extends Component
         $categ = Categoria::all()->sortBy('nombre');;
 
         $categorias = Categoria::where('nombre', 'LIKE', '%' . $buscar . '%')
-            ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')->orderBy('id', 'desc')->paginate(2);
+            ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')->orderBy('id', 'desc')->paginate(8);
 
         return view('livewire.categorias.index-categorias', compact('categorias', 'categ', 'buscar'));
     }

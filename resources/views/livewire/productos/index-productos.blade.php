@@ -1,14 +1,13 @@
-<div class="min-h-screen max-w-7xl mx-auto px-4 py-12">
-    <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Productos') }}
-            </h2>
-            @livewire('productos.crear-producto')
-        </div>
-    </x-slot>
+<div class="min-h-screen">
 
-    <div class="">
+    <div class="flex items-center justify-between sm:px-12 p-4 bg-white shadow">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Productos') }}
+        </h2>
+        @livewire('productos.crear-producto')
+    </div>
+
+    <div class="p-4 sm:p-12">
         <form action="{{ route('productos')}}" class="flex items-center justify-center border rounded w-full bg-lime-500">
             @if($buscar == "")
             <select name="categoria" id="categoria" onchange="ShowSelected();" class="hidden sm:block text-xs bg-gray-200 px-2 py-3 rounded-tl rounded-bl border-none focus:ring-0 text-black">
@@ -32,70 +31,73 @@
                 <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="24">
             </button>
         </form>
-    </div>
 
-    @if ($productos->count())
+        @if ($productos->count())
 
-    <div class="grid gap-x-16 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
+        <div class="grid gap-x-16 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-12">
 
-        @foreach ($productos as $producto)
+            @foreach ($productos as $producto)
 
-        <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
-            <div class="flex h-[70%] items-center">
-                <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full" width="">
-            </div>
-
-            <div class="w-full p-4 font-bold text-xl xl:text-2xl">
-                <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
-                <p class="text-base font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
-                <p class="text-base font-light text-orange-600">{{$producto->stock}}+ En existencias</p>
-                <div class="flex items-start mt-2">
-                    <span class="text-base font-light mt-0.5 mr-0.5">US$</span>
-                    <span class="text-3xl font-light"> {{intval($producto->precio);}}</strong></span>
-                    @php
-                    $decimal = substr($producto->precio, -2);
-                    @endphp
-                    @if ($decimal <> 0)
-                        <span class="mt-0.5 ml-0.5 text-base font-light">{{substr($producto->precio, -2);}}</span>
-                        @endif
+            <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
+                <div class="flex h-[70%] items-center">
+                    <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
                 </div>
+
+                <div class="w-full p-4 font-bold text-xl xl:text-2xl">
+                    <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
+                    <p class="text-base font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
+                    <p class="text-base font-light text-orange-600">{{$producto->stock}}+ En existencias</p>
+                    <div class="flex items-start mt-2">
+                        <span class="text-base font-light mt-0.5 mr-0.5">US$</span>
+                        <span class="text-3xl font-light"> {{intval($producto->precio);}}</strong></span>
+                        @php
+                        $decimal = substr($producto->precio, -2);
+                        @endphp
+                        @if ($decimal <> 0)
+                            <span class="mt-0.5 ml-0.5 text-base font-light">{{substr($producto->precio, -2);}}</span>
+                            @endif
+                    </div>
+                </div>
+
+                <div class="w-full p-4 flex items-center justify-between">
+                    <a href="#" title="Eliminar" class="px-2" wire:click="delete({{$producto->id}})">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <style>
+                                svg {
+                                    fill: #7d7d7d
+                                }
+                            </style>
+                            <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                        </svg>
+                    </a>
+                    <a href="#" wire:click="edit({{$producto}})" title="Editar" class="group text-center px-2">
+                        <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
+                        <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
+                        <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
+                    </a>
+                </div>
+
             </div>
 
-            <div class="w-full p-4 flex items-center justify-between">
-                <a href="#" title="Eliminar" class="px-2" wire:click="delete({{$producto->id}})">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                        <style>
-                            svg {
-                                fill: #7d7d7d
-                            }
-                        </style>
-                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                    </svg>
-                </a>
-                <a href="#" wire:click="edit({{$producto}})" title="Editar" class="group text-center px-2">
-                    <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
-                    <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
-                    <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
-                </a>
-            </div>
+            @endforeach
 
         </div>
 
-        @endforeach
+        @else
 
-    </div>
+        <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
+            <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
+        </div>
 
-    @else
-    <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
-        <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
-    </div>
-    @endif
+        @endif
 
-    @if ($productos->hasPages())
-    <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
-        {{$productos->onEachSide(0)->links()}}
+        @if ($productos->hasPages())
+        <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
+            {{$productos->onEachSide(0)->links()}}
+        </div>
+        @endif
+        
     </div>
-    @endif
 
     <!--Modal delete -->
 
@@ -166,7 +168,7 @@
                     <x-input id="precio" class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" type="number" step="any" name="precio" wire:model="precio" required autofocus />
                     <x-input-error for="precio" />
                 </div>
-            </div> 
+            </div>
             <p class="text-zinc-800">Imagen de la Categoría</p>
 
             <div class="flex justify-between items-end mt-4">
@@ -206,7 +208,7 @@
         </x-slot>
 
     </x-dialog-modal>
-   
+
     <script>
         function ShowSelected() {
             /* Para obtener el valor */

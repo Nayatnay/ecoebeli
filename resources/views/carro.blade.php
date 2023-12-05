@@ -14,6 +14,7 @@
 </head>
 
 <body class="antialised bg-gray-100">
+    
     <div class="flex items-center justify-between bg-zinc-900 shadow text-white sm:px-10 px-2 py-1 w-full">
 
         <div class="mr-4 min-w-[140px]">

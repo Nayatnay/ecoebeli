@@ -1,6 +1,6 @@
-<div>
+<div class="min-h-screen">
     <!-- formulario de busqueda -->
-    <div class="">
+    <div class="p-4 sm:p-12">
         <form action="{{ route('dashboard')}}" class="flex items-center justify-center border rounded w-full bg-lime-500">
             @if($buscar == null)
             <select name="categoria" id="categoria" onchange="ShowSelected();" class="hidden sm:block text-xs bg-gray-200 px-2 py-3 rounded-tl rounded-bl border-none focus:ring-0 text-black">
@@ -24,42 +24,41 @@
                 <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="24">
             </button>
         </form>
-    </div>
 
-    <!-- muestra de categorias -->
+        <!-- muestra de categorias -->
 
-    @if ($categorias->count())
+        @if ($categorias->count())
 
-    <div class="my-12 text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div class="my-12 text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
 
-        @foreach ($categorias as $categoria)
+            @foreach ($categorias as $categoria)
 
-        <div class="flex flex-col items-center justify-between border rounded-lg bg-gray-100">
-            <div class="w-full p-4 font-bold text-xl xl:text-2xl">
-                <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
-                <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
+            <div class="flex flex-col items-center justify-between border rounded-lg bg-gray-100">
+                <div class="w-full p-4 font-bold text-xl xl:text-2xl">
+                    <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
+                    <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
+                </div>
+                <a href="{{route('verproductos', $categoria->nombre)}}" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
+                    <div>
+                        <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full">
+                    </div>
+                    <div class="w-full p-4 font-bold">
+                        Ver más
+                    </div>
+                </a>
             </div>
-            <a href="{{route('verproductos', $categoria->nombre)}}" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
-                <div>
-                    <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full">
-                </div>
-                <div class="w-full p-4 font-bold">
-                    Ver más
-                </div>
-            </a>
+
+            @endforeach
+
         </div>
 
-        @endforeach
+        @else
+        <div class="bg-white text-base font-semibold sm:px-10 px-2 py-2 shadow">
+            <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
+        </div>
+        @endif
 
     </div>
-
-    @else
-    <div class="bg-white text-base font-semibold sm:px-10 px-2 py-2 shadow">
-        <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
-    </div>
-    @endif
-
-    
 
     <footer class="bg-zinc-900 text-white text-xs p-8 text-center">
         <p class="mb-2 text-sm font-semibold">Síguenos</p>

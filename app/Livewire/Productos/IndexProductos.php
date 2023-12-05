@@ -112,16 +112,16 @@ class IndexProductos extends Component
 
         if ($request->categoria <> null) {
             $productos = Producto::where('id_categoria', '=', $request->categoria)
-                ->orderBy('id', 'desc')->paginate(6);
+                ->orderBy('id', 'desc')->paginate(8);
             if (count($productos) == 0) {
                 $productos = Producto::where('nombre', 'LIKE', '%' . $buscar . '%')
                     ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')
-                    ->orderBy('id', 'desc')->paginate(6);
+                    ->orderBy('id', 'desc')->paginate(8);
             }
         } else {
             $productos = Producto::where('nombre', 'LIKE', '%' . $buscar . '%')
                 ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')
-                ->orderBy('id', 'desc')->paginate(6);
+                ->orderBy('id', 'desc')->paginate(8);
         }
 
         return view('livewire.productos.index-productos', compact('productos', 'buscar', 'categ'));

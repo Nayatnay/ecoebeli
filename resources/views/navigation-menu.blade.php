@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-zinc-900 border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="sm:px-10 px-2 py-1">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -21,7 +21,7 @@
                     <x-nav-link href="{{ route('productos') }}" :active="request()->routeIs('productos')">
                         {{ __('Productos') }}
                     </x-nav-link>
-                    
+
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
                 @endif
 
                 <!-- Settings Dropdown -->
-                <div class="ms-3 relative">
+                <div class="ms-3 relative flex items-center">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -87,15 +87,19 @@
                                 <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                             </button>
                             @else
-                            <span class="inline-flex rounded-md">
-                                <button type="button" class="inline-flex items-center p-3 rounded border border-transparent text-sm leading-4 font-medium text-white hover:border-gray-400 focus:border-gray-400 transition ease-in-out duration-150">
-                                    Hola {{ Auth::user()->name }}
+                            <div class="flex">
+                                <span class="inline-flex rounded-md">
+                                    <button type="button" class="inline-flex items-center p-3 rounded border border-transparent text-sm leading-4 font-medium text-white hover:border-gray-400 focus:border-gray-400 transition ease-in-out duration-150">
+                                        Hola {{ Auth::user()->name }}
 
-                                    <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </button>
-                            </span>
+                                        <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </button>
+                                </span>
+
+                            </div>
+
                             @endif
                         </x-slot>
 
@@ -127,6 +131,10 @@
                             </form>
                         </x-slot>
                     </x-dropdown>
+                    <a href="{{ route('carrito') }}" class="flex items-end font-light p-2 border border-transparent rounded hover:border-gray-400">
+                        <img src="{{asset('img/carw.png')}}" alt="Compras" width="20">
+                        <p class="hidden lg:block ml-2 text-sm text-white">Carrito</p>
+                    </a>
                 </div>
             </div>
 
@@ -144,8 +152,8 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        
-    <div class="pt-2 pb-3 space-y-1">
+
+        <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
@@ -154,6 +162,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link href="{{ route('productos') }}" :active="request()->routeIs('productos')">
                 {{ __('Productos') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('carrito') }}" :active="request()->routeIs('carrito')">
+                {{ __('Carrito') }}
             </x-responsive-nav-link>
         </div>
 

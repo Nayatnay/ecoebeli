@@ -75,16 +75,15 @@
             <!-- Carousel wrapper -->
             <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
                 <!-- Item 1 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
-                    <span class="absolute top-1/2 left-1/2 text-2xl font-semibold -translate-x-1/2 -translate-y-1/2 sm:text-3xl text-gray-800">First Slide</span>
+                <div class="hidden animation ease-in-out duration-700" data-carousel-item="active">
                     <img src="{{asset('img/a1.jpg')}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                 </div>
                 <!-- Item 2 -->
-                <div class="hidden animation duration-700 ease-in-out" data-carousel-item>
+                <div class="hidden animation ease-in-out duration-700" data-carousel-item>
                     <img src="{{asset('img/a2.jpg')}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                 </div>
                 <!-- Item 3 -->
-                <div class="hidden animation duration-700 ease-in-out" data-carousel-item>
+                <div class="hidden animation ease-in-out duration-700" data-carousel-item>
                     <img src="{{asset('img/a3.jpg')}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
                 </div>
             </div>
@@ -120,7 +119,7 @@
 
     @if ($categorias->count())
 
-    <div class="text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 md:p-8">
+    <div class="text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 md:p-12">
 
         @foreach ($categorias as $categoria)
 

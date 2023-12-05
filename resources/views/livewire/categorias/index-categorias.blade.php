@@ -1,15 +1,13 @@
-<div class="min-h-screen max-w-7xl mx-auto px-4 py-12">
+<div class="min-h-screen">
 
-    <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Categorías') }}
-            </h2>
-            @livewire('categorias.crear-categoria')
-        </div>
-    </x-slot>
+    <div class="flex items-center justify-between sm:px-12 p-4 bg-white shadow">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Categorías
+        </h2>
+        @livewire('categorias.crear-categoria')
+    </div>
 
-    <div class="">
+    <div class="p-4 sm:p-12">
         <form action="{{ route('categorias')}}" class="flex items-center justify-center border rounded w-full bg-lime-500">
             @if($buscar == "")
             <select name="categoria" id="categoria" onchange="ShowSelected();" class="hidden sm:block text-xs bg-gray-200 px-2 py-3 rounded-tl rounded-bl border-none focus:ring-0 text-black">
@@ -33,61 +31,62 @@
                 <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="24">
             </button>
         </form>
-    </div>
 
 
-    @if ($categorias->count())
 
-    <div class="grid gap-x-16 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
+        @if ($categorias->count())
 
-        @foreach ($categorias as $categoria)
+        <div class="my-12 grid gap-x-16 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
 
-        <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
-            <div class="flex h-[70%] items-center">
-                <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full" width="">
+            @foreach ($categorias as $categoria)
+
+            <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
+                <div class="flex h-[70%] items-center">
+                    <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                </div>
+
+                <div class="w-full p-4 font-bold text-xl xl:text-2xl">
+                    <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
+                    <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
+                </div>
+
+                <div class="w-full p-4 flex items-center justify-between">
+                    <a href="#" title="Eliminar" class="px-2" wire:click="delete({{$categoria->id}})">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <style>
+                                svg {
+                                    fill: #7d7d7d
+                                }
+                            </style>
+                            <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                        </svg>
+                    </a>
+                    <a href="#" wire:click="edit({{$categoria}})" title="Editar" class="group text-center px-2">
+                        <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
+                        <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
+                        <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
+                    </a>
+                </div>
+
             </div>
 
-            <div class="w-full p-4 font-bold text-xl xl:text-2xl">
-                <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
-                <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
-            </div>
-
-            <div class="w-full p-4 flex items-center justify-between">
-                <a href="#" title="Eliminar" class="px-2" wire:click="delete({{$categoria->id}})">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                        <style>
-                            svg {
-                                fill: #7d7d7d
-                            }
-                        </style>
-                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
-                    </svg>
-                </a>
-                <a href="#" wire:click="edit({{$categoria}})" title="Editar" class="group text-center px-2">
-                    <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
-                    <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
-                    <span class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
-                </a>
-            </div>
+            @endforeach
 
         </div>
 
-        @endforeach
+        @else
+        <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
+            <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
+        </div>
+        @endif
 
+        @if ($categorias->hasPages())
+        <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
+            {{$categorias->onEachSide(0)->links()}}
+        </div>
+        @endif
     </div>
-
-    @else
-    <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
-        <span>0 resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
-    </div>
-    @endif
-
-    @if ($categorias->hasPages())
-    <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
-        {{$categorias->onEachSide(0)->links()}}
-    </div>
-    @endif
-
+    
     <!--Modal edit -->
 
     <x-dialog-modal wire:model="open_edit">
