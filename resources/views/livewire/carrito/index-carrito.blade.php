@@ -4,24 +4,24 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight mr-4">{{ __('Carrito') }}</h2>
         <!-- formulario de busqueda -->
 
-        <form action="{{ route('dashboard')}}" class="flex items-center justify-center border rounded w-full bg-lime-500">
+        <form action="{{ route('carrito')}}" class="flex items-center justify-center border rounded w-full bg-lime-500">
             @if($buscar == null)
-            <select name="categoria" id="categoria" onchange="ShowSelected();" class="hidden sm:block text-xs bg-gray-200 px-2 py-3 rounded-tl rounded-bl border-none focus:ring-0 text-black">
+            <select name="categoria" id="categoria" onchange="ShowSelected();" class="hidden sm:block text-xs bg-gray-300 px-2 py-3 rounded-tl rounded-bl border-none focus:ring-0 text-black">
                 <option value="">Todas las Categorías</option>
                 @foreach ($categ as $categoria)
-                <option value="$categoria->id">{{$categoria->nombre}}</option>
+                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                 @endforeach
             </select>
-            <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value="{{ $buscar }}" class="text-xs w-full bg-white px-2 py-3 border-none focus:ring-0">
+            <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value="{{ $buscar }}" class="text-xs w-full bg-gray-100 px-2 py-3 border-none focus:ring-0">
             @else
-            <select name="categoria" id="categoria" onchange="ShowSelected();" class="hidden sm:block text-xs bg-gray-200 px-2 py-3 rounded-tl rounded-bl border-none focus:ring-0 text-black">
+            <select name="categoria" id="categoria" onchange="ShowSelected();" class="hidden sm:block text-xs bg-gray-300 px-2 py-3 rounded-tl rounded-bl border-none focus:ring-0 text-black">
                 <option value="$buscar">{{$buscar}}</option>
                 <option value="">Todas las Categorías</option>
                 @foreach ($categ as $categoria)
-                <option value="$categoria->id">{{$categoria->nombre}}</option>
+                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                 @endforeach
             </select>
-            <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value="" class="text-xs w-full bg-white px-2 py-3 border-none focus:ring-0">
+            <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value="" class="text-xs w-full bg-gray-100 px-2 py-3 border-none focus:ring-0">
             @endif
             <button type="submit" class="p-2 bg-lime-500  border-none focus:ring-0">
                 <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="24">
@@ -41,7 +41,7 @@
     </div>
 
     <div class="p-4 sm:px-12">
-        
+
         <div class="mt-4 text-xs font-semibold text-gray-700">
             <p>El precio y la disponibilidad de los productos de Ebeli.com están sujetos a cambio.
                 En el carrito de compras puedes dejar temporalmente los productos que quieras.
@@ -102,17 +102,17 @@
 
         </div>
     </div>
-        <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
+    <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
-        <div class="mt-6 py-10 flex flex-col items-center text-xs font-semibold bg-white">
-            <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-            <div>
-                <span>¿Eres un cliente nuevo?</span>
-                <a href="{{ route('register') }}" class="text-blue-700 hover:underline">Empieza aquí.</a>
+    <div class="mt-6 py-10 flex flex-col items-center text-xs font-semibold bg-white">
+        <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
+        <div>
+            <span>¿Eres un cliente nuevo?</span>
+            <a href="{{ route('register') }}" class="text-blue-700 hover:underline">Empieza aquí.</a>
 
-            </div>
         </div>
-   
+    </div>
+
     <footer class="bg-zinc-900 text-white text-xs p-8 text-center">
         <p class="mb-2 text-sm font-semibold">Síguenos</p>
         <div class="mb-10 text-white font-normal flex justify-center">
@@ -135,4 +135,31 @@
         </div>
 
     </footer>
+
+    <!-- volver a la misma posicion al recargar la pagina -->
+
+    <script>
+        window.onload = function() {
+            var pos = window.name || 0;
+            window.scrollTo(0, pos);
+        }
+        window.onunload = function() {
+            window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
+        }
+    </script>
+
+    <script>
+        function ShowSelected() {
+            /* Para obtener el valor */
+            var cod = document.getElementById("categoria").value;
+            //alert(cod);
+
+            /* Para obtener el texto */
+            var combo = document.getElementById("categoria");
+            var selected = combo.options[combo.selectedIndex].text;
+            //alert(selected);
+            document.getElementById("buscar").value = selected;
+            document.getElementById("buscar").focus();
+        }
+    </script>
 </div>
