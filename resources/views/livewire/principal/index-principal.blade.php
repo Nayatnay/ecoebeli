@@ -1,4 +1,9 @@
 <div class="min-h-screen">
+
+    <div class="mt-4 flex justify-center">
+        <p class="inline-block text-white bg-red-700 rounded-full h-16 w-16 text-center text-6xl">x</p>
+    </div>
+
     <!-- formulario de busqueda -->
     <div class="p-4 sm:p-12">
         <form action="{{ route('dashboard')}}" class="flex items-center justify-center border rounded w-full bg-lime-500">

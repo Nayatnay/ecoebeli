@@ -15,7 +15,6 @@ class CarroController extends Controller
         $categ = Categoria::all()->sortBy('nombre');
         $productos = Producto::orderBy('nombre')->paginate(6);
         
-
         return view('carro', compact('productos', 'categ', 'buscar'));
     }
 }

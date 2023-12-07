@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ebeli&trade;</title>
+    <title>Ebeli&trade; | Tu tienda online</title>
     <link rel="shortcut icon" href="{!! asset('img/icono.png') !!}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
@@ -62,14 +62,14 @@
 
 
     <!-- video presentacion en mp4
-    <div class="w-full mx-auto">
-        <video width="1024" height="768" controls>
-            <source src="{{asset('img/Ebelipres.mp4')}}" type="video/mp4">
-        </video>
-    </div>
+<div class="w-full mx-auto">
+<video width="1024" height="768" controls>
+<source src="{{asset('img/Ebelipres.mp4')}}" type="video/mp4">
+</video>
+</div>
 -->
     <!-- This is an example component -->
-
+    
     <div class="w-full">
         <div id="default-carousel" class="relative" data-carousel="static">
             <!-- Carousel wrapper -->
@@ -196,10 +196,10 @@
     </script>
 
     <!-- Resize del select 
-    <script src="https://unpkg.com/auto-resize-custom-select"></script>
-    <script>
-        customSelect();
-    </script>
+<script src="https://unpkg.com/auto-resize-custom-select"></script>
+<script>
+customSelect();
+</script>
 -->
 
     <script>
@@ -216,7 +216,6 @@
             document.getElementById("buscar").focus();
         }
     </script>
-
 </body>
 
 </html>

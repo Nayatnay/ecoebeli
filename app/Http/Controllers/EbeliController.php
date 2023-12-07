@@ -2,26 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Categoria;
-use App\Models\Producto;
 use Livewire\WithPagination;
-
+use Illuminate\Http\Request;
 
 class EbeliController extends Controller
 {
     use WithPagination;
 
-    public function index(Request $request)
+    protected $listeners = ['render'];
+
+    public function index(request $request)
     {
         $buscar = $request->buscar;
         $categ = Categoria::all()->sortBy('nombre');
         $categorias = Categoria::all()->sortBy('nombre');
 
-        if ($buscar <> null) {
-            return redirect()->route('verproductos', compact('buscar'));
+        if ($buscar == "Todas las Categorías") {
+            return redirect()->Route('/');
+        } else {
+            if ($buscar <> null) {
+                //$this->redirectRoute('verproductos', ['buscar' => $buscar]); con livewire
+                return redirect()->Route('verproductos', compact('buscar'));
+            }
         }
 
-        return view('ebeli', compact('categ', 'buscar', 'categorias'));     
+        return view('ebeli', compact('categ', 'buscar', 'categorias'));
     }
 }

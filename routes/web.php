@@ -9,6 +9,7 @@ use App\Livewire\Carrito\IndexCarro as CarritoIndexCarro;
 use App\Livewire\Categorias\IndexCategorias;
 use App\Livewire\IndexCarro;
 use App\Livewire\Productos\IndexProductos;
+use App\Livewire\Productos\VerProductos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [EbeliController::class, 'index'])->name('/');
-Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
 
+//Route::get('verproductos', VerProductos::class)->name('verproductos');
+Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
 
 Route::get('categorias', IndexCategorias::class)->name('categorias');

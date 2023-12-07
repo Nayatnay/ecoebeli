@@ -30,6 +30,10 @@
 
     </div>
 
+    <div class="mt-4 flex justify-center">
+        <p class="inline-block text-white bg-red-700 rounded-full h-16 w-16 text-center text-6xl">x</p>
+    </div>
+
     <div class="flex flex-col items-center sm:flex-row sm:items-start bg-white rounded shadow mx-4 mt-6 sm:mt-12 sm:mx-12 sm:p-12 p-4 ">
         <div>
             <img src="{{asset('img/carg.png')}}" alt="Compras" title="Compras" width="200" class="p-4">

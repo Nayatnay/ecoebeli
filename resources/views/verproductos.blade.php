@@ -31,7 +31,7 @@
                 <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                 @endforeach
             </select>
-            <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value="{{ $buscar }}" class="text-sm w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0">
+            <input type="search" placeholder="Buscar en Ebeli" wire.model="buscar" name="buscar" id="buscar" value="{{ $buscar }}" class="text-sm w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0">
             @else
             <select name="categoria" id="categoria" onchange="ShowSelected();" class="text-sm bg-white px-4 py-2 rounded-tl rounded-bl border-none focus:ring-0 text-black">
                 <option value="$buscar">{{$buscar}}</option>
@@ -40,7 +40,7 @@
                 <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
                 @endforeach
             </select>
-            <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value="" class="text-sm w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0">
+            <input type="search" placeholder="Buscar en Ebeli" wire.model="buscar" name="buscar" id="buscar" value="" class="text-sm w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0">
             @endif
             <button type="submit" class="p-2 bg-lime-500  border-none focus:ring-0">
                 <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="24">
@@ -66,7 +66,6 @@
 
     <!-- muestra productos que cumplenm con la condicion de búqueda    -->
 
-
     @if ($productos->count())
 
     <div class="text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-6 p-4 md:p-8">
@@ -74,13 +73,19 @@
         @foreach ($productos as $producto)
 
         <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
-            <div class="flex h-[70%] items-start">
-                <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full" width="">
+
+
+            <div class="flex h-[50%] items-start">
+                <a href="#">
+                    <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                </a>
             </div>
 
             <div class="w-full p-4 font-bold text-xl">
-                <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
-                <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
+                <a href="#">
+                    <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
+                    <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
+                </a>
                 <p class="mt-2 flex items-start text-sm font-bold">{{$producto->stock}}+ <strong class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong></p>
                 <div class="flex items-start mt-2">
                     <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
@@ -93,7 +98,10 @@
                         @endif
                 </div>
             </div>
+
+
         </div>
+
 
         @endforeach
 
@@ -147,22 +155,22 @@
 
 
     <!-- volver a la misma posicion al recargar la pagina -->
-<!--
-    <script>
-        window.onload = function() {
-            var pos = window.name || 0;
-            window.scrollTo(0, pos);
-        }
-        window.onunload = function() {
-            window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
-        }
-    </script>
+    <!--
+<script>
+window.onload = function() {
+var pos = window.name || 0;
+window.scrollTo(0, pos);
+}
+window.onunload = function() {
+window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
+}
+</script>
 
-     Resize del select 
-    <script src="https://unpkg.com/auto-resize-custom-select"></script>
-    <script>
-        customSelect();
-    </script>
+Resize del select 
+<script src="https://unpkg.com/auto-resize-custom-select"></script>
+<script>
+customSelect();
+</script>
 -->
 
     <script>
@@ -179,7 +187,6 @@
             document.getElementById("buscar").focus();
         }
     </script>
-
 </body>
 
 </html>

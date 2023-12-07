@@ -14,7 +14,7 @@
 </head>
 
 <body class="antialised bg-gray-100">
-    
+
     <div class="flex items-center justify-between bg-zinc-900 shadow text-white sm:px-10 px-2 py-1 w-full">
 
         <div class="mr-4 min-w-[140px]">
@@ -100,13 +100,17 @@
             @foreach ($productos as $producto)
 
             <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
-                <div class="flex h-[70%] items-start ">
-                    <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                <div class="flex h-[50%] items-start ">
+                    <a href="#">
+                        <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                    </a>
                 </div>
 
                 <div class="w-full p-4 font-bold text-xl ">
-                    <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
-                    <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
+                    <a href="#">
+                        <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
+                        <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
+                    </a>
                     <p class="mt-2 flex items-start text-sm font-bold">{{$producto->stock}}+ <strong class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong></p>
                     <div class="flex items-start mt-4">
                         <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
@@ -173,7 +177,7 @@
 
     </footer>
 
-    <!-- volver a la misma posicion al recargar la pagina -->
+    <!-- volver a la misma posicion al recargar la pagina 
 
     <script>
         window.onload = function() {
@@ -184,7 +188,7 @@
             window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
         }
     </script>
-
+    -->
     <!-- Resize del select 
     <script src="https://unpkg.com/auto-resize-custom-select"></script>
     <script>
