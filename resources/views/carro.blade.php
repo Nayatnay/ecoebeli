@@ -55,7 +55,7 @@
             <a href="{{ route('login') }}" class="flex items-end font-semibold mr-2 px-2 py-2 border border-transparent rounded-sm hover:border-white"><img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
             </a>
-            <a href="{{ route('carro') }}" class="flex items-end font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
+            <a href="{{ route('carro') }}" class="lg:w-40 flex items-end justify-center font-semibold border border-transparent rounded-sm hover:border-white px-2 py-4"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Carrito</p>
             </a>
         </div>
@@ -91,7 +91,6 @@
         <p class="mt-4 text-2xl font-bold">Recomendaciones y tendencias de compras</p>
 
         <!-- muestra productos que cumplenm con la condicion de búqueda    -->
-
 
         @if ($productos->count())
 
@@ -147,10 +146,9 @@
 
     <div class="border-y border-zinc-300 py-10 flex flex-col items-center text-xs font-semibold bg-white">
         <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-        <div>
+        <div class="text-xs">
             <span>¿Eres un cliente nuevo?</span>
-            <a href="{{ route('register') }}" class="text-blue-700 hover:underline">Empieza aquí.</a>
-
+            <a href="{{ route('register') }}" class="text-orange-600 hover:underline">Empieza aquí.</a>
         </div>
     </div>
 

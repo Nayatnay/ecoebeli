@@ -32,14 +32,14 @@
             <a href="{{ route('login') }}" class="flex items-end font-semibold mr-2 px-2 py-2 border border-transparent rounded-sm hover:border-white"><img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
             </a>
-            <a href="" class="flex items-end font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
+            <a href="{{ route('carro') }}" class="lg:w-40 flex items-end justify-center font-semibold border border-transparent rounded-sm hover:border-white px-2 py-4"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Carrito</p>
             </a>
         </div>
     </div>
 
     <!-- formulario de busqueda -->
-    
+
     <div class="md:px-10 px-5 mt-8">
         <form action="{{ route('buscar')}}" class="flex items-center justify-center border rounded w-full bg-lime-500">
             @if($buscar == "")
@@ -69,7 +69,7 @@
 
     @if ($categorias->count())
 
-    <div class="text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 md:p-8">
+    <div class="text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 md:p-12">
 
         @foreach ($categorias as $categoria)
 
@@ -78,7 +78,7 @@
                 <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
                 <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
             </div>
-            <a href="#" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
+            <a href="{{route('verproductos', $categoria->nombre)}}" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
                 <div>
                     <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full">
                 </div>
@@ -102,10 +102,9 @@
 
     <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-xs font-semibold">
         <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-        <div>
+        <div class="text-xs">
             <span>¿Eres un cliente nuevo?</span>
-            <a href="{{ route('register') }}" class="text-blue-700 hover:underline">Empieza aquí.</a>
-
+            <a href="{{ route('register') }}" class="text-orange-600 hover:underline">Empieza aquí.</a>
         </div>
     </div>
 

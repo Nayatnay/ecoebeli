@@ -48,16 +48,43 @@
         </form>
 
         <div class="flex items-center justify-end text-sm ml-4 lg:min-w-[220px]">
+
             <a href="{{ route('buscar') }}" class="lg:hidden block p-2 mr-2">
                 <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="auto">
             </a>
-            <a href="{{ route('login') }}" class="flex items-end font-semibold mr-2 px-2 py-2 border border-transparent rounded-sm hover:border-white"><img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
-                <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
-            </a>
-            <a href="{{ route('carro') }}" class="flex items-end font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
+
+            @if (Route::has('login'))
+            <div class="">
+                @auth
+
+                <div class="flex">
+                    <span class="inline-flex rounded-md">
+                        <button type="button" class="inline-flex items-center p-3 rounded-sm border border-transparent text-sm leading-4 font-medium text-white hover:border-white focus:border-gray-400 transition ease-in-out duration-150">
+                            Hola {{ Auth::user()->name }}
+
+                            <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </button>
+                    </span>
+
+                </div>
+
+                @else
+                <a href="{{ route('login') }}" class="flex items-end font-semibold mr-1 p-2 border border-transparent rounded-sm hover:border-white">
+                    <img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
+                    <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
+                </a>
+                @endauth
+            </div>
+            @endif
+
+            <a href="{{ route('carro') }}" class="lg:w-40 flex items-end justify-center font-semibold border border-transparent rounded-sm hover:border-white px-2 py-4"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
                 <p class="hidden lg:block ml-2 text-sm">Carrito</p>
             </a>
+
         </div>
+
     </div>
 
 
@@ -69,11 +96,11 @@
 </div>
 -->
     <!-- This is an example component -->
-    
+
     <div class="w-full">
         <div id="default-carousel" class="relative" data-carousel="static">
             <!-- Carousel wrapper -->
-            <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
+            <div class="overflow-hidden relative h-48 sm:h-64 xl:h-80 2xl:h-96">
                 <!-- Item 1 -->
                 <div class="hidden animation ease-in-out duration-700" data-carousel-item="active">
                     <img src="{{asset('img/a1.jpg')}}" class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
@@ -119,20 +146,20 @@
 
     @if ($categorias->count())
 
-    <div class="text-gray-700 grid gap-x-5 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 p-4 md:p-12">
+    <div class="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 px-4 py-8 md:p-12">
 
         @foreach ($categorias as $categoria)
 
-        <div class="flex flex-col items-center justify-between border rounded-lg bg-gray-100">
-            <div class="w-full p-4 font-bold text-xl xl:text-2xl">
+        <div class="flex flex-col items-center justify-between border bg-gray-100">
+            <div class="w-full p-4 font-bold text-xl">
                 <p class="text-ellipsis line-clamp-1">{{$categoria->nombre}}</p>
-                <p class="text-base font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
+                <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$categoria->descripcion}}</p>
             </div>
-            <a href="{{route('verproductos', $categoria->nombre)}}" class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
+            <a href="{{route('verproductos', $categoria->nombre)}}" class="w-full text-orange-600 bg-gray-100 text-sm font-semibold duration-75 hover:underline">
                 <div>
                     <img src="{{asset('/storage/categorias/'.$categoria->imagen)}}" alt="" title="" class="w-full">
                 </div>
-                <div class="w-full p-4 font-bold">
+                <div class="w-full p-4">
                     Ver más
                 </div>
             </a>
@@ -153,10 +180,9 @@
 
     <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-xs font-semibold">
         <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-        <div>
+        <div class="text-xs">
             <span>¿Eres un cliente nuevo?</span>
-            <a href="{{ route('register') }}" class="text-blue-700 hover:underline">Empieza aquí.</a>
-
+            <a href="{{ route('register') }}" class="text-orange-600 hover:underline">Empieza aquí.</a>
         </div>
     </div>
 
@@ -196,10 +222,10 @@
     </script>
 
     <!-- Resize del select 
-<script src="https://unpkg.com/auto-resize-custom-select"></script>
-<script>
-customSelect();
-</script>
+    <script src="https://unpkg.com/auto-resize-custom-select"></script>
+    <script>
+    customSelect();
+    </script>
 -->
 
     <script>

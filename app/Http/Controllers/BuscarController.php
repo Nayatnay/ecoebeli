@@ -5,25 +5,28 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Producto;
+use Livewire\WithPagination;
 
 class BuscarController extends Controller
 {
-    public function index(Request $request)
+    use WithPagination;
+
+    protected $listeners = ['render'];
+
+    public function index(request $request)
     {
         $buscar = $request->buscar;
+        $categ = Categoria::all()->sortBy('nombre');
+        $categorias = Categoria::all()->sortBy('nombre');
 
         if ($buscar == "Todas las Categorías") {
-            $buscar = "";
+            return redirect()->Route('/');
+        } else {
+            if ($buscar <> null) {
+                return redirect()->Route('verproductos', compact('buscar'));
+            }
         }
 
-        $categ = Categoria::all();
-
-        $categorias = Categoria::where('nombre', 'LIKE', '%' . $buscar . '%')
-            ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')->get()->sortBy('nombre');
-
-        $productos = Producto::where('nombre', 'LIKE', '%' . $buscar . '%')
-            ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')->get()->sortBy('nombre');
-
-        return view('buscar', compact('categorias', 'productos', 'categ', 'buscar'));
+        return view('buscar', compact('categorias', 'categ', 'buscar'));
     }
 }
