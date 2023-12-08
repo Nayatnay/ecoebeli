@@ -42,7 +42,7 @@ Route::get('politicas', function () {
     return view('politicas');
 })->name('politicas');
 
-Route::middleware([
+/*Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
@@ -50,4 +50,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+*/
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('dashboard', [EbeliController::class, 'index'])->name('dashboard');
 });

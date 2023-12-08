@@ -16,7 +16,7 @@
 <body class="antialised">
     <div class="flex items-center justify-between bg-zinc-900 shadow text-white sm:px-10 px-2 py-1 w-full">
 
-        <div class="mr-4 min-w-[140px]">
+        <div class="sm:mr-4 min-w-[140px]">
             <a href="{{route('/')}}" class="flex items-center rounded-sm border border-transparent hover:border-white py-2">
                 <img src="{{asset('img/logoc.png')}}" alt="Logo" title="Logo" width="40">
                 <h1 class="text-3xl font-semibold mr-2">ebeli&trade;</h1>
@@ -47,58 +47,44 @@
             </button>
         </form>
 
-        <div class="flex items-center justify-end text-sm ml-4">
-
-            <a href="{{ route('buscar') }}" class="lg:hidden block p-2 mr-2 rounded-sm border border-transparent hover:border-white">
-                <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="auto">
-            </a>
-
-            @if (Route::has('login'))
-            <div class="">
-                @auth
-
-                <div class="">
-                    <span class="hidden sm:inline-flex">
-                        <button type="button" class="min-w-[160px] inline-flex items-center px-2 py-3 rounded-sm border border-transparent text-sm leading-4 font-medium text-white hover:border-white focus:border-gray-400 transition ease-in-out duration-150">
-                            Hola {{ Auth::user()->name }}
-
-                            <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </button>
-                    </span>
-                    <span class="sm:hidden inline-flex">
-                        <button type="button" class="w-8 h-8 mr-2 inline-flex justify-center items-center p-2 rounded-full text-sm font-medium border text-white bg-lime-700 transition ease-in-out duration-150">
-                            {{substr(Auth::user()->name, 0, 1)}}
-                        </button>
-                    </span>
-                </div>
-
-                @else
-                <a href="{{ route('login') }}" class="lg:min-w-[120px] inline-flex items-end font-semibold mr-1 p-2 border border-transparent rounded-sm hover:border-white">
+        @if (Route::has('login'))
+        <div class="">
+            @auth
+            <div class="flex items-center justify-end text-sm ml-4">
+                <a href="{{ route('buscar') }}" class="hidden lg:hidden sm:block p-2 mr-2 rounded border border-transparent hover:border-gray-400">
+                    <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="auto">
+                </a>
+                <a href="{{ route('carro') }}" class="hidden lg:w-28 sm:flex items-center justify-center font-semibold border border-transparent rounded hover:border-gray-400 px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24" class="mr-2 ">
+                    <p class="hidden lg:block text-sm">Carrito</p>
+                </a>
+                @livewire('navigation-menu')
+            </div>
+            @else
+            <div class="flex items-center justify-end text-sm ml-4">
+                <a href="{{ route('buscar') }}" class="lg:hidden block p-2  rounded border border-transparent hover:border-gray-400">
+                    <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="auto">
+                </a>
+                <a href="{{ route('carro') }}" class="lg:w-28 flex items-end justify-center font-semibold border border-transparent rounded hover:border-gray-400 px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
+                    <p class="hidden lg:block ml-2 text-sm">Carrito</p>
+                </a>
+                <a href="{{ route('login') }}" class="lg:min-w-[120px] inline-flex items-end font-semibold mr-1 p-2 border border-transparent rounded hover:border-gray-400">
                     <img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
                     <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
                 </a>
-                @endauth
             </div>
-            @endif
-
-            <a href="{{ route('carro') }}" class="lg:w-28 flex items-end justify-center font-semibold border border-transparent rounded-sm hover:border-white px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
-                <p class="hidden lg:block ml-2 text-sm">Carrito</p>
-            </a>
-
+            @endauth
         </div>
+        @endif
 
     </div>
 
-    <div><a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a></div>
     <!-- video presentacion en mp4
-<div class="w-full mx-auto">
-<video width="1024" height="768" controls>
-<source src="{{asset('img/Ebelipres.mp4')}}" type="video/mp4">
-</video>
-</div>
--->
+    <div class="w-full mx-auto">
+    <video width="1024" height="768" controls>
+    <source src="{{asset('img/Ebelipres.mp4')}}" type="video/mp4">
+    </video>
+    </div>
+    -->
 
     <!-- This is an example component -->
 
