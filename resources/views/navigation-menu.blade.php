@@ -30,6 +30,12 @@
                 <x-dropdown-link href="{{ route('profile.show') }}">
                     {{ __('Perfil') }}
                 </x-dropdown-link>
+                <x-dropdown-link href="{{ route('categorias') }}">
+                    {{ __('Categorías') }}
+                </x-dropdown-link>
+                <x-dropdown-link href="{{ route('productos') }}">
+                    {{ __('Productos') }}
+                </x-dropdown-link>
                 <x-dropdown-link href="{{ route('buscar') }}" class="sm:hidden block">
                     {{ __('Buscar') }}
                 </x-dropdown-link>
