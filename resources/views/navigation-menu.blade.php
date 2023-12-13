@@ -39,7 +39,7 @@
                 <x-dropdown-link href="{{ route('buscar') }}" class="sm:hidden block">
                     {{ __('Buscar') }}
                 </x-dropdown-link>
-                <x-dropdown-link href="{{ route('carro') }}"  class="sm:hidden block">
+                <x-dropdown-link href="{{ route('carro') }}" class="sm:hidden block">
                     {{ __('Carrito') }}
                 </x-dropdown-link>
 
@@ -55,7 +55,5 @@
                 </form>
             </x-slot>
         </x-dropdown>
-
     </div>
-
 </nav>

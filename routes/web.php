@@ -33,7 +33,6 @@ Route::get('productos', IndexProductos::class)->name('productos');
 Route::get('carrito', IndexCarrito::class)->name('carrito');
 Route::get('carro', [CarroController::class, 'index'])->name('carro');
 
-
 Route::get('condiciones', function () {
     return view('condiciones');
 })->name('condiciones');
