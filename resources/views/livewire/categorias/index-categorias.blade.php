@@ -1,4 +1,4 @@
-<x-plantilla-layout>
+<x-app-layout>
     <div>
 
 
@@ -224,4 +224,4 @@
         @endif
 
     </div>
-</x-plantilla-layout>
+</x-app-layout>

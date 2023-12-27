@@ -27,6 +27,9 @@
                     <p class="font-semibold text-gray-400">{{ Auth::user()->email }}</p>
                 </div>
 
+                <x-dropdown-link href="{{ route('/') }}">
+                    {{ __('Home') }}
+                </x-dropdown-link>
                 <x-dropdown-link href="{{ route('profile.show') }}">
                     {{ __('Perfil') }}
                 </x-dropdown-link>

@@ -18,7 +18,7 @@ class VerproductosController extends Controller
         $buscar = $request->buscar;
 
         $categ = Categoria::all()->sortBy('nombre');
-
+        
         $producto_buscado = Categoria::where('nombre', '=', $buscar)
             ->orwhere('descripcion', '=', $buscar)->first();
 
