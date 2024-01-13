@@ -1,7 +1,4 @@
-<x-app-layout>
     <div>
-
-
         <div class="flex items-center justify-between sm:px-12 p-4 bg-white shadow">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Categorías
@@ -224,4 +221,3 @@
         @endif
 
     </div>
-</x-app-layout>

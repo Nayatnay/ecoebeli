@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos | Ebeli&trade;</title>
     <link rel="shortcut icon" href="{!! asset('img/icono.png') !!}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -14,68 +17,7 @@
 </head>
 
 <body class="antialised">
-    <div class="flex items-center justify-between bg-zinc-900 shadow text-white sm:px-10 px-2 py-1 w-full">
-
-        <div class="mr-4 min-w-[140px]">
-            <a href="{{route('/')}}" class="flex items-center rounded-sm border border-transparent hover:border-white py-2">
-                <img src="{{asset('img/logoc.png')}}" alt="Logo" title="Logo" width="40">
-                <h1 class="text-3xl font-semibold mr-2">ebeli&trade;</h1>
-            </a>
-        </div>
-
-        <form action="{{ route('/')}}" class="hidden lg:flex items-center justify-center rounded border border-white w-full bg-lime-500">
-            @if($buscar == null)
-            <select name="categoria" id="categoria" onchange="ShowSelected();" class="text-sm bg-white px-4 py-2 rounded-tl rounded-bl border-none focus:ring-0 text-black">
-                <option value="">Todas las Categorías</option>
-                @foreach ($categ as $categoria)
-                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
-                @endforeach
-            </select>
-            <input type="search" placeholder="Buscar en Ebeli" wire.model="buscar" name="buscar" id="buscar" value="{{ $buscar }}" class="text-sm w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0">
-            @else
-            <select name="categoria" id="categoria" onchange="ShowSelected();" class="text-sm bg-white px-4 py-2 rounded-tl rounded-bl border-none focus:ring-0 text-black">
-                <option value="$buscar">{{$buscar}}</option>
-                <option value="">Todas las Categorías</option>
-                @foreach ($categ as $categoria)
-                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
-                @endforeach
-            </select>
-            <input type="search" placeholder="Buscar en Ebeli" wire.model="buscar" name="buscar" id="buscar" value="" class="text-sm w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0">
-            @endif
-            <button type="submit" class="p-2 bg-lime-500  border-none focus:ring-0">
-                <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="24">
-            </button>
-        </form>
-
-        @if (Route::has('login'))
-        <div class="">
-            @auth
-            <div class="flex items-center justify-end text-sm ml-4">
-                <a href="{{ route('buscar') }}" class="hidden lg:hidden sm:block p-2 mr-2 rounded border border-transparent hover:border-gray-400">
-                    <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="auto">
-                </a>
-                <a href="{{ route('carro') }}" class="hidden lg:w-28 sm:flex items-center justify-center font-semibold border border-transparent rounded hover:border-gray-400 px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24" class="mr-2 ">
-                    <p class="hidden lg:block text-sm">Carrito</p>
-                </a>
-                @livewire('navigation-menu')
-            </div>
-            @else
-            <div class="flex items-center justify-end text-sm ml-4">
-                <a href="{{ route('buscar') }}" class="lg:hidden block p-2  rounded border border-transparent hover:border-gray-400">
-                    <img src="{{asset('img/buscar.png')}}" alt="Buscar" title="Buscar" width="24" height="auto">
-                </a>
-                <a href="{{ route('carro') }}" class="lg:w-28 flex items-end justify-center font-semibold border border-transparent rounded hover:border-gray-400 px-2 py-2"><img src="{{asset('img/carw.png')}}" alt="Compras" title="Compras" width="24">
-                    <p class="hidden lg:block ml-2 text-sm">Carrito</p>
-                </a>
-                <a href="{{ route('login') }}" class="lg:min-w-[120px] inline-flex items-end font-semibold mr-1 p-2 border border-transparent rounded hover:border-gray-400">
-                    <img src="{{asset('img/userw.png')}}" alt="Iniciar sesión" title="Iniciar sesión" width="24">
-                    <p class="hidden lg:block ml-2 text-sm">Tu Cuenta</p>
-                </a>
-            </div>
-            @endauth
-        </div>
-        @endif
-    </div>
+    @livewire('cabecera.nav-cabeza')
 
     <div class="bg-gray-200 text-base font-semibold sm:px-10 px-2 py-2 shadow">
         <span>{{ $productos->firstItem() }} a {{ $productos->lastItem() }} de {{ $productos->total() }} resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>

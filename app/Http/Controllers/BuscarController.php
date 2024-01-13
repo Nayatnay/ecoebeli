@@ -16,6 +16,8 @@ class BuscarController extends Controller
     public function index(request $request)
     {
         $buscar = $request->buscar;
+        $categoria = $request->categoria;
+
         $categ = Categoria::all()->sortBy('nombre');
         $categorias = Categoria::all()->sortBy('nombre');
 
