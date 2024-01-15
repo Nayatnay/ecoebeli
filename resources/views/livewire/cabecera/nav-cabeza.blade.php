@@ -5,7 +5,7 @@
         <div class="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center justify-between mx-auto px-4 py-2">
 
             <a href="{{ route('/') }}"
-                class="min-w-[120px] flex items-center rounded-sm border border-transparent hover:border-white py-3">
+                class="min-w-[112px] flex items-center rounded-sm border border-transparent hover:border-white py-3">
                 <img src="{{ asset('img/logoc.png') }}" alt="Logo" title="Logo" width="32">
                 <h1 class="text-2xl font-semibold mr-2 whitespace-nowrap">Ebeli&trade;</h1>
             </a>
@@ -66,7 +66,7 @@
                             <button type="button"
                                 class="flex items-center justify-center text-xl font-medium w-10 h-10 text-lime-600 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
                                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
-                                data-dropdown-placement="bottom">
+                                data-dropdown-placement="bottom" title="Bienvenido {{ ucwords(Auth::user()->name) }}">
                                 <span class="sr-only">Open user menu</span>
                                 <i class="fa-solid fa-user"></i>
                             </button>
@@ -92,6 +92,20 @@
                                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
                                             <i class="fa-solid fa-user"></i>
                                             <span class="ml-2">Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('admincat') }}"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                            <i class="fa-solid fa-user"></i>
+                                            <span class="ml-2">Categorías</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('adminpro') }}"
+                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                            <i class="fa-solid fa-user"></i>
+                                            <span class="ml-2">Productos</span>
                                         </a>
                                     </li>
                                     <li class="mt-3 border-t">
@@ -139,22 +153,21 @@
                         </button>
                     </div>
 
-
                     <div class="hidden w-full md:block md:w-[210px] md:min-w-[210px]" id="navbar-default">
                         <ul
-                            class="text-sm font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent">
+                            class="text-xl font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent">
                             <li>
                                 <a href="{{ route('login') }}"
                                     class="block border border-transparent hover:border-white p-3 rounded-sm hover:bg-zinc-700 md:hover:bg-transparent">
                                     <i class="fa-solid fa-user"></i>
-                                    <span class="ml-2">Tu Cuenta</span>
+                                    <span class="text-sm">Tu Cuenta</span>
                                 </a>
                             </li>
-<li>
+                            <li>
                                 <a href="{{ route('carro') }}"
                                     class="block border border-transparent hover:border-white p-3 rounded-sm hover:bg-zinc-700 md:hover:bg-transparent">
                                     <i class="fa-solid fa-cart-shopping"></i>
-                                    <span class="ml-2">Carrito</span>
+                                    <span class="text-sm">Carrito</span>
                                 </a>
                             </li>
                         </ul>

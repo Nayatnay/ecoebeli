@@ -20,109 +20,68 @@
     @livewire('cabecera.nav-cabeza')
 
     <div class="bg-gray-200 text-base font-semibold sm:px-10 px-2 py-2 shadow">
-        <span>{{ $productos->firstItem() }} a {{ $productos->lastItem() }} de {{ $productos->total() }} resultados para </span> <span class="text-orange-700"> "{{$buscar}}" </span>
+        <span>{{ $productos->firstItem() }} a {{ $productos->lastItem() }} de {{ $productos->total() }} resultados para
+        </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
     </div>
 
     <!-- muestra productos que cumplen con la condicion de búqueda    -->
 
     @if ($productos->count())
 
-    <div class="text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mt-4 md:mt-0 p-4 md:p-8">
+        <div
+            class="text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mt-4 md:mt-0 p-4 md:p-8">
 
-        @foreach ($productos as $producto)
+            @foreach ($productos as $producto)
+                <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
 
-        <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
+                    <div class="flex h-[50%] items-start">
+                        <a href="#">
+                            <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
+                                title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                        </a>
+                    </div>
 
-            <div class="flex h-[50%] items-start">
-                <a href="#">
-                    <img src="{{asset('/storage/productos/'.$producto->imagen)}}" alt="" title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
-                </a>
-            </div>
+                    <div class="w-full p-4 font-bold text-xl">
+                        <a href="#">
+                            <p class="text-ellipsis line-clamp-1">{{ $producto->nombre }}</p>
+                            <p class="text-sm font-normal text-ellipsis line-clamp-1">{{ $producto->descripcion }}</p>
+                        </a>
+                        <p class="mt-2 flex items-start text-sm font-bold">{{ $producto->stock }}+ <strong
+                                class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong>
+                        </p>
+                        <div class="flex items-start mt-2">
+                            <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
+                            <span class="text-3xl font-semibold"> {{ intval($producto->precio) }}</strong></span>
+                            @php
+                                $decimal = substr($producto->precio, -2);
+                            @endphp
+                            @if ($decimal != 0)
+                                <span
+                                    class="mt-0.5 ml-0.5 text-sm font-light">{{ substr($producto->precio, -2) }}</span>
+                            @endif
+                        </div>
+                    </div>
 
-            <div class="w-full p-4 font-bold text-xl">
-                <a href="#">
-                    <p class="text-ellipsis line-clamp-1">{{$producto->nombre}}</p>
-                    <p class="text-sm font-normal text-ellipsis line-clamp-1">{{$producto->descripcion}}</p>
-                </a>
-                <p class="mt-2 flex items-start text-sm font-bold">{{$producto->stock}}+ <strong class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong></p>
-                <div class="flex items-start mt-2">
-                    <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
-                    <span class="text-3xl font-semibold"> {{intval($producto->precio);}}</strong></span>
-                    @php
-                    $decimal = substr($producto->precio, -2);
-                    @endphp
-                    @if ($decimal <> 0)
-                        <span class="mt-0.5 ml-0.5 text-sm font-light">{{substr($producto->precio, -2);}}</span>
-                        @endif
                 </div>
-            </div>
+            @endforeach
 
         </div>
-
-        @endforeach
-
-    </div>
 
     @endif
 
     @if ($productos->hasPages())
-    <div class="mx-4 md:mx-8 px-4 py-2 border border-gray-300 rounded-md text-center my-10">
-        {{$productos->onEachSide(0)->links()}}
-    </div>
+        <div class="mx-4 md:mx-8 px-4 py-2 border border-gray-300 rounded-md text-center my-10">
+            {{ $productos->onEachSide(0)->links() }}
+        </div>
     @endif
 
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
-    <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-sm font-semibold">
-        <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-        <div class="text-xs">
-            <span>¿Eres un cliente nuevo?</span>
-            <a href="{{ route('register') }}" class="text-orange-600 hover:underline">Empieza aquí.</a>
-        </div>
-    </div>
+    <x-Identificate></x-Identificate>
 
-    <footer class="bg-zinc-900 text-white text-xs p-8 text-center">
-        <p class="mb-2 text-sm font-semibold">Síguenos</p>
-        <div class="mb-10 text-white font-normal flex justify-center">
+    <!--            pie de pagina FOOTER               -->
 
-            <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
-                <img src="{{asset('img/facebook.png')}}" width="24" height="auto" title="" alt="facebook">
-                <p class="w-20 text-left ml-2 text-sm">Facebook</p>
-            </a>
-            <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
-                <img src="{{asset('img/instagram.png')}}" width="24" height="auto" title="" alt="instagram">
-                <p class="w-20 text-left ml-2 text-sm">Instagram</p>
-            </a>
-        </div>
-
-        <div class="text-center font-semibold ">
-            <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline mr-2">Condiciones de uso</a>
-            <a href="{{ route('politicas') }}" target="_blank" class="hover:underline mr-2">Políticas de privacidad</a>
-            <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline  ">Aviso legal </a>
-            <p class="font-light">&copy; 2023 Ebeli™ - Todos los derechos reservados.</p>
-        </div>
-
-    </footer>
-
-
-    <!-- volver a la misma posicion al recargar la pagina -->
-    <!--
-<script>
-window.onload = function() {
-var pos = window.name || 0;
-window.scrollTo(0, pos);
-}
-window.onunload = function() {
-window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
-}
-</script>
-
-Resize del select 
-<script src="https://unpkg.com/auto-resize-custom-select"></script>
-<script>
-customSelect();
-</script>
--->
+    <x-footer></x-footer>
 
     <script>
         function ShowSelected() {
@@ -138,6 +97,7 @@ customSelect();
             document.getElementById("buscar").focus();
         }
     </script>
+    
 </body>
 
 </html>

@@ -51,7 +51,7 @@ class CrearProducto extends Component
 
         $this->reset(['open_crear', 'codigo', 'id_categoria', 'nombre', 'descripcion', 'imagen', 'precio', 'stock']);
         $this->identificador = rand(); // reemplaza el valor del identificador. Reseteará el nombre de la imagen seleccionada anteriormente
-        return redirect()->route('productos')->with('creado', 'ok');
+        return redirect()->route('adminpro')->with('creado', 'ok');
     }
 
     public function cancelar(){

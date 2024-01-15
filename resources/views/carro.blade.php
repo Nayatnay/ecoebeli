@@ -103,55 +103,11 @@
 
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
-    <div class="border-y border-zinc-300 py-10 flex flex-col items-center text-xs font-semibold bg-white">
-        <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-        <div class="text-xs">
-            <span>¿Eres un cliente nuevo?</span>
-            <a href="{{ route('register') }}" class="text-orange-600 hover:underline">Empieza aquí.</a>
-        </div>
-    </div>
+    <x-Identificate></x-Identificate>
 
-    <footer class="bg-zinc-900 text-white text-xs p-8 text-center">
-        <p class="mb-2 text-sm font-semibold">Síguenos</p>
-        <div class="mb-10 text-white font-normal flex justify-center">
+    <!--            pie de pagina FOOTER               -->
 
-            <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
-                <img src="{{asset('img/facebook.png')}}" width="24" height="auto" title="" alt="facebook">
-                <p class="w-20 text-left ml-2 text-sm">Facebook</p>
-            </a>
-            <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank" class="flex items-end font-light hover:font-normal">
-                <img src="{{asset('img/instagram.png')}}" width="24" height="auto" title="" alt="instagram">
-                <p class="w-20 text-left ml-2 text-sm">Instagram</p>
-            </a>
-        </div>
-
-        <div class="text-center font-semibold ">
-            <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline mr-2">Condiciones de uso</a>
-            <a href="{{ route('politicas') }}" target="_blank" class="hover:underline mr-2">Políticas de privacidad</a>
-            <a href="{{ route('condiciones') }}" target="_blank" class="hover:underline  ">Aviso legal </a>
-            <p class="font-light">&copy; 2023 Ebeli™ - Todos los derechos reservados.</p>
-        </div>
-
-    </footer>
-
-    <!-- volver a la misma posicion al recargar la pagina 
-
-    <script>
-        window.onload = function() {
-            var pos = window.name || 0;
-            window.scrollTo(0, pos);
-        }
-        window.onunload = function() {
-            window.name = self.pageYOffset || (document.documentElement.scrollTop + document.body.scrollTop);
-        }
-    </script>
-    -->
-    <!-- Resize del select 
-    <script src="https://unpkg.com/auto-resize-custom-select"></script>
-    <script>
-        customSelect();
-    </script>
--->
+    <x-footer></x-footer>
 
     <script>
         function ShowSelected() {

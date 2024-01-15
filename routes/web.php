@@ -28,6 +28,14 @@ Route::get('/', [EbeliController::class, 'index'])->name('/');
 Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
 
+Route::get('admincat', function () {
+    return view('admincat');
+})->name('admincat');
+
+Route::get('adminpro', function () {
+    return view('adminpro');
+})->name('adminpro');
+
 Route::get('categorias', IndexCategorias::class)->name('categorias');
 Route::get('productos', IndexProductos::class)->name('productos');
 Route::get('carrito', IndexCarrito::class)->name('carrito');

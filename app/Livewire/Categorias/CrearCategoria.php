@@ -44,7 +44,7 @@ class CrearCategoria extends Component
 
         $this->reset(['open_crear', 'nombre', 'descripcion', 'imagen']);
         $this->identificador = rand(); // reemplaza el valor del identificador. Reseteará el nombre de la imagen seleccionada anteriormente
-        return redirect()->route('categorias')->with('creado', 'ok');
+        return redirect()->route('admincat')->with('creado', 'ok');
     }
 
     public function cancelar(){
