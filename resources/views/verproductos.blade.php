@@ -20,8 +20,16 @@
     @livewire('cabecera.nav-cabeza')
 
     <div class="bg-gray-200 text-base font-semibold sm:px-10 px-2 py-2 shadow">
-        <span>{{ $productos->firstItem() }} a {{ $productos->lastItem() }} de {{ $productos->total() }} resultados para
-        </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
+        @if ($productos->firstItem() == 0)
+            <span>0 resultados para</span>
+            </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
+        @else
+            <span>{{ $productos->firstItem() }} a {{ $productos->lastItem() }} de {{ $productos->total() }} 
+                resultados para
+            </span>
+            <span class="text-orange-700"> "{{ $buscar }}" </span>
+        @endif
+
     </div>
 
     <!-- muestra productos que cumplen con la condicion de búqueda    -->
@@ -97,7 +105,7 @@
             document.getElementById("buscar").focus();
         }
     </script>
-    
+
 </body>
 
 </html>

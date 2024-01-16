@@ -1,6 +1,6 @@
 <x-app-layout>
     
-    <div class="">
+    <div>
         @livewire('categorias.index-categorias')
     </div>
     

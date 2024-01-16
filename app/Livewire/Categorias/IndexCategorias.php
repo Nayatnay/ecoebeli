@@ -95,7 +95,7 @@ class IndexCategorias extends Component
             $buscar = "";
         }
 
-        $categ = Categoria::all()->sortBy('nombre');;
+        $categ = Categoria::all()->sortBy('nombre');
 
         $categorias = Categoria::where('nombre', 'LIKE', '%' . $buscar . '%')
             ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')->orderBy('id', 'desc')->paginate(8, ['*'], 'categ');
