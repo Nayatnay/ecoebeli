@@ -43,10 +43,14 @@
 
                         <div class="w-full">
                             <div class="w-full p-4">
-                                <p class="text-ellipsis line-clamp-1 font-bold text-xl xl:text-2xl">{{ $producto->nombre }}</p>
-                                <p class="text-base text-gray-500 text-ellipsis line-clamp-1">{{ $producto->descripcion }}
+                                <p class="text-ellipsis line-clamp-1 font-bold text-xl xl:text-2xl">
+                                    {{ $producto->nombre }}</p>
+                                <p class="text-base text-gray-500 text-ellipsis line-clamp-1">
+                                    {{ $producto->descripcion }}
                                 </p>
-                                <p class="text-base text-lime-600">{{ $producto->stock }}+ En existencias
+                                <p class="mt-2 flex items-start text-sm font-bold">{{ $producto->stock }}+ <strong
+                                        class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong>
+                                </p>
                                 </p>
                                 <div class="flex items-start mt-2">
                                     <span class="text-base mt-0.5 mr-0.5">US$</span>
