@@ -19,7 +19,7 @@
 <body class="antialised">
     @livewire('cabecera.nav-cabeza')
 
-    <div class="bg-gray-200 text-base font-semibold sm:px-10 px-2 py-2 shadow">
+    <div class="bg-gray-200 text-sm sm:text-base font-semibold sm:px-10 px-5 py-2 shadow">
         @if ($productos->firstItem() == 0)
             <span>0 resultados para</span>
             </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
@@ -37,20 +37,20 @@
     @if ($productos->count())
 
         <div
-            class="text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-6 mt-4 md:mt-0 p-4 md:p-8">
+            class="text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 mt-4 md:mt-0 p-4 md:p-8">
 
             @foreach ($productos as $producto)
                 <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
 
                     <div class="flex h-[50%] items-start">
-                        <a href="#">
+                        <a href="{{ route('detalproducto', $producto->id) }}">
                             <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
                                 title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
                         </a>
                     </div>
 
                     <div class="w-full p-4 font-bold text-xl">
-                        <a href="#">
+                        <a href="{{ route('detalproducto', $producto->id)}} ">
                             <p class="text-ellipsis line-clamp-1">{{ $producto->nombre }}</p>
                             <p class="text-sm font-normal text-ellipsis line-clamp-1">{{ $producto->descripcion }}</p>
                         </a>

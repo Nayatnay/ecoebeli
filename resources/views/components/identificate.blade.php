@@ -2,18 +2,10 @@
     @if (Route::has('login'))
         @auth
             <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-xs font-semibold">
-                <p class="px-10 py-2 border-b border-gray-400 mb-1">Cliente autenticado: <span class="uppercase font-normal text-sm">{{ucwords(Auth::user()->name)}}</span></p>
+                <p class="px-10 py-2 border-b border-gray-400 mb-1 uppercase font-normal text-sm">{{ucwords(Auth::user()->name)}}</p>
                 
-                <div class="text-xs">
-                    
-                    <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-                        <span>¿Deseas cerrar tu sesión?</span>
-                        <a href="{{ route('logout') }}" @click.prevent="$root.submit();"
-                        class="text-orange-600 hover:underline">Hazlo aquí.
-                        </a>
-                    </form>
-                    
+                <div class="text-xs px-4 py-2">
+                    <p>Una manera sencilla de navegar en tu tienda. Visita las páginas de tu interés.</p>
                 </div>
             </div>
         @else

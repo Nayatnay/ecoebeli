@@ -7,7 +7,7 @@
     <x-dialog-modal wire:model="open_crear">
 
         <x-slot name="title">
-            <p class="font-bold text-left pb-4 border-b text-zinc-800">Crear Nueva categoría</p>
+            <p class="font-bold text-left pb-4 border-b text-zinc-800">Crear Nuevo Producto</p>
         </x-slot>
 
         <x-slot name="content" class="">
@@ -36,29 +36,29 @@
                 <x-input-error for="id_categoria" />
             </div>
             <div class="flex flex-col sm:flex-row items-start justify-between w-full">
-                <div class="basis-1/2 mb-4">
+                <div class="basis-1/2 mb-4 w-full mr-4">
                     <div class="mb-4">
                         <x-label for="codigo" value="{{ __('Código') }}" class="text-zinc-800" />
-                        <x-input id="codigo" class="block mt-1" type="text" name="codigo"
+                        <x-input id="codigo" class="w-full block mt-1" type="text" name="codigo"
                             wire:model.defer="codigo" required autofocus />
                         <x-input-error for="codigo" />
                     </div>
                     <div class="mb-4">
                         <x-label for="stock" value="{{ __('Existencias') }}" class="text-zinc-800" />
                         <x-input id="stock"
-                            class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            class="w-full block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             type="number" step="any" name="stock" wire:model.defer="stock" required autofocus />
                         <x-input-error for="stock" />
                     </div>
                     <div class="mb-4">
                         <x-label for="precio" value="{{ __('Precio') }}" class="text-zinc-800" />
                         <x-input id="precio"
-                            class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            class="w-full block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                             type="number" step="any" name="precio" wire:model.defer="precio" required autofocus />
                         <x-input-error for="precio" />
                     </div>
                 </div>
-                <div class="basis-1/2">
+                <div class="basis-1/2 w-full">
                     <div class="text-xs text-left lg:text-sm">
                         <label for="{{ $identificador }}" class="font-medium cursor-pointer hover:underline">Agregar una
                             Imagen</label>

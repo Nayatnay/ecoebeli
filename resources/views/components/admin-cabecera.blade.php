@@ -22,7 +22,7 @@
                 </a>
                 <div class="flex items-center px-2">
                     <button type="button"
-                        class="flex items-center justify-center text-xl font-medium w-10 h-10 text-lime-600 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
+                        class="flex items-center justify-center text-xl font-medium w-10 h-10 border-2 border-gray-600 text-lime-600 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
                         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                         data-dropdown-placement="bottom" title="Bienvenido {{ ucwords(Auth::user()->name) }}">
                         <span class="sr-only">Open user menu</span>
@@ -80,7 +80,7 @@
                 </div>
 
                 <a href="{{ route('carro') }}"
-                    class="w-10 h-10 text-xl flex items-center justify-center font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
+                    class="w-10 h-10 text-xl flex items-center justify-center font-medium text-gray-500 border-2 border-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </a>
             </div>

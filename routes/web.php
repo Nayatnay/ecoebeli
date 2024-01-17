@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BuscarController;
 use App\Http\Controllers\CarroController;
+use App\Http\Controllers\DetalproductosController;
 use App\Http\Controllers\EbeliController;
 use App\Http\Controllers\VerproductosController;
 use App\Livewire\Carrito\IndexCarrito;
@@ -26,6 +27,7 @@ Route::get('/', [EbeliController::class, 'index'])->name('/');
 
 //Route::get('verproductos', VerProductos::class)->name('verproductos');
 Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
+Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalproducto');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
 
 Route::get('admincat', function () {
