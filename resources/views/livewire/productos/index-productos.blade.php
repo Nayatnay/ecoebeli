@@ -165,52 +165,55 @@
                 </select>
                 <x-input-error for="id_categoria" />
             </div>
-            <div class="flex flex-wrap">
-                <div class="mb-4">
-                    <x-label for="codigo" value="{{ __('Código') }}" class="text-zinc-800" />
-                    <x-input id="codigo" class="block mt-1" type="text" name="codigo" wire:model="codigo"
-                        required autofocus />
-                    <x-input-error for="codigo" />
+            <div class="flex flex-col sm:flex-row items-start justify-between w-full">
+                <div class="basis-1/2 mb-4 w-full mr-4">
+                    <div class="mb-4">
+                        <x-label for="codigo" value="{{ __('Código') }}" class="text-zinc-800" />
+                        <x-input id="codigo" class="block mt-1" type="text" name="codigo"
+                            wire:model="codigo" required autofocus />
+                        <x-input-error for="codigo" />
+                    </div>
+                    <div class="mb-4">
+                        <x-label for="stock" value="{{ __('Existencias') }}" class="text-zinc-800" />
+                        <x-input id="stock"
+                            class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            type="number" step="any" name="stock" wire:model="stock" required autofocus />
+                        <x-input-error for="stock" />
+                    </div>
+                    <div class="mb-4">
+                        <x-label for="precio" value="{{ __('Precio') }}" class="text-zinc-800" />
+                        <x-input id="precio"
+                            class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            type="number" step="any" name="precio" wire:model="precio" required autofocus />
+                        <x-input-error for="precio" />
+                    </div>
                 </div>
-                <div class="mb-4 sm:mx-2">
-                    <x-label for="stock" value="{{ __('Existencias') }}" class="text-zinc-800" />
-                    <x-input id="stock"
-                        class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        type="number" step="any" name="stock" wire:model="stock" required autofocus />
-                    <x-input-error for="stock" />
+                <div class="basis-1/2 w-full">
+                    <p class="text-zinc-800">Imagen de la Categoría</p>
+
+                    <div class="flex justify-between items-end mt-4">
+                        @if ($imagenva)
+                            <img src="{{ $imagenva->temporaryUrl() }}" class="p-4 border border-zinc-500 rounded"
+                                width="240">
+                        @else
+                            <img src="{{ asset('../storage/productos/' . $imagen) }}" alt="" title=""
+                                class="p-4 border border-zinc-500 rounded" width="240">
+                        @endif
+                    </div>
+
+                    <div class="text-zinc-800 text-xs text-left lg:text-sm ">
+                        <label for="{{ $identificador }}" class="cursor-pointer hover:underline">Seleccionar nueva
+                            Imagen</label>
+                        <input id="{{ $identificador }}" type="file" style="visibility:hidden;" name="imagenva"
+                            wire:model="imagenva" required />
+                        <x-input-error for="imagenva" />
+                    </div>
+
+                    <div wire:loading wire:target="imagenva" class="w-full text-xs font-semibold">
+                        <p>¡Cargando imagen!...</p>
+                    </div>
                 </div>
-                <div class="mb-4">
-                    <x-label for="precio" value="{{ __('Precio') }}" class="text-zinc-800" />
-                    <x-input id="precio"
-                        class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        type="number" step="any" name="precio" wire:model="precio" required autofocus />
-                    <x-input-error for="precio" />
-                </div>
             </div>
-            <p class="text-zinc-800">Imagen de la Categoría</p>
-
-            <div class="flex justify-between items-end mt-4">
-                @if ($imagenva)
-                    <img src="{{ $imagenva->temporaryUrl() }}" class="p-4 border border-zinc-500 rounded"
-                        width="240">
-                @else
-                    <img src="{{ asset('../storage/productos/' . $imagen) }}" alt="" title=""
-                        class="p-4 border border-zinc-500 rounded" width="240">
-                @endif
-            </div>
-
-            <div class="text-zinc-800 text-xs text-left lg:text-sm ">
-                <label for="{{ $identificador }}" class="cursor-pointer hover:underline">Seleccionar nueva
-                    Imagen</label>
-                <input id="{{ $identificador }}" type="file" style="visibility:hidden;" name="imagenva"
-                    wire:model="imagenva" required />
-                <x-input-error for="imagenva" />
-            </div>
-
-            <div wire:loading wire:target="imagenva" class="w-full text-xs font-semibold">
-                <p>¡Cargando imagen!...</p>
-            </div>
-
         </x-slot>
 
         <x-slot name="footer">

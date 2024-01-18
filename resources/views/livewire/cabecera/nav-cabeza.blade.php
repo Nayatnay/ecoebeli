@@ -155,7 +155,7 @@
 
                     <div class="hidden w-full md:block md:w-[210px] md:min-w-[210px]" id="navbar-default">
                         <ul
-                            class="text-xl font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent">
+                            class="text-xl flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent">
                             <li>
                                 <a href="{{ route('login') }}"
                                     class="block border border-transparent hover:border-white p-3 rounded-sm hover:bg-zinc-700 md:hover:bg-transparent">

@@ -14,7 +14,7 @@ class CarroController extends Controller
 
         $categ = Categoria::all()->sortBy('nombre');
         $productos = Producto::orderBy('nombre')->paginate(6);
-        
-        return view('carro', compact('productos', 'categ', 'buscar'));
+        $produc = Producto::where('precio', '<=', 100)->inRandomOrder()->limit(8)->get();;
+        return view('carro', compact('productos', 'produc',  'categ', 'buscar'));
     }
 }

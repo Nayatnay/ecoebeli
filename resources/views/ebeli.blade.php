@@ -80,37 +80,37 @@
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
 
     <!-- muestra de categorias -->
+    <div class="max-w-screen-xl mx-auto">
+        @if ($categorias->count())
 
-    @if ($categorias->count())
+            <div class="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 px-4 py-8 ">
 
-        <div class="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 px-4 py-8 md:p-12">
-
-            @foreach ($categorias as $categoria)
-                <div class="flex flex-col items-center justify-between border bg-gray-100">
-                    <div class="w-full p-4 font-bold text-xl">
-                        <p class="text-ellipsis line-clamp-1">{{ $categoria->nombre }}</p>
-                        <p class="text-sm font-normal text-ellipsis line-clamp-1">{{ $categoria->descripcion }}</p>
+                @foreach ($categorias as $categoria)
+                    <div class="flex flex-col items-center justify-between border border-gray-300 bg-gray-100">
+                        <div class="w-full p-4 font-bold text-xl">
+                            <p class="text-ellipsis line-clamp-1">{{ $categoria->nombre }}</p>
+                            <p class="text-sm font-normal text-ellipsis line-clamp-1">{{ $categoria->descripcion }}</p>
+                        </div>
+                        <a href="{{ route('verproductos', $categoria->nombre) }}"
+                            class="w-full text-orange-600 bg-gray-100 text-sm font-semibold duration-75 hover:underline">
+                            <div>
+                                <img src="{{ asset('/storage/categorias/' . $categoria->imagen) }}" alt=""
+                                    title="" class="w-full">
+                            </div>
+                            <div class="w-full p-4">
+                                Ver más
+                            </div>
+                        </a>
                     </div>
-                    <a href="{{ route('verproductos', $categoria->nombre) }}"
-                        class="w-full text-orange-600 bg-gray-100 text-sm font-semibold duration-75 hover:underline">
-                        <div>
-                            <img src="{{ asset('/storage/categorias/' . $categoria->imagen) }}" alt=""
-                                title="" class="w-full">
-                        </div>
-                        <div class="w-full p-4">
-                            Ver más
-                        </div>
-                    </a>
-                </div>
-            @endforeach
+                @endforeach
 
-        </div>
-    @else
-        <div class="bg-white text-base font-semibold sm:px-10 px-2 py-2 shadow">
-            <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
-        </div>
-    @endif
-
+            </div>
+        @else
+            <div class="bg-white text-base font-semibold sm:px-10 px-2 py-2 shadow">
+                <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
+            </div>
+        @endif
+    </div>
 
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
