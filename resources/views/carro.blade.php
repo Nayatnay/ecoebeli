@@ -24,21 +24,21 @@
 
         <div class="p-4">
 
-            <div class="bg-white px-4 py-8 md:p-8">
-                <div class="flex items-end">
+            <div class="bg-white md:px-4 py-8 md:p-8">
+                <div class="flex flex-col md:flex-row md:items-end items-center justify-center">
                     <img src="{{ asset('img/carg.png') }}" alt="Compras" title="Compras" width="32px">
-                    <p class="text-base md:text-3xl font-medium ml-4">Tu carrito de Ebeli está vacío.
+                    <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium md:ml-2">Tu carrito de Ebeli está vacío
                     </p>
                 </div>
-                <div class="mt-2 pb-2 border-b text-sm md:text-lg ">
+                <div class="mt-2 pb-2 text-center border-b md:text-base lg:text-lg ">
                     <p>Llena tu carrito con los artículos de tu preferencia, ropa, artículos para el hogar,
                         electrónicos, y
                         más.
-                        <br> Continúa comprando en <a href="{{ route('/') }}"
+                         Continúa comprando en <a href="{{ route('/') }}"
                             class="text-lime-600 hover:underline">ebeli.com.</a>
                     </p>
                 </div>
-                <div class="mt-8 text-base font-medium ">
+                <div class="mt-8 text-base font-medium text-center ">
                     <a href="#1" class="bg-lime-600 hover:bg-lime-700 text-white rounded-full px-6 py-2">Compra
                         las ofertas del día
                     </a>
@@ -56,7 +56,7 @@
         <div class="p-4 text-sm">
             <div class="rounded-lg border border-gray-200 w-72 p-4 bg-white">
                 <div class="mb-4">
-                    <p class="text-lg font-semibold">Recomendaciones para productos de nuestra tienda</p>
+                    <p class="text-lg font-semibold">Recomendaciones de productos en nuestra tienda</p>
                 </div>
                 @if ($productos->count())
                     @foreach ($produc as $product)
