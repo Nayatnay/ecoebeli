@@ -26,17 +26,27 @@
 
             @if (count(Cart::getContent()))
                 <div class="bg-white md:px-4 py-8 md:p-8">
-                    <div class="flex flex-col md:flex-row items-end">
-                        <img src="{{ asset('img/car.png') }}" alt="Compras" title="Compras" width="32px">
-                        <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium md:ml-2">Carrito</p>
+                    <div class="flex flex-col md:flex-row items-end justify-between">
+                        <div class="flex items-end">
+                            <img src="{{ asset('img/car.png') }}" alt="Compras" title="Compras" width="32px">
+                            <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium md:ml-2">Carrito</p>
+                        </div>
+                        @if (session('info'))
+                            <div class="mensaje text-gray-700 text-xs text-right font-bold">
+                                Producto Agregado con éxito
+                            </div>
+                        @endif
                     </div>
                     <div class="w-full flex justify-between text-sm border-b pb-1">
-                        <p class="text-orange-600 font-mediun">Todos tus productos seleccionados</p>
+                        <p class="text-orange-600 font-mediun">Productos Seleccionados</p>
                         <p>Precio</p>
                     </div>
-                    <div class="py-2">
+                    <div class="">
+                        @php
+                            $subtotal = 0;
+                        @endphp
                         @foreach (Cart::getContent() as $item)
-                            <div class="flex items-center my-4">
+                            <div class="flex items-center mt-4 border-b pb-4">
                                 <div>
                                     <img src="{{ asset('/storage/productos/' . $item->attributes->imagen) }}"
                                         width="96px" class="rounded mr-4">
@@ -58,14 +68,25 @@
                                         </p>
                                     </div>
                                 </div>
-
-
                             </div>
+
+                            @php
+                                $subtotal = $subtotal + $item->price * $item->quantity;
+                            @endphp
                         @endforeach
                     </div>
-                    <div class="text-right text-xs  text-orange-600 hover:underline">
-                        <a href="{{ route('clear') }}">Vaciar carrito</a>
+
+                    <div class="flex items-start justify-between">
+                        
+                        <div class="text-right text-xs text-orange-600 hover:underline">
+                            <a href="{{ route('clear') }}">Vaciar carrito</a>
+                        </div>
+                        <div class="text-xl text-right font-semibold">
+                            <p>Subtotal: US$ {{ number_format($subtotal, 2) }}</p>
+                        </div>
+
                     </div>
+
                 </div>
             @else
                 <div class="bg-white md:px-4 py-8 md:p-8">
@@ -125,7 +146,7 @@
                                 </a>
 
                                 <div class="my-4">
-                                    <form action="{{ route('add') }}" method="post">
+                                    <form action="{{ route('adicion') }}" method="post">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $product->id }}">
                                         <input type="submit" value="Agregar al carrito"
@@ -225,6 +246,17 @@
             document.getElementById("buscar").value = selected;
             document.getElementById("buscar").focus();
         }
+    </script>
+
+    <!-- MOSTRAR MENSAJE POR 3 SEGUNDOS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".mensaje").fadeOut(1500);
+            }, 2000);
+        });
     </script>
 
 </body>

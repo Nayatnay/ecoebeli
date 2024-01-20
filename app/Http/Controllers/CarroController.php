@@ -21,7 +21,29 @@ class CarroController extends Controller
        */
         $categ = Categoria::all()->sortBy('nombre');
         $productos = Producto::orderBy('nombre')->paginate(6);
-        $produc = Producto::where('precio', '<=', 100)->inRandomOrder()->limit(8)->get();;
+        $produc = Producto::where('precio', '<=', 100)->inRandomOrder()->limit(8)->get();
+
         return view('carro', compact('productos', 'produc',  'categ', 'buscar'));
+    }
+
+    public function adicion(Request $request)
+    {
+        
+        $producto = Producto::find($request->id);
+       
+        if (empty($producto)) {
+            return redirect('/');
+        }
+
+        CartFacade::add(
+            $producto->id,
+            $producto->nombre,
+            $producto->precio,
+            1,
+            array("imagen"=>$producto->imagen)
+
+        );
+
+        return redirect()->Route('carro')->with('info', 'ok');
     }
 }

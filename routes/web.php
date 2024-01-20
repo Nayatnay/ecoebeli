@@ -61,6 +61,7 @@ Route::middleware([
 //Rutas carrito
 
 Route::post('cart/add', [CartController::class, 'add'])->name('add');
+Route::post('adicion', [CarroController::class, 'adicion'])->name('adicion');
 Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('removeitem');
