@@ -20,6 +20,12 @@
 
     @livewire('cabecera.nav-cabeza')
 
+    @if (session('info'))
+        <div class="bg-yellow-300 text-sm w-full text-center font-medium p-2">
+            Producto Agregado: {{ $producto->nombre }}
+        </div>
+    @endif
+
     <div class="bg-transparent text-sm sm:text-base font-semibold py-2 shadow">
 
         <div class="max-w-screen-xl md:mx-auto flex items-center md:justify-between px-6">
@@ -93,30 +99,38 @@
             @auth
                 <div class="mt-6 md:mt-0 rounded-lg md:border border-gray-300 w-full text-center text-sm md:p-6 pb-4">
                     <p>Enviar a <strong>{{ ucwords(Auth::user()->name) }}</strong></p>
-                    <p class="mt-2 text-xs text-gray-600"><i class="fa-solid fa-location-dot mr-1 text-sm"></i>{{Auth::user()->pais}}
-                    -{{Auth::user()->estado}}-{{Auth::user()->ciudad}}-{{Auth::user()->direccion}} <br>
-                    CP.{{Auth::user()->cp}}</p>
+                    <p class="mt-2 text-xs text-gray-600"><i
+                            class="fa-solid fa-location-dot mr-1 text-sm"></i>{{ Auth::user()->pais }}
+                        -{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }}-{{ Auth::user()->direccion }} <br>
+                        CP.{{ Auth::user()->cp }}</p>
                     <div class="mt-8 w-full">
-                        <a href="#"
-                            class="block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-400">Agregar al
-                            carrito</a>
+                        <form action="{{ route('add') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $producto->id }}">
+                            <input type="submit" value="Agregar al carrito"
+                                class="w-full block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-400">
+                        </form>
                     </div>
                     <div class="mt-4 w-full">
                         <a href="#"
-                            class="block text-xs font-medium px-4 py-2 border rounded-full bg-lime-600 hover:bg-lime-700 text-white">Comprar ahora</a>
+                            class="block text-xs font-medium px-4 py-2 border rounded-full bg-lime-600 hover:bg-lime-700 text-white">Comprar
+                            ahora</a>
                     </div>
                 </div>
             @else
                 <div class="rounded-lg md:border border-gray-300 w-full text-center text-sm md:p-6 pb-4">
                     <p class="mt-6 md:mt-0 text-base text-gray-600"><i class="fa-solid fa-location-dot mr-1"></i></p>
                     <p id="bloque"></p>
-                
-                <div class="mt-8 w-full">
-                    <a href="#"
-                        class="block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300">Agregar al
-                        carrito</a>
+
+                    <div class="mt-8 w-full">
+                        <form action="{{ route('add') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $producto->id }}">
+                            <input type="submit" value="Agregar al carrito"
+                                class="w-full block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-400">
+                        </form>
+                    </div>
                 </div>
-            </div>
             @endauth
         </div>
 

@@ -585,6 +585,7 @@ class ComposerStaticInit98ecc144f2016ffcf00caa687351cae3
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\BuscarController' => __DIR__ . '/../..' . '/app/Http/Controllers/BuscarController.php',
         'App\\Http\\Controllers\\CarroController' => __DIR__ . '/../..' . '/app/Http/Controllers/CarroController.php',
+        'App\\Http\\Controllers\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/CartController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DetalproductosController' => __DIR__ . '/../..' . '/app/Http/Controllers/DetalproductosController.php',
         'App\\Http\\Controllers\\EbeliController' => __DIR__ . '/../..' . '/app/Http/Controllers/EbeliController.php',

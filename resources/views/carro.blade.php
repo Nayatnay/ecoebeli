@@ -24,27 +24,72 @@
 
         <div class="p-4">
 
-            <div class="bg-white md:px-4 py-8 md:p-8">
-                <div class="flex flex-col md:flex-row md:items-end items-center justify-center">
-                    <img src="{{ asset('img/carg.png') }}" alt="Compras" title="Compras" width="32px">
-                    <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium md:ml-2">Tu carrito de Ebeli está vacío
-                    </p>
-                </div>
-                <div class="mt-2 pb-2 text-center border-b md:text-base lg:text-lg ">
-                    <p>Llena tu carrito con los artículos de tu preferencia, ropa, artículos para el hogar,
-                        electrónicos, y
-                        más.
-                         Continúa comprando en <a href="{{ route('/') }}"
-                            class="text-lime-600 hover:underline">ebeli.com.</a>
-                    </p>
-                </div>
-                <div class="mt-8 text-base font-medium text-center ">
-                    <a href="#1" class="bg-lime-600 hover:bg-lime-700 text-white rounded-full px-6 py-2">Compra
-                        las ofertas del día
-                    </a>
-                </div>
-            </div>
+            @if (count(Cart::getContent()))
+                <div class="bg-white md:px-4 py-8 md:p-8">
+                    <div class="flex flex-col md:flex-row items-end">
+                        <img src="{{ asset('img/car.png') }}" alt="Compras" title="Compras" width="32px">
+                        <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium md:ml-2">Carrito</p>
+                    </div>
+                    <div class="w-full flex justify-between text-sm border-b pb-1">
+                        <p class="text-orange-600 font-mediun">Todos tus productos seleccionados</p>
+                        <p>Precio</p>
+                    </div>
+                    <div class="py-2">
+                        @foreach (Cart::getContent() as $item)
+                            <div class="flex items-center my-4">
+                                <div>
+                                    <img src="{{ asset('/storage/productos/' . $item->attributes->imagen) }}"
+                                        width="96px" class="rounded mr-4">
+                                </div>
+                                <div class="w-full flex items-start justify-between">
+                                    <div class="ml-4">
+                                        <p class="text-2xl text-left font-normal">{{ $item->name }}</p>
+                                        <p class="text-sm text-left">Cant.: {{ $item->quantity }}</p>
 
+                                        <a href="#"
+                                            class="block text-xs text-left text-orange-600 hover:underline">
+                                            Eliminar
+                                        </a>
+
+                                    </div>
+                                    <div>
+                                        <p class="text-xl text-right font-semibold">US$
+                                            {{ number_format($item->price, 2) }}
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="text-right text-xs  text-orange-600 hover:underline">
+                        <a href="{{ route('clear') }}">Vaciar carrito</a>
+                    </div>
+                </div>
+            @else
+                <div class="bg-white md:px-4 py-8 md:p-8">
+                    <div class="flex flex-col md:flex-row md:items-end items-center justify-center">
+                        <img src="{{ asset('img/carg.png') }}" alt="Compras" title="Compras" width="32px">
+                        <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium md:ml-2">Tu carrito de Ebeli
+                            está vacío
+                        </p>
+                    </div>
+                    <div class="mt-2 pb-2 text-center border-b md:text-base lg:text-lg ">
+                        <p>Llena tu carrito con los artículos de tu preferencia, ropa, artículos para el hogar,
+                            electrónicos, y
+                            más.
+                            Continúa comprando en <a href="{{ route('/') }}"
+                                class="text-lime-600 hover:underline">ebeli.com.</a>
+                        </p>
+                    </div>
+                    <div class="mt-8 text-base font-medium text-center ">
+                        <a href="#1" class="bg-lime-600 hover:bg-lime-700 text-white rounded-full px-6 py-2">Compra
+                            las ofertas del día
+                        </a>
+                    </div>
+                </div>
+            @endif
             <div class="mt-4 text-xs font-semibold text-gray-700">
                 <p>El precio y la disponibilidad de los productos de Ebeli.com están sujetos a cambio.
                     En el carrito de compras puedes dejar temporalmente los productos que quieras.
@@ -80,10 +125,12 @@
                                 </a>
 
                                 <div class="my-4">
-                                    <a href="#"
-                                        class="text-xs font-semibold px-2 py-1 border rounded-full bg-yellow-300">Agregar
-                                        al
-                                        carrito</a>
+                                    <form action="{{ route('add') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <input type="submit" value="Agregar al carrito"
+                                            class="block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-400">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +149,8 @@
 
             @if ($productos->count())
 
-                <div class="mt-4 text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 px-4">
+                <div
+                    class="mt-4 text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 px-4">
 
                     @foreach ($productos as $producto)
                         <div

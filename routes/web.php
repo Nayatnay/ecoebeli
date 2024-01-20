@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BuscarController;
 use App\Http\Controllers\CarroController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetalproductosController;
 use App\Http\Controllers\EbeliController;
 use App\Http\Controllers\VerproductosController;
@@ -25,7 +26,6 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [EbeliController::class, 'index'])->name('/');
 
-//Route::get('verproductos', VerProductos::class)->name('verproductos');
 Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
 Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalproducto');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
@@ -50,6 +50,28 @@ Route::get('politicas', function () {
     return view('politicas');
 })->name('politicas');
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('dashboard', [EbeliController::class, 'index'])->name('dashboard');
+});
+
+//Rutas carrito
+
+Route::post('cart/add', [CartController::class, 'add'])->name('add');
+Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
+Route::post('cart/removeitem', [CartController::class, 'removeItem'])->name('removeitem');
+
+/*Route::get('/cart','CartController@index')->name('cart.index');
+Route::post('/cart','CartController@add')->name('cart.add');
+Route::post('/cart/conditions','CartController@addCondition')->name('cart.addCondition');
+Route::delete('/cart/conditions','CartController@clearCartConditions')->name('cart.clearCartConditions');
+Route::get('/cart/details','CartController@details')->name('cart.details');
+Route::delete('/cart/{id}','CartController@delete')->name('cart.delete');*/
+
 /*Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -60,11 +82,3 @@ Route::get('politicas', function () {
     })->name('dashboard');
 });
 */
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('dashboard', [EbeliController::class, 'index'])->name('dashboard');
-});

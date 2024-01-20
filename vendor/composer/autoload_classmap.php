@@ -22,6 +22,7 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\BuscarController' => $baseDir . '/app/Http/Controllers/BuscarController.php',
     'App\\Http\\Controllers\\CarroController' => $baseDir . '/app/Http/Controllers/CarroController.php',
+    'App\\Http\\Controllers\\CartController' => $baseDir . '/app/Http/Controllers/CartController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DetalproductosController' => $baseDir . '/app/Http/Controllers/DetalproductosController.php',
     'App\\Http\\Controllers\\EbeliController' => $baseDir . '/app/Http/Controllers/EbeliController.php',

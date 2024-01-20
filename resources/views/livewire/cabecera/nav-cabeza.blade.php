@@ -122,8 +122,9 @@
                         </div>
 
                         <a href="{{ route('carro') }}"
-                            class="w-10 h-10 text-xl flex items-center justify-center font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
+                            class="w-14 h-10 text-xl flex items-center justify-center font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
                             <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="ml-1 rounded bg-orange-600 text-white text-xs px-1">{{Cart::getContent()->count()}}</span>
                         </a>
 
                     </div>
@@ -153,7 +154,7 @@
                         </button>
                     </div>
 
-                    <div class="hidden w-full md:block md:w-[210px] md:min-w-[210px]" id="navbar-default">
+                    <div class="hidden w-full md:block md:w-[240px] md:min-w-[240px]" id="navbar-default">
                         <ul
                             class="text-xl flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row rtl:space-x-reverse md:mt-0 md:border-0 bg-zinc-800 md:bg-transparent">
                             <li>
@@ -167,7 +168,8 @@
                                 <a href="{{ route('carro') }}"
                                     class="block border border-transparent hover:border-white p-3 rounded-sm hover:bg-zinc-700 md:hover:bg-transparent">
                                     <i class="fa-solid fa-cart-shopping"></i>
-                                    <span class="text-sm">Carrito</span>
+                                    <span class="text-sm"> Carrito</span>
+                                    <span class="rounded bg-orange-600 text-white text-xs px-1">{{Cart::getContent()->count()}}</span>
                                 </a>
                             </li>
                         </ul>
