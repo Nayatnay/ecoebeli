@@ -37,8 +37,8 @@
                             </div>
                         @endif
                     </div>
-                    <div class="w-full flex justify-between text-sm border-b pb-1">
-                        <p class="text-orange-600 font-mediun">Productos Seleccionados</p>
+                    <div class="w-full flex justify-between text-sm border-b px-2 pb-1">
+                        <p class="text-orange-600 font-normal">{{count(Cart::getContent())}} Productos Seleccionados</p>
                         <p>Precio</p>
                     </div>
                     <div class="">
@@ -76,15 +76,22 @@
                         @endforeach
                     </div>
 
-                    <div class="flex items-start justify-between">
-                        
-                        <div class="text-right text-xs text-orange-600 hover:underline">
+                    <div class="flex items-start justify-between mt-2">
+
+                        <div class="text-right text-xs text-orange-600 hover:underline px-2">
                             <a href="{{ route('clear') }}">Vaciar carrito</a>
                         </div>
                         <div class="text-xl text-right font-semibold">
                             <p>Subtotal: US$ {{ number_format($subtotal, 2) }}</p>
                         </div>
 
+                    </div>
+
+                    <div class="mt-10 text-right">
+                        <a href="#"
+                            class="cursor-pointer text-sm font-medium px-14 py-2 border rounded-md bg-yellow-300 hover:bg-yellow-200">
+                            Comprar ahora
+                        </a>
                     </div>
 
                 </div>
@@ -150,7 +157,7 @@
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $product->id }}">
                                         <input type="submit" value="Agregar al carrito"
-                                            class="block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-400">
+                                            class="cursor-pointer block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-200">
                                     </form>
                                 </div>
                             </div>

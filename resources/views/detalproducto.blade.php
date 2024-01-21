@@ -108,12 +108,12 @@
                             @csrf
                             <input type="hidden" name="id" value="{{ $producto->id }}">
                             <input type="submit" value="Agregar al carrito"
-                                class="w-full block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-400">
+                                class="cursor-pointer w-full block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-200">
                         </form>
                     </div>
                     <div class="mt-4 w-full">
                         <a href="#"
-                            class="block text-xs font-medium px-4 py-2 border rounded-full bg-lime-600 hover:bg-lime-700 text-white">Comprar
+                            class="block text-xs font-medium px-4 py-2 border rounded-full bg-orange-600 hover:bg-orange-500 text-white">Comprar
                             ahora</a>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                             @csrf
                             <input type="hidden" name="id" value="{{ $producto->id }}">
                             <input type="submit" value="Agregar al carrito"
-                                class="w-full block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-400">
+                                class="cursor-pointer w-full block text-xs font-medium px-4 py-2 border rounded-full bg-yellow-300 hover:bg-yellow-200">
                         </form>
                     </div>
                 </div>
