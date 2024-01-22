@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
-use Darryldecode\Cart\Facades\CartFacade;   
+use Darryldecode\Cart\Facades\CartFacade;
 
 class CartController extends Controller
 {
     public function add(Request $request)
     {
-        
+
         $producto = Producto::find($request->id);
-       
+
         if (empty($producto)) {
             return redirect('/');
         }
@@ -22,7 +22,7 @@ class CartController extends Controller
             $producto->nombre,
             $producto->precio,
             1,
-            array("imagen"=>$producto->imagen)
+            array("imagen" => $producto->imagen)
 
         );
 
@@ -34,4 +34,5 @@ class CartController extends Controller
         CartFacade::clear();
         return redirect()->back();
     }
+
 }

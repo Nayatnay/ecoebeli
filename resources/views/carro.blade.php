@@ -36,14 +36,21 @@
                                 Producto Agregado con éxito
                             </div>
                         @endif
+                        @if (session('eliminado'))
+                        <div class="mensaje text-red-700 text-xs text-right font-bold">
+                            Producto Eliminado con éxito!
+                        </div>
+                    @endif
                     </div>
                     <div class="w-full flex justify-between text-sm border-b px-2 pb-1">
-                        <p class="text-orange-600 font-normal">{{count(Cart::getContent())}} Productos Seleccionados</p>
+                        <p class="text-orange-600 font-normal">{{ \Cart::getTotalQuantity() }} Productos almacenados en el carrito
+                        </p>
                         <p>Precio</p>
                     </div>
                     <div class="">
                         @php
                             $subtotal = 0;
+                            $numproductos = 0;
                         @endphp
                         @foreach (Cart::getContent() as $item)
                             <div class="flex items-center mt-4 border-b pb-4">
@@ -54,16 +61,39 @@
                                 <div class="w-full flex items-start justify-between">
                                     <div class="ml-4">
                                         <p class="text-2xl text-left font-normal">{{ $item->name }}</p>
-                                        <p class="text-sm text-left">Cant.: {{ $item->quantity }}</p>
 
-                                        <a href="#"
-                                            class="block text-xs text-left text-orange-600 hover:underline">
-                                            Eliminar
-                                        </a>
+                                        <div class="flex">
+                                            <span>Cant.: </span>
+                                            <select name="cant" id="cant" onchange="ShowSelected();"
+                                                class="text-sm font-medium border-none focus:ring-0 focus:outline-none hover:cursor-pointer px-2 py-0 ml-1 text-black">
+                                                @if ($item->quantity == 1)
+                                                    <option value="{{ $item->quantity }} Unidad" class="bg-white border-none">
+                                                        {{ $item->quantity }} Unidad
+                                                    </option>
+                                                @else
+                                                    <option value="{{ $item->quantity }} Unidades" class="bg-white border-none">
+                                                        {{ $item->quantity }} Unidades
+                                                    </option>
+                                                @endif
+                                                @for ($i = 0; $i < 10; $i++)
+                                                    <option value="{{ $i }}" class="bg-white border-none">
+                                                        {{ $i }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="mt-2">
+                                            <form action="{{ route('removeitem') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" name="rowId" value="{{ $item->id }}">
+                                                <input type="submit" value="Eliminar"
+                                                    class="block text-xs text-left text-orange-600 hover:underline cursor-pointer">
+                                            </form>
+                                        </div>
 
                                     </div>
                                     <div>
-                                        <p class="text-xl text-right font-semibold">US$
+                                        <p class="text-lg text-right font-medium">US$
                                             {{ number_format($item->price, 2) }}
                                         </p>
                                     </div>
@@ -81,8 +111,10 @@
                         <div class="text-right text-xs text-orange-600 hover:underline px-2">
                             <a href="{{ route('clear') }}">Vaciar carrito</a>
                         </div>
-                        <div class="text-xl text-right font-semibold">
-                            <p>Subtotal: US$ {{ number_format($subtotal, 2) }}</p>
+                        <div class="text-lg text-right">
+                            <span class="font-normal">Subtotal:</span>
+                            <span class="font-medium"> US$ {{ number_format($subtotal, 2) }}</span>
+                            <p class="text-sm text-gray-800">( por {{ \Cart::getTotalQuantity() }} unidades)</p>
                         </div>
 
                     </div>
@@ -144,7 +176,7 @@
                             <div class="w-full">
                                 <a href="{{ route('detalproducto', $product->id) }} ">
                                     <div>
-                                        <p class="text text-orange-400">{{ $product->nombre }}</p>
+                                        <p class="text text-orange-600">{{ $product->nombre }}</p>
                                         <p class="text-xs font-medium"><i class="fa-solid fa-store text-yellow-300"></i>
                                             {{ $product->stock }}+ existencias
                                         </p>

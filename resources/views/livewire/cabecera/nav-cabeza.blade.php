@@ -124,7 +124,7 @@
                         <a href="{{ route('carro') }}"
                             class="w-14 h-10 text-xl flex items-center justify-center font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="ml-1 rounded bg-orange-600 text-white text-xs px-1">{{Cart::getContent()->count()}}</span>
+                            <span class="ml-1 rounded bg-orange-600 text-white text-xs px-1">{{\Cart::getTotalQuantity()}}</span>
                         </a>
 
                     </div>
@@ -169,7 +169,7 @@
                                     class="block border border-transparent hover:border-white p-3 rounded-sm hover:bg-zinc-700 md:hover:bg-transparent">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                     <span class="text-sm"> Carrito</span>
-                                    <span class="rounded bg-orange-600 text-white text-xs px-1">{{Cart::getContent()->count()}}</span>
+                                    <span class="rounded bg-orange-600 text-white text-xs px-1">{{\Cart::getTotalQuantity()}}</span>
                                 </a>
                             </li>
                         </ul>

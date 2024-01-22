@@ -46,4 +46,11 @@ class CarroController extends Controller
 
         return redirect()->Route('carro')->with('info', 'ok');
     }
+
+    public function removeItem(Request $request)
+    {
+        CartFacade::remove($request->rowId);
+
+        return redirect()->Route('carro')->with('eliminado', 'ok');
+    }
 }
