@@ -52,7 +52,7 @@
                         <a href="{{ route('buscar') }}">
                             <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
                                 aria-expanded="false"
-                                class="md:hidden text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg text-sm p-2.5 me-1">
+                                class="md:hidden text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg text-sm p-2.5">
                                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 20 20">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -64,7 +64,7 @@
 
                         <div class="flex items-center px-2">
                             <button type="button"
-                                class="flex items-center justify-center text-xl font-medium w-10 h-10 text-lime-600 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
+                                class="flex items-center justify-center text-xl font-medium w-10 h-10 text-lime-500 hover:border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
                                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                                 data-dropdown-placement="bottom" title="Bienvenido {{ ucwords(Auth::user()->name) }}">
                                 <span class="sr-only">Open user menu</span>
@@ -122,11 +122,12 @@
                         </div>
 
                         <a href="{{ route('carro') }}"
-                            class="w-14 h-10 text-xl flex items-center justify-center font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
+                            class="w-10 h-10 ml-1 text-xl flex items-center justify-center font-medium text-white hover:border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <span class="ml-1 rounded bg-orange-600 text-white text-xs px-1">{{\Cart::getTotalQuantity()}}</span>
+                            <p class="ml-0.5 mb-4 text-lime-500 text-[10px] text-center font-bold">{{\Cart::getTotalQuantity()}}</p>    
                         </a>
-
+                            
+                        
                     </div>
                 @else
                     <div>
@@ -169,7 +170,7 @@
                                     class="block border border-transparent hover:border-white p-3 rounded-sm hover:bg-zinc-700 md:hover:bg-transparent">
                                     <i class="fa-solid fa-cart-shopping"></i>
                                     <span class="text-sm"> Carrito</span>
-                                    <span class="rounded bg-orange-600 text-white text-xs px-1">{{\Cart::getTotalQuantity()}}</span>
+                                    <span class="rounded-full bg-lime-600 text-white text-[10px] text-center font-medium px-1">{{\Cart::getTotalQuantity()}}</span>
                                 </a>
                             </li>
                         </ul>

@@ -37,19 +37,28 @@
                             </div>
                         @endif
                         @if (session('eliminado'))
-                        <div class="mensaje text-red-700 text-xs text-right font-bold">
-                            Producto Eliminado con éxito!
-                        </div>
-                    @endif
+                            <div class="mensaje text-red-700 text-xs text-right font-bold">
+                                Producto Eliminado con éxito!
+                            </div>
+                        @endif
+                        @if (session('actualizado'))
+                            <div class="mensaje text-green-700 text-xs text-right font-bold">
+                                Cantidad actualizada satisfactoriamente!
+                            </div>
+                        @endif
                     </div>
                     <div class="w-full flex justify-between text-sm border-b px-2 pb-1">
-                        <p class="text-orange-600 font-normal">{{ \Cart::getTotalQuantity() }} Productos almacenados en el carrito
-                        </p>
+                        @if (count(Cart::getContent()) == 1)
+                            <p class="text-orange-600 font-normal">{{ count(Cart::getContent()) }} Item agregado al
+                                carrito</p>
+                        @else
+                            <p class="text-orange-600 font-normal">{{ count(Cart::getContent()) }} Items agregados al
+                                carrito</p>
+                        @endif
                         <p>Precio</p>
                     </div>
                     <div class="">
                         @php
-                            $subtotal = 0;
                             $numproductos = 0;
                         @endphp
                         @foreach (Cart::getContent() as $item)
@@ -62,27 +71,34 @@
                                     <div class="ml-4">
                                         <p class="text-2xl text-left font-normal">{{ $item->name }}</p>
 
-                                        <div class="flex">
+                                        <div class="flex text-xs">
                                             <span>Cant.: </span>
-                                            <select name="cant" id="cant" onchange="ShowSelected();"
-                                                class="text-sm font-medium border-none focus:ring-0 focus:outline-none hover:cursor-pointer px-2 py-0 ml-1 text-black">
-                                                @if ($item->quantity == 1)
-                                                    <option value="{{ $item->quantity }} Unidad" class="bg-white border-none">
-                                                        {{ $item->quantity }} Unidad
-                                                    </option>
-                                                @else
-                                                    <option value="{{ $item->quantity }} Unidades" class="bg-white border-none">
-                                                        {{ $item->quantity }} Unidades
-                                                    </option>
-                                                @endif
-                                                @for ($i = 0; $i < 10; $i++)
-                                                    <option value="{{ $i }}" class="bg-white border-none">
-                                                        {{ $i }}
-                                                    </option>
-                                                @endfor
-                                            </select>
+                                            <form action="{{ route('updateqty') }}" method="post">
+                                                @csrf
+                                                <select name="cant" id="cant" onchange="this.form.submit()"
+                                                    class="text-xs font-medium border-none focus:ring-0 focus:outline-none hover:cursor-pointer px-2 py-0 ml-1 text-black">
+                                                    @if ($item->quantity == 1)
+                                                        <option value="{{ $item->quantity }}"
+                                                            class="bg-white border-none">
+                                                            {{ $item->quantity }} Unidad
+                                                        </option>
+                                                    @else
+                                                        <option value="{{ $item->quantity }}"
+                                                            class="bg-white border-none">
+                                                            {{ $item->quantity }} Unidades
+                                                        </option>
+                                                    @endif
+                                                    @for ($i = 0; $i < 10; $i++)
+                                                        <option value="{{ $i }}"
+                                                            class="bg-white border-none">
+                                                            {{ $i }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                                <input type="hidden" name="rowId" value="{{ $item->id }}">
+                                            </form>
                                         </div>
-                                        <div class="mt-2">
+                                        <div class="mt-1">
                                             <form action="{{ route('removeitem') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="rowId" value="{{ $item->id }}">
@@ -99,10 +115,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @php
-                                $subtotal = $subtotal + $item->price * $item->quantity;
-                            @endphp
                         @endforeach
                     </div>
 
@@ -113,7 +125,7 @@
                         </div>
                         <div class="text-lg text-right">
                             <span class="font-normal">Subtotal:</span>
-                            <span class="font-medium"> US$ {{ number_format($subtotal, 2) }}</span>
+                            <span class="font-medium"> US$ {{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</span>
                             <p class="text-sm text-gray-800">( por {{ \Cart::getTotalQuantity() }} unidades)</p>
                         </div>
 
@@ -177,7 +189,8 @@
                                 <a href="{{ route('detalproducto', $product->id) }} ">
                                     <div>
                                         <p class="text text-orange-600">{{ $product->nombre }}</p>
-                                        <p class="text-xs font-medium"><i class="fa-solid fa-store text-yellow-300"></i>
+                                        <p class="text-xs font-medium"><i
+                                                class="fa-solid fa-store text-yellow-300"></i>
                                             {{ $product->stock }}+ existencias
                                         </p>
                                         <span class="text-base font-semibold"> US${{ $product->precio }}</span>

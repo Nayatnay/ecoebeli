@@ -22,7 +22,7 @@
                 </a>
                 <div class="flex items-center px-2">
                     <button type="button"
-                        class="flex items-center justify-center text-xl font-medium w-10 h-10 border-2 border-gray-600 text-lime-600 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
+                        class="flex items-center justify-center text-xl font-medium w-10 h-10 hover:border-2 border-gray-200 text-lime-500 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
                         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                         data-dropdown-placement="bottom" title="Bienvenido {{ ucwords(Auth::user()->name) }}">
                         <span class="sr-only">Open user menu</span>
@@ -80,10 +80,12 @@
                 </div>
 
                 <a href="{{ route('carro') }}"
-                    class="w-14 h-10 text-xl flex items-center justify-center font-medium text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="ml-1 rounded bg-orange-600 text-white text-xs px-1">{{\Cart::getTotalQuantity()}}</span>
-                </a>
+                            class="w-10 h-10 text-xl flex items-center justify-center hover:border-2 border-gray-200 font-medium text-white focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <p class="ml-0.5 mb-4 text-lime-500 text-[10px] text-center font-bold">{{\Cart::getTotalQuantity()}}</p>    
+                        </a>
+
+                
             </div>
         </div>
     </nav>
