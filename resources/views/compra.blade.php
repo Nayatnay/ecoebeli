@@ -20,25 +20,61 @@
     @livewire('cabecera.nav-cabeza')
     <div class="shadow">
         <div class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Mi Compra de <strong class="text-orange-600 ml-1">{{ \Cart::getTotalQuantity() }} artículos</strong>
-            </h2>
+            @if (\Cart::getTotalQuantity() == 1)
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Mi Compra de <strong class="text-orange-600 ml-1">{{ \Cart::getTotalQuantity() }} artículo</strong>
+                </h2>
+            @else
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    Mi Compra de <strong class="text-orange-600 ml-1">{{ \Cart::getTotalQuantity() }} artículos</strong>
+                </h2>
+            @endif
         </div>
     </div>
 
     <div class="max-w-screen-xl mx-auto p-4 flex justify-between">
-        <div class="w-full flex datos border rounded-lg p-4 text-lg">
-            <p class="font-bold mr-6">1. dirección para el envío</p>
+        <div class="w-full mr-6">
+            <div class="w-full flex border-b border-gray-300  text-base p-4">
+                <p class="font-bold mr-6">1. Dirección para el envío</p>
 
-            <p class="text-gray-600 text-base">
-                {{ Auth::user()->name }} <br>
-                {{ Auth::user()->pais }}
-                -{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }} <br>{{ Auth::user()->direccion }} <br>
-                CP.{{ Auth::user()->cp }}
-            </p>
+                <div class="text-gray-600 text-sm font-medium ">
+                    <p class="uppercase">{{ Auth::user()->name }} </p>
+                    <p> {{ Auth::user()->pais }}-{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }}</p>
+                    <p>{{ Auth::user()->direccion }}</p>
+                    <p> CP.{{ Auth::user()->cp }}</p>
+                </div>
+
+            </div>
+            <div>
+                <p class="font-bold border-b border-gray-300 p-4">2. Método de pago</p>
+            </div>
         </div>
-        <div class="orden border rounded-lg p-4">
-            hola mundos
+
+        <div class="border rounded-lg ml-6 w-full md:w-[360px]">
+            <div class="bg-gray-100 px-4 py-2 text-center font-medium">
+                <p>Orden de Compra</p>
+            </div>
+            <div class="p-4 text-sm">
+                <div class="flex justify-between ">
+                    <p>Total pedido:</p>
+                    <p>US${{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
+                </div>
+                <div class="flex justify-between my-1">
+                    <p>Envío:</p>
+                    <p class=""> US${{ number_format(0, 2, '.', '.') }}</p>
+                </div>
+                <div class="flex justify-between border-b pb-4">
+                    <p>Impuestos:</p>
+                    <p class=""> US${{ number_format(0, 2, '.', '.') }}</p>
+                </div>
+                <div class="flex justify-between text-lg font-medium pt-4">
+                    <p>Total Pedido:</p>
+                    <p class=""> US${{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
+                </div>
+            </div>
+            <div class="bg-gray-100 px-4 py-2 text-center">
+                Fondo de detalles
+            </div>
         </div>
     </div>
 
