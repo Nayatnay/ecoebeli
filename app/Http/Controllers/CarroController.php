@@ -55,6 +55,11 @@ class CarroController extends Controller
 
     public function updateqty(Request $request)
     {
+        if ($request->cant == 0) {
+            CartFacade::remove($request->rowId);
+            return redirect()->Route('carro')->with('eliminado', 'ok');
+        }
+        
         CartFacade::remove($request->rowId);
 
         $producto = Producto::find($request->rowId);
@@ -69,5 +74,25 @@ class CarroController extends Controller
         );
 
         return redirect()->Route('carro')->with('actualizado', 'ok');
+    }
+
+    public function adicompra(Producto $producto)
+    {
+        $producto = Producto::find($producto->id);
+
+        if (empty($producto)) {
+            return redirect('/');
+        }
+
+        CartFacade::add(
+            $producto->id,
+            $producto->nombre,
+            $producto->precio,
+            1,
+            array("imagen" => $producto->imagen)
+
+        );
+
+        return redirect()->Route('compra');
     }
 }

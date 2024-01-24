@@ -51,9 +51,9 @@
                     @php
                         $decimal = substr($producto->precio, -2);
                     @endphp
-                    @if ($decimal != 0)
+                    
                         <span class="mt-0.5 ml-0.5 text-sm font-light">{{ substr($producto->precio, -2) }}</span>
-                    @endif
+                    
                 </div>
             </div>
 
@@ -112,7 +112,7 @@
                         </form>
                     </div>
                     <div class="mt-4 w-full">
-                        <a href="#"
+                        <a href="{{route('adicompra', $producto->id)}}"
                             class="block text-xs font-medium px-4 py-2 border rounded-full bg-orange-600 hover:bg-orange-500 text-white">Comprar
                             ahora</a>
                     </div>

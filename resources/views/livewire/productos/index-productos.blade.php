@@ -58,10 +58,9 @@
                                     @php
                                         $decimal = substr($producto->precio, -2);
                                     @endphp
-                                    @if ($decimal != 0)
-                                        <span
-                                            class="mt-0.5 ml-0.5 text-base font-light">{{ substr($producto->precio, -2) }}</span>
-                                    @endif
+
+                                    <span class="mt-0.5 ml-0.5 text-base font-light">{{ substr($producto->precio, -2) }}</span>
+
                                 </div>
                             </div>
 

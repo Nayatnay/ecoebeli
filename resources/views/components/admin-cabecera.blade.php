@@ -53,6 +53,13 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="{{ route('compra') }}"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                    <i class="fa-solid fa-credit-card"></i>
+                                    <span class="ml-2">Mis Compras</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admincat') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
                                     <i class="fa-solid fa-layer-group"></i>

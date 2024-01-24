@@ -3,6 +3,7 @@
 use App\Http\Controllers\BuscarController;
 use App\Http\Controllers\CarroController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DetalproductosController;
 use App\Http\Controllers\EbeliController;
 use App\Http\Controllers\VerproductosController;
@@ -66,6 +67,11 @@ Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout
 Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('cart/removeitem', [CarroController::class, 'removeItem'])->name('removeitem');
 Route::post('cart/updateqty', [CarroController::class, 'updateqty'])->name('updateqty');
+
+//Rutas Compras
+Route::get('compra', [CompraController::class, 'index'])->name('compra');
+Route::get('verificalog', [CompraController::class, 'verificalog'])->name('verificalog');
+Route::get('adicompra/{producto}', [CarroController::class, 'adicompra'])->name('adicompra');
 
 /*Route::get('/cart','CartController@index')->name('cart.index');
 Route::post('/cart','CartController@add')->name('cart.add');

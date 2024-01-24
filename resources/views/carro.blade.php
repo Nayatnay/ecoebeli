@@ -58,9 +58,7 @@
                         <p>Precio</p>
                     </div>
                     <div class="">
-                        @php
-                            $numproductos = 0;
-                        @endphp
+
                         @foreach (Cart::getContent() as $item)
                             <div class="flex items-center mt-4 border-b pb-4">
                                 <div>
@@ -79,18 +77,21 @@
                                                     class="text-xs font-medium border-none focus:ring-0 focus:outline-none hover:cursor-pointer px-2 py-0 ml-1 text-black">
                                                     @if ($item->quantity == 1)
                                                         <option value="{{ $item->quantity }}"
-                                                            class="bg-white border-none">
+                                                            class="">
                                                             {{ $item->quantity }} Unidad
                                                         </option>
                                                     @else
                                                         <option value="{{ $item->quantity }}"
-                                                            class="bg-white border-none">
+                                                            class="">
                                                             {{ $item->quantity }} Unidades
                                                         </option>
                                                     @endif
-                                                    @for ($i = 0; $i < 10; $i++)
+                                                    <option value="0" class="">
+                                                        0 
+                                                    </option>
+                                                    @for ($i = 1; $i < 1000; $i++)
                                                         <option value="{{ $i }}"
-                                                            class="bg-white border-none">
+                                                            class="">
                                                             {{ $i }}
                                                         </option>
                                                     @endfor
@@ -125,14 +126,15 @@
                         </div>
                         <div class="text-lg text-right">
                             <span class="font-normal">Subtotal:</span>
-                            <span class="font-medium"> US$ {{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</span>
+                            <span class="font-medium"> US$
+                                {{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</span>
                             <p class="text-sm text-gray-800">( por {{ \Cart::getTotalQuantity() }} unidades)</p>
                         </div>
 
                     </div>
 
                     <div class="mt-10 text-right">
-                        <a href="#"
+                        <a href="{{ route('verificalog')}}"
                             class="cursor-pointer text-sm font-medium px-14 py-2 border rounded-md bg-yellow-300 hover:bg-yellow-200">
                             Comprar ahora
                         </a>
