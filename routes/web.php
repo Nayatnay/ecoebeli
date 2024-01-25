@@ -73,12 +73,6 @@ Route::get('compra', [CompraController::class, 'index'])->name('compra');
 Route::get('verificalog', [CompraController::class, 'verificalog'])->name('verificalog');
 Route::get('adicompra/{producto}', [CarroController::class, 'adicompra'])->name('adicompra');
 
-/*Route::get('/cart','CartController@index')->name('cart.index');
-Route::post('/cart','CartController@add')->name('cart.add');
-Route::post('/cart/conditions','CartController@addCondition')->name('cart.addCondition');
-Route::delete('/cart/conditions','CartController@clearCartConditions')->name('cart.clearCartConditions');
-Route::get('/cart/details','CartController@details')->name('cart.details');
-Route::delete('/cart/{id}','CartController@delete')->name('cart.delete');*/
 
 /*Route::middleware([
     'auth:sanctum',

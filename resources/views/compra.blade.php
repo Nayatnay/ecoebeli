@@ -16,9 +16,11 @@
 
 </head>
 
-<body class="antialised">
+<body class="antialised bg-gray-100">
+
     @livewire('cabecera.nav-cabeza')
-    <div class="shadow">
+
+    <div class="shadow bg-white">
         <div class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">
             @if (\Cart::getTotalQuantity() == 1)
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -32,26 +34,54 @@
         </div>
     </div>
 
-    <div class="max-w-screen-xl mx-auto p-4 flex justify-between">
-        <div class="w-full mr-6">
-            <div class="w-full flex border-b border-gray-300  text-base p-4">
-                <p class="font-bold mr-6">1. Dirección para el envío</p>
+    <!-- Cuerpo de Compras -->
 
-                <div class="text-gray-600 text-sm font-medium ">
-                    <p class="uppercase">{{ Auth::user()->name }} </p>
-                    <p> {{ Auth::user()->pais }}-{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }}</p>
-                    <p>{{ Auth::user()->direccion }}</p>
-                    <p> CP.{{ Auth::user()->cp }}</p>
+    <div class="max-w-screen-xl mx-auto p-4 flex justify-between">
+
+        <div class="w-full mr-6 bg-white p-4">
+
+            <div class="w-full text-base p-4">
+                <div class="flex border-b border-gray-300 pb-4">
+                    <div class="font-bold mr-6">
+                        <p>1. Dirección para el envío</p>
+                    </div>
+                    <div class="text-gray-600 text-sm font-medium">
+                        <p class="uppercase">{{ Auth::user()->name }} </p>
+                        <p> {{ Auth::user()->pais }}-{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }}</p>
+                        <p>{{ Auth::user()->direccion }}</p>
+                        <p> CP.{{ Auth::user()->cp }}</p>
+                    </div>
                 </div>
 
             </div>
-            <div>
-                <p class="font-bold border-b border-gray-300 p-4">2. Método de pago</p>
+
+            <div class="w-full p-4 text-base">
+                <p class="font-bold border-b border-gray-300 pb-4">2. Método de pago</p>
+                <div class="w-full flex justify-between text-gray-600 text-sm font-medium my-4">
+                    <p><i class="fa-regular fa-credit-card mr-4"></i>Visa que termina de 6578</p>
+                    <p> {{ Auth::user()->name }}</p>
+                    <p>10/2027</p>
+                </div>
+                <div class="w-full flex justify-between text-gray-600 text-sm font-medium my-4">
+                    <p><i class="fa-regular fa-credit-card mr-4"></i>Mastercard que termina de 4875</p>
+                    <p> {{ Auth::user()->name }}</p>
+                    <p>10/2027</p>
+                </div>
+                <div class="w-full flex justify-between text-gray-600 text-sm font-medium mt-4">
+                    <p><i class="fa-regular fa-credit-card mr-4"></i>Visa Platinium que termina de 6021</p>
+                    <p> {{ Auth::user()->name }}</p>
+                    <p>10/2027</p>
+                </div>
             </div>
+
+            <div class="p-4">
+                @livewire('medios.agregar-tc')
+            </div>
+
         </div>
 
-        <div class="border rounded-lg ml-6 w-full md:w-[360px]">
-            <div class="bg-gray-100 px-4 py-2 text-center font-medium">
+        <div class="border rounded-lg ml-6 w-full md:w-[360px] max-h-[268px]">
+            <div class="px-4 py-3 text-center font-medium border-b bg-orange-600 text-white rounded-t-lg">
                 <p>Orden de Compra</p>
             </div>
             <div class="p-4 text-sm">
@@ -59,7 +89,7 @@
                     <p>Total pedido:</p>
                     <p>US${{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
                 </div>
-                <div class="flex justify-between my-1">
+                <div class="flex justify-between my-2">
                     <p>Envío:</p>
                     <p class=""> US${{ number_format(0, 2, '.', '.') }}</p>
                 </div>
@@ -67,16 +97,16 @@
                     <p>Impuestos:</p>
                     <p class=""> US${{ number_format(0, 2, '.', '.') }}</p>
                 </div>
-                <div class="flex justify-between text-lg font-medium pt-4">
+                <div class="flex justify-between text-lg font-medium pt-4 text-orange-600">
                     <p>Total Pedido:</p>
-                    <p class=""> US${{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
+                    <p class="text-gray-800"> US${{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
                 </div>
             </div>
-            <div class="bg-gray-100 px-4 py-2 text-center">
-                Fondo de detalles
+            <div class="p-4 bg-gray-200">
+                @livewire('medios.mediosde-pago')
             </div>
+
         </div>
-    </div>
 
 </body>
 
