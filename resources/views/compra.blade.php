@@ -81,7 +81,7 @@
         </div>
 
         <div class="border rounded-lg ml-6 w-full md:w-[360px] max-h-[268px]">
-            <div class="px-4 py-3 text-center font-medium border-b bg-orange-600 text-white rounded-t-lg">
+            <div class="px-4 py-3 text-center font-medium border-b bg-zinc-700 text-white rounded-t-lg">
                 <p>Orden de Compra</p>
             </div>
             <div class="p-4 text-sm">
@@ -99,13 +99,15 @@
                 </div>
                 <div class="flex justify-between text-lg font-medium pt-4 text-orange-600">
                     <p>Total Pedido:</p>
-                    <p class="text-gray-800"> US${{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
+                    <p class=""> US${{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
                 </div>
             </div>
-            <div class="p-4 bg-gray-200">
+            <div class="p-4 bg-gray-200 rounded-b-lg">
                 @livewire('medios.mediosde-pago')
+                <a href="https://wa.me/+584126067734?text=Hola. Me gustaria conocer los medios de pago que acepta además de los indicados en la web."
+            target="_blank" class="hover:underline text-xs">Contacto en Venezuela +58-4126067734</a>
             </div>
-
+            
         </div>
 
 </body>

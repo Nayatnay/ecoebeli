@@ -1,6 +1,6 @@
 <div>
-    <div class="text-xs font-semibold text-orange-600 hover:underline">
-        <p wire:click="$set('open', true)" class="cursor-pointer">Ver Medios de Pago para este Producto</p>
+    <div class="text-sm font-semibold hover:underline">
+        <p wire:click="$set('open', true)" class="cursor-pointer">Ver los Medios de Pago</p>
     </div>
 
     <!--Modal crear -->
@@ -15,29 +15,37 @@
 
         <x-slot name="content">
 
-            <p class="text-lg font-medium"><i class="fa-solid fa-dollar-sign mr-4"></i>Tarjetas de Crédito Visa/Mastercard/American Express</p>
+            <p class="text-lg font-medium"><i class="fa-solid fa-dollar-sign mr-4"></i>Pago a acordar con el vendedor</p>
+
+            <p class="my-4">Ponte en contacto con el vendedor para conocer los medios de pago que acepta además de los
+                indicados a continuacion.
+            </p>
+
+            <p class="text-lg font-medium">Transferencia Bancaria Banesco</p>
+
+            <p class="my-4">Cuenta corriente 0134-2563-52-3645212352. De de Ebeli.com Ecommerce personal. Código de
+                Identificacion Fiscal RIF. J-30521685-9
+            </p>
+
+            <p class="text-lg font-medium">Tarjetas de Crédito Visa/Mastercard/American Express</p>
 
             <p class="my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta repudiandae debitis sit
                 voluptatibus,
-                non quisquam consequuntur nemo dolores culpa quod sint tempore voluptatum enim eum, labore eaque qui
-                alias voluptas!
             </p>
 
             <p class="text-lg font-medium">Tarjetas de Débito Internacional</p>
 
             <p class="my-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur molestiae dolor
                 aliquam reprehenderit
-                nihil consectetur dignissimos, iusto asperiores adipisci. Voluptates veritatis atque voluptatem odio
-                adipisci expedita iusto repellendus tempora esse?</p>
+            </p>
 
             <p class="text-lg font-medium">Plataformas PayPal/AirTM</p>
 
             <p class="my-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed temporibus id tenetur vel,
                 aspernatur
                 dolorum
-                tempora quibusdam numquam similique iure iusto fuga sint quae, quo consequuntur nemo nobis accusantium.
-                Quas.
             </p>
+
         </x-slot>
 
         <x-slot name="footer">
