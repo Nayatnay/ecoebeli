@@ -25,24 +25,24 @@
         <div class="p-4">
 
             @if (count(Cart::getContent()))
-                <div class="bg-white md:px-4 py-8 md:p-8">
-                    <div class="flex flex-col md:flex-row items-end justify-between">
+                <div class="bg-white px-4 py-8 md:p-8">
+                    <div class="flex flex-col md:flex-row md:items-end">
                         <div class="flex items-end">
                             <img src="{{ asset('img/car.png') }}" alt="Compras" title="Compras" width="32px">
-                            <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium md:ml-2">Carrito</p>
+                            <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium ml-2">Carrito</p>
                         </div>
                         @if (session('info'))
-                            <div class="mensaje text-gray-700 text-xs text-right font-bold">
+                            <div class="mensaje text-gray-700 text-xs mt-1 md:mt-0 px-2 md:text-right font-bold">
                                 Producto Agregado con éxito
                             </div>
                         @endif
                         @if (session('eliminado'))
-                            <div class="mensaje text-red-700 text-xs text-right font-bold">
+                            <div class="mensaje text-red-700 text-xs mt-1 md:mt-0 px-2 md:text-right font-bold">
                                 Producto Eliminado con éxito!
                             </div>
                         @endif
                         @if (session('actualizado'))
-                            <div class="mensaje text-green-700 text-xs text-right font-bold">
+                            <div class="mensaje text-green-700 text-xs mt-1 md:mt-0 px-2 md:text-right font-bold">
                                 Cantidad actualizada satisfactoriamente!
                             </div>
                         @endif
@@ -55,19 +55,26 @@
                             <p class="text-orange-600 font-normal">{{ count(Cart::getContent()) }} Items agregados al
                                 carrito</p>
                         @endif
-                        <p>Precio</p>
+                        <p class="hidden md:block">Precio</p>
                     </div>
+
                     <div class="">
 
                         @foreach (Cart::getContent() as $item)
-                            <div class="flex items-center mt-4 border-b pb-4">
+                            <div class="flex items-center mt-4 border-b pb-4 px-2">
                                 <div>
                                     <img src="{{ asset('/storage/productos/' . $item->attributes->imagen) }}"
                                         width="96px" class="rounded mr-4">
                                 </div>
                                 <div class="w-full flex items-start justify-between">
                                     <div class="ml-4">
-                                        <p class="text-2xl text-left font-normal">{{ $item->name }}</p>
+                                        <p class="text-lg lg:text-2xl text-left font-normal">{{ $item->name }}</p>
+
+                                        <div class="md:hidden mb-2">
+                                            <p class="text-base lg:text-lg font-medium">US$
+                                                {{ number_format($item->price, 2) }}
+                                            </p>
+                                        </div>
 
                                         <div class="flex text-xs">
                                             <span>Cant.: </span>
@@ -109,8 +116,8 @@
                                         </div>
 
                                     </div>
-                                    <div>
-                                        <p class="text-lg text-right font-medium">US$
+                                    <div class="hidden md:block">
+                                        <p class="text-base lg:text-lg text-right font-medium">US$
                                             {{ number_format($item->price, 2) }}
                                         </p>
                                     </div>
@@ -119,12 +126,12 @@
                         @endforeach
                     </div>
 
-                    <div class="flex items-start justify-between mt-2">
+                    <div class="flex items-start justify-between mt-2 px-2">
 
-                        <div class="text-right text-xs text-orange-600 hover:underline px-2">
+                        <div class="text-right text-xs text-orange-600 hover:underline">
                             <a href="{{ route('clear') }}">Vaciar carrito</a>
                         </div>
-                        <div class="text-lg text-right">
+                        <div class="text-base lg:text-lg text-right">
                             <span class="font-normal">Subtotal:</span>
                             <span class="font-medium"> US$
                                 {{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</span>
@@ -133,7 +140,7 @@
 
                     </div>
 
-                    <div class="mt-10 text-right">
+                    <div class="mt-10 text-center md:text-right px-2">
                         <a href="{{ route('verificalog')}}"
                             class="cursor-pointer text-sm font-medium px-14 py-2 border rounded-md bg-yellow-300 hover:bg-yellow-200">
                             Comprar ahora

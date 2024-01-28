@@ -1,5 +1,5 @@
 <div>
-    <div class="text-sm font-semibold hover:underline">
+    <div class="text-xs font-bold hover:underline">
         <p wire:click="$set('open', true)" class="cursor-pointer">Ver los Medios de Pago</p>
     </div>
 
