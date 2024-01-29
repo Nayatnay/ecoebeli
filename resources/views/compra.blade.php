@@ -38,7 +38,7 @@
 
     <div class="max-w-screen-xl mx-auto p-4 flex flex-col md:flex-row justify-between">
 
-        <div class="w-full md:mr-6 bg-white p-2 md:p-4">
+        <div class="w-full md:mr-2 bg-white p-2 md:p-4">
 
             <div class="w-full text-base p-4">
                 <div class="flex flex-col md:flex-row border-b border-gray-300 pb-4">
@@ -48,8 +48,7 @@
                     <div class="text-gray-600 text-sm font-medium mt-2 md:mt-0 ml-5 md:ml-0">
                         <p class="uppercase">{{ Auth::user()->name }} </p>
                         <p> {{ Auth::user()->pais }}-{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }}</p>
-                        <p>{{ Auth::user()->direccion }}</p>
-                        <p> CP.{{ Auth::user()->cp }}</p>
+                        <p>{{ Auth::user()->direccion }} - CP.{{ Auth::user()->cp }}</p>
                     </div>
                 </div>
 
@@ -57,6 +56,22 @@
 
             <div class="w-full p-4 text-base">
                 <p class="font-bold">2. Método de pago</p>
+                <div class="flex justify-between text-sm font-medium border-b border-gray-300 pb-2 mb-2">
+                    <p class="w-full sm:basis-2/5"></p>
+                    <p class="hidden sm:block w-full sm:basis-2/5">Nombre en la Tarjeta</p>
+                    <p class="hidden sm:block basis-1/5 text-right">Vencimiento</p>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Visa que termina de
+                        6578</p>
+                    <p class="hidden sm:block basis-2/5">{{ Auth::user()->name }}</p>
+                    <p class="hidden sm:block basis-1/5 text-right">03/2027</p>
+                </div>
+                <div class="sm:hidden block w-full text-sm">
+                    <p>{{ Auth::user()->name }}</p>
+                    <p>03/2027</p>
+                </div>
+                <!--
                 <div class="min-h-0 overflow-auto w-full">
                     <table
                         class="text-gray-800 text-sm font-medium table-fixed w-full h-auto border-collapse text-left">
@@ -82,7 +97,7 @@
                         </tbody>
                     </table>
                 </div>
-
+            -->
             </div>
 
             <div class="p-4">
@@ -92,7 +107,7 @@
         </div>
 
         <div>
-            <div class="border border-gray-200 bg-white rounded-lg mt-4 md:mt-0 md:ml-6 w-full md:w-[280px]">
+            <div class="border border-gray-200 bg-white rounded-lg mt-4 md:mt-0 md:ml-2 w-full md:w-[280px]">
                 <div class="px-4 py-3  border-b border-gray-200 rounded-t-lg">
                     <p class="text-lg font-bold">Orden de Compra</p>
                     <p class="text-xs">Puedes completar la compra de tus {{ \Cart::getTotalQuantity() }} artículos o

@@ -26,14 +26,14 @@
 
             @if (count(Cart::getContent()))
                 <div class="bg-white px-4 py-8 md:p-8">
-                    <div class="flex flex-col md:flex-row md:items-end">
+                    <div class="flex flex-col md:flex-row md:items-end md:justify-between">
                         <div class="flex items-end">
                             <img src="{{ asset('img/car.png') }}" alt="Compras" title="Compras" width="32px">
                             <p class="mt-2 md:mt-0 sm:text-2xl text-xl lg:text-3xl font-medium ml-2">Carrito</p>
                         </div>
                         @if (session('info'))
                             <div class="mensaje text-gray-700 text-xs mt-1 md:mt-0 px-2 md:text-right font-bold">
-                                Producto Agregado con éxito
+                                Producto Agregado con éxito!
                             </div>
                         @endif
                         @if (session('eliminado'))
