@@ -29,21 +29,18 @@
             </div>
             <div class="mb-4">
                 <x-label for="vencimiento" value="{{ __('Fecha de vencimiento') }}" class="text-zinc-800 mb-1" />
-                <select name="mes" id="mes"
-                    class="text-xs font-medium rounded-lg border-gray-300 focus:ring-0 focus:outline-none hover:cursor-pointer p-2 text-black"
-                    onchange="ShowSelected();">
+                <select name="mes" id="mes" wire:model.defer="mes"
+                    class="text-xs font-medium rounded-lg border-gray-300 focus:ring-0 focus:outline-none hover:cursor-pointer p-2 text-black">
                     @for ($i = 1; $i < 13; $i++)
                         <option value="{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</option>
                     @endfor
                 </select>
-                <select name="ano" id="ano"
-                    class="text-xs font-medium rounded-lg border-gray-300 focus:ring-0 focus:outline-none hover:cursor-pointer p-2 text-black"
-                    onchange="ShowSelected();">
+                <select name="ano" id="ano" wire:model.defer="ano"
+                    class="text-xs font-medium rounded-lg border-gray-300 focus:ring-0 focus:outline-none hover:cursor-pointer p-2 text-black">
                     @for ($i = 2024; $i < 2045; $i++)
                         <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
                 </select>
-                <x-input id="vencimiento" type="text" name="vencimiento" wire:model.defer="vencimiento"/>
             </div>
             <div class="mb-4">
                 <x-label for="cvc" value="{{ __('Código de seguridad (CVV)') }}" class="text-zinc-800" />
@@ -67,21 +64,5 @@
         </x-slot>
 
     </x-dialog-modal>
-
-    <script>
-        function ShowSelected() {
-            /* Para obtener el valor */
-            var cod = document.getElementById("mes").value;
-            var cod = document.getElementById("ano").value;
-            /* Para obtener el texto */
-            var combo = document.getElementById("mes");
-            var combodos = document.getElementById("ano");
-
-            var selected = combo.options[combo.selectedIndex].text + '/' + combodos.options[combodos.selectedIndex].text;
-            //alert(selected);
-            document.getElementById("vencimiento").value = selected;
-            document.getElementById("vencimiento").text = selected;
-        }
-    </script>
 
 </div>

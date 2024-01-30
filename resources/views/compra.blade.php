@@ -62,15 +62,17 @@
                     <p class="hidden sm:block basis-1/5 text-right">Vencimiento</p>
                 </div>
                 @foreach ($medios as $medio)
-                    <div class="flex justify-between text-sm">
-                        <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Visa que termina en
-                            {{ $medio->codigo }}</p>
-                        <p class="hidden sm:block basis-2/5"> {{ $medio->nombre }}</p>
-                        <p class="hidden sm:block basis-1/5 text-right">{{ $medio->vencimiento }}</p>
-                    </div>
-                    <div class="sm:hidden block w-full text-sm">
-                        <p>{{ $medio->nombre }}</p>
-                        <p>{{ $medio->vencimiento }}</p>
+                    <div class="py-2">
+                        <div class="hidden sm:flex justify-between text-sm">
+                            <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Visa que termina en {{substr($medio->codigo, -4) }}</p>
+                            <p class="hidden sm:block basis-2/5"> {{ $medio->nombre }}</p>
+                            <p class="hidden sm:block basis-1/5 text-right">{{ $medio->vencimiento }}</p>
+                        </div>
+                        <div class="sm:hidden block w-full text-sm">
+                            <p class="">Visa <strong>...{{substr($medio->codigo, -4) }}</strong></p>
+                            <p>{{ $medio->nombre }}</p>
+                            <p>{{ $medio->vencimiento }}</p>
+                        </div>
                     </div>
                 @endforeach
             </div>
