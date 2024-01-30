@@ -68,6 +68,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    //Relaciones uno a muchos
+    
+    public function medios()
+    {
+        return $this->hasMany('App\Models\Medio', 'id_user');
+    }
+
     public function name(): Attribute
     {
         return new Attribute(

@@ -61,43 +61,18 @@
                     <p class="hidden sm:block w-full sm:basis-2/5">Nombre en la Tarjeta</p>
                     <p class="hidden sm:block basis-1/5 text-right">Vencimiento</p>
                 </div>
-                <div class="flex justify-between text-sm">
-                    <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Visa que termina de
-                        6578</p>
-                    <p class="hidden sm:block basis-2/5">{{ Auth::user()->name }}</p>
-                    <p class="hidden sm:block basis-1/5 text-right">03/2027</p>
-                </div>
-                <div class="sm:hidden block w-full text-sm">
-                    <p>{{ Auth::user()->name }}</p>
-                    <p>03/2027</p>
-                </div>
-                <!--
-                <div class="min-h-0 overflow-auto w-full">
-                    <table
-                        class="text-gray-800 text-sm font-medium table-fixed w-full h-auto border-collapse text-left">
-                        <thead class="border-b border-gray-300 h-8">
-                            <tr>
-                                <th class="w-60"></th>
-                                <th class="w-60"><span class="hidden md:block">Nombre en la tarjeta</span></th>
-                                <th class="text-right w-20"><span class="hidden md:block">Vencimiento</span></th>
-                            </tr>
-                        </thead>
-                        <tbody class="font-normal">
-                            <tr class="h-10 hover:bg-gray-100">
-
-                                <td class="w-60"><i class="fa-regular fa-credit-card mr-2 md:mr-4"></i><span
-                                        class="font-medium md:font-normal">Visa que termina de
-                                        6578</span> <span class="md:hidden block">{{ Auth::user()->name }}</span>
-                                    <span class="md:hidden block">10/2027</span>
-                                </td>
-                                <td class="w-60"><span class="hidden md:block">{{ Auth::user()->name }}</span></td>
-                                <td class="text-right w-20"><span class="hidden md:block">10/2027</span></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-            -->
+                @foreach ($medios as $medio)
+                    <div class="flex justify-between text-sm">
+                        <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Visa que termina en
+                            {{ $medio->codigo }}</p>
+                        <p class="hidden sm:block basis-2/5"> {{ $medio->nombre }}</p>
+                        <p class="hidden sm:block basis-1/5 text-right">{{ $medio->vencimiento }}</p>
+                    </div>
+                    <div class="sm:hidden block w-full text-sm">
+                        <p>{{ $medio->nombre }}</p>
+                        <p>{{ $medio->vencimiento }}</p>
+                    </div>
+                @endforeach
             </div>
 
             <div class="p-4">
@@ -136,7 +111,6 @@
                     <a href="https://wa.me/+584126067734?text=Hola. Me gustaria conocer los medios de pago que acepta además de los indicados en la web."
                         target="_blank" class="hover:underline text-xs">Contacto en Venezuela +58-4126067734</a>
                 </div>
-
             </div>
         </div>
 
