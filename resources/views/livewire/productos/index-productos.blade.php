@@ -1,3 +1,4 @@
+@section('title', 'Productos | Ebeli')
 <div class="min-h-screen">
     <div class="bg-white shadow">
         <div class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">

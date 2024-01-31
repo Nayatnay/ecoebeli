@@ -1,3 +1,4 @@
+@section('title', 'Categorías | Ebeli')
 <div>
     <div class="bg-white shadow">
         <div class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito | Ebeli&trade;</title>
+    <title>Compras | Ebeli&trade;</title>
     <link rel="shortcut icon" href="{!! asset('img/icono.png') !!}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -45,7 +45,7 @@
                     <div class="font-bold md:mr-6">
                         <p>1. Dirección para el envío</p>
                     </div>
-                    <div class="text-gray-600 text-sm font-medium mt-2 md:mt-0 ml-5 md:ml-0">
+                    <div class="text-gray-600 text-sm mt-2 md:mt-0 ml-5 md:ml-0">
                         <p class="uppercase">{{ Auth::user()->name }} </p>
                         <p> {{ Auth::user()->pais }}-{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }}</p>
                         <p>{{ Auth::user()->direccion }} - CP.{{ Auth::user()->cp }}</p>
@@ -63,15 +63,76 @@
                 </div>
                 @foreach ($medios as $medio)
                     <div class="py-2">
-                        <div class="hidden sm:flex justify-between text-sm">
-                            <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Visa que termina en {{substr($medio->codigo, -4) }}</p>
+                        <div class="hidden sm:flex items-end justify-between text-sm text-gray-700">
+                            @if (substr($medio->codigo, 0, 1) == 3)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal"><strong>American
+                                        Express</strong> que termina en
+                                    {{ substr($medio->codigo, -4) }}
+                                </p>
+                            @endif
+                            @if (substr($medio->codigo, 0, 1) == 4)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal"><strong>Visa</strong> que
+                                    termina en
+                                    {{ substr($medio->codigo, -4) }}
+                                </p>
+                            @endif
+                            @if (substr($medio->codigo, 0, 1) == 5)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal"><strong>Mastercard</strong>
+                                    que termina en
+                                    {{ substr($medio->codigo, -4) }}
+                                </p>
+                            @endif
+                            @if (substr($medio->codigo, 0, 1) != 3 && substr($medio->codigo, 0, 1) != 4 && substr($medio->codigo, 0, 1) != 5)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal"><strong>Tarjeta</strong> que
+                                    termina en
+                                    {{ substr($medio->codigo, -4) }}
+                                </p>
+                            @endif
                             <p class="hidden sm:block basis-2/5"> {{ $medio->nombre }}</p>
-                            <p class="hidden sm:block basis-1/5 text-right">{{ $medio->vencimiento }}</p>
+                            @if (substr($medio->vencimiento, 0, 1) == 'V')
+                                <p class="hidden sm:block basis-1/5 text-right text-orange-600 font-bold text-xs">
+                                    {{ $medio->vencimiento }}</p>
+                            @else
+                                <p class="hidden sm:block basis-1/5 text-right">{{ $medio->vencimiento }}</p>
+                            @endif
+
+                            <a href="{{ route('editmedio', $medio->id) }}" title="Eliminar" class="text-center text-orange-600 px-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+
                         </div>
                         <div class="sm:hidden block w-full text-sm">
-                            <p class="">Visa <strong>...{{substr($medio->codigo, -4) }}</strong></p>
-                            <p>{{ $medio->nombre }}</p>
-                            <p>{{ $medio->vencimiento }}</p>
+                            @if (substr($medio->codigo, 0, 1) == 3)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal">American
+                                    Express <strong>...{{ substr($medio->codigo, -4) }}</strong>
+                                </p>
+                            @endif
+                            @if (substr($medio->codigo, 0, 1) == 4)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Visa
+                                    <strong>...{{ substr($medio->codigo, -4) }}</strong>
+                                </p>
+                            @endif
+                            @if (substr($medio->codigo, 0, 1) == 5)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Mastercard
+                                    <strong>...{{ substr($medio->codigo, -4) }}</strong>
+                                </p>
+                            @endif
+                            @if (substr($medio->codigo, 0, 1) != 3 && substr($medio->codigo, 0, 1) != 4 && substr($medio->codigo, 0, 1) != 5)
+                                <p class="w-full sm:basis-2/5 font-medium sm:font-normal">Tarjeta
+                                    <strong>...{{ substr($medio->codigo, -4) }}</strong>
+                                </p>
+                            @endif
+                            @if (substr($medio->vencimiento, 0, 1) == 'V')
+                                <p>{{ $medio->nombre }} - <strong
+                                        class="text-orange-600 text-xs">{{ $medio->vencimiento }}</strong></p>
+                            @else
+                                <p>{{ $medio->nombre }} - {{ $medio->vencimiento }}</p>
+                            @endif
+
+                            <a href="{{ route('editmedio', $medio->id) }}" title="Eliminar" class="text-center text-orange-600 px-2">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+
                         </div>
                     </div>
                 @endforeach
@@ -115,6 +176,21 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+    <script>
+        const input = document.getElementById("codigo");
+
+        input.addEventListener("input", function() {
+            const inputValue = this.value.replace(/\s/g, ""); // quitamos todos los espacios encontrados...
+            if (inputValue !== "") {
+                const result = inputValue.match(/.{1,4}/g).join(
+                    " "); // y agregamos un espacio cada 4 caracteres, uso join(" ") para quitar las comas...
+                this.value = result; // Y el valor del input será la cadena modificada.
+            }
+        });
+    </script>
 
 </body>
 

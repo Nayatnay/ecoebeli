@@ -15,22 +15,18 @@ class AgregarTc extends Component
     protected $listeners = ['render'];
 
     protected $rules = [
-        'codigo' => 'required',
+        'codigo' => 'required|unique:medios',
         'nombre' => 'required',
-        'vencimiento' => 'required',
+        'mes' => 'required',
+        'ano' => 'required',
         'cvc' => 'required',
     ];
 
     public function save()
     {        
-        if ($this->mes == null || $this->ano == null) {
-            $this->mes = '01';
-            $this->ano = '2024';
-        }
-        
-        $this->vencimiento = str_pad($this->mes, 2, '0', STR_PAD_LEFT) . '/' . $this->ano;
-        
         $this->validate();
+              
+        $this->vencimiento = str_pad($this->mes, 2, '0', STR_PAD_LEFT) . '/' . $this->ano;    
 
         $codigo = $this->codigo;
         $nombre = $this->nombre;

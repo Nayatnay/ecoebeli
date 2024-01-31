@@ -72,7 +72,7 @@ Route::post('cart/updateqty', [CarroController::class, 'updateqty'])->name('upda
 Route::get('compra', [CompraController::class, 'index'])->name('compra');
 Route::get('verificalog', [CompraController::class, 'verificalog'])->name('verificalog');
 Route::get('adicompra/{producto}', [CarroController::class, 'adicompra'])->name('adicompra');
-
+Route::get('editmedio/{medio}', [CompraController::class, 'editmedio'])->name('editmedio');
 
 /*Route::middleware([
     'auth:sanctum',

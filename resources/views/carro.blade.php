@@ -47,12 +47,12 @@
                             </div>
                         @endif
                     </div>
-                    <div class="w-full flex justify-between text-sm border-b px-2 pb-1">
+                    <div class="w-full flex justify-between text-sm border-b px-2 py-1">
                         @if (count(Cart::getContent()) == 1)
-                            <p class="text-orange-600 font-normal">{{ count(Cart::getContent()) }} Item agregado al
+                            <p class="text-orange-600">{{ count(Cart::getContent()) }} Item agregado al
                                 carrito</p>
                         @else
-                            <p class="text-orange-600 font-normal">{{ count(Cart::getContent()) }} Items agregados al
+                            <p class="text-orange-600">{{ count(Cart::getContent()) }} Items agregados al
                                 carrito</p>
                         @endif
                         <p class="hidden md:block">Precio</p>
