@@ -63,7 +63,7 @@
                 </div>
                 @foreach ($medios as $medio)
                     <div class="py-2">
-                        <div class="hidden sm:flex items-end justify-between text-sm text-gray-700">
+                        <div class="hidden sm:flex items-center justify-between text-sm text-gray-700">
                             @if (substr($medio->codigo, 0, 1) == 3)
                                 <p class="w-full sm:basis-2/5 font-medium sm:font-normal"><strong>American
                                         Express</strong> que termina en
@@ -96,8 +96,8 @@
                                 <p class="hidden sm:block basis-1/5 text-right">{{ $medio->vencimiento }}</p>
                             @endif
 
-                            <a href="{{ route('editmedio', $medio->id) }}" title="Eliminar" class="text-center text-orange-600 px-2">
-                                <i class="fa-solid fa-trash"></i>
+                            <a href="{{ route('editmedio', $medio->id) }}" title="Actualizar" class="text-center text-lg text-orange-600 ml-2 px-1 hover:bg-gray-200 rounded-sm">
+                                <i class="fa-solid fa-ellipsis"></i>
                             </a>
 
                         </div>
@@ -129,8 +129,8 @@
                                 <p>{{ $medio->nombre }} - {{ $medio->vencimiento }}</p>
                             @endif
 
-                            <a href="{{ route('editmedio', $medio->id) }}" title="Eliminar" class="text-center text-orange-600 px-2">
-                                <i class="fa-solid fa-trash"></i>
+                            <a href="{{ route('editmedio', $medio->id) }}" title="Actualizar" class="text-center text-lg text-orange-600 ml-2 px-1 hover:bg-gray-200 rounded-sm">
+                                <i class="fa-solid fa-ellipsis"></i>
                             </a>
 
                         </div>

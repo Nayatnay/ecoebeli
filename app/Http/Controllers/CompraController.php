@@ -32,6 +32,7 @@ class CompraController extends Controller
                 }
             }
         }
+        
         return view('compra', compact('medios'));
     }
 
