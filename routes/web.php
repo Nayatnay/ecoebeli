@@ -67,7 +67,7 @@ Route::middleware([
 
 Route::post('cart/add', [CartController::class, 'add'])->name('add');
 Route::post('adicion', [CarroController::class, 'adicion'])->name('adicion');
-Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
+//Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
 Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
 Route::post('cart/removeitem', [CarroController::class, 'removeItem'])->name('removeitem');
 Route::post('cart/updateqty', [CarroController::class, 'updateqty'])->name('updateqty');

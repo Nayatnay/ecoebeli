@@ -10,6 +10,17 @@
       'Cart' => 'Darryldecode\\Cart\\Facades\\CartFacade',
     ),
   ),
+  'diglactic/laravel-breadcrumbs' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Diglactic\\Breadcrumbs\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Breadcrumbs' => 'Diglactic\\Breadcrumbs\\Breadcrumbs',
+    ),
+  ),
   'laravel/fortify' => 
   array (
     'providers' => 
