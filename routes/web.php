@@ -39,6 +39,10 @@ Route::get('adminpro', function () {
     return view('adminpro');
 })->name('adminpro');
 
+Route::get('admincom', function () {
+    return view('admincom');
+})->name('admincom');
+
 Route::get('categorias', IndexCategorias::class)->name('categorias');
 Route::get('productos', IndexProductos::class)->name('productos');
 Route::get('carro', [CarroController::class, 'index'])->name('carro');
@@ -70,7 +74,7 @@ Route::post('cart/updateqty', [CarroController::class, 'updateqty'])->name('upda
 
 //Rutas Compras
 Route::get('compra', [CompraController::class, 'index'])->name('compra');
-Route::get('verificalog', [CompraController::class, 'verificalog'])->name('verificalog');
+Route::get('verificalog', [CarroController::class, 'verificalog'])->name('verificalog');
 Route::get('adicompra/{producto}', [CarroController::class, 'adicompra'])->name('adicompra');
 Route::get('editmedio/{medio}', [CompraController::class, 'editmedio'])->name('editmedio');
 

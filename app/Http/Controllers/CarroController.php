@@ -93,6 +93,15 @@ class CarroController extends Controller
 
         );
 
-        return redirect()->Route('compra');
+        return redirect()->Route('admincom');
+    }
+
+    public function verificalog()
+    {
+        if (auth()->user()) {
+            return redirect(route('admincom'));
+        } else {
+            return redirect(route('login'));
+        }
     }
 }

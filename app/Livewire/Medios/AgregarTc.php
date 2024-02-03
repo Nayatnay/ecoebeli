@@ -41,9 +41,9 @@ class AgregarTc extends Component
             'cvc' => $cvc,
         ]);
 
-        $this->reset(['open', 'codigo', 'nombre', 'vencimiento', 'cvc']);
+        $this->reset(['open', 'codigo', 'nombre', 'mes', 'ano', 'cvc']);
         
-        return redirect()->route('compra');
+        return redirect()->route('admincom');
     }
 
 
