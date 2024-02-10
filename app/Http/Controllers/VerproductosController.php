@@ -15,6 +15,7 @@ class VerproductosController extends Controller
 
     public function index(Request $request, $buscar)
     {
+        
         $buscar = $request->buscar;
 
         $categ = Categoria::all()->sortBy('nombre');

@@ -17,7 +17,7 @@
 </head>
 
 <body class="antialised">
-
+    
     @livewire('cabecera.nav-cabeza')
 
     <!-- formulario de busqueda -->

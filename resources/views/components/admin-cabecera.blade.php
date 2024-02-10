@@ -1,6 +1,6 @@
 <div>
     <nav class="bg-zinc-900 text-white border-b border-gray-600">
-
+        
         <div class="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center justify-between mx-auto px-4 py-2">
             <a href="{{ route('/') }}"
                 class="min-w-[112px] flex items-center rounded-sm border border-transparent hover:border-white py-3">

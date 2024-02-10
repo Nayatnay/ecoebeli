@@ -17,9 +17,11 @@
 </head>
 
 <body class="antialised">
+    
     @livewire('cabecera.nav-cabeza')
 
-
+    {{ session(['varval' => $buscar]) }}
+    
     <div class="bg-gray-200 text-sm sm:text-base font-semibold py-2 shadow">
         <div class="max-w-screen-xl mx-auto px-6">
             @if ($productos->firstItem() == 0)
@@ -88,6 +90,7 @@
         @endif
 
     </div>
+
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
     <x-Identificate></x-Identificate>

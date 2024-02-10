@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Http\Responses;
+
+use Laravel\Fortify\Contracts\RegisterResponse as ContractsRegisterResponse;
+
+class RegisterResponse implements ContractsRegisterResponse
+{
+    public function toResponse($request)
+    {
+        // here i am checking if the currently logout in users has a role_id of 2 which 
+        //make him a regular user and then redirect to the users dashboard else the admin dashboard
+        if (auth()->user()->role_id == 2) {
+            return redirect()->intended(config('fortify.home'));
+        }
+        //return redirect()->intended(config('fortify.admin.home'));
+        $rutita = session('urlcall');
+        $buscar = session('varval');
+        $producto = session('varvalpro');
+
+        if (session('varval') == null && session('varvalpro') == null) {
+            return redirect($rutita);
+        }
+        
+        return redirect()->Route($rutita, compact('buscar', 'producto'));
+    }
+}

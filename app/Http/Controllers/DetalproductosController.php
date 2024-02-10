@@ -10,8 +10,9 @@ class DetalproductosController extends Controller
 {
     public function index(Producto $producto)
     {
-        $buscar = $producto->id;
 
+        $buscar = $producto->id;
+        
         $categ = Categoria::all()->sortBy('nombre');
         
         $producto = Producto::where('id', '=', $buscar)->first();

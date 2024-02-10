@@ -17,8 +17,10 @@
 </head>
 
 <body class="antialised">
-
+    
     @livewire('cabecera.nav-cabeza')
+
+    {{ session(['varvalpro' => $producto->id]) }}
 
     @if (session('info'))
         <div class="bg-yellow-300 text-sm w-full text-center font-medium p-2">

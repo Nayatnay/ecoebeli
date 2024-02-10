@@ -1,7 +1,7 @@
 <div>
 
     <nav class="bg-zinc-900 text-white border-b border-gray-600">
-
+        {{ session(['urlcall' => Route::currentRouteName()]) }}
         <div class="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center justify-between mx-auto px-4 py-2">
 
             <a href="{{ route('/') }}"

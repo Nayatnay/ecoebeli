@@ -17,9 +17,9 @@
         </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('login') }}" >
             @csrf
-
+            
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
@@ -61,7 +61,8 @@
 
         <div class="mt-6 border-t border-gray-600 py-2 text-center text-sm font-light">
             <p class="mb-2 text-xs text-gray-400">¿Eres nuevo en Ebeli?</p>
-            <a class="text-sm hover:underline bg-zinc-500 text-gray-100 border border-gray-500 rounded block w-full p-2 ring-zinc-500 focus:ring" href="{{ route('register') }}">
+            <a class="text-sm hover:underline bg-zinc-500 text-gray-100 border border-gray-500 rounded block w-full p-2 ring-zinc-500 focus:ring"
+             href="{{ route('register') }}">
                 Crea tu cuenta de Ebeli
             </a>
         </div>

@@ -17,7 +17,7 @@
 </head>
 
 <body class="antialised bg-gray-100">
-
+    
     @livewire('cabecera.nav-cabeza')
 
     <div class="flex flex-col md:flex-row max-w-screen-xl mx-auto">
@@ -49,10 +49,10 @@
                     </div>
                     <div class="w-full flex justify-between text-sm border-b px-2 py-1">
                         @if (count(Cart::getContent()) == 1)
-                            <p class="text-orange-600">{{ count(Cart::getContent()) }} Item agregado al
+                            <p class="text-gray-800">{{ count(Cart::getContent()) }} Item agregado al
                                 carrito</p>
                         @else
-                            <p class="text-orange-600">{{ count(Cart::getContent()) }} Items agregados al
+                            <p class="text-gray-800">{{ count(Cart::getContent()) }} Items agregados al
                                 carrito</p>
                         @endif
                         <p class="hidden md:block">Precio</p>

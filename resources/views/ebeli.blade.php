@@ -16,9 +16,8 @@
 </head>
 
 <body class="bg-zinc-100 text-black">
-
+    
     @livewire('cabecera.nav-cabeza')
-
 
     <div id="default-carousel" class="relative" data-carousel="static">
         <!-- Carousel wrapper -->
