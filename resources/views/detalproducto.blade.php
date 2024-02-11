@@ -17,7 +17,7 @@
 </head>
 
 <body class="antialised">
-    
+
     @livewire('cabecera.nav-cabeza')
 
     {{ session(['varvalpro' => $producto->id]) }}
@@ -53,9 +53,9 @@
                     @php
                         $decimal = substr($producto->precio, -2);
                     @endphp
-                    
-                        <span class="mt-0.5 ml-0.5 text-sm font-light">{{ substr($producto->precio, -2) }}</span>
-                    
+
+                    <span class="mt-0.5 ml-0.5 text-sm font-light">{{ substr($producto->precio, -2) }}</span>
+
                 </div>
             </div>
 
@@ -114,7 +114,7 @@
                         </form>
                     </div>
                     <div class="mt-4 w-full">
-                        <a href="{{route('adicompra', $producto->id)}}"
+                        <a href="{{ route('adicompra', $producto->id) }}"
                             class="block text-xs font-medium px-4 py-2 border rounded-full bg-orange-600 hover:bg-orange-500 text-white">Comprar
                             ahora</a>
                     </div>
@@ -138,7 +138,70 @@
 
     </div>
 
+    @if ($prodssimil->count())
 
+        <div class="my-8 md:max-w-screen-xl md:mx-auto px-4 md:p-6">
+
+            <p class="text-2xl font-bold">Productos relacionados con este artículo</p>
+
+            <div class="flex flex-col md:flex-row items-center md:items-start md:justify-between">
+
+
+
+                <div
+                    class="text-black grid gap-x-4 gap-y-4 md:gap-y-8 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 mt-0 py-8">
+
+                    @foreach ($prodssimil as $produ)
+                        <div
+                            class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
+
+                            <div class="flex h-[50%] items-start">
+                                <a href="{{ route('detalproducto', $produ->id) }}">
+                                    <img src="{{ asset('/storage/productos/' . $produ->imagen) }}" alt=""
+                                        title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                                </a>
+                            </div>
+
+                            <div class="w-full p-4 font-bold text-xl">
+                                <a href="{{ route('detalproducto', $produ->id) }} ">
+                                    <p class="text-ellipsis line-clamp-1">{{ $produ->nombre }}</p>
+                                    <p class="text-sm font-normal text-ellipsis line-clamp-1">
+                                        {{ $produ->descripcion }}
+                                    </p>
+                                </a>
+                                <p class="mt-2 flex items-start text-sm font-bold">{{ $produ->stock }}+ <strong
+                                        class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong>
+                                </p>
+                                <div class="flex items-start mt-2">
+                                    <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
+                                    <span class="text-3xl font-semibold">
+                                        {{ intval($produ->precio) }}</strong></span>
+                                    @php
+                                        $decimal = substr($produ->precio, -2);
+                                    @endphp
+                                    @if ($decimal != 0)
+                                        <span
+                                            class="mt-0.5 ml-0.5 text-sm font-light">{{ substr($produ->precio, -2) }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+                    @endforeach
+
+                </div>
+
+            </div>
+
+            @if ($prodssimil->hasPages())
+                <div class="px-4 py-2 border border-gray-300 rounded-md text-center my-10">
+                    {{ $prodssimil->onEachSide(0)->links() }}
+                </div>
+            @endif
+
+        </div>
+        
+    @endif
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
     <x-Identificate></x-Identificate>
