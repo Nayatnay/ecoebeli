@@ -19,7 +19,9 @@ class DetalproductosController extends Controller
 
         $producto = Producto::where('id', '=', $buscar)->first();
 
-        $pruebas = [$producto->nombre];
+        // PRODUCTOS SIMILARES SEGUN LA PRIMERA PALABRA DESCRIPTIVA DEL NOMBRE
+
+        /*$pruebas = [$producto->nombre];
 
         foreach ($pruebas as $texto) {
             if (preg_match('/^\W*(?:\w+\W+){0}(?:de\W+)?\w+/iu', $texto, $match)) {
@@ -33,7 +35,12 @@ class DetalproductosController extends Controller
                 $query->where('nombre', 'LIKE', '%' . $this->resultado . '%')
                     ->orwhere('descripcion', 'LIKE', '%' . $this->resultado . '%');
             })->orderBy('nombre')->paginate(6, ['*'], 'prosimilar');
-     
+     */
+
+        $prodssimil = Producto::where('id', '<>', $producto->id)
+        ->where('id_subcategoria', '=', $producto->id_subcategoria)
+            ->orderBy('nombre')->paginate(6, ['*'], 'prosimilar');
+
         return view('detalproducto', compact('producto', 'categ', 'buscar', 'prodssimil'));
     }
 }

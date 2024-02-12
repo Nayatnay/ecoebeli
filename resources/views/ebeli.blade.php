@@ -80,9 +80,10 @@
 
     <!-- muestra de categorias -->
     <div class="max-w-screen-xl mx-auto">
+        
         @if ($categorias->count())
 
-            <div class="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-5 px-4 py-8 ">
+            <div class="grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 px-4 py-8 ">
 
                 @foreach ($categorias as $categoria)
                     <div class="flex flex-col items-center justify-between border border-gray-300 bg-gray-100">

@@ -13,6 +13,17 @@ class VerproductosController extends Controller
 
     protected $listeners = ['render'];
 
+    public function vertienda(Request $request)
+    {
+        $buscar = $request->buscar;
+
+        $categ = Categoria::all()->sortBy('nombre');
+        
+        $productos = Producto::orderBy('nombre')->paginate(24, ['*'], 'prodlink');
+
+        return view('tienda', compact('productos', 'categ', 'buscar'));
+    }
+
     public function index(Request $request, $buscar)
     {
         

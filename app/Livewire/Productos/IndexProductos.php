@@ -4,6 +4,7 @@ namespace App\Livewire\Productos;
 
 use App\Models\Categoria;
 use App\Models\Producto;
+use App\Models\Subcategoria;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,8 +18,8 @@ class IndexProductos extends Component
     public $open_crear = false;
     public $open_delete = false;
     public $open_edit = false;
-    public $identificador, $codigo, $id_categoria, $nombre, $descripcion, $imagen, $precio, $stock, $imagenva;
-    public $categoria, $producto;
+    public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $descripcion, $imagen, $precio, $stock, $imagenva;
+    public $categoria, $subcategoria, $producto;
 
     protected $listeners = ['render'];
 
@@ -27,6 +28,7 @@ class IndexProductos extends Component
         return [
             'codigo' => 'required|unique:productos,codigo,' . $this->producto->id,
             'id_categoria' => 'required',
+            'id_subcategoria' => 'required',
             'nombre' => 'required',
             'descripcion' => 'required',
             'imagen' => 'required',
@@ -60,6 +62,7 @@ class IndexProductos extends Component
         $this->producto = $producto;
         $this->codigo = $producto->codigo;
         $this->id_categoria = $producto->id_categoria;
+        $this->id_subcategoria = $producto->id_subcategoria;
         $this->nombre = $producto->nombre;
         $this->descripcion = $producto->descripcion;
         $this->imagen = $producto->imagen;
@@ -84,6 +87,7 @@ class IndexProductos extends Component
         } else {
             $this->producto->codigo = $this->codigo;
             $this->producto->id_categoria = $this->id_categoria;
+            $this->producto->id_subcategoria = $this->id_subcategoria;
             $this->producto->nombre = $this->nombre;
             $this->producto->descripcion = $this->descripcion;
             $this->producto->stock = $this->stock;
@@ -93,7 +97,7 @@ class IndexProductos extends Component
 
         $this->imagenva = null;
 
-        $this->reset(['open_edit', 'codigo', 'id_categoria', 'nombre', 'descripcion', 'imagen', 'stock', 'precio']);  //cierra el modal y limpia los campos del formulario
+        $this->reset(['open_edit', 'codigo', 'id_categoria','id_subcategoria', 'nombre', 'descripcion', 'imagen', 'stock', 'precio']);  //cierra el modal y limpia los campos del formulario
         $this->identificador = rand();
         $this->dispatch('index-productos');
     }
@@ -108,7 +112,8 @@ class IndexProductos extends Component
             $buscar = "";
         }
 
-        $categ = Categoria::all()->sortBy('nombre');;
+        $categ = Categoria::all()->sortBy('nombre');
+        $subcategorias = Subcategoria::all()->sortBy('nombre');
 
         if ($request->categoria <> null) {
             $productos = Producto::where('id_categoria', '=', $request->categoria)
@@ -124,6 +129,6 @@ class IndexProductos extends Component
                 ->orderBy('id', 'desc')->paginate(8, ['*'], 'prodlink');
         }
 
-        return view('livewire.productos.index-productos', compact('productos', 'buscar', 'categ'));
+        return view('livewire.productos.index-productos', compact('productos', 'buscar', 'categ', 'subcategorias'));
     }
 }

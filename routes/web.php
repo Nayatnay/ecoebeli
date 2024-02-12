@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [EbeliController::class, 'index'])->name('/');
 
+Route::get('tienda', [VerproductosController::class, 'vertienda'])->name('tienda');
 Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
 Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalproducto');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
@@ -34,6 +35,10 @@ Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
 Route::get('admincat', function () {
     return view('admincat');
 })->name('admincat');
+
+Route::get('adminsubcat', function () {
+    return view('adminsubcat');
+})->name('adminsubcat');
 
 Route::get('adminpro', function () {
     return view('adminpro');

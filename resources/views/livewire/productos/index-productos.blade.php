@@ -165,6 +165,17 @@
                 </select>
                 <x-input-error for="id_categoria" />
             </div>
+            <div class=" mb-4">
+                <x-label for="id_subcategoria" value="{{ __('Sub-Categoría') }}" class="text-zinc-800" />
+                <select name="id_subcategoria" wire:model="id_subcategoria"
+                    class="w-full px-2 py-3 text-sm rounded-md border border-gray-200 focus:border-gray-300 focus:ring-0 text-zinc-800">
+                    <option value="">Seleccionar categoría</option>
+                    @foreach ($subcategorias as $subcategoria)
+                        <option value="{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</option>
+                    @endforeach
+                </select>
+                <x-input-error for="id_subcategoria" />
+            </div>
             <div class="flex flex-col sm:flex-row items-start justify-between w-full">
                 <div class="basis-1/2 mb-4 w-full mr-4">
                     <div class="mb-4">

@@ -23,6 +23,14 @@ class Categoria extends Model
         return $this->hasMany('App\Models\Producto', 'id_categoria');
     }
 
+    //Relaciones uno a muchos
+
+    public function subcategorias()
+    {
+        return $this->hasMany('App\Models\Subcategoria', 'id_categoria');
+    }
+
+
     public function nombre(): Attribute
     {
         return new Attribute(

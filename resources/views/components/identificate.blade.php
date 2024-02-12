@@ -1,11 +1,11 @@
 <div>
     @if (Route::has('login'))
         @auth
-            <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-xs font-semibold">
-                <p class="px-10 py-2 border-b border-gray-400 mb-1 uppercase font-semibold text-sm">{{ucwords(Auth::user()->name)}}</p>
+            <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-sm font-semibold">
+                <p class="px-10 py-2 border-b border-gray-400 mb-1 uppercase font-semibold text-lg">{{ucwords(Auth::user()->name)}}</p>
                 
-                <div class="text-xs text-center font-light px-4 py-2">
-                    <p>Una manera sencilla de navegar en tu tienda. Visita las páginas de tu interés.</p>
+                <div class="text-center px-4 py-2 font-light">
+                    <p>Una manera sencilla de navegar en tu tienda. <a href="{{ route('tienda') }}" class="text-orange-600 font-normal hover:underline">Visualiza aquí.</a></p>
                 </div>
             </div>
         @else
