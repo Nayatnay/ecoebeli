@@ -13,6 +13,7 @@ use App\Livewire\Categorias\IndexCategorias;
 use App\Livewire\IndexCarro;
 use App\Livewire\Productos\IndexProductos;
 use App\Livewire\Productos\VerProductos;
+use App\Livewire\Tienda\IndexTienda;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,10 +28,14 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [EbeliController::class, 'index'])->name('/');
 
-Route::get('tienda', [VerproductosController::class, 'vertienda'])->name('tienda');
+Route::get('tienda', IndexTienda::class)->name('tienda');
 Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
 Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalproducto');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
+
+Route::get('admintienda', function () {
+    return view('admintienda');
+})->name('admintienda');
 
 Route::get('admincat', function () {
     return view('admincat');

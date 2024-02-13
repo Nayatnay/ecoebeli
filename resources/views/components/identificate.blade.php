@@ -5,7 +5,7 @@
                 <p class="px-10 py-2 border-b border-gray-400 mb-1 uppercase font-semibold text-lg">{{ucwords(Auth::user()->name)}}</p>
                 
                 <div class="text-center px-4 py-2 font-light">
-                    <p>Una manera sencilla de navegar en tu tienda. <a href="{{ route('tienda') }}" class="text-orange-600 font-normal hover:underline">Visualiza aquí.</a></p>
+                    <p>Una manera sencilla de navegar en tu tienda. <a href="{{ route('admintienda') }}" class="text-orange-600 font-normal hover:underline">Visualiza aquí.</a></p>
                 </div>
             </div>
         @else

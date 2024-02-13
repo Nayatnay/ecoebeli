@@ -11,26 +11,16 @@ class VerproductosController extends Controller
 {
     use WithPagination;
 
+    public $sort = 'id';
+    public $direc = 'desc';
+
     protected $listeners = ['render'];
-
-    public function vertienda(Request $request)
-    {
-        $buscar = $request->buscar;
-
-        $categ = Categoria::all()->sortBy('nombre');
-        
-        $productos = Producto::orderBy('nombre')->paginate(24, ['*'], 'prodlink');
-
-        return view('tienda', compact('productos', 'categ', 'buscar'));
-    }
 
     public function index(Request $request, $buscar)
     {
-        
-        $buscar = $request->buscar;
 
+        $buscar = $request->buscar;
         $categ = Categoria::all()->sortBy('nombre');
-        
         $producto_buscado = Categoria::where('nombre', '=', $buscar)
             ->orwhere('descripcion', '=', $buscar)->first();
 
