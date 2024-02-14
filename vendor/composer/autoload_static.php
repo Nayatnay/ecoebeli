@@ -157,6 +157,7 @@ class ComposerStaticInit98ecc144f2016ffcf00caa687351cae3
         ),
         'E' => 
         array (
+            'EloquentFilter\\' => 15,
             'Egulias\\EmailValidator\\' => 23,
         ),
         'D' => 
@@ -505,6 +506,10 @@ class ComposerStaticInit98ecc144f2016ffcf00caa687351cae3
         array (
             0 => __DIR__ . '/..' . '/facade/ignition-contracts/src',
         ),
+        'EloquentFilter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tucker-eric/eloquentfilter/src',
+        ),
         'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
@@ -611,6 +616,8 @@ class ComposerStaticInit98ecc144f2016ffcf00caa687351cae3
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Responses\\LoginResponse' => __DIR__ . '/../..' . '/app/Http/Responses/LoginResponse.php',
+        'App\\Http\\Responses\\RegisterResponse' => __DIR__ . '/../..' . '/app/Http/Responses/RegisterResponse.php',
         'App\\Livewire\\Cabecera\\NavCabeza' => __DIR__ . '/../..' . '/app/Livewire/Cabecera/NavCabeza.php',
         'App\\Livewire\\Categorias\\CrearCategoria' => __DIR__ . '/../..' . '/app/Livewire/Categorias/CrearCategoria.php',
         'App\\Livewire\\Categorias\\IndexCategorias' => __DIR__ . '/../..' . '/app/Livewire/Categorias/IndexCategorias.php',
@@ -619,11 +626,15 @@ class ComposerStaticInit98ecc144f2016ffcf00caa687351cae3
         'App\\Livewire\\Medios\\MediosdePago' => __DIR__ . '/../..' . '/app/Livewire/Medios/MediosdePago.php',
         'App\\Livewire\\Productos\\CrearProducto' => __DIR__ . '/../..' . '/app/Livewire/Productos/CrearProducto.php',
         'App\\Livewire\\Productos\\IndexProductos' => __DIR__ . '/../..' . '/app/Livewire/Productos/IndexProductos.php',
+        'App\\Livewire\\Subcategorias\\CrearSubcategoria' => __DIR__ . '/../..' . '/app/Livewire/Subcategorias/CrearSubcategoria.php',
+        'App\\Livewire\\Subcategorias\\IndexSubcategorias' => __DIR__ . '/../..' . '/app/Livewire/Subcategorias/IndexSubcategorias.php',
+        'App\\Livewire\\Tienda\\IndexTienda' => __DIR__ . '/../..' . '/app/Livewire/Tienda/IndexTienda.php',
         'App\\Models\\Cart' => __DIR__ . '/../..' . '/app/Models/Cart.php',
         'App\\Models\\Categoria' => __DIR__ . '/../..' . '/app/Models/Categoria.php',
         'App\\Models\\Medio' => __DIR__ . '/../..' . '/app/Models/Medio.php',
         'App\\Models\\Membership' => __DIR__ . '/../..' . '/app/Models/Membership.php',
         'App\\Models\\Producto' => __DIR__ . '/../..' . '/app/Models/Producto.php',
+        'App\\Models\\Subcategoria' => __DIR__ . '/../..' . '/app/Models/Subcategoria.php',
         'App\\Models\\Team' => __DIR__ . '/../..' . '/app/Models/Team.php',
         'App\\Models\\TeamInvitation' => __DIR__ . '/../..' . '/app/Models/TeamInvitation.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -1064,6 +1075,11 @@ class ComposerStaticInit98ecc144f2016ffcf00caa687351cae3
         'Egulias\\EmailValidator\\Warning\\QuotedString' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/QuotedString.php',
         'Egulias\\EmailValidator\\Warning\\TLD' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/TLD.php',
         'Egulias\\EmailValidator\\Warning\\Warning' => __DIR__ . '/..' . '/egulias/email-validator/src/Warning/Warning.php',
+        'EloquentFilter\\Commands\\MakeEloquentFilter' => __DIR__ . '/..' . '/tucker-eric/eloquentfilter/src/Commands/MakeEloquentFilter.php',
+        'EloquentFilter\\Filterable' => __DIR__ . '/..' . '/tucker-eric/eloquentfilter/src/Filterable.php',
+        'EloquentFilter\\LumenServiceProvider' => __DIR__ . '/..' . '/tucker-eric/eloquentfilter/src/LumenServiceProvider.php',
+        'EloquentFilter\\ModelFilter' => __DIR__ . '/..' . '/tucker-eric/eloquentfilter/src/ModelFilter.php',
+        'EloquentFilter\\ServiceProvider' => __DIR__ . '/..' . '/tucker-eric/eloquentfilter/src/ServiceProvider.php',
         'Facade\\IgnitionContracts\\BaseSolution' => __DIR__ . '/..' . '/facade/ignition-contracts/src/BaseSolution.php',
         'Facade\\IgnitionContracts\\HasSolutionsForThrowable' => __DIR__ . '/..' . '/facade/ignition-contracts/src/HasSolutionsForThrowable.php',
         'Facade\\IgnitionContracts\\ProvidesSolution' => __DIR__ . '/..' . '/facade/ignition-contracts/src/ProvidesSolution.php',

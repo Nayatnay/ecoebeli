@@ -1,75 +1,140 @@
 @section('title', 'Tienda | Ebeli')
 <div>
-    <div class="bg-gray-200 text-sm sm:text-base font-semibold py-4 shadow">
-        <div class="max-w-screen-xl mx-auto px-6 font-light">
-            <span class="pl-4">{{ $productos->total() }} artículos en la tienda </span>
+    <div class="bg-gray-200 text-sm sm:text-base font-semibold shadow">
+        <div class="max-w-screen-xl mx-auto flex items-center justify-between ">
+            <div class="font-light">
+                <span class="pl-4">Total de artículos en la tienda {{ $productos->total() }} </span>
+            </div>
+            <div class="text-sm font-medium m-2 border border-gray-500 rounded-lg">
+                <select name="filtro" id="filtro" wire:change="order" wire:model="filtro"
+                    class="font-normal rounded-lg text-sm border-none focus:ring-0 focus:outline-none hover:cursor-pointer 
+                     bg-transparent">
+                    <option value="0">Ordenar por</option>
+                    <option value="1">Precio de menor a mayor</option>
+                    <option value="2">Precio de mayor a menor</option>
+                </select>
+            </div>
         </div>
+
     </div>
 
     <!-- muestra productos que cumplen con la condicion de búqueda    -->
-    <div class="max-w-screen-xl mx-auto py-8">
-        @if ($productos->count())
+    <div class="max-w-screen-xl mx-auto py-8 flex min-h-screen">
 
-            <div class="text-sm font-medium p-2 flex items-center justify-end">
-                <p class="">Ordenar por</p>
-                
-                    <select name="filtro" id="filtro" wire:change="order('precio')" wire:model="filtro"
-                        class="font-normal text-sm border-none focus:ring-0 focus:outline-none hover:cursor-pointer 
-                        hover:text-orange-600 bg-transparent">
-                        <option value="0">Listado</option>
-                        <option value="1">Menor precio</option>
-                        <option value="2">Mayor precio</option>
+        <div class="border m-4 min-w-[240px] rounded-lg bg-gray-100">
+            <div class="bg-zinc-700 text-white p-2 rounded-t-lg">
+                ¿Qué buscas?
+            </div>
+            <div class="p-4">
+                <!-- Filtro Categorías -->
+                <div class="mb-4">
+                    <select name="subcategoria" id="subcategoria" wire:change="order"
+                        wire:model="filters.id_subcategoria"
+                        class="w-full rounded-lg font-normal text-sm border-none focus:ring-0 focus:outline-none 
+                    hover:cursor-pointer bg-white">
+                        <option value="0">Todas las categorías</option>
+                        @foreach ($subcateg as $subcat)
+                            <option value="{{ $subcat->id }}"class="bg-white">{{ $subcat->nombre }}</option>
+                        @endforeach
                     </select>
-                
-            </div>
-            <div
-                class="text-black grid gap-x-2 gap-y-4 md:gap-y-8 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 px-6 py-4">
-
-                @foreach ($productos as $producto)
-                    <div
-                        class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
-
-                        <div class="flex h-[50%] items-start">
-                            <a href="{{ route('detalproducto', $producto->id) }}">
-                                <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
-                                    title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
-                            </a>
-                        </div>
-
-                        <div class="w-full p-4 font-bold text-xl">
-                            <a href="{{ route('detalproducto', $producto->id) }} ">
-                                <p class="text-ellipsis line-clamp-1">{{ $producto->nombre }}</p>
-                                <p class="text-sm font-normal text-ellipsis line-clamp-1">{{ $producto->descripcion }}
-                                </p>
-                            </a>
-                            <p class="mt-2 flex items-start text-sm font-bold">{{ $producto->stock }}+ <strong
-                                    class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">existencias</strong>
-                            </p>
-                            <div class="flex items-start mt-2">
-                                <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
-                                <span class="text-3xl font-semibold"> {{ intval($producto->precio) }}</strong></span>
-                                @php
-                                    $decimal = substr($producto->precio, -2);
-                                @endphp
-                                @if ($decimal != 0)
-                                    <span
-                                        class="mt-0.5 ml-0.5 text-sm font-light">{{ substr($producto->precio, -2) }}</span>
-                                @endif
-                            </div>
-                        </div>
-
-                    </div>
-                @endforeach
-
-            </div>
-            @if ($productos->hasPages())
-                <div class="mx-4 md:mx-8 px-4 py-2 border border-gray-300 rounded-md text-center my-10">
-                    {{ $productos->onEachSide(0)->links() }}
                 </div>
+                <!-- Filtro marcas -->
+                <div class="mb-4">
+                    <select name="marca" id="marca" wire:change="order" wire:model="filters.marca"
+                        class="w-full rounded-lg font-normal text-sm border-none focus:ring-0 focus:outline-none 
+                    hover:cursor-pointer bg-white">
+                        <option value="0">Todas las marcas</option>
+                        @foreach ($marcas as $marc)
+                            <option value="{{ $marc->marca }}"class="bg-white">{{ $marc->marca }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <!-- Filtro color -->
+                <div class="mb-4">
+                    <select name="color" id="color" wire:change="order" wire:model="filters.color"
+                        class="w-full rounded-lg font-normal text-sm border-none focus:ring-0 focus:outline-none 
+                    hover:cursor-pointer bg-white">
+                        <option value="0">Todos los colores</option>
+                        @foreach ($colores as $color)
+                            <option value="{{ $color->color }}"class="bg-white">{{ $color->color }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <!-- Filtro tallas -->
+                <div class="mb-4">
+                    <select name="talla" id="talla" wire:change="order" wire:model="filters.talla"
+                        class="w-full rounded-lg font-normal text-sm border-none focus:ring-0 focus:outline-none 
+                    hover:cursor-pointer bg-white">
+                        <option value="0">Todas las tallas</option>
+                        @foreach ($tallas as $talla)
+                            <option value="{{ $talla->talla }}"class="bg-white">{{ $talla->talla }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="bg-red-200">
+                    Limpiar los filtros
+                </div>
+            </div>
+
+        </div>
+
+        <div class="w-full">
+            @if ($productos->count())
+
+                <div
+                    class="text-black grid gap-x-4 gap-y-4 md:gap-y-8 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 px-6 py-4">
+
+                    @foreach ($productos as $producto)
+                        <div
+                            class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
+
+                            <div class="flex h-[50%] items-start">
+                                <a href="{{ route('detalproducto', $producto->id) }}">
+                                    <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
+                                        title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                                </a>
+                            </div>
+
+                            <div class="w-full p-4 font-bold text-lg">
+                                <a href="{{ route('detalproducto', $producto->id) }} ">
+                                    <p class="text-ellipsis line-clamp-1">{{ $producto->nombre }}</p>
+                                    <p class="text-sm font-normal text-ellipsis line-clamp-1">
+                                        {{ $producto->descripcion }}
+                                    </p>
+                                </a>
+                                <p class="mt-2 flex items-start text-sm font-bold">{{ $producto->stock }}+ <strong
+                                        class="ml-1 bg-lime-600 px-2 pb-0.5 rounded-lg text-xs text-white font-bold uppercase">stock</strong>
+                                </p>
+                                <div class="flex items-start mt-2">
+                                    <span class="text-sm font-normal mt-0.5 mr-0.5">US$</span>
+                                    <span class="text-3xl font-semibold">
+                                        {{ intval($producto->precio) }}</strong></span>
+                                    @php
+                                        $decimal = substr($producto->precio, -2);
+                                    @endphp
+                                    @if ($decimal != 0)
+                                        <span
+                                            class="mt-0.5 ml-0.5 text-sm font-light">{{ substr($producto->precio, -2) }}</span>
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+                    @endforeach
+
+                </div>
+                @if ($productos->hasPages())
+                    <div class="mx-4 md:mx-8 px-4 py-2 border border-gray-300 rounded-md text-center my-10">
+                        {{ $productos->onEachSide(0)->links() }}
+                    </div>
+                @endif
+            @else
+                <div class="w-full pt-6 pb-2 pl-6 border-b text-orange-600 font-medium">
+                    <p>Lo sentimos, no existen productos con el filtro seleccionado</p>
+                </div>
+
             @endif
-        @endif
-
-
+        </div>
 
     </div>
 

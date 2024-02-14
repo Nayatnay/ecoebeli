@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('descripcion');
             $table->string('imagen', 2048);
             $table->decimal('precio', 8, 2);
+            $table->string('marca');
+            $table->string('color');
+            $table->string('talla')->nullable();
             $table->integer('stock'); 
             $table->timestamps();
 

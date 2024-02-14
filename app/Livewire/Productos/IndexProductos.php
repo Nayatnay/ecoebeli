@@ -18,7 +18,8 @@ class IndexProductos extends Component
     public $open_crear = false;
     public $open_delete = false;
     public $open_edit = false;
-    public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $descripcion, $imagen, $precio, $stock, $imagenva;
+    public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla;
+    public $descripcion, $imagen, $precio, $stock, $imagenva;
     public $categoria, $subcategoria, $producto;
 
     protected $listeners = ['render'];
@@ -30,6 +31,8 @@ class IndexProductos extends Component
             'id_categoria' => 'required',
             'id_subcategoria' => 'required',
             'nombre' => 'required',
+            'marca' => 'required',
+            'color' => 'required',
             'descripcion' => 'required',
             'imagen' => 'required',
             'imagenva' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048',
@@ -64,6 +67,9 @@ class IndexProductos extends Component
         $this->id_categoria = $producto->id_categoria;
         $this->id_subcategoria = $producto->id_subcategoria;
         $this->nombre = $producto->nombre;
+        $this->marca = $producto->marca;
+        $this->color = $producto->color;
+        $this->talla = $producto->talla;
         $this->descripcion = $producto->descripcion;
         $this->imagen = $producto->imagen;
         $this->precio = $producto->precio;
@@ -89,6 +95,9 @@ class IndexProductos extends Component
             $this->producto->id_categoria = $this->id_categoria;
             $this->producto->id_subcategoria = $this->id_subcategoria;
             $this->producto->nombre = $this->nombre;
+            $this->producto->marca = $this->marca;
+            $this->producto->color = $this->color;
+            $this->producto->talla = $this->talla;
             $this->producto->descripcion = $this->descripcion;
             $this->producto->stock = $this->stock;
             $this->producto->precio = $this->precio;
@@ -97,7 +106,7 @@ class IndexProductos extends Component
 
         $this->imagenva = null;
 
-        $this->reset(['open_edit', 'codigo', 'id_categoria','id_subcategoria', 'nombre', 'descripcion', 'imagen', 'stock', 'precio']);  //cierra el modal y limpia los campos del formulario
+        $this->reset(['open_edit', 'codigo', 'id_categoria','id_subcategoria', 'nombre', 'marca', 'color', 'talla', 'descripcion', 'imagen', 'stock', 'precio']);  //cierra el modal y limpia los campos del formulario
         $this->identificador = rand();
         $this->dispatch('index-productos');
     }

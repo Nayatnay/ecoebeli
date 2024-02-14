@@ -171,6 +171,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
+        EloquentFilter\ServiceProvider::class,
     ])->toArray(),
 
     /*

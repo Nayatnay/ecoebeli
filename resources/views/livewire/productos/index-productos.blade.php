@@ -148,6 +148,26 @@
                     required autofocus />
                 <x-input-error for="nombre" />
             </div>
+            <div class="flex">
+                <div class=" mb-4">
+                    <x-label for="marca" value="{{ __('Marca') }}" class="text-zinc-800" />
+                    <x-input id="marca" class="block mt-1 w-full" type="text" name="marca" wire:model="marca"
+                        required autofocus />
+                    <x-input-error for="marca" />
+                </div>
+                <div class=" mb-4 mx-2">
+                    <x-label for="color" value="{{ __('Color') }}" class="text-zinc-800" />
+                    <x-input id="color" class="block mt-1 w-full" type="text" name="color" wire:model="color"
+                        required autofocus />
+                    <x-input-error for="color" />
+                </div>
+                <div class=" mb-4">
+                    <x-label for="talla" value="{{ __('Talla') }} (Si aplica)" class="text-zinc-800" />
+                    <x-input id="talla" class="block mt-1 w-full" type="text" name="talla" wire:model="talla"
+                        required autofocus />
+                    <x-input-error for="talla" />
+                </div>
+            </div>
             <div class=" mb-4">
                 <x-label for="descripcion" value="{{ __('descripcion') }}" class="text-zinc-800" />
                 <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"

@@ -18,6 +18,26 @@
                     wire:model.defer="nombre" required autofocus />
                 <x-input-error for="nombre" />
             </div>
+            <div class="flex">
+                <div class=" mb-4">
+                    <x-label for="marca" value="{{ __('Marca') }}" class="text-zinc-800" />
+                    <x-input id="marca" class="block mt-1 w-full" type="text" name="marca"
+                        wire:model.defer="marca" required autofocus />
+                    <x-input-error for="marca" />
+                </div>
+                <div class=" mb-4 mx-2">
+                    <x-label for="color" value="{{ __('Color') }}" class="text-zinc-800" />
+                    <x-input id="color" class="block mt-1 w-full" type="text" name="color"
+                        wire:model.defer="color" required autofocus />
+                    <x-input-error for="color" />
+                </div>
+                <div class=" mb-4">
+                    <x-label for="talla" value="{{ __('Talla') }} (Si aplica)" class="text-zinc-800" />
+                    <x-input id="talla" class="block mt-1 w-full" type="text" name="talla"
+                        wire:model.defer="talla" required autofocus />
+                    <x-input-error for="talla" />
+                </div>
+            </div>
             <div class=" mb-4">
                 <x-label for="descripcion" value="{{ __('Descripción') }}" class="text-zinc-800" />
                 <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"
@@ -65,15 +85,17 @@
                         <x-label for="precio" value="{{ __('Precio') }}" class="text-zinc-800" />
                         <x-input id="precio"
                             class="w-full block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            type="number" step="any" name="precio" wire:model.defer="precio" required autofocus />
+                            type="number" step="any" name="precio" wire:model.defer="precio" required
+                            autofocus />
                         <x-input-error for="precio" />
                     </div>
                 </div>
                 <div class="basis-1/2 w-full">
                     <div class="text-xs text-left lg:text-sm">
-                        <label for="{{ $identificador }}" class="font-medium cursor-pointer hover:underline">Agregar una
+                        <label for="{{ $identificador }}" class="font-medium cursor-pointer hover:underline">Agregar
+                            una
                             Imagen</label>
-                        <input id="{{ $identificador }}" type="file" style="visibility:hidden;" name="imagen" 
+                        <input id="{{ $identificador }}" type="file" style="visibility:hidden;" name="imagen"
                             wire:model="imagen" class="flex flex-wrap" required />
                         <x-input-error for="imagen" />
                     </div>
