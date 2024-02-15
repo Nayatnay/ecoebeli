@@ -23,7 +23,7 @@
     {{ session(['varvalpro' => $producto->id]) }}
 
     @if (session('info'))
-        <div class="bg-yellow-300 text-sm w-full text-center font-medium p-2">
+        <div class="mensaje bg-yellow-300 text-sm w-full text-center font-medium p-2">
             Producto Agregado: {{ $producto->nombre }}
         </div>
     @endif
@@ -220,6 +220,17 @@
                 "<br>Longitud: " + position.coords.longitude;
         }
     </script>
+
+     <!-- MOSTRAR MENSAJE POR 3 SEGUNDOS -->
+     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+     <script type="text/javascript">
+         $(document).ready(function() {
+             setTimeout(function() {
+                 $(".mensaje").fadeOut(1500);
+             }, 2000);
+         });
+     </script>
 
 </body>
 

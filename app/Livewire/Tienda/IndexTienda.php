@@ -40,6 +40,11 @@ class IndexTienda extends Component
         $this->filters['precio'] = "";
     }
 
+    public function clearan()
+    {
+        $this->filters['precio'] = "";
+    }
+
     public function mount()
     {
         $this->filters = array_merge($this->filtersToMerge, $this->filters);

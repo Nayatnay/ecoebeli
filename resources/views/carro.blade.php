@@ -273,7 +273,7 @@
                 </div>
             @else
                 <div class="bg-white text-orange-700 text-base font-semibold sm:px-10 mx-4 px-4 py-2 shadow">
-                    <span>Sin Stock </span> " </span>
+                    <span>Sin Stock </span>
                 </div>
             @endif
 

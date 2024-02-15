@@ -8,16 +8,16 @@ use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
 class CarroController extends Controller
 {
+
+    public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
+
     public function index(Request $request)
     {
         $buscar = $request->buscar;
 
-       /*$nido = [];
-        $items = CartFacade::getContent();
-        foreach ($items as $row) {
-            $nido[]['id'] = $row;
-        }
-       dd($nido);*/
         $categ = Categoria::all()->sortBy('nombre');
         $productos = Producto::orderBy('nombre')->paginate(6);
         $produc = Producto::where('precio', '<=', 100)->inRandomOrder()->limit(8)->get();

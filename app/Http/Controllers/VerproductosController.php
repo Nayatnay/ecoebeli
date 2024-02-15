@@ -16,6 +16,11 @@ class VerproductosController extends Controller
 
     protected $listeners = ['render'];
 
+    public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
+
     public function index(Request $request, $buscar)
     {
 

@@ -1,6 +1,6 @@
 <div>
     <nav class="bg-zinc-900 text-white border-b border-gray-600">
-        
+
         <div class="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center justify-between mx-auto px-4 py-2">
             <a href="{{ route('/') }}"
                 class="min-w-[112px] flex items-center rounded-sm border border-transparent hover:border-white py-3">
@@ -66,27 +66,29 @@
                                     <span class="ml-2">Tienda</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('admincat') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
-                                    <i class="fa-solid fa-layer-group"></i>
-                                    <span class="ml-2">Categorías</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('adminsubcat') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
-                                    <i class="fa-solid fa-list"></i>
-                                    <span class="ml-2">Sub-Categorías</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('adminpro') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
-                                    <i class="fa-solid fa-store"></i>
-                                    <span class="ml-2">Productos</span>
-                                </a>
-                            </li>
+                            @can('admincat')
+                                <li>
+                                    <a href="{{ route('admincat') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                        <i class="fa-solid fa-layer-group"></i>
+                                        <span class="ml-2">Categorías</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('adminsubcat') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                        <i class="fa-solid fa-list"></i>
+                                        <span class="ml-2">Sub-Categorías</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('adminpro') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                        <i class="fa-solid fa-store"></i>
+                                        <span class="ml-2">Productos</span>
+                                    </a>
+                                </li>
+                            @endcan
                             <li class="mt-3 border-t">
                                 <form method="POST" action="{{ route('logout') }}" x-data>
                                     @csrf
@@ -101,12 +103,13 @@
                 </div>
 
                 <a href="{{ route('carro') }}"
-                            class="w-10 h-10 text-xl flex items-center justify-center hover:border-2 border-gray-200 font-medium text-white focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <p class="ml-0.5 mb-4 text-lime-500 text-[10px] text-center font-bold">{{\Cart::getTotalQuantity()}}</p>    
-                        </a>
+                    class="w-10 h-10 text-xl flex items-center justify-center hover:border-2 border-gray-200 font-medium text-white focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <p class="ml-0.5 mb-4 text-lime-500 text-[10px] text-center font-bold">
+                        {{ \Cart::getTotalQuantity() }}</p>
+                </a>
 
-                
+
             </div>
         </div>
     </nav>

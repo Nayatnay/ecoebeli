@@ -24,12 +24,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        $this->call(RoleSeeder::class);
+
         User::create([
-            
-            'name' => 'Programador',          
-            'doc' => '6325870',     
+
+            'name' => 'Programador',
+            'doc' => '6325870',
             'email' => 'ospnetsistemas2006@gmail.com',
-            'email_verified_at' => now(),           
+            'email_verified_at' => now(),
             'password' => bcrypt('v-41328029'), // password
             'remember_token' => Str::random(10),
             'pais' => 'VE',
@@ -39,12 +41,11 @@ class DatabaseSeeder extends Seeder
             'cp' => '1221',
             'telf' => '0414-1823819',
 
-        ]);
+        ])->assignRole('Admin');
 
         Storage::disk('public')->deleteDirectory('categorias');
         Storage::disk('public')->makeDirectory('categorias');
 
         Categoria::factory(3)->create();
-
     }
 }

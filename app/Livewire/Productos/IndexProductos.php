@@ -115,6 +115,10 @@ class IndexProductos extends Component
         $this->dispatch('index-productos');
     }
 
+    public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
 
     public function render(Request $request)
     {

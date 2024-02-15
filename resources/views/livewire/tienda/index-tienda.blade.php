@@ -72,10 +72,11 @@
                     </select>
                 </div>
                 <!-- Filtro precios -->
-                <div class="mt-4 p-3 text-sm bg-white rounded-t-lg border-b">
-                    Rango de precios
+                <div class="mt-4 p-3 flex items-center font-normal justify-between text-sm bg-white rounded-t-lg border-b">
+                    <p>Rango de precios</p>
+                    <i class="fa-solid fa-broom cursor-pointer text-gray-500 hover:text-orange-600 rounded-sm p-1" title="Limpiar rango" wire:click="clearan"></i>
                 </div>
-                <div class="mb-4 text-sm bg-white py-4 px-3">
+                <div class="mb-4 text-sm bg-white py-4 px-3 rounded-b-lg">
                     <div class="flex items-center mb-4">
                         <input type="radio" id="25" name="fav_language" value="25"
                             wire:model="filters.precio" wire:click="order" class="mr-2">

@@ -10,10 +10,15 @@ class NavCabeza extends Component
 {
     public $buscar;
 
+    public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
+
     public function render(Request $request)
     {
         $buscar = $request->buscar;
-        
+
         $categ = categoria::all()->sortBy('nombre');
         $categorias = categoria::all()->sortBy('nombre');
 

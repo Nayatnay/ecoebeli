@@ -12,6 +12,11 @@ class EbeliController extends Controller
 
     protected $listeners = ['render'];
 
+    public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
+
     public function index(request $request)
     {
         $buscar = $request->buscar;

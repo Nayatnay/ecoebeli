@@ -86,6 +86,11 @@ class IndexCategorias extends Component
     
     }
 
+    public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
+
     public function render(Request $request)
     {
         $this->identificador = rand();

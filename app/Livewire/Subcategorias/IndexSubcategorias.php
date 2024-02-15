@@ -64,9 +64,10 @@ class IndexSubcategorias extends Component
     
     }
 
-
-
-
+    public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
 
     public function render(Request $request)
     {

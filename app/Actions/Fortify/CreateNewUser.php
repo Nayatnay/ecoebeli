@@ -44,6 +44,7 @@ class CreateNewUser implements CreatesNewUsers
             'cp' => $input['cp'],
             'telf' => $input['telf'],
             'password' => Hash::make($input['password']),
-        ]);
+        ])->assignRole('Cliente');
+    
     }
 }

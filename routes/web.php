@@ -14,6 +14,7 @@ use App\Livewire\IndexCarro;
 use App\Livewire\Productos\IndexProductos;
 use App\Livewire\Productos\VerProductos;
 use App\Livewire\Tienda\IndexTienda;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,42 +29,42 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [EbeliController::class, 'index'])->name('/');
 
-Route::get('tienda', IndexTienda::class)->name('tienda');
-Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
-Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalproducto');
-Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
+Route::get('tienda', IndexTienda::class)->Middleware('can:tienda')->name('tienda');
+Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->Middleware('can:verproductos')->name('verproductos');
+Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->Middleware('can:detalproducto')->name('detalproducto');
+Route::get('buscar', [BuscarController::class, 'index'])->Middleware('can:buscar')->name('buscar');
 
 Route::get('admintienda', function () {
     return view('admintienda');
-})->name('admintienda');
+})->Middleware('can:admintienda')->name('admintienda');
 
 Route::get('admincat', function () {
     return view('admincat');
-})->name('admincat');
+})->Middleware('can:admincat')->name('admincat');
 
 Route::get('adminsubcat', function () {
     return view('adminsubcat');
-})->name('adminsubcat');
+})->Middleware('can:adminsubcat')->name('adminsubcat');
 
 Route::get('adminpro', function () {
     return view('adminpro');
-})->name('adminpro');
+})->Middleware('can:adminpro')->name('adminpro');
 
 Route::get('admincom', function () {
     return view('admincom');
-})->name('admincom');
+})->Middleware('can:admincom')->name('admincom');
 
-Route::get('categorias', IndexCategorias::class)->name('categorias');
-Route::get('productos', IndexProductos::class)->name('productos');
-Route::get('carro', [CarroController::class, 'index'])->name('carro');
+Route::get('categorias', IndexCategorias::class)->Middleware('can:categorias')->name('categorias');
+Route::get('productos', IndexProductos::class)->Middleware('can:productos')->name('productos');
+Route::get('carro', [CarroController::class, 'index'])->Middleware('can:carro')->name('carro');
 
 Route::get('condiciones', function () {
     return view('condiciones');
-})->name('condiciones');
+})->Middleware('can:condiciones')->name('condiciones');
 
 Route::get('politicas', function () {
     return view('politicas');
-})->name('politicas');
+})->Middleware('can:politicas')->name('politicas');
 
 Route::middleware([
     'auth:sanctum',
@@ -76,17 +77,17 @@ Route::middleware([
 //Rutas carrito
 
 //Route::get('cart/checkout', [CartController::class, 'checkout'])->name('checkout');
-Route::post('cart/add', [CartController::class, 'add'])->name('add');
-Route::post('adicion', [CarroController::class, 'adicion'])->name('adicion');
-Route::get('cart/clear', [CartController::class, 'clear'])->name('clear');
-Route::post('cart/removeitem', [CarroController::class, 'removeItem'])->name('removeitem');
-Route::post('cart/updateqty', [CarroController::class, 'updateqty'])->name('updateqty');
+Route::post('cart/add', [CartController::class, 'add'])->Middleware('can:add')->name('add');
+Route::post('adicion', [CarroController::class, 'adicion'])->Middleware('can:adicion')->name('adicion');
+Route::get('cart/clear', [CartController::class, 'clear'])->Middleware('can:vlear')->name('clear');
+Route::post('cart/removeitem', [CarroController::class, 'removeItem'])->Middleware('can:removeitem')->name('removeitem');
+Route::post('cart/updateqty', [CarroController::class, 'updateqty'])->Middleware('can:updateqty')->name('updateqty');
 
 //Rutas Compras
-Route::get('compra', [CompraController::class, 'index'])->name('compra');
-Route::get('verificalog', [CarroController::class, 'verificalog'])->name('verificalog');
-Route::get('adicompra/{producto}', [CarroController::class, 'adicompra'])->name('adicompra');
-Route::get('editmedio/{medio}', [CompraController::class, 'editmedio'])->name('editmedio');
+Route::get('compra', [CompraController::class, 'index'])->Middleware('can:compra')->name('compra');
+Route::get('verificalog', [CarroController::class, 'verificalog'])->Middleware('can:verificalog')->name('verificalog');
+Route::get('adicompra/{producto}', [CarroController::class, 'adicompra'])->Middleware('can:adicompra')->name('adicompra');
+Route::get('editmedio/{medio}', [CompraController::class, 'editmedio'])->Middleware('can:editmedio')->name('editmedio');
 
 /*Route::middleware([
     'auth:sanctum',
