@@ -17,18 +17,28 @@ class IndexTienda extends Component
 
     public $sort = 'id';
     public $direc = 'asc';
-    public $filtro, $id_subcategoria, $marca, $color, $talla;
+    public $filtro, $id_subcategoria, $marca, $color, $talla, $precio, $value, $value2;
 
     public array $filters = array();
 
     protected $listeners = ['render'];
-    
+
     public array $filtersToMerge = [
         'id_subcategoria' => [],
         'marca' => [],
         'color' => [],
         'talla' => [],
+        'precio' => [],
     ];
+
+    public function clear()
+    {
+        $this->filters['id_subcategoria'] = "";
+        $this->filters['marca'] = "";
+        $this->filters['color'] = "";
+        $this->filters['talla'] = "";
+        $this->filters['precio'] = "";
+    }
 
     public function mount()
     {
@@ -56,16 +66,38 @@ class IndexTienda extends Component
     public function render()
     {
 
-        $subcateg = Subcategoria::orderby('nombre')->get();
-        $marcas= Producto::select('marca')->distinct()->get(); //selecciona un solo registro por marca
-        $colores= Producto::select('color')->distinct()->get(); //selecciona un solo registro por marca
-        $tallas= Producto::select('talla')->distinct()->where('talla', '<>', "")->get(); //selecciona un solo registro por marca
+        if ($this->filters['precio'] == 25) {
+            $this->value = 0;
+            $this->value2 = $this->filters['precio'];
+        }
+        if ($this->filters['precio'] == 50) {
+            $this->value = 25;
+            $this->value2 = $this->filters['precio'];
+        }
+        if ($this->filters['precio'] == 100) {
+            $this->value = 50;
+            $this->value2 = $this->filters['precio'];
+        }
+        if ($this->filters['precio'] == 200) {
+            $this->value = 100;
+            $this->value2 = $this->filters['precio'];
+        }
+        if ($this->filters['precio'] == 201) {
+            $this->value = $this->filters['precio'];
+            $this->value2 = 100000;
+        }
         
+
+        $subcateg = Subcategoria::orderby('nombre')->get();
+        $marcas = Producto::select('marca')->distinct()->get(); //selecciona un solo registro por marca
+        $colores = Producto::select('color')->distinct()->get(); //selecciona un solo registro por marca
+        $tallas = Producto::select('talla')->distinct()->where('talla', '<>', "")->get(); //selecciona un solo registro por marca
+
         $productos = Producto::query()
             ->when($this->filters['id_subcategoria'], function ($query) {
                 return $query->where('id_subcategoria', '=', $this->filters['id_subcategoria']);
             })
-            
+
             ->when($this->filters['marca'], function ($query) {
                 return $query->where('marca', '=', $this->filters['marca']);
             })
@@ -78,9 +110,12 @@ class IndexTienda extends Component
                 return $query->where('talla', '=', $this->filters['talla']);
             })
 
-            ->orderby($this->sort, $this->direc)->paginate(24, ['*'], 'prodlink');
+            ->when($this->filters['precio'], function ($query) {
+                return $query->where('precio', '>=', $this->value)->where('precio', '<=', $this->value2);
+            })
 
-        return view('livewire.tienda.index-tienda', compact('productos', 'subcateg', 'marcas', 'colores', 'tallas' ));
+            ->orderby($this->sort, $this->direc)->paginate(15, ['*'], 'prodlink');
 
+        return view('livewire.tienda.index-tienda', compact('productos', 'subcateg', 'marcas', 'colores', 'tallas'));
     }
 }

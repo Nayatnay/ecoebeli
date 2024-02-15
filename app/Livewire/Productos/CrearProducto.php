@@ -15,7 +15,11 @@ class CrearProducto extends Component
 
     public $open_crear = false;
     public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla;
-    public $descripcion, $imagen, $precio, $stock;
+    public $descripcion, $imagen, $precio, $stock, $catbuscada;
+
+    /*public $categoria, $subcategoria;
+    public $categorias = [], $subcategorias = [];
+    */
 
     protected $listeners = ['render'];
 
@@ -34,11 +38,23 @@ class CrearProducto extends Component
 
     public function mount() // Lo estoy usando para eliminar el nombre de la imagen que se selecciono anteriormente en el modal
     {
+        /*$this->categorias = Categoria::all()->sortBy('nombre');
+        $this->subcategorias = collect();*/
         $this->identificador = rand();
     }
 
+    /*public function updatedcategoria($value)
+    {
+        $this->subcategorias = Subcategoria::where('id_categoria', $value)->get();
+        $this->subcategoria = $this->subcategorias->first()->id ?? null;
+        
+    }
+*/
     public function save()
     {
+        $subycat = Subcategoria::where('id', '=', $this->id_subcategoria,)->first();
+        $this->id_categoria = $subycat->id_categoria;
+
         $this->validate();
 
         $fileName = time() . '.' . $this->imagen->extension();
@@ -63,16 +79,18 @@ class CrearProducto extends Component
         return redirect()->route('adminpro')->with('creado', 'ok');
     }
 
-    public function cancelar(){
+    public function cancelar()
+    {
         $this->reset(['open_crear', 'codigo', 'id_categoria', 'id_subcategoria', 'nombre', 'marca', 'color', 'talla', 'descripcion', 'imagen', 'precio', 'stock']);
-        $this->identificador = rand(); 
+        $this->identificador = rand();
     }
 
 
     public function render()
     {
-        $categorias = Categoria::all()->sortBy('nombre');
+        //$categorias = Categoria::all()->sortBy('nombre');
         $subcategorias = Subcategoria::all()->sortBy('nombre');
-        return view('livewire.productos.crear-producto', compact('categorias', 'subcategorias'));
+
+        return view('livewire.productos.crear-producto', compact('subcategorias'));
     }
 }

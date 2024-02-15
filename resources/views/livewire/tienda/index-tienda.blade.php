@@ -71,8 +71,41 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="bg-red-200">
-                    Limpiar los filtros
+                <!-- Filtro precios -->
+                <div class="mt-4 p-3 text-sm bg-white rounded-t-lg border-b">
+                    Rango de precios
+                </div>
+                <div class="mb-4 text-sm bg-white py-4 px-3">
+                    <div class="flex items-center mb-4">
+                        <input type="radio" id="25" name="fav_language" value="25"
+                            wire:model="filters.precio" wire:click="order" class="mr-2">
+                        <label for="25">Menos de $25</label>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="radio" id="50" name="fav_language" value="50"
+                            wire:model="filters.precio" wire:click="order" class="mr-2">
+                        <label for="50">De $25 a $50</label>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="radio" id="100" name="fav_language" value="100"
+                            wire:model="filters.precio" wire:click="order" class="mr-2">
+                        <label for="100">De $50 a $100</label>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="radio" id="200" name="fav_language" value="200"
+                            wire:model="filters.precio" wire:click="order" class="mr-2">
+                        <label for="200">De $100 a $200</label>
+                    </div>
+                    <div class="flex items-center mb-4">
+                        <input type="radio" id="201" name="fav_language" value="201"
+                            wire:model="filters.precio" wire:click="order" class="mr-2">
+                        <label for="201">$200 y más</label>
+                    </div>
+                </div>
+                <!-- Limpiar todos los Filtros -->
+                <div class="mt-8 bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-normal text-center rounded-lg p-2 cursor-pointer"
+                    wire:click="clear">
+                    <span>Limpiar los filtros</span>
                 </div>
             </div>
 

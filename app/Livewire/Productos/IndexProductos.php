@@ -82,6 +82,10 @@ class IndexProductos extends Component
 
     public function update()
     {
+
+        $subycat = Subcategoria::where('id', '=', $this->id_subcategoria,)->first();
+        $this->id_categoria = $subycat->id_categoria;
+
         if ($this->imagenva <> null) {
             $this->imagen = $this->imagenva;
             $fileName = time() . '.' . $this->imagen->extension();
@@ -106,7 +110,7 @@ class IndexProductos extends Component
 
         $this->imagenva = null;
 
-        $this->reset(['open_edit', 'codigo', 'id_categoria','id_subcategoria', 'nombre', 'marca', 'color', 'talla', 'descripcion', 'imagen', 'stock', 'precio']);  //cierra el modal y limpia los campos del formulario
+        $this->reset(['open_edit', 'codigo', 'id_categoria', 'id_subcategoria', 'nombre', 'marca', 'color', 'talla', 'descripcion', 'imagen', 'stock', 'precio']);  //cierra el modal y limpia los campos del formulario
         $this->identificador = rand();
         $this->dispatch('index-productos');
     }
