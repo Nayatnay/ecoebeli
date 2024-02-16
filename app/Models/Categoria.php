@@ -30,7 +30,12 @@ class Categoria extends Model
         return $this->hasMany('App\Models\Subcategoria', 'id_categoria');
     }
 
-
+    /*public function getRouteKeyName()
+    {
+        return 'slug';
+        
+    }
+*/
     public function nombre(): Attribute
     {
         return new Attribute(

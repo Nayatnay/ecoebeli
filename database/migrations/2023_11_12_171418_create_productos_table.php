@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('id_subcategoria'); 
             $table->string('codigo')->unique();
             $table->string('nombre');
+            $table->string('slug');
             $table->string('descripcion');
             $table->string('imagen', 2048);
             $table->decimal('precio', 8, 2);

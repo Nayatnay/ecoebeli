@@ -2032,6 +2032,7 @@ abstract class Model implements Arrayable, ArrayAccess, CanBeEscapedWhenCastToSt
     public function getRouteKeyName()
     {
         return $this->getKeyName();
+        
     }
 
     /**

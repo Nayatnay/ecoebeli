@@ -46,6 +46,6 @@ class DatabaseSeeder extends Seeder
         Storage::disk('public')->deleteDirectory('categorias');
         Storage::disk('public')->makeDirectory('categorias');
 
-        Categoria::factory(3)->create();
+        Categoria::factory(10)->create();
     }
 }

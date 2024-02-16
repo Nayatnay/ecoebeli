@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_categoria');
             $table->string('nombre');
+            $table->string('slug');
             $table->timestamps();
             // Llave foranea
             $table->foreign('id_categoria')->references('id')->on('categorias')->onDelete('cascade');

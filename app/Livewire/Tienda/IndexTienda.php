@@ -119,7 +119,7 @@ class IndexTienda extends Component
                 return $query->where('precio', '>=', $this->value)->where('precio', '<=', $this->value2);
             })
 
-            ->orderby($this->sort, $this->direc)->paginate(15, ['*'], 'prodlink');
+            ->orderby($this->sort, $this->direc)->paginate(12, ['*'], 'prodlink');
 
         return view('livewire.tienda.index-tienda', compact('productos', 'subcateg', 'marcas', 'colores', 'tallas'));
     }
