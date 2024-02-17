@@ -3,6 +3,7 @@
 namespace App\Livewire\Categorias;
 
 use App\Models\Categoria;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,7 @@ class CrearCategoria extends Component
 
     public $open_crear = false;
     public $imagen, $identificador, $nombre, $descripcion;
+    public $slug;
 
     protected $listeners = ['render'];
 
@@ -34,10 +36,12 @@ class CrearCategoria extends Component
         $fileName = time() . '.' . $this->imagen->extension();
         $this->imagen->storeAs('public/categorias', $fileName);
         $nombre = $this->nombre;
+        $slug = $this->slug;
         $descripcion = $this->descripcion;
 
         Categoria::create([
             'nombre' => $nombre,
+            'slug' => $slug,
             'descripcion' => $descripcion,
             'imagen' => $fileName,
         ]);
@@ -57,4 +61,10 @@ class CrearCategoria extends Component
         $this->identificador = rand();
         return view('livewire.categorias.crear-categoria');
     }
+
+    public function generateSlug()
+    {
+        $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->nombre);
+    }
+
 }

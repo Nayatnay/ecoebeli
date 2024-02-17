@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\id_Categoria;
 use App\Models\Producto;
 use App\Models\Subcategoria;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -16,6 +17,7 @@ class CrearProducto extends Component
     public $open_crear = false;
     public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla;
     public $descripcion, $imagen, $precio, $stock, $catbuscada;
+    public $slug;
 
     /*public $categoria, $subcategoria;
     public $categorias = [], $subcategorias = [];
@@ -93,4 +95,10 @@ class CrearProducto extends Component
 
         return view('livewire.productos.crear-producto', compact('subcategorias'));
     }
+
+    public function generateSlug()
+    {
+        $this->slug = SlugService::createSlug(Producto::class, 'slug', $this->nombre);
+    }
+
 }

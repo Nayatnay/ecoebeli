@@ -1,5 +1,6 @@
 <?php
 
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -173,6 +174,8 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         EloquentFilter\ServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        //Cviebrock\EloquentSluggable\ServiceProvider::class,
+
     ])->toArray(),
 
     /*

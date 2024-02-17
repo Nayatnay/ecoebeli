@@ -15,12 +15,11 @@ class CategoriaFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    { 
-        $name = $this->faker->name();
+    {        
         return [
-            'nombre' => $name,
-            'slug' => Str::slug($name, '-'),
-            'descripcion' => $this->faker->name(),
+            'nombre' => $this->faker->sentence(),
+            'slug' => $this->faker->slug(),
+            'descripcion' => $this->faker->paragraph(),
             'imagen' => $this->faker->image('public/storage/categorias', 640, 480, null, false)
         ];
     }

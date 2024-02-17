@@ -5,6 +5,7 @@ namespace App\Livewire\Productos;
 use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\Subcategoria;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -21,6 +22,7 @@ class IndexProductos extends Component
     public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla;
     public $descripcion, $imagen, $precio, $stock, $imagenva;
     public $categoria, $subcategoria, $producto;
+    public $slug;
 
     protected $listeners = ['render'];
 
@@ -147,5 +149,10 @@ class IndexProductos extends Component
         }
 
         return view('livewire.productos.index-productos', compact('productos', 'buscar', 'categ', 'subcategorias'));
+    }
+
+    public function generateSlug()
+    {
+        $this->slug = SlugService::createSlug(Producto::class, 'slug', $this->nombre);
     }
 }

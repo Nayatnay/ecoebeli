@@ -51,7 +51,7 @@
                             </div>
                             <div class="w-full p-4 flex items-center justify-between border-t border-gray-200">
                                 <a href="#" title="Eliminar" class="px-2"
-                                    wire:click="delete({{ $categoria->id }})">
+                                    wire:click="delete({{ $categoria }})">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em"
                                         viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                         <style>
@@ -108,6 +108,7 @@
                     required autofocus />
                 <x-input-error for="nombre" />
             </div>
+            
             <div class=" mb-4">
                 <x-label for="descripcion" value="{{ __('descripcion') }}" class="text-zinc-800" />
                 <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"

@@ -4,10 +4,12 @@ namespace App\Livewire\Categorias;
 
 use App\Models\Categoria;
 use BaconQrCode\Renderer\Path\Path;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 
 class IndexCategorias extends Component
 {
@@ -17,6 +19,7 @@ class IndexCategorias extends Component
     public $open_delete = false;
     public $open_edit = false;
     public $categoria, $imagen, $nombre, $descripcion, $identificador, $imagenva;
+    public $slug;
 
     public function mount(Categoria $categoria)
     {
@@ -30,6 +33,7 @@ class IndexCategorias extends Component
     {
         return [
             'nombre' => 'required',
+            'slug' => 'required',
             'descripcion' => 'required',
             'imagen' => 'required',
             'imagenva' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048'
@@ -48,11 +52,13 @@ class IndexCategorias extends Component
         $this->reset(['open_delete']);  //cierra el modal     
         $this->dispatch('index-categorias');
     }
-
+    
     public function edit(Categoria $categoria)
     {
+                
         $this->categoria = $categoria;
         $this->nombre = $categoria->nombre;
+        $this->slug = $categoria->slug;
         $this->descripcion = $categoria->descripcion;
         $this->imagen = $categoria->imagen;
 
@@ -63,27 +69,27 @@ class IndexCategorias extends Component
 
     public function update()
     {
-        if ($this->imagenva <> null) {           
+
+        if ($this->imagenva <> null) {
             $this->imagen = $this->imagenva;
             $fileName = time() . '.' . $this->imagen->extension();
             $this->imagen->storeAs('public/categorias', $fileName);
-            $this->imagen = $fileName;        
-        
+            $this->imagen = $fileName;
+
             $validatedData = $this->validate();
             $this->categoria->update($validatedData);
-
-        } else{
-            $this->categoria->nombre=$this->nombre;
-            $this->categoria->descripcion=$this->descripcion;            
+        } else {
+            $this->categoria->nombre = $this->nombre;
+            $this->categoria->slug = Str::slug($this->nombre, '-');
+            $this->categoria->descripcion = $this->descripcion;
             $this->categoria->update();
-        }     
+        }
 
         $this->imagenva = null;
 
         $this->reset(['open_edit', 'nombre', 'descripcion', 'imagen']);  //cierra el modal y limpia los campos del formulario
         $this->identificador = rand();
         $this->dispatch('index-categorias');
-    
     }
 
     public function updatingBuscar()
@@ -107,4 +113,10 @@ class IndexCategorias extends Component
 
         return view('livewire.categorias.index-categorias', compact('categorias', 'categ', 'buscar'));
     }
+
+    public function generateSlug()
+    {
+        $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->nombre);
+    }
+
 }

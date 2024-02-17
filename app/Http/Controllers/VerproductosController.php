@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Producto;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
@@ -13,6 +14,7 @@ class VerproductosController extends Controller
 
     public $sort = 'id';
     public $direc = 'desc';
+    public $slug, $cati;
 
     protected $listeners = ['render'];
 
@@ -29,7 +31,9 @@ class VerproductosController extends Controller
         $producto_buscado = Categoria::where('nombre', '=', $buscar)
             ->orwhere('descripcion', '=', $buscar)->first();
 
-        $conteo_productos = 0;
+            $this->cati = $producto_buscado->nombre; //////////////////////////// ojo eliminar
+
+            $conteo_productos = 0;
 
         if ($producto_buscado == null) {
             $productos = Producto::where('nombre', 'LIKE', '%' . $buscar . '%')
@@ -46,5 +50,10 @@ class VerproductosController extends Controller
         }
 
         return view('verproductos', compact('productos', 'categ', 'buscar', 'conteo_productos'));
+    }
+
+    public function generateSlug()
+    {
+        $this->slug = SlugService::createSlug(Producto::class, 'slug', $this->cati);
     }
 }
