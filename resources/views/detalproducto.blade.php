@@ -114,7 +114,7 @@
                         </form>
                     </div>
                     <div class="mt-4 w-full">
-                        <a href="{{ route('adicompra', $producto->id) }}"
+                        <a href="{{ route('adicompra', $producto) }}"
                             class="block text-xs font-medium px-4 py-2 border rounded-full bg-orange-600 hover:bg-orange-500 text-white">Comprar
                             ahora</a>
                     </div>
@@ -156,14 +156,14 @@
                             class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
 
                             <div class="flex h-[50%] items-start">
-                                <a href="{{ route('detalproducto', $produ->id) }}">
+                                <a href="{{ route('detalproducto', $produ) }}">
                                     <img src="{{ asset('/storage/productos/' . $produ->imagen) }}" alt=""
                                         title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
                                 </a>
                             </div>
 
                             <div class="w-full p-4 font-bold text-xl">
-                                <a href="{{ route('detalproducto', $produ->id) }} ">
+                                <a href="{{ route('detalproducto', $produ) }} ">
                                     <p class="text-ellipsis line-clamp-1">{{ $produ->nombre }}</p>
                                     <p class="text-sm font-normal text-ellipsis line-clamp-1">
                                         {{ $produ->descripcion }}

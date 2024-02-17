@@ -67,6 +67,7 @@ class CrearProducto extends Component
             'id_categoria' => $this->id_categoria,
             'id_subcategoria' => $this->id_subcategoria,
             'nombre' => $this->nombre,
+            'slug' => $this->slug,
             'marca' => $this->marca,
             'color' => $this->color,
             'talla' => $this->talla,

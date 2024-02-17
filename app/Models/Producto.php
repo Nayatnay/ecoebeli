@@ -38,11 +38,11 @@ class Producto extends Model
         ];
     }
 
-    /*public function getRouteKeyName()
+    public function getRouteKeyName()
     {
         return 'slug';
     }
-*/
+
 
     //Relacion uno a muchos (inversa)
 

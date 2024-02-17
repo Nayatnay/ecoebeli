@@ -27,13 +27,13 @@ class VerproductosController extends Controller
     {
 
         $buscar = $request->buscar;
+        
         $categ = Categoria::all()->sortBy('nombre');
-        $producto_buscado = Categoria::where('nombre', '=', $buscar)
+        $producto_buscado = Categoria::where('slug', '=', $buscar)
             ->orwhere('descripcion', '=', $buscar)->first();
-
-            $this->cati = $producto_buscado->nombre; //////////////////////////// ojo eliminar
-
-            $conteo_productos = 0;
+            
+        $buscar =$producto_buscado->nombre;
+        $conteo_productos = 0;
 
         if ($producto_buscado == null) {
             $productos = Producto::where('nombre', 'LIKE', '%' . $buscar . '%')
@@ -54,6 +54,6 @@ class VerproductosController extends Controller
 
     public function generateSlug()
     {
-        $this->slug = SlugService::createSlug(Producto::class, 'slug', $this->cati);
+        $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->cati);
     }
 }

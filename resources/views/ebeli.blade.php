@@ -91,7 +91,7 @@
                             <p class="text-ellipsis line-clamp-1">{{ $categoria->nombre }}</p>
                             <p class="text-sm font-normal text-ellipsis line-clamp-1">{{ $categoria->descripcion }}</p>
                         </div>
-                        <a href="{{ route('verproductos', $categoria->nombre) }}"
+                        <a href="{{ route('verproductos', $categoria) }}"
                             class="w-full text-orange-600 bg-gray-100 text-sm font-semibold duration-75 hover:underline">
                             <div>
                                 <img src="{{ asset('/storage/categorias/' . $categoria->imagen) }}" alt=""

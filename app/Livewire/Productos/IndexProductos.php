@@ -64,6 +64,8 @@ class IndexProductos extends Component
 
     public function edit(Producto $producto)
     {
+        dd($producto);
+       
         $this->producto = $producto;
         $this->codigo = $producto->codigo;
         $this->id_categoria = $producto->id_categoria;

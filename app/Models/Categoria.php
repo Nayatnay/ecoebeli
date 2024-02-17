@@ -54,11 +54,11 @@ class Categoria extends Model
         $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->nombre);
     }
 
-   /*public function getRouteKeyName()
+   public function getRouteKeyName()
     {
         return 'slug';
     }
-*/
+
     //Relaciones uno a muchos
 
     public function productos()
