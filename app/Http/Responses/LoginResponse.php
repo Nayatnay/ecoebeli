@@ -15,6 +15,7 @@ class LoginResponse implements ContractsLoginResponse
             return redirect()->intended(config('fortify.home'));
         }
         //return redirect()->intended(config('fortify.admin.home'));
+        
         $rutita = session('urlcall');
         $buscado = session('varval');
         $producto = session('varvalpro');
@@ -24,8 +25,9 @@ class LoginResponse implements ContractsLoginResponse
         }
 
         if (session('varval') <> null && session('varvalpro') == null) {
-            $buscar = Categoria::where('nombre', '=', $buscado)->first();
-            return redirect()->Route($rutita, compact('buscar', 'producto'));
+            $buscadito = Categoria::where('nombre', '=', $buscado)->first();
+            $buscar = $buscadito->slug;
+            return redirect()->Route($rutita, compact('buscar'));
         }
 
         if (session('varval') == null && session('varvalpro') <> null) {
@@ -33,7 +35,9 @@ class LoginResponse implements ContractsLoginResponse
         }
 
         if (session('varval') <> null && session('varvalpro') <> null) {
-            return redirect()->Route($rutita, compact('producto'));
+            $buscadito = Categoria::where('nombre', '=', $buscado)->first();
+            $buscar = $buscadito->slug;
+            return redirect()->Route($rutita, compact('producto', 'buscar'));
         }
     }
 }

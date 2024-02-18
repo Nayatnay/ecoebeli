@@ -14,8 +14,8 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 class Categoria extends Model
 {
     use HasFactory;
-    use Sluggable;
-    use SluggableScopeHelpers;
+    //use Sluggable;
+    //use SluggableScopeHelpers;
 
 
     protected $fillable = [
@@ -25,6 +25,7 @@ class Categoria extends Model
         'imagen',
     ];
 
+    /*
     public function sluggable(): array
     {
         return [
@@ -37,15 +38,14 @@ class Categoria extends Model
 
     public function sluggableEvent(): string
     {
-        /**
+        
          * Default behaviour -- generate slug before model is saved.
-         */
+        
         return SluggableObserver::SAVING;
 
-        /**
          * Optional behaviour -- generate slug after model is saved.
          * This will likely become the new default in the next major release.
-         */
+      
         return SluggableObserver::SAVED;
     }
 
@@ -54,11 +54,13 @@ class Categoria extends Model
         $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->nombre);
     }
 
-   public function getRouteKeyName()
+    public function getRouteKeyName()
     {
         return 'slug';
     }
 
+    */
+    
     //Relaciones uno a muchos
 
     public function productos()

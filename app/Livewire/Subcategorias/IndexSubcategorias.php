@@ -7,6 +7,7 @@ use App\Models\Subcategoria;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class IndexSubcategorias extends Component
 {
@@ -14,7 +15,7 @@ class IndexSubcategorias extends Component
 
     public $open_delete = false;
     public $open_edit = false;
-    public $categoria, $subcategoria, $nombre, $id_categoria;
+    public $categoria, $subcategoria, $nombre, $id_categoria, $slug;
 
     public function mount(Categoria $categoria)
     {
@@ -28,7 +29,7 @@ class IndexSubcategorias extends Component
         return [
             'nombre' => 'required',
             'id_categoria' => 'required',
-            ];
+        ];
     }
 
     public function delete(Subcategoria $subcategoria)
@@ -47,21 +48,22 @@ class IndexSubcategorias extends Component
     public function edit(Subcategoria $subcategoria)
     {
         $this->subcategoria = $subcategoria;
-        
         $this->id_categoria = $subcategoria->id_categoria;
         $this->nombre = $subcategoria->nombre;
+        $this->slug = $subcategoria->slug;
 
         $this->open_edit = true;
     }
 
     public function update()
-    {           
-            $validatedData = $this->validate();
-            $this->subcategoria->update($validatedData);
+    {
+        $this->subcategoria->slug = Str::slug($this->nombre, '-');
+
+        $validatedData = $this->validate();
+        $this->subcategoria->update($validatedData);
 
         $this->reset(['open_edit', 'nombre', 'categoria']);  //cierra el modal y limpia los campos del formulario
         $this->dispatch('index-subcategorias');
-    
     }
 
     public function updatingBuscar()
@@ -81,7 +83,7 @@ class IndexSubcategorias extends Component
 
         $subcategorias = Subcategoria::where('nombre', 'LIKE', '%' . $buscar . '%')
             ->orderBy('id', 'desc')->paginate(8, ['*'], 'subcateg');
-        
+
         return view('livewire.subcategorias.index-subcategorias', compact('buscar', 'subcategorias', 'categ',));
     }
 }

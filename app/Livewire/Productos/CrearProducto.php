@@ -9,6 +9,7 @@ use App\Models\Subcategoria;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 
 class CrearProducto extends Component
 {
@@ -27,7 +28,7 @@ class CrearProducto extends Component
 
     protected $rules = [
         'codigo' => 'required|unique:productos',
-        'id_categoria' => 'required',
+        
         'id_subcategoria' => 'required',
         'nombre' => 'required',
         'marca' => 'required',
@@ -54,10 +55,12 @@ class CrearProducto extends Component
 */
     public function save()
     {
+        $this->validate();
+        
         $subycat = Subcategoria::where('id', '=', $this->id_subcategoria,)->first();
         $this->id_categoria = $subycat->id_categoria;
-
-        $this->validate();
+        $this->slug = Str::slug($this->nombre, '-');
+        
 
         $fileName = time() . '.' . $this->imagen->extension();
         $this->imagen->storeAs('public/productos', $fileName);
@@ -97,9 +100,9 @@ class CrearProducto extends Component
         return view('livewire.productos.crear-producto', compact('subcategorias'));
     }
 
-    public function generateSlug()
+    /*public function generateSlug()
     {
         $this->slug = SlugService::createSlug(Producto::class, 'slug', $this->nombre);
     }
-
+*/
 }

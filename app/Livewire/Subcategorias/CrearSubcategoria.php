@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Subcategoria;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class CrearSubcategoria extends Component
 {
@@ -28,7 +29,9 @@ class CrearSubcategoria extends Component
     public function save()
     {
         $this->validate();
-
+        
+        $this->slug = Str::slug($this->nombre, '-');
+        
         Subcategoria::create([
             'nombre' => $this->nombre,
             'slug' => $this->slug,
@@ -45,9 +48,10 @@ class CrearSubcategoria extends Component
         return view('livewire.subcategorias.crear-subcategoria', compact('categorias'));
     }
 
+    /*
     public function generateSlug()
     {
         $this->slug = SlugService::createSlug(Subcategoria::class, 'slug', $this->nombre);
     }
-
+*/
 }

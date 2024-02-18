@@ -106,7 +106,7 @@
                         -{{ Auth::user()->estado }}-{{ Auth::user()->ciudad }}-{{ Auth::user()->direccion }} <br>
                         CP.{{ Auth::user()->cp }}</p>
                     <div class="mt-8 w-full">
-                        <form action="{{ route('add') }}" method="post">
+                        <form action="{{ route('add', $producto->slug) }}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{ $producto->id }}">
                             <input type="submit" value="Agregar al carrito"
@@ -125,7 +125,7 @@
                     <p id="bloque"></p>
 
                     <div class="mt-8 w-full">
-                        <form action="{{ route('add') }}" method="post">
+                        <form action="{{ route('add', $producto->slug) }}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{ $producto->id }}">
                             <input type="submit" value="Agregar al carrito"
@@ -156,14 +156,14 @@
                             class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
 
                             <div class="flex h-[50%] items-start">
-                                <a href="{{ route('detalproducto', $produ) }}">
+                                <a href="{{ route('detalproducto', $produ->slug) }}">
                                     <img src="{{ asset('/storage/productos/' . $produ->imagen) }}" alt=""
                                         title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
                                 </a>
                             </div>
 
                             <div class="w-full p-4 font-bold text-xl">
-                                <a href="{{ route('detalproducto', $produ) }} ">
+                                <a href="{{ route('detalproducto', $produ->slug) }} ">
                                     <p class="text-ellipsis line-clamp-1">{{ $produ->nombre }}</p>
                                     <p class="text-sm font-normal text-ellipsis line-clamp-1">
                                         {{ $produ->descripcion }}

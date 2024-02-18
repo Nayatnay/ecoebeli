@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 
 class IndexProductos extends Component
 {
@@ -64,13 +65,12 @@ class IndexProductos extends Component
 
     public function edit(Producto $producto)
     {
-        dd($producto);
-       
         $this->producto = $producto;
         $this->codigo = $producto->codigo;
         $this->id_categoria = $producto->id_categoria;
         $this->id_subcategoria = $producto->id_subcategoria;
         $this->nombre = $producto->nombre;
+        $this->slug = $producto->slug;
         $this->marca = $producto->marca;
         $this->color = $producto->color;
         $this->talla = $producto->talla;
@@ -86,7 +86,6 @@ class IndexProductos extends Component
 
     public function update()
     {
-
         $subycat = Subcategoria::where('id', '=', $this->id_subcategoria,)->first();
         $this->id_categoria = $subycat->id_categoria;
 
@@ -96,6 +95,8 @@ class IndexProductos extends Component
             $this->imagen->storeAs('public/productos', $fileName);
             $this->imagen = $fileName;
 
+            $this->producto->slug = Str::slug($this->nombre, '-');
+            
             $validatedData = $this->validate();
             $this->producto->update($validatedData);
         } else {
@@ -103,6 +104,7 @@ class IndexProductos extends Component
             $this->producto->id_categoria = $this->id_categoria;
             $this->producto->id_subcategoria = $this->id_subcategoria;
             $this->producto->nombre = $this->nombre;
+            $this->producto->slug = Str::slug($this->nombre, '-');
             $this->producto->marca = $this->marca;
             $this->producto->color = $this->color;
             $this->producto->talla = $this->talla;

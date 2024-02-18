@@ -11,7 +11,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Producto extends Model
 {
     use HasFactory;
-    use Sluggable;
+    //use Sluggable;
 
     protected $fillable = [   
         'id_categoria',
@@ -28,6 +28,7 @@ class Producto extends Model
         'stock',  
     ];
 
+    /*
     public function sluggable(): array
     {
         return [
@@ -42,7 +43,7 @@ class Producto extends Model
     {
         return 'slug';
     }
-
+*/
 
     //Relacion uno a muchos (inversa)
 

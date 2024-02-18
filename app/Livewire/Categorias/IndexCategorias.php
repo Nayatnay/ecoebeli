@@ -33,7 +33,6 @@ class IndexCategorias extends Component
     {
         return [
             'nombre' => 'required',
-            'slug' => 'required',
             'descripcion' => 'required',
             'imagen' => 'required',
             'imagenva' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048'
@@ -42,9 +41,8 @@ class IndexCategorias extends Component
 
     public function delete(Categoria $categoria)
     {
-        dd($categoria);
         $this->categoria = $categoria;
-        $this->open_delete = true;
+        $this->open_delete = true;  
     }
 
     public function destroy()
@@ -53,10 +51,10 @@ class IndexCategorias extends Component
         $this->reset(['open_delete']);  //cierra el modal     
         $this->dispatch('index-categorias');
     }
-    
+
     public function edit(Categoria $categoria)
     {
-                
+        
         $this->categoria = $categoria;
         $this->nombre = $categoria->nombre;
         $this->slug = $categoria->slug;
@@ -70,12 +68,13 @@ class IndexCategorias extends Component
 
     public function update()
     {
-
         if ($this->imagenva <> null) {
             $this->imagen = $this->imagenva;
             $fileName = time() . '.' . $this->imagen->extension();
             $this->imagen->storeAs('public/categorias', $fileName);
             $this->imagen = $fileName;
+
+            $this->categoria->slug = Str::slug($this->nombre, '-');
 
             $validatedData = $this->validate();
             $this->categoria->update($validatedData);
@@ -114,10 +113,4 @@ class IndexCategorias extends Component
 
         return view('livewire.categorias.index-categorias', compact('categorias', 'categ', 'buscar'));
     }
-
-    public function generateSlug()
-    {
-        $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->nombre);
-    }
-
 }

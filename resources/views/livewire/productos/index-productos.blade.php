@@ -148,6 +148,10 @@
                     required autofocus />
                 <x-input-error for="nombre" />
             </div>
+            <div class="hidden">
+                <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" wire:model="slug"
+                    required autofocus />    
+            </div>
             <div class="flex">
                 <div class=" mb-4">
                     <x-label for="marca" value="{{ __('Marca') }}" class="text-zinc-800" />

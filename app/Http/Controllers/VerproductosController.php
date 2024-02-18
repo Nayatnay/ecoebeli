@@ -26,8 +26,8 @@ class VerproductosController extends Controller
 
     public function index($buscar)
     {
-        $titulo = str_replace("-"," ",$buscar);
-        
+        $titulo = str_replace("-", " ", $buscar);
+
         $categ = Categoria::all()->sortBy('nombre');
         $productos = producto::where('nombre', 'LIKE', '%' . $buscar . '%')
             ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')
@@ -40,13 +40,15 @@ class VerproductosController extends Controller
             $conteo_productos = count(producto::where('nombre', 'LIKE', '%' . $buscar . '%')
                 ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')->get());
         }
-        
+
         $buscar = Str::slug($buscar, '-');
         return view('verproductos', compact('productos', 'categ', 'buscar', 'conteo_productos', 'titulo'));
     }
-
+    
+    /*
     public function generateSlug()
     {
         $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->cati);
     }
+    */
 }

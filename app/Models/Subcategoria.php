@@ -11,7 +11,8 @@ use Cviebrock\EloquentSluggable\SluggableObserver;
 
 class Subcategoria extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory;
+    //use Sluggable;
 
     protected $fillable = [
         'id_categoria',
@@ -19,6 +20,7 @@ class Subcategoria extends Model
         'slug',
     ];
 
+    /*
     public function sluggable(): array
     {
         return [
@@ -31,15 +33,15 @@ class Subcategoria extends Model
 
     public function sluggableEvent(): string
     {
-        /**
+       
          * Default behaviour -- generate slug before model is saved.
-         */
+         
         return SluggableObserver::SAVING;
 
         /**
          * Optional behaviour -- generate slug after model is saved.
          * This will likely become the new default in the next major release.
-         */
+        
         return SluggableObserver::SAVED;
     }
 
@@ -52,6 +54,9 @@ class Subcategoria extends Model
     {
         return 'slug';
     }
+
+    */
+
     //Relacion uno a muchos (inversa)
 
     public function categoria(){

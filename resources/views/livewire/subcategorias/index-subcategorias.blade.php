@@ -35,7 +35,8 @@
 
             <div class="w-full my-12 p-4 border  min-h-0 overflow-auto rounded-lg text-base">
 
-                <table class="table-fixed bg-white w-full font-light text-base md:text-lg text-left h-auto border-collapse">
+                <table
+                    class="table-fixed bg-white w-full font-light text-base md:text-lg text-left h-auto border-collapse">
 
                     <tbody class="text-left text-base">
 
@@ -45,8 +46,8 @@
 
                                 <td class="w-[32px]">
                                     <img src="{{ asset('/storage/categorias/' . $subcategoria->categoria->imagen) }}"
-                                        alt="" title="" class="bg-red-100 rounded w-full"> 
-                                        
+                                        alt="" title="" class="bg-red-100 rounded w-full">
+
                                 </td>
                                 <td class="pl-2 w-96 min-w-96 text-gray-600">{{ $subcategoria->categoria->nombre }}</td>
                                 <td class="w-20">
@@ -55,7 +56,7 @@
                                     </a>
                                 </td>
                                 <td class="w-20">
-                                    <a href="#" wire:click="edit({{ $subcategoria }})" title="Editar"
+                                    <a href="#" wire:click="edit({{ $subcategoria->id }})" title="Editar"
                                         class="group text-center">
                                         <span
                                             class="h-1 w-1 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
@@ -88,7 +89,7 @@
     <x-dialog-modal wire:model="open_edit">
 
         <x-slot name="title">
-            <p class="font-bold text-left pb-4 border-b">Actualizar categoría</p>
+            <p class="font-bold text-left pb-4 border-b">Actualizar Subcategoría</p>
         </x-slot>
 
         <x-slot name="content">
@@ -99,6 +100,12 @@
                     required autofocus />
                 <x-input-error for="nombre" />
             </div>
+            
+            <div class="hidden">
+                <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" wire:model="slug"
+                    required autofocus />
+            </div>
+
 
             <div class=" mb-4">
                 <x-label for="id_categoria" value="{{ __('Categoría') }}" class="text-zinc-800" />
@@ -111,7 +118,7 @@
                 </select>
                 <x-input-error for="id_categoria" />
             </div>
-            
+
 
         </x-slot>
 

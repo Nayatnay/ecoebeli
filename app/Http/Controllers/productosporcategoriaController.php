@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class productosporcategoriaController extends Controller
 {
@@ -22,7 +23,6 @@ class productosporcategoriaController extends Controller
 
     public function index($buscar)
     {
-        
         $categ = Categoria::all()->sortBy('nombre');
         $categoria_buscada = Categoria::where('slug', '=', $buscar)->first();
 
@@ -33,12 +33,8 @@ class productosporcategoriaController extends Controller
             ->orderBy('nombre')->paginate(6, ['*'], 'prodlink');
 
         $conteo_productos = count(Producto::where('id_categoria', '=', $categoria_buscada->id)->get());
+        //$buscar = Str::slug($categoria_buscada->slug, '-');
 
         return view('productosporcategoria', compact('productos', 'categ', 'buscar', 'conteo_productos'));
-    }
-
-    public function generateSlug()
-    {
-        $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->cati);
     }
 }

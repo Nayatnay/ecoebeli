@@ -10,7 +10,6 @@ class CartController extends Controller
 {
     public function add(Request $request)
     {
-
         $producto = Producto::find($request->id);
 
         if (empty($producto)) {
@@ -25,7 +24,8 @@ class CartController extends Controller
             array("imagen" => $producto->imagen)
 
         );
-
+        
+        $producto = $producto->slug;
         return redirect()->Route('detalproducto', compact('producto'))->with('info', 'ok');
     }
 
@@ -34,5 +34,4 @@ class CartController extends Controller
         CartFacade::clear();
         return redirect()->back();
     }
-
 }

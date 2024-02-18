@@ -27,7 +27,6 @@ class CarroController extends Controller
 
     public function adicion(Request $request)
     {
-
         $producto = Producto::find($request->id);
 
         if (empty($producto)) {

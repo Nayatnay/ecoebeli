@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class CrearCategoria extends Component
 {
@@ -36,7 +37,7 @@ class CrearCategoria extends Component
         $fileName = time() . '.' . $this->imagen->extension();
         $this->imagen->storeAs('public/categorias', $fileName);
         $nombre = $this->nombre;
-        $slug = $this->slug;
+        $slug = Str::slug($this->nombre, '-');
         $descripcion = $this->descripcion;
 
         Categoria::create([
@@ -62,9 +63,10 @@ class CrearCategoria extends Component
         return view('livewire.categorias.crear-categoria');
     }
 
+    /*
     public function generateSlug()
     {
         $this->slug = SlugService::createSlug(Categoria::class, 'slug', $this->nombre);
     }
-
+*/
 }
