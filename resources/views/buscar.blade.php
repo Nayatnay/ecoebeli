@@ -25,7 +25,7 @@
     <div class="max-w-screen-xl mx-auto w-full px-4 mt-8 md:mt-16">
         <form action="{{ route('buscar') }}"
             class="flex items-center justify-center border rounded md:w-[40%] bg-lime-500">
-            @if ($buscar == '')
+            @if ($buscar == null)
                 <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar"
                     value="{{ $buscar }}" class="text-xs w-full bg-white px-2 py-3 border-none focus:ring-0">
             @else
@@ -54,7 +54,7 @@
                             <p class="text-base font-normal text-ellipsis line-clamp-1">{{ $categoria->descripcion }}
                             </p>
                         </div>
-                        <a href="{{ route('verproductos', $categoria->nombre) }}"
+                        <a href="{{ route('productosporcategoria', $categoria) }}"
                             class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
                             <div>
                                 <img src="{{ asset('/storage/categorias/' . $categoria->imagen) }}" alt=""

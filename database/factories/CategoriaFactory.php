@@ -16,9 +16,10 @@ class CategoriaFactory extends Factory
      */
     public function definition(): array
     {        
+        $name = $this->faker->name();
         return [
-            'nombre' => $this->faker->sentence(),
-            'slug' => $this->faker->slug(),
+            'nombre' => $name,
+            'slug' => Str::slug($name, '-'),
             'descripcion' => $this->faker->paragraph(),
             'imagen' => $this->faker->image('public/storage/categorias', 640, 480, null, false)
         ];

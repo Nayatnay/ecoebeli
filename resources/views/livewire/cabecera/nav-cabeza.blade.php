@@ -19,7 +19,7 @@
 
                     <select name="categoria" id="categoria" onchange="ShowSelected();"
                         class="min-h-[40px] text-sm pl-4 pr-8 py-2 rounded-tl rounded-bl border-none focus:ring-0 focus:outline-none hover:cursor-pointer bg-gray-100 hover:bg-gray-300 text-black">
-                        <option value="" class="bg-white">Todas las Categorías</option>
+                        <option value="0" class="bg-white">Todas las Categorías</option>
                         @foreach ($categ as $categoria)
                             <option value="{{ $categoria->id }}" class="bg-white">{{ $categoria->nombre }}</option>
                         @endforeach
@@ -32,7 +32,7 @@
                     <select name="categoria" id="categoria" onchange="ShowSelected();"
                         class="min-h-[40px] text-sm pl-4 pr-8 py-2 rounded-tl rounded-bl border-none focus:ring-0 focus:outline-none hover:cursor-pointer bg-gray-100 hover:bg-gray-300 text-black">
                         <option value="$buscar">{{ $buscar }}</option>
-                        <option value="" class="bg-white">Todas las Categorías</option>
+                        <option value="0" class="bg-white">Todas las Categorías</option>
                         @foreach ($categ as $categoria)
                             <option value="{{ $categoria->id }}"class="bg-white">{{ $categoria->nombre }}</option>
                         @endforeach

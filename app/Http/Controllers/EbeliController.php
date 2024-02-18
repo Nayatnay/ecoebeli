@@ -23,15 +23,6 @@ class EbeliController extends Controller
         $categ = Categoria::all()->sortBy('nombre');
         $categorias = Categoria::all()->sortBy('nombre');
 
-        if ($buscar == "Todas las Categorías") {
-            return view('ebeli', compact('categ', 'buscar', 'categorias'));
-        } else {
-            if ($buscar <> null) {
-                //$this->redirectRoute('verproductos', ['buscar' => $buscar]); con livewire
-                return redirect()->Route('verproductos', compact('buscar'));
-            }
-        }
-
         return view('ebeli', compact('categ', 'buscar', 'categorias'));
     }
 }

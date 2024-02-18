@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DetalproductosController;
 use App\Http\Controllers\EbeliController;
+use App\Http\Controllers\productosporcategoriaController;
 use App\Http\Controllers\VerproductosController;
 use App\Livewire\Carrito\IndexCarrito;
 use App\Livewire\Carrito\IndexCarro as CarritoIndexCarro;
@@ -30,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [EbeliController::class, 'index'])->name('/');
 
 Route::get('tienda', IndexTienda::class)->Middleware('can:tienda')->name('tienda');
+Route::get('productosporcategoria/{buscar}', [productosporcategoriaController::class, 'index'])->name('productosporcategoria');
 Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
 Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalproducto');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');

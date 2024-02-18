@@ -26,12 +26,12 @@
         <div class="max-w-screen-xl mx-auto px-6">
             @if ($productos->firstItem() == 0)
                 <span>0 resultados para</span>
-                </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
+                </span> <span class="text-orange-700"> "{{ $titulo }}" </span>
             @else
                 <span>{{ $productos->firstItem() }} a {{ $productos->lastItem() }} de {{ $productos->total() }}
                     resultados para
                 </span>
-                <span class="text-orange-700"> "{{ $buscar }}" </span>
+                <span class="text-orange-700"> "{{ $titulo }}" </span>
             @endif
         </div>
     </div>

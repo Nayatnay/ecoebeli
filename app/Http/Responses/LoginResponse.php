@@ -2,6 +2,7 @@
 
 namespace App\Http\Responses;
 
+use App\Models\Categoria;
 use Laravel\Fortify\Contracts\LoginResponse as ContractsLoginResponse;
 
 class LoginResponse implements ContractsLoginResponse
@@ -15,13 +16,24 @@ class LoginResponse implements ContractsLoginResponse
         }
         //return redirect()->intended(config('fortify.admin.home'));
         $rutita = session('urlcall');
-        $buscar = session('varval');
+        $buscado = session('varval');
         $producto = session('varvalpro');
 
         if (session('varval') == null && session('varvalpro') == null) {
             return redirect($rutita);
         }
-        
-        return redirect()->Route($rutita, compact('buscar', 'producto'));
+
+        if (session('varval') <> null && session('varvalpro') == null) {
+            $buscar = Categoria::where('nombre', '=', $buscado)->first();
+            return redirect()->Route($rutita, compact('buscar', 'producto'));
+        }
+
+        if (session('varval') == null && session('varvalpro') <> null) {
+            return redirect()->Route($rutita, compact('producto'));
+        }
+
+        if (session('varval') <> null && session('varvalpro') <> null) {
+            return redirect()->Route($rutita, compact('producto'));
+        }
     }
 }

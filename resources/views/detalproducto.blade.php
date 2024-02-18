@@ -20,7 +20,7 @@
 
     @livewire('cabecera.nav-cabeza')
 
-    {{ session(['varvalpro' => $producto->id]) }}
+    {{ session(['varvalpro' => $producto]) }}
 
     @if (session('info'))
         <div class="mensaje bg-yellow-300 text-sm w-full text-center font-medium p-2">

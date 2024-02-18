@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Categoria;
 use App\Models\Producto;
 use Livewire\WithPagination;
+use Illuminate\Support\Str;
 
 class BuscarController extends Controller
 {
@@ -20,20 +21,30 @@ class BuscarController extends Controller
 
     public function index(request $request)
     {
-        $buscar = $request->buscar;
-        $categoria = $request->categoria;
-
+        $buscar = Str::slug($request->buscar);
+        
         $categ = Categoria::all()->sortBy('nombre');
         $categorias = Categoria::all()->sortBy('nombre');
 
-        if ($buscar == "Todas las Categorías") {
-            return redirect()->Route('/');
-        } else {
-            if ($buscar <> null) {
+        if ($request->categoria <> 0) {
+            
+            $comprobacion = Categoria::where('id', '=', $request->categoria)->first();
+            if ($comprobacion->nombre == $request->buscar) {
+                $categoria = Categoria::where('id', '=', $request->categoria)->first();
+                return redirect()->Route('productosporcategoria', compact('buscar'));
+            }else{
                 return redirect()->Route('verproductos', compact('buscar'));
             }
         }
 
-        return view('buscar', compact('categorias', 'categ', 'buscar'));
+        if ($request->buscar == "Todas las Categorías") {
+            return redirect()->Route('/');
+        } else {
+            if ($request->buscar <> null) {
+                return redirect()->Route('verproductos', compact('buscar'));
+            } else {
+                return view('buscar', compact('categorias', 'categ', 'buscar'));
+            }
+        }
     }
 }
