@@ -42,6 +42,7 @@ class IndexCategorias extends Component
 
     public function delete(Categoria $categoria)
     {
+        dd($categoria);
         $this->categoria = $categoria;
         $this->open_delete = true;
     }
