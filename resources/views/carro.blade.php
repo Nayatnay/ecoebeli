@@ -187,7 +187,7 @@
                 @if ($productos->count())
                     @foreach ($produc as $product)
                         <div class="flex items-center mt-6">
-                            <a href="{{ route('detalproducto', $product->slug) }} ">
+                            <a href="{{ route('detalleproducto', $product->slug) }} ">
                                 <div class="min-w-[96px] mr-4">
                                     <img src="{{ asset('/storage/productos/' . $product->imagen) }}" alt=""
                                         title="" width="96px" class="rounded ">
@@ -195,7 +195,7 @@
                             </a>
 
                             <div class="w-full">
-                                <a href="{{ route('detalproducto', $product->slug) }} ">
+                                <a href="{{ route('detalleproducto', $product->slug) }} ">
                                     <div>
                                         <p class="text text-orange-600">{{ $product->nombre }}</p>
                                         <p class="text-xs font-medium"><i
@@ -238,14 +238,14 @@
                         <div
                             class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
                             <div class="flex h-[50%] items-start ">
-                                <a href="{{ route('detalproducto', $producto->slug) }}">
+                                <a href="{{ route('detalleproducto', $producto->slug) }}">
                                     <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
                                         title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
                                 </a>
                             </div>
 
                             <div class="w-full p-4 font-bold text-xl ">
-                                <a href="{{ route('detalproducto', $producto->slug) }}">
+                                <a href="{{ route('detalleproducto', $producto->slug) }}">
                                     <p class="text-ellipsis line-clamp-1">{{ $producto->nombre }}</p>
                                     <p class="text-sm font-normal text-ellipsis line-clamp-1">
                                         {{ $producto->descripcion }}

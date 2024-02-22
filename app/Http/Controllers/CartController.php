@@ -26,7 +26,7 @@ class CartController extends Controller
         );
         
         $producto = $producto->slug;
-        return redirect()->Route('detalproducto', compact('producto'))->with('info', 'ok');
+        return redirect()->Route('detalleproducto', compact('producto'))->with('info', 'ok');
     }
 
     public function clear()

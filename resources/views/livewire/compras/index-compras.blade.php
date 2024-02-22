@@ -133,12 +133,19 @@
                     @livewire('medios.agregar-tc')
                 </div>
 
-                <div class="p-4 border-t text-sm">
-                    <span>Para realizar sus pagos a través de tansferencias bancarias y otros medios de pago desde
-                        Venezuela</span>
-                    <a href="https://wa.me/+584126067734?text=Hola. Me gustaria conocer los medios de pago que acepta además de los indicados en la web."
-                        target="_blank" class="text-orange-600 hover:underline">Contacta al vendedor +58-4126067734
-                    </a>
+                <div class="p-4 border-t text-sm text-justify">
+                    <p>Para tramitar su pago <strong>desde Venezuela</strong> hágalo a través de la Banca
+                        <strong>Banesco Banca Universal,</strong> con transferencia
+                        a la cuenta 0134-0426-77-5236-541234
+                        a nombre de <strong>Ebeli, C.A. </strong> Registro de Identificación Fiscal J-30621425-8.
+                    </p>
+                    <div class="mt-4 text-xs font-medium">
+                        <span>Para utilizar otros medios de pago </span>
+                        <a href="https://wa.me/+584126067734?text=Hola. Me gustaria conocer los medios de pago que acepta además de los indicados en la web."
+                            target="_blank" class="text-orange-600 hover:underline">Contacte al vendedor +58-4126067734
+                        </a>
+                    </div>
+
                 </div>
 
             </div>
@@ -178,6 +185,20 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="max-w-screen-xl mx-auto p-4 my-4">
+
+            <div class="w-full p-8 rounded-lg bg-white">
+
+                <div  class="font-bold pb-4 border-b">
+                    <p>3. Registrar el pago</p>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
     <!--            pie de pagina FOOTER               -->

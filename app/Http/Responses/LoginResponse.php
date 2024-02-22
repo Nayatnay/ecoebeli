@@ -19,7 +19,7 @@ class LoginResponse implements ContractsLoginResponse
         $rutita = session('urlcall');
         $buscado = session('varval');
         $producto = session('varvalpro');
-
+    
         if (session('varval') == null && session('varvalpro') == null) {
             return redirect($rutita);
         }
@@ -35,9 +35,7 @@ class LoginResponse implements ContractsLoginResponse
         }
 
         if (session('varval') <> null && session('varvalpro') <> null) {
-            $buscadito = Categoria::where('nombre', '=', $buscado)->first();
-            $buscar = $buscadito->slug;
-            return redirect()->Route($rutita, compact('producto', 'buscar'));
+            return redirect()->Route($rutita, compact('producto'));
         }
     }
 }

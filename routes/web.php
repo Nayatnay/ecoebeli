@@ -33,7 +33,7 @@ Route::get('/', [EbeliController::class, 'index'])->name('/');
 Route::get('tienda', IndexTienda::class)->Middleware('can:tienda')->name('tienda');
 Route::get('productosporcategoria/{buscar}', [productosporcategoriaController::class, 'index'])->name('productosporcategoria');
 Route::get('verproductos/{buscar}', [VerproductosController::class, 'index'])->name('verproductos');
-Route::get('detalproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalproducto');
+Route::get('detalleproducto/{producto}', [DetalproductosController::class, 'index'])->name('detalleproducto');
 Route::get('buscar', [BuscarController::class, 'index'])->name('buscar');
 
 Route::get('admintienda', function () {

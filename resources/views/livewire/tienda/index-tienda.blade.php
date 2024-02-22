@@ -127,14 +127,14 @@
                             class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
 
                             <div class="flex h-[50%] items-start">
-                                <a href="{{ route('detalproducto', $producto->slug) }}">
+                                <a href="{{ route('detalleproducto', $producto->slug) }}">
                                     <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
                                         title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
                                 </a>
                             </div>
 
                             <div class="w-full p-4 font-bold text-lg">
-                                <a href="{{ route('detalproducto', $producto->slug) }} ">
+                                <a href="{{ route('detalleproducto', $producto->slug) }} ">
                                     <p class="text-ellipsis line-clamp-1">{{ $producto->nombre }}</p>
                                     <p class="text-sm font-normal text-ellipsis line-clamp-1">
                                         {{ $producto->descripcion }}

@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Productos;
 
+use App\Models\Cart as ModelsCart;
 use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\Subcategoria;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Darryldecode\Cart\Cart;
+use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -113,6 +116,8 @@ class IndexProductos extends Component
             $this->producto->precio = $this->precio;
             $this->producto->update();
         }
+
+
 
         $this->imagenva = null;
 

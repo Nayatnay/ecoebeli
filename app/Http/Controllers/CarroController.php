@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Categoria;
 use App\Models\Producto;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Http\Request;
+
 class CarroController extends Controller
 {
 
@@ -21,6 +23,19 @@ class CarroController extends Controller
         $categ = Categoria::all()->sortBy('nombre');
         $productos = Producto::orderBy('nombre')->paginate(6);
         $produc = Producto::where('precio', '<>', 0)->inRandomOrder()->limit(8)->get();
+
+        //actualizar precios de los productos que estan en el carrito de compras
+
+        foreach (CartFacade::getContent() as $item) {
+            
+            $producto = Producto::find($item->id);
+
+            if ($producto <> null) {
+                CartFacade::update( $item->id, ['price' => $producto->precio]);
+            } else {
+                CartFacade::remove($item->id); //elimina el item del carrito por producto eliminado en la DB
+            }
+        }
 
         return view('carro', compact('productos', 'produc',  'categ', 'buscar'));
     }
@@ -58,7 +73,9 @@ class CarroController extends Controller
             CartFacade::remove($request->rowId);
             return redirect()->Route('carro')->with('eliminado', 'ok');
         }
-        
+
+        //CartFacade::update( $request->rowId, ['quantity' => $request->cant]); //me aumenta la cantidad NO FUNCIONÓ
+       
         CartFacade::remove($request->rowId);
 
         $producto = Producto::find($request->rowId);

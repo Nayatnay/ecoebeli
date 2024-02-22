@@ -20,7 +20,7 @@
 
     @livewire('cabecera.nav-cabeza')
 
-    {{ session(['varvalpro' => $producto]) }}
+    {{ session(['varvalpro' => $producto->slug]) }}
 
     @if (session('info'))
         <div class="mensaje bg-yellow-300 text-sm w-full text-center font-medium p-2">
@@ -156,14 +156,14 @@
                             class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-gray-100">
 
                             <div class="flex h-[50%] items-start">
-                                <a href="{{ route('detalproducto', $produ->slug) }}">
+                                <a href="{{ route('detalleproducto', $produ->slug) }}">
                                     <img src="{{ asset('/storage/productos/' . $produ->imagen) }}" alt=""
                                         title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
                                 </a>
                             </div>
 
                             <div class="w-full p-4 font-bold text-xl">
-                                <a href="{{ route('detalproducto', $produ->slug) }} ">
+                                <a href="{{ route('detalleproducto', $produ->slug) }} ">
                                     <p class="text-ellipsis line-clamp-1">{{ $produ->nombre }}</p>
                                     <p class="text-sm font-normal text-ellipsis line-clamp-1">
                                         {{ $produ->descripcion }}
