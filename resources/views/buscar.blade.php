@@ -54,7 +54,7 @@
                             <p class="text-base font-normal text-ellipsis line-clamp-1">{{ $categoria->descripcion }}
                             </p>
                         </div>
-                        <a href="{{ route('productosporcategoria', $categoria) }}"
+                        <a href="{{ route('productosporcategoria', $categoria->slug) }}"
                             class="w-full rounded-tl-lg rounded-tr-lg bg-gray-100 text-lime-600 duration-75 hover:underline">
                             <div>
                                 <img src="{{ asset('/storage/categorias/' . $categoria->imagen) }}" alt=""
