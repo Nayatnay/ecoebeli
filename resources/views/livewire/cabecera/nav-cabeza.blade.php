@@ -19,7 +19,7 @@
 
                     <select name="categoria" id="categoria" onchange="ShowSelected();"
                         class="min-h-[40px] text-sm pl-4 pr-8 py-2 rounded-tl rounded-bl border-none focus:ring-0 focus:outline-none hover:cursor-pointer bg-gray-100 hover:bg-gray-300 text-black">
-                        <option value="0" class="bg-white">Todas las Categorías</option>
+                        <option value="" class="bg-white">Todas las Categorías</option>
                         @foreach ($categ as $categoria)
                             <option value="{{ $categoria->id }}" class="bg-white">{{ $categoria->nombre }}</option>
                         @endforeach
@@ -42,11 +42,13 @@
                         class="min-h-[40px] text-sm text-white w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0 focus:outline-none">
                 @endif
 
-                <button type="submit" value="$bucar"
+                <button type="submit" value="{{$buscar}}"
                     class="p-2 bg-lime-600 hover:bg-lime-500 rounded-tr rounded-br border-none focus:ring-0 min-w-[40px] min-h-[40px] text-center text-base font-bold">
                     <i class="fas fa-solid fa-magnifying-glass"></i>
                 </button>
             </form>
+
+            <!-- Cuenta / carrito y menu dropdown -->
 
             @if (Route::has('login'))
                 @auth
