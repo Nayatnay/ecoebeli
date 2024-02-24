@@ -255,21 +255,6 @@
 
     </x-dialog-modal>
 
-    <script>
-        function ShowSelected() {
-            /* Para obtener el valor */
-            var cod = document.getElementById("categoria").value;
-            //alert(cod);
-
-            /* Para obtener el texto */
-            var combo = document.getElementById("categoria");
-            var selected = combo.options[combo.selectedIndex].text;
-            //alert(selected);
-            document.getElementById("buscar").value = selected;
-            document.getElementById("buscar").focus();
-        }
-    </script>
-
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @if (session('creado') == 'ok')

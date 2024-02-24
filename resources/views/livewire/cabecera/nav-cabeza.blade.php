@@ -4,7 +4,7 @@
 
         {{ session(['urlcall' => Route::currentRouteName()]) }}
 
-        <div class="max-w-screen-xl flex flex-wrap md:flex-nowrap items-center justify-between mx-auto px-4 py-2">
+        <div class=" max-w-screen-xl flex flex-wrap md:flex-nowrap items-center justify-between mx-auto px-4 py-2">
 
             <a href="{{ route('/') }}"
                 class="min-w-[112px] flex items-center rounded-sm border border-transparent hover:border-white py-3">
@@ -12,41 +12,30 @@
                 <h1 class="text-2xl font-semibold mr-2 whitespace-nowrap">Ebeli&trade;</h1>
             </a>
 
-            <form action="{{ route('buscar') }}"
-                class="w-full mx-4 hidden md:flex items-center rounded border border-gray-300">
+            <div class=" hidden md:flex items-center w-full">
 
-                @if ($buscar == null)
+                <select name="categoria" id="categoria" wire:change="buscateg" wire:model="categoria"
+                    class="min-h-[40px] text-sm pl-4 pr-8 py-2 ml-4 rounded-tl rounded-bl border-none focus:ring-0 focus:outline-none hover:cursor-pointer bg-gray-100 hover:bg-gray-300 text-black">
+                    <option value="">Categorías</option>
+                    <option value="0" class="bg-white">Todas las Categorías</option>
+                    @foreach ($categ as $categoria)
+                        <option value="{{ $categoria->id }}" class="bg-white">{{ $categoria->nombre }}</option>
+                    @endforeach
+                </select>
 
-                    <select name="categoria" id="categoria" onchange="ShowSelected();"
-                        class="min-h-[40px] text-sm pl-4 pr-8 py-2 rounded-tl rounded-bl border-none focus:ring-0 focus:outline-none hover:cursor-pointer bg-gray-100 hover:bg-gray-300 text-black">
-                        <option value="" class="bg-white">Todas las Categorías</option>
-                        @foreach ($categ as $categoria)
-                            <option value="{{ $categoria->id }}" class="bg-white">{{ $categoria->nombre }}</option>
-                        @endforeach
-                    </select>
-
-                    <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar"
+                <form action="{{ route('buscar') }}"
+                    class="bg-red-100 w-full md:flex items-center mr-4 rounded-tr rounded-br border border-gray-300">
+                    <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" required
                         value="{{ $buscar }}"
                         class="min-h-[40px] text-sm text-white w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0 focus:outline-none">
-                @else
-                    <select name="categoria" id="categoria" onchange="ShowSelected();"
-                        class="min-h-[40px] text-sm pl-4 pr-8 py-2 rounded-tl rounded-bl border-none focus:ring-0 focus:outline-none hover:cursor-pointer bg-gray-100 hover:bg-gray-300 text-black">
-                        <option value="$buscar">{{ $buscar }}</option>
-                        <option value="0" class="bg-white">Todas las Categorías</option>
-                        @foreach ($categ as $categoria)
-                            <option value="{{ $categoria->id }}"class="bg-white">{{ $categoria->nombre }}</option>
-                        @endforeach
-                    </select>
 
-                    <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value=""
-                        class="min-h-[40px] text-sm text-white w-full bg-zinc-900 px-4 py-2 border-none focus:ring-0 focus:outline-none">
-                @endif
-
-                <button type="submit" value="{{$buscar}}"
-                    class="p-2 bg-lime-600 hover:bg-lime-500 rounded-tr rounded-br border-none focus:ring-0 min-w-[40px] min-h-[40px] text-center text-base font-bold">
-                    <i class="fas fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
+                    <button type="submit" value="{{ $buscar }}"
+                        class="p-2 bg-lime-600 hover:bg-lime-500 rounded-tr rounded-br border-none focus:ring-0 min-w-[40px] min-h-[40px] text-center text-base font-bold">
+                        <i class="fas fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                
+            </div>
 
             <!-- Cuenta / carrito y menu dropdown -->
 
@@ -66,8 +55,12 @@
                             </button>
                         </a>
 
+                         <!-- MENU -->
+
                         <div class="flex items-center px-2">
-                            <button type="button"
+                             
+                            <!-- Boton Dropdown menu -->
+                             <button type="button"
                                 class="flex items-center justify-center text-xl font-medium w-10 h-10 text-lime-500 hover:border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
                                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                                 data-dropdown-placement="bottom" title="Bienvenido {{ ucwords(Auth::user()->name) }}">

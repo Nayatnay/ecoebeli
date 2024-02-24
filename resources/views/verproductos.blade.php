@@ -20,7 +20,8 @@
     
     @livewire('cabecera.nav-cabeza')
 
-    {{ session(['varval' => $buscar]) }}
+    {{ session(['varvalpro' => null]) }}
+    {{ session(['varval' => str_replace("-", " ", $buscar)]) }}
     
     <div class="bg-gray-200 text-sm sm:text-base font-semibold py-2 shadow">
         <div class="max-w-screen-xl mx-auto px-6">

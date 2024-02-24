@@ -4,6 +4,7 @@ namespace App\Livewire\Compras;
 
 use App\Models\Medio;
 use App\Models\Producto;
+
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -70,11 +71,11 @@ class IndexCompras extends Component
         //actualizar precios de los productos que estan en el carrito de compras
 
         foreach (CartFacade::getContent() as $item) {
-            
+
             $producto = Producto::find($item->id);
 
             if ($producto <> null) {
-                CartFacade::update( $item->id, ['price' => $producto->precio]);
+                CartFacade::update($item->id, ['price' => $producto->precio]);
             } else {
                 CartFacade::remove($item->id); //elimina el item del carrito por producto eliminado en la DB
             }

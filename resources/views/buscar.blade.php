@@ -17,7 +17,7 @@
 </head>
 
 <body class="antialised">
-    
+
     @livewire('cabecera.nav-cabeza')
 
     <!-- formulario de busqueda -->
@@ -25,19 +25,14 @@
     <div class="max-w-screen-xl mx-auto w-full px-4 mt-8 md:mt-16">
         <form action="{{ route('buscar') }}"
             class="flex items-center justify-center border rounded md:w-[40%] bg-lime-500">
-            @if ($buscar == null)
-                <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar"
-                    value="{{ $buscar }}" class="text-xs w-full bg-white px-2 py-3 border-none focus:ring-0">
-            @else
-                <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value=""
-                    class="text-xs w-full bg-white px-2 py-3 border-none focus:ring-0">
-            @endif
-
+            <input type="search" placeholder="Buscar en Ebeli" name="buscar" id="buscar" value=""
+                class="text-xs w-full bg-white px-2 py-3 border-none focus:ring-0" required>
             <button type="submit" class="p-2 bg-lime-500  border-none focus:ring-0">
                 <img src="{{ asset('img/buscar.png') }}" alt="Buscar" title="Buscar" width="24" height="24">
             </button>
         </form>
     </div>
+
     <!-- Categorias y productos -->
 
     <div class="max-w-screen-xl mx-auto">
@@ -96,7 +91,7 @@
         }
     </script>
 
-     <script>
+    <script>
         function ShowSelected() {
             /* Para obtener el valor */
             var cod = document.getElementById("categoria").value;

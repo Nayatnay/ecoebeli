@@ -27,10 +27,10 @@ class VerproductosController extends Controller
     public function index($buscar)
     {
         $titulo = str_replace("-", " ", $buscar);
-
+    //dd($titulo);
         $categ = Categoria::all()->sortBy('nombre');
-        $productos = producto::where('nombre', 'LIKE', '%' . $buscar . '%')
-            ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')
+        $productos = producto::where('nombre', 'LIKE', '%' . $titulo . '%')
+            ->orwhere('descripcion', 'LIKE', '%' . $titulo . '%')
             ->orderBy('nombre')->paginate(6, ['*'], 'prodlink');
 
         if ($productos == null) {
@@ -41,7 +41,7 @@ class VerproductosController extends Controller
                 ->orwhere('descripcion', 'LIKE', '%' . $buscar . '%')->get());
         }
 
-        $buscar = Str::slug($buscar, '-');
+        //$buscar = Str::slug($buscar, '-');
         return view('verproductos', compact('productos', 'categ', 'buscar', 'conteo_productos', 'titulo'));
     }
     

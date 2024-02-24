@@ -19,7 +19,8 @@
 <body class="antialised">
     
     @livewire('cabecera.nav-cabeza')
-
+    
+    {{ session(['varvalpro' => null]) }}
     {{ session(['varval' => $buscar]) }}
     
     <div class="bg-gray-200 text-sm sm:text-base font-semibold py-2 shadow">

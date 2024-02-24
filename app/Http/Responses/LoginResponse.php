@@ -3,6 +3,8 @@
 namespace App\Http\Responses;
 
 use App\Models\Categoria;
+use App\Models\Producto;
+use Illuminate\Support\Str;
 use Laravel\Fortify\Contracts\LoginResponse as ContractsLoginResponse;
 
 class LoginResponse implements ContractsLoginResponse
@@ -24,18 +26,13 @@ class LoginResponse implements ContractsLoginResponse
             return redirect($rutita);
         }
 
-        if (session('varval') <> null && session('varvalpro') == null) {
-            $buscadito = Categoria::where('nombre', '=', $buscado)->first();
-            $buscar = $buscadito->slug;
+        if (session('varval') <> null ) {
+            $buscar = Str::slug($buscado, '-');
             return redirect()->Route($rutita, compact('buscar'));
         }
 
-        if (session('varval') == null && session('varvalpro') <> null) {
+        if (session('varvalpro') <> null) {
             return redirect()->Route($rutita, compact('producto'));
-        }
-
-        if (session('varval') <> null && session('varvalpro') <> null) {
-            return redirect()->Route($rutita, compact('producto'));
-        }
+        }        
     }
 }

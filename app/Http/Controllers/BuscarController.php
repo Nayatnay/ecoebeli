@@ -26,17 +26,6 @@ class BuscarController extends Controller
         $categ = Categoria::all()->sortBy('nombre');
         $categorias = Categoria::all()->sortBy('nombre');
 
-        if ($request->categoria <> 0) {
-            
-            $comprobacion = Categoria::where('id', '=', $request->categoria)->first();
-            if ($comprobacion->nombre == $request->buscar) {
-                $categoria = Categoria::where('id', '=', $request->categoria)->first();
-                return redirect()->Route('productosporcategoria', compact('buscar'));
-            }else{
-                return redirect()->Route('verproductos', compact('buscar'));
-            }
-        }
-
         if ($request->buscar == "Todas las Categorías") {
             return redirect()->Route('/');
         } else {

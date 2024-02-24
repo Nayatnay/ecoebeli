@@ -19,7 +19,8 @@
 <body class="antialised">
 
     @livewire('cabecera.nav-cabeza')
-
+    
+    {{ session(['varval' => null]) }}
     {{ session(['varvalpro' => $producto->slug]) }}
 
     @if (session('info'))

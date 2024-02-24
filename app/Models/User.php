@@ -78,6 +78,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Medio', 'id_user');
     }
 
+    public function ventas()
+    {
+        return $this->hasMany('App\Models\Venta', 'id_user');
+    }
+
     public function name(): Attribute
     {
         return new Attribute(

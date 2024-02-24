@@ -13,18 +13,20 @@ return new class extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_usuario');
-            $table->string('tipo_comprobante');
-            $table->string('serie_comprobante');      
-            $table->string('num_comprobante');
+            $table->unsignedBigInteger('id_user');
+            $table->string('tipo_pago');
+            $table->string('referencia');      
+            $table->string('banco');
             $table->string('fecha');   
+            $table->string('codigo'); 
+            $table->string('telf'); 
             $table->decimal('impuesto', 8, 2);
             $table->decimal('total', 8, 2); 
             $table->integer('estado');  
             $table->timestamps();
 
              // Llave foranea
-             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
+             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

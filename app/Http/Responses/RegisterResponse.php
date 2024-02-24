@@ -3,6 +3,7 @@
 namespace App\Http\Responses;
 
 use App\Models\Categoria;
+use Illuminate\Support\Str;
 use Laravel\Fortify\Contracts\RegisterResponse as ContractsRegisterResponse;
 
 class RegisterResponse implements ContractsRegisterResponse
@@ -23,18 +24,14 @@ class RegisterResponse implements ContractsRegisterResponse
             return redirect($rutita);
         }
 
-        if (session('varval') <> null && session('varvalpro') == null) {
-            $buscadito = Categoria::where('nombre', '=', $buscado)->first();
-            $buscar = $buscadito->slug;
+        if (session('varval') <> null ) {
+            $buscar = Str::slug($buscado, '-');
             return redirect()->Route($rutita, compact('buscar'));
         }
 
-        if (session('varval') == null && session('varvalpro') <> null) {
+        if (session('varvalpro') <> null) {
             return redirect()->Route($rutita, compact('producto'));
         }
 
-        if (session('varval') <> null && session('varvalpro') <> null) {
-            return redirect()->Route($rutita, compact('producto'));
-        }
     }
 }
