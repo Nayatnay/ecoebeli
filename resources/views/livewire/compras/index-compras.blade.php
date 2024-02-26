@@ -195,11 +195,18 @@
                 <div class="font-bold pb-4 border-b">
                     <p>3. Registrar el pago</p>
                 </div>
-
-                <div class="my-8">
-                    @livewire('compras.registrar-pago')
+                @if (\Cart::getSubtotal() <> 0)
+                    <div class="my-8">
+                        @livewire('compras.registrar-pago')
+                    </div>
+                @else
+                <div class="my-6 text-sm pl-4">
+                    <p class="font-medium mb-4 text-orange-600">Sin pagos pendientes</p>
+                    <p>Llena tu carrito con los artículos de tu preferencia, ropa, artículos para el hogar, 
+                        electrónicos, y más. Continúa comprando en <a href="{{ route('admintienda') }}"
+                        class="text-orange-600 hover:underline font-medium">tu tienda.</a></p>
                 </div>
-
+                    @endif
             </div>
 
         </div>
@@ -269,5 +276,5 @@
         });
     </script>
 
-    
+
 </div>

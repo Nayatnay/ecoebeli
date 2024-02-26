@@ -1,5 +1,5 @@
 <div>
-    <div class="text-xs md:text-sm font-normal text-orange-600">
+    <div class="text-xs md:text-sm font-medium text-orange-600">
         <p wire:click="$set('open', true)" class="cursor-pointer inline-block  hover:underline">
             <i class="fa-solid fa-money-bill mr-4"></i>
             Agregar información del pago
@@ -29,8 +29,8 @@
                         class="mr-2 text-orange-600" required />
                     <x-label for="pagomovil" value="Pago móvil" class="text-zinc-800" />
                 </div>
-                <x-input-error for="tipo_pago" />
             </div>
+            <x-input-error for="tipo_pago" />
 
             <div class="mt-8 mb-4">
                 <x-label for="referencia" value="{{ __('Nº Referencia') }}" class="ml-4 text-zinc-800" />
@@ -109,7 +109,7 @@
 
             <div class="mb-4  w-full md:w-60">
                 <x-label for="total" value="{{ __('Monto') }}" class="ml-4 text-zinc-800" />
-                <x-input id="total"
+                <x-input id="total" value="{{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}"
                     class="w-full text-sm block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                     type="number" step="any" name="total" wire:model.defer="total" required />
                 <x-input-error for="total" />

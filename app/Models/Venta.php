@@ -10,6 +10,7 @@ class Venta extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id_user',
         'tipo_pago',
         'referencia',
         'banco',

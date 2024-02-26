@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Compras;
 
+use App\Models\Venta;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class RegistrarPago extends Component
@@ -17,8 +19,7 @@ class RegistrarPago extends Component
         'banco' => 'required',
         'fecha' => 'required',
         'codigo' => 'required',
-        'telf' => 'required',
-        
+        'telf' => 'required',       
         'total' => 'required',
         
     ];
@@ -30,12 +31,30 @@ class RegistrarPago extends Component
             $this->telf = 0;
         }
         
-        dd($this->codigo);
+        $this->validate();
+
+        Venta::create([
+            'id_user' => Auth::user()->id,
+            'tipo_pago' => $this->tipo_pago,
+            'referencia' => $this->referencia,
+            'banco' => $this->banco,
+            'fecha' => $this->fecha,
+            'codigo' => $this->codigo,
+            'telf' => $this->telf,
+            'total' => $this->total,
+            'impuesto' => 0,
+            'estado' => 0,
+        ]);
+
+        $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'fecha', 'codigo', 'telf', 'total']);
+        
+        return redirect()->route('admincom');
+        
     }
 
     public function cancelar()
     {
-        $this->reset(['open', 'referencia']);
+        $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'fecha', 'codigo', 'telf', 'total']);
     }
 
     public function render()
