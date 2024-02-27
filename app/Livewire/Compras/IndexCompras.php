@@ -4,7 +4,7 @@ namespace App\Livewire\Compras;
 
 use App\Models\Medio;
 use App\Models\Producto;
-
+use App\Models\Tasa;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -81,6 +81,9 @@ class IndexCompras extends Component
             }
         }
 
-        return view('livewire.compras.index-compras', compact('medios'));
+        $tasa = Tasa::first();
+        $bolivares = CartFacade::getsubtotal() * $tasa->tasa;
+
+        return view('livewire.compras.index-compras', compact('medios', 'bolivares'));
     }
 }

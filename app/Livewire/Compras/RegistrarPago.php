@@ -2,14 +2,17 @@
 
 namespace App\Livewire\Compras;
 
+use App\Models\Tasa;
 use App\Models\Venta;
+use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Livewire\Component;
 
 class RegistrarPago extends Component
 {
     public $open = false;
-    public $tipo_pago, $referencia, $banco, $codigo, $telf, $fecha, $total;
+    public $tipo_pago, $referencia, $banco, $codigo, $telf, $fecha, $total, $tasa;
 
     protected $listeners = ['render'];
 
@@ -23,6 +26,15 @@ class RegistrarPago extends Component
         'total' => 'required',
         
     ];
+
+    public function mount(Tasa $tasa){
+       
+        $tasa = Tasa::first();
+        $bolivar = CartFacade::getsubtotal() * $tasa->tasa;
+        $this->fecha = date('Y-m-d');        
+        $this->total = number_format($bolivar, 2, '.', '');
+        
+    }
 
     public function pagar()
     {
@@ -46,7 +58,7 @@ class RegistrarPago extends Component
             'estado' => 0,
         ]);
 
-        $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'fecha', 'codigo', 'telf', 'total']);
+        $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'codigo', 'telf']);
         
         return redirect()->route('admincom');
         
@@ -54,7 +66,7 @@ class RegistrarPago extends Component
 
     public function cancelar()
     {
-        $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'fecha', 'codigo', 'telf', 'total']);
+        $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'codigo', 'telf']);
     }
 
     public function render()

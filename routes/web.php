@@ -52,6 +52,10 @@ Route::get('adminpro', function () {
     return view('adminpro');
 })->Middleware('can:adminpro')->name('adminpro');
 
+Route::get('tasa', function () {
+    return view('tasa');
+})->Middleware('can:tasa')->name('tasa');
+
 Route::get('admincom', function () {
     return view('admincom');
 })->Middleware('can:admincom')->name('admincom');

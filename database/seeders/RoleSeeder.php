@@ -36,10 +36,12 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'admincat'])->syncRoles([$role1]);
         Permission::create(['name' => 'adminsubcat'])->syncRoles([$role1]);
         Permission::create(['name' => 'adminpro'])->syncRoles([$role1]);
+        Permission::create(['name' => 'tasa'])->syncRoles([$role1]);
         
         Permission::create(['name' => 'categoria_delete'])->syncRoles([$role1]);
         Permission::create(['name' => 'categorias'])->syncRoles([$role1]);
         Permission::create(['name' => 'productos'])->syncRoles([$role1]);
+        
         /*
         // carrito
         Permission::create(['name' => 'add'])->syncRoles([$role1, $role2]);

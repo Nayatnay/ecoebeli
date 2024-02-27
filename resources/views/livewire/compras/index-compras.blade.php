@@ -197,6 +197,11 @@
                 </div>
                 @if (\Cart::getSubtotal() <> 0)
                     <div class="my-8">
+                        <div class="mb-6 text-sm">
+                            Asegúrate de realizar tu pago por el monto exacto a la tasa del dia. 
+                            Tu pago pendiente en moneda nacional es de 
+                            <strong>  Bs. {{ number_format($bolivares, 2, '.', '.')}} </strong>
+                        </div>
                         @livewire('compras.registrar-pago')
                     </div>
                 @else

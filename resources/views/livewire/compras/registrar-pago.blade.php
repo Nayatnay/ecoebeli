@@ -17,16 +17,14 @@
 
             <div class="flex items-center">
                 <div class="flex items-center mr-2">
-                    <x-input type="radio" id="transferencia" onclick="HiddenTelf();" name="tipo_pago" 
-                    wire:model.defer="tipo_pago" value="0"
-                        class="mr-2 text-orange-600" required />
+                    <x-input type="radio" id="transferencia" onclick="HiddenTelf();" name="tipo_pago"
+                        wire:model.defer="tipo_pago" value="0" class="mr-2 text-orange-600" required />
                     <x-label for="transferencia" value="Transferencia" class="text-zinc-800" />
                 </div>
 
                 <div class="flex items-center ml-2">
-                    <x-input type="radio" id="pagomovil" onclick="ShowTelf();" name="tipo_pago" 
-                    wire:model.defer="tipo_pago" value="1"
-                        class="mr-2 text-orange-600" required />
+                    <x-input type="radio" id="pagomovil" onclick="ShowTelf();" name="tipo_pago"
+                        wire:model.defer="tipo_pago" value="1" class="mr-2 text-orange-600" required />
                     <x-label for="pagomovil" value="Pago móvil" class="text-zinc-800" />
                 </div>
             </div>
@@ -77,9 +75,8 @@
                 <x-input-error for="banco" />
             </div>
 
-            <div class="hidden mb-4" id="divtelf">
-                <x-label for="codigo" value="{{ __('Teléfono Emisor') }}"
-                    class="ml-4 text-zinc-800" />
+            <div class="mb-4" id="divtelf">
+                <x-label for="codigo" value="{{ __('Teléfono Emisor') }}" class="ml-4 text-zinc-800" />
 
                 <div class="flex">
                     <select name="codigo" id="codigo"
@@ -95,7 +92,7 @@
                     </select>
                     <x-input id="telf"
                         class="w-32 text-sm block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                        type="number" step="any" name="telf" wire:model.defer="telf"  />
+                        type="number" step="any" name="telf" wire:model.defer="telf" />
                 </div>
                 <x-input-error for="telf" />
             </div>
@@ -103,15 +100,15 @@
             <div class="mb-4  w-full md:w-60">
                 <x-label for="fecha" value="{{ __('Fecha de pago') }}" class="ml-4 text-zinc-800" />
                 <x-input id="fecha" class="text-sm w-full block mt-1" type="date" name="fecha"
-                    wire:model.defer="fecha" required />
+                    wire:model="fecha" required />
                 <x-input-error for="fecha" />
             </div>
 
             <div class="mb-4  w-full md:w-60">
                 <x-label for="total" value="{{ __('Monto') }}" class="ml-4 text-zinc-800" />
-                <x-input id="total" value="{{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}"
+                <x-input id="total" value=""
                     class="w-full text-sm block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                    type="number" step="any" name="total" wire:model.defer="total" required />
+                    type="number" step="any" name="total" wire:model="total" required />
                 <x-input-error for="total" />
             </div>
 
@@ -130,12 +127,29 @@
         </x-slot>
 
     </x-dialog-modal>
+<!--
+    <script>
+        window.addEventListener('load', function() {
+            var transf = document.getElementById("transferencia");
+            var pagmo = document.getElementById("pagomovil");
 
+            if (transf.checked == false && pagmo.checked == false) {
+                document.getElementById("divtelf").style.display = "none";
+            } else {
 
+                if (transf.checked == true) {
+                    document.getElementById("divtelf").style.display = "none";
+                }
+                if (pagmo.checked == true) {
+                    document.getElementById("divtelf").style.display = "block";
+                }
+            }
+        });
+    </script>
+-->
     <script>
         function HiddenTelf() {
             document.getElementById("divtelf").style.display = "none";
-            
         };
     </script>
 
@@ -144,4 +158,5 @@
             document.getElementById("divtelf").style.display = "block";
         };
     </script>
+
 </div>
