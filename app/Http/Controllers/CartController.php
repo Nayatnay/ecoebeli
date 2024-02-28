@@ -16,6 +16,10 @@ class CartController extends Controller
             return redirect('/');
         }
 
+        if ($producto->stock <= 0) {
+            return redirect()->back();
+        }
+        
         CartFacade::add(
             $producto->id,
             $producto->nombre,

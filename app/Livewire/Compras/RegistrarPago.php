@@ -3,6 +3,7 @@
 namespace App\Livewire\Compras;
 
 use App\Models\Detalleventa;
+use App\Models\Producto;
 use App\Models\Tasa;
 use App\Models\Venta;
 use Darryldecode\Cart\Facades\CartFacade;
@@ -23,18 +24,21 @@ class RegistrarPago extends Component
         'banco' => 'required',
         'fecha' => 'required',
         'codigo' => 'required',
-        'telf' => 'required',       
+        'telf' => 'required',
         'total' => 'required',
-        
+
     ];
 
     public function mount(Tasa $tasa)
     {
+        $bolivar = 0;
         $tasa = tasa::orderBy('id', 'desc')->first();
-        $bolivar = CartFacade::getsubtotal() * $tasa->valtasa;
-        $this->fecha = date('Y-m-d');        
+        if ($tasa <> null) {
+            $bolivar = CartFacade::getsubtotal() * $tasa->valtasa;
+        }
+
+        $this->fecha = date('Y-m-d');
         $this->total = number_format($bolivar, 2, '.', '');
-        
     }
 
     public function pagar()
@@ -43,7 +47,7 @@ class RegistrarPago extends Component
             $this->codigo = 0;
             $this->telf = 0;
         }
-        
+
         $this->validate();
 
         Venta::create([
@@ -60,9 +64,8 @@ class RegistrarPago extends Component
         ]);
 
         $venta = Venta::orderBy('id', 'desc')->first();
-        
-        foreach (CartFacade::getContent() as $item)
-        {
+
+        foreach (CartFacade::getContent() as $item) {
             Detalleventa::create([
                 'id_venta' => $venta->id,
                 'id_producto' => $item->id,
@@ -70,14 +73,18 @@ class RegistrarPago extends Component
                 'precio' => $item->price,
                 'descuento' => 0,
             ]);
+
+            //Actualizar el stock del producto vendido
+            $stockproducto = Producto::where('id', '=', $item->id)->first();
+            $stockproducto->stock = $stockproducto->stock - $item->quantity;
+            $stockproducto->update();
         }
 
         CartFacade::clear();
 
         $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'codigo', 'telf']);
-        
+
         return redirect()->route('admincom')->with('info', 'ok');;
-        
     }
 
     public function cancelar()

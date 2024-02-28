@@ -17,7 +17,7 @@
 </head>
 
 <body class="antialised bg-gray-100">
-    
+
     @livewire('cabecera.nav-cabeza')
 
     <div class="flex flex-col md:flex-row max-w-screen-xl mx-auto">
@@ -83,22 +83,19 @@
                                                 <select name="cant" id="cant" onchange="this.form.submit()"
                                                     class="text-xs font-medium border-none focus:ring-0 focus:outline-none hover:cursor-pointer px-2 py-0 ml-1 text-black">
                                                     @if ($item->quantity == 1)
-                                                        <option value="{{ $item->quantity }}"
-                                                            class="">
+                                                        <option value="{{ $item->quantity }}" class="">
                                                             {{ $item->quantity }} Unidad
                                                         </option>
                                                     @else
-                                                        <option value="{{ $item->quantity }}"
-                                                            class="">
+                                                        <option value="{{ $item->quantity }}" class="">
                                                             {{ $item->quantity }} Unidades
                                                         </option>
                                                     @endif
                                                     <option value="0" class="">
-                                                        0 
+                                                        0
                                                     </option>
                                                     @for ($i = 1; $i < 1000; $i++)
-                                                        <option value="{{ $i }}"
-                                                            class="">
+                                                        <option value="{{ $i }}" class="">
                                                             {{ $i }}
                                                         </option>
                                                     @endfor
@@ -141,7 +138,7 @@
                     </div>
 
                     <div class="mt-10 text-center md:text-right px-2">
-                        <a href="{{ route('verificalog')}}"
+                        <a href="{{ route('verificalog') }}"
                             class="cursor-pointer text-sm font-medium px-14 py-2 border rounded-md bg-yellow-300 hover:bg-yellow-200">
                             Comprar ahora
                         </a>
@@ -197,11 +194,18 @@
                             <div class="w-full">
                                 <a href="{{ route('detalleproducto', $product->slug) }} ">
                                     <div>
-                                        <p class="text text-orange-600">{{ $product->nombre }}</p>
-                                        <p class="text-xs font-medium"><i
-                                                class="fa-solid fa-store text-yellow-300"></i>
-                                            {{ $product->stock }}+ existencias
-                                        </p>
+                                        <p class="text text-red-700">{{ $product->nombre }}</p>
+                                        @if ($product->stock <= 0)
+                                            <p class="inline-block px-2 py-1 text-xs font-medium bg-red-700 rounded text-white"><i
+                                                    class="fa-solid fa-store"></i>
+                                                {{ $product->stock }}+ existencias
+                                            </p>
+                                        @else
+                                            <p class="text-xs font-medium"><i
+                                                    class="fa-solid fa-store text-yellow-300"></i>
+                                                {{ $product->stock }}+ existencias
+                                            </p>
+                                        @endif
                                         <span class="text-base font-semibold"> US${{ $product->precio }}</span>
                                     </div>
                                 </a>

@@ -13,7 +13,7 @@ class Producto extends Model
     use HasFactory;
     //use Sluggable;
 
-    protected $fillable = [   
+    protected $fillable = [
         'id_categoria',
         'id_subcategoria',
         'codigo',
@@ -25,7 +25,7 @@ class Producto extends Model
         'descripcion',
         'imagen',
         'precio',
-        'stock',  
+        'stock',
     ];
 
     /*
@@ -45,9 +45,19 @@ class Producto extends Model
     }
 */
 
+    //Relaciones uno a muchos
+
+    public function detalleventas()
+    {
+        return $this->hasMany('App\Models\Detalleventa', 'id_producto');
+    }
+
+
+
     //Relacion uno a muchos (inversa)
 
-    public function categoria(){
+    public function categoria()
+    {
         return $this->belongsTo('App\Models\Categoria', 'id_categoria');
     }
 

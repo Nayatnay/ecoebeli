@@ -19,7 +19,7 @@
 <body class="antialised">
 
     @livewire('cabecera.nav-cabeza')
-    
+
     {{ session(['varval' => null]) }}
     {{ session(['varvalpro' => $producto->slug]) }}
 
@@ -71,34 +71,52 @@
                 width="" class="rounded w-full">
         </div>
 
-        <div class="w-full mx-4">
-            <p class="hidden md:block text-xl lg:text-3xl mx-4">{{ $producto->descripcion }}</p>
-            <p class="hidden md:block mt-5 md:mt-10 ml-4 pb-2 border-b text-sm font-normal mr-6"><i
-                    class="fa-solid fa-store text-yellow-300"></i>
-                {{ $producto->stock }}+ existencias
-            </p>
-            <div class="flex items-start text-orange-600 ml-2 md:ml-4 pt-2">
+        <div class="w-full mt-4 md:mt-0 mx-4 px-4">
+            <p class="hidden md:block text-xl lg:text-3xl">{{ $producto->descripcion }}</p>
+            @if ($producto->stock <= 0)
+                <p class="py-1 px-2 text-xs font-medium bg-orange-600 rounded text-white hidden md:inline-block mt-5 md:mt-10 border-b">
+                    <i class="fa-solid fa-store"></i>
+                    {{ $producto->stock }}+ existencias
+                </p>
+            @else
+                <p class="py-1 hidden md:block mt-5 md:mt-10 pb-2 border-b text-sm font-normal"><i
+                        class="fa-solid fa-store text-yellow-300"></i>
+                    {{ $producto->stock }}+ existencias
+                </p>
+            @endif
+            <div class="flex items-start text-orange-600 pt-2">
                 <span class="text-base text-gray-800 font-normal mr-2">Precio:</span>
                 <span class="text-xl font-semibold">US$</span>
-                <span class="text-xl font-semibold"> {{ $producto->precio }}</strong></span>
+                <span class="text-xl font-semibold"> {{ $producto->precio }}</span>
             </div>
-            <div class="mx-2 mt-4 font-medium">
+            <div class="text-lg mt-4 font-medium">
                 <p>Detalles del Producto</p>
             </div>
-            <div class="mx-2 pt-2 text-sm md:text-base">
-                <p>▪ Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reprehenderit sapiente harum
+            <div class="mt-2 text-sm md:text-base">
+                @if($producto->marca <> null)
+                <p class="font-semibold">Marca: <span class="font-light capitalize">{{ $producto->marca }}</span></p>
+                @endif
+                @if($producto->color <> null)
+                <p class="font-semibold">Color: <span class="font-light capitalize">{{ $producto->color }}</span></p>
+                @endif
+                @if($producto->talla <> null)
+                <p class="font-semibold">Tamaño: <span class="font-light capitalize">{{ $producto->talla }}</span></p>
+                @endif
+            </div>
+            <div class="text-lg mt-4 font-medium">
+                <p>Acerca de este Producto</p>
+            </div>
+            <div class="mt-2">
+                <p class="text-justify">▪ Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reprehenderit sapiente harum
                     delectus deleniti quasi quo consequatur recusandae cupiditate corrupti soluta impedit, ea cum enim
                     quia, repellat ullam ad eius.</p>
-                <p>▪ Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reprehenderit sapiente harum
-                    delectus deleniti quasi quo consequatur recusandae cupiditate corrupti soluta impedit, ea cum enim
-                    quia, repellat ullam ad eius.</p>
-                <p>▪ Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reprehenderit sapiente harum
+                <p class="text-justify">▪ Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reprehenderit sapiente harum
                     delectus deleniti quasi quo consequatur recusandae cupiditate corrupti soluta impedit, ea cum enim
                     quia, repellat ullam ad eius.</p>
             </div>
         </div>
 
-        <div class="mt-0 md:ml-4 w-full md:w-[520px] h-full">
+        <div class="mt-0 w-full md:w-[520px] h-full">
             @auth
                 <div class="mt-6 md:mt-0 rounded-lg md:border border-gray-300 w-full text-center text-sm md:p-6 pb-4">
                     <p>Enviar a <strong>{{ ucwords(Auth::user()->name) }}</strong></p>
@@ -201,7 +219,7 @@
             @endif
 
         </div>
-        
+
     @endif
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
@@ -222,16 +240,16 @@
         }
     </script>
 
-     <!-- MOSTRAR MENSAJE POR 3 SEGUNDOS -->
-     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <!-- MOSTRAR MENSAJE POR 3 SEGUNDOS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
-     <script type="text/javascript">
-         $(document).ready(function() {
-             setTimeout(function() {
-                 $(".mensaje").fadeOut(1500);
-             }, 2000);
-         });
-     </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".mensaje").fadeOut(1500);
+            }, 2000);
+        });
+    </script>
 
 </body>
 

@@ -4,10 +4,16 @@
     <div class="bg-white shadow">
 
         <div class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">
-            <h2 class="font-semibold md:text-2xl text-lime-700 leading-tight">
-                Tasa dolar del Día: {{ $ultimatasa->valtasa }}<strong class="text-sm font-normal text-gray-600"> BS/USD</strong>
-            </h2>
-
+            @if ($ultimatasa <> null)
+                <h2 class="font-semibold md:text-2xl text-lime-700 leading-tight">
+                    Tasa dolar del Día: {{ $ultimatasa->valtasa }}<strong class="text-sm font-normal text-gray-600">
+                        BS/USD</strong>
+                </h2>
+            @else
+                <h2 class="font-semibold md:text-2xl text-lime-700 leading-tight">
+                    Tasa dolar del Día: <strong class="text-sm font-normal text-gray-600"> BS/USD</strong>
+                </h2>
+            @endif
             @livewire('tasa.crear-tasa')
 
         </div>
@@ -37,7 +43,7 @@
             </div>
         @else
             <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
-                <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
+                <span>Sin resultados </span>
             </div>
         @endif
 
@@ -49,10 +55,10 @@
 
     </div>
 
-     <!--            pie de pagina FOOTER               -->
+    <!--            pie de pagina FOOTER               -->
 
-     <x-footer></x-footer>
+    <x-footer></x-footer>
 
-     <!--Modal edit -->
+    <!--Modal edit -->
 
 </div>

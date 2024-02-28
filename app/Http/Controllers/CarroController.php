@@ -27,11 +27,11 @@ class CarroController extends Controller
         //actualizar precios de los productos que estan en el carrito de compras
 
         foreach (CartFacade::getContent() as $item) {
-            
+
             $producto = Producto::find($item->id);
 
             if ($producto <> null) {
-                CartFacade::update( $item->id, ['price' => $producto->precio]);
+                CartFacade::update($item->id, ['price' => $producto->precio]);
             } else {
                 CartFacade::remove($item->id); //elimina el item del carrito por producto eliminado en la DB
             }
@@ -46,6 +46,10 @@ class CarroController extends Controller
 
         if (empty($producto)) {
             return redirect('/');
+        }
+
+        if ($producto->stock <= 0) {
+            return redirect()->back();
         }
 
         CartFacade::add(
@@ -75,19 +79,28 @@ class CarroController extends Controller
         }
 
         //CartFacade::update( $request->rowId, ['quantity' => $request->cant]); //me aumenta la cantidad NO FUNCIONÓ
-       
+
         CartFacade::remove($request->rowId);
 
         $producto = Producto::find($request->rowId);
 
-        CartFacade::add(
-            $producto->id,
-            $producto->nombre,
-            $producto->precio,
-            $request->cant,
-            array("imagen" => $producto->imagen)
-
-        );
+        if ($producto->stock < $request->cant) {
+            CartFacade::add(
+                $producto->id,
+                $producto->nombre,
+                $producto->precio,
+                $producto->stock,
+                array("imagen" => $producto->imagen)
+            );
+        }else{
+            CartFacade::add(
+                $producto->id,
+                $producto->nombre,
+                $producto->precio,
+                $request->cant,
+                array("imagen" => $producto->imagen)
+            );
+        }     
 
         return redirect()->Route('carro')->with('actualizado', 'ok');
     }
@@ -98,6 +111,10 @@ class CarroController extends Controller
 
         if (empty($producto)) {
             return redirect('/');
+        }
+
+        if ($producto->stock <= 0) {
+            return redirect()->back();
         }
 
         CartFacade::add(

@@ -24,7 +24,7 @@
 
         <div class="max-w-screen-xl mx-auto p-4 flex flex-col md:flex-row justify-between my-4">
 
-            <div class="w-full md:mr-2 p-2 md:p-4 rounded-lg bg-white">
+            <div class="w-full md:mr-2 p-2 md:p-4 rounded-lg bg-white border border-gray-200">
 
                 <div class="w-full text-base p-4">
                     <div class="flex flex-col md:flex-row border-b border-gray-300 pb-4">
@@ -189,7 +189,7 @@
 
         <div class="max-w-screen-xl mx-auto p-4 my-4">
 
-            <div class="w-full p-6 md:p-8 rounded-lg bg-white">
+            <div class="w-full p-6 md:p-8 rounded-lg bg-white border border-gray-200">
 
                 <div class="font-bold pb-4 border-b">
                     <p>3. Registrar el pago</p>
@@ -204,9 +204,10 @@
                         @livewire('compras.registrar-pago')
                     </div>
                 @else
-                    <div class="my-6 text-xl pl-4">
+                    <div class="my-6 text-base md:text-xl md:pl-4">
                         <p class="font-medium mb-4 text-lime-700">Sin pagos pendientes</p>
-                        <p class="text-base font-normal text-gray-700">Llena tu carrito con los artículos de tu
+                        <p class="text-xs md:text-base font-normal text-gray-700 text-justify">Llena tu carrito con los
+                            artículos de tu
                             preferencia, ropa, artículos para el hogar,
                             electrónicos, y más. Continúa comprando en <a href="{{ route('admintienda') }}"
                                 class="text-lime-700 underline font-medium">tu tienda.</a></p>
@@ -216,38 +217,57 @@
 
         </div>
 
-        @if ($compras->count())
+        <div class="max-w-screen-xl mx-auto mt-8 mb-20">
 
-            <div class="w-full my-12 p-4 border  min-h-0 overflow-auto rounded-lg text-base">
+            <p class="mb-4 px-4 text-2xl font-bold">Historial de Compras</p>
 
-                <table
-                    class="table-fixed bg-white w-full font-light text-base md:text-lg text-left h-auto border-collapse">
+            @if ($producto_comprado->count())
 
-                    <tbody class="text-left text-base">
+                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 p-4">
 
-                        @foreach ($compras as $compra)
-                            <tr class="h-14 hover:bg-gray-100">
-                                <td class="pl-4 w-48">{{ $compra->fecha }}</td>
-                                <td class="pl-4 w-48">{{ $compra->total }}</td>
+                    @foreach ($producto_comprado as $product)
 
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @else
-            <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
-                <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
-            </div>
-        @endif
+                        <div class="flex items-center bg-white border border-gray-300 ">
 
-        @if ($compras->hasPages())
-            <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
-                {{ $compras->onEachSide(0)->links() }}
-            </div>
-        @endif
+                            <div class="w-[160px] mr-2 md:mr-4 p-2 md:p-4 bg-gray-300">
+                                <img src="{{ asset('/storage/productos/' . $product->producto->imagen) }}"
+                                    alt="" title="" class="rounded md:w-[160px]">
+                            </div>
 
+                            <div class="">
+                                <p class="inline-block bg-lime-700 text-white rounded font-bold text-center text-sm md:text-lg px-2 mb-2 capitalize">
+                                    {{ $product->producto->nombre }}</p>
+                                <div class="text-xs md:text-sm">
+                                    <p class="hidden md:block">{{ $product->producto->descripcion }}</p>
+                                    <p>{{ $product->cantidad }} unidades / <strong
+                                            class="text-lime-700">{{ $product->precio }} USD por unidad</strong></p>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    @endforeach
+
+                </div>
+            @else
+                <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
+                    <span>Sin resultados </span>
+                </div>
+            @endif
+
+            @if ($producto_comprado->hasPages())
+                <div class="w-1/2 mx-auto px-4 py-2 border-2 rounded-lg text-center my-20">
+                    {{ $producto_comprado->onEachSide(0)->links() }}
+                </div>
+            @endif
+        </div>
     </div>
+
+     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
+
+     <x-Identificate></x-Identificate>
+
 
     <!--            pie de pagina FOOTER               -->
 
