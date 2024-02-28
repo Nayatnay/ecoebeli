@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Compras;
 
+use App\Models\Detalleventa;
 use App\Models\Tasa;
 use App\Models\Venta;
 use Darryldecode\Cart\Facades\CartFacade;
@@ -27,10 +28,10 @@ class RegistrarPago extends Component
         
     ];
 
-    public function mount(Tasa $tasa){
-       
-        $tasa = Tasa::first();
-        $bolivar = CartFacade::getsubtotal() * $tasa->tasa;
+    public function mount(Tasa $tasa)
+    {
+        $tasa = tasa::orderBy('id', 'desc')->first();
+        $bolivar = CartFacade::getsubtotal() * $tasa->valtasa;
         $this->fecha = date('Y-m-d');        
         $this->total = number_format($bolivar, 2, '.', '');
         
@@ -58,9 +59,24 @@ class RegistrarPago extends Component
             'estado' => 0,
         ]);
 
+        $venta = Venta::orderBy('id', 'desc')->first();
+        
+        foreach (CartFacade::getContent() as $item)
+        {
+            Detalleventa::create([
+                'id_venta' => $venta->id,
+                'id_producto' => $item->id,
+                'cantidad' => $item->quantity,
+                'precio' => $item->price,
+                'descuento' => 0,
+            ]);
+        }
+
+        CartFacade::clear();
+
         $this->reset(['open', 'tipo_pago', 'referencia', 'banco', 'codigo', 'telf']);
         
-        return redirect()->route('admincom');
+        return redirect()->route('admincom')->with('info', 'ok');;
         
     }
 

@@ -10,7 +10,7 @@ class Tasa extends Model
     use HasFactory;
 
     protected $fillable = [   
-        'tasa',  
+        'valtasa',  
     ];
 
 }

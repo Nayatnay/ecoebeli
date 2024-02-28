@@ -5,18 +5,17 @@
         <div class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">
             @if (\Cart::getTotalQuantity() == 1)
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Mi Compra de <strong class="text-orange-600 ml-1">{{ \Cart::getTotalQuantity() }}
+                    Mi Compra de <strong class="text-lime-700 ml-1">{{ \Cart::getTotalQuantity() }}
                         artículo</strong>
                 </h2>
             @else
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                    Mi Compra de <strong class="text-orange-600 ml-1">{{ \Cart::getTotalQuantity() }}
+                    Mi Compra de <strong class="text-lime-700 ml-1">{{ \Cart::getTotalQuantity() }}
                         artículos</strong>
                 </h2>
             @endif
         </div>
     </div>
-
 
     <!-- Cuerpo de Compras -->
 
@@ -79,14 +78,14 @@
                                 @endif
                                 <p class="hidden sm:block basis-2/5"> {{ $medio->nombre }}</p>
                                 @if (substr($medio->vencimiento, 0, 1) == 'V')
-                                    <p class="hidden sm:block basis-1/5 text-right text-orange-600 font-bold text-xs">
+                                    <p class="hidden sm:block basis-1/5 text-right text-lime-700 font-bold text-xs">
                                         {{ $medio->vencimiento }}</p>
                                 @else
                                     <p class="hidden sm:block basis-1/5 text-right">{{ $medio->vencimiento }}</p>
                                 @endif
 
                                 <a href="#" wire:click="edit({{ $medio }})" title="Actualizar"
-                                    class="text-center text-lg text-orange-600 ml-2 px-1 hover:bg-gray-200 rounded-sm">
+                                    class="text-center text-lg text-lime-700 ml-2 px-1 hover:bg-gray-200 rounded-sm">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </a>
 
@@ -114,13 +113,13 @@
                                 @endif
                                 @if (substr($medio->vencimiento, 0, 1) == 'V')
                                     <p>{{ $medio->nombre }} - <strong
-                                            class="text-orange-600 text-xs">{{ $medio->vencimiento }}</strong></p>
+                                            class="text-lime-700 text-xs">{{ $medio->vencimiento }}</strong></p>
                                 @else
                                     <p>{{ $medio->nombre }} - {{ $medio->vencimiento }}</p>
                                 @endif
 
                                 <a href="#" wire:click="edit({{ $medio }})" title="Actualizar"
-                                    class="text-center text-lg text-orange-600 ml-2 px-1 hover:bg-gray-200 rounded-sm">
+                                    class="text-center text-lg text-lime-700 ml-2 px-1 hover:bg-gray-200 rounded-sm">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </a>
 
@@ -142,7 +141,7 @@
                     <div class="mt-4 text-xs font-medium">
                         <span>Para utilizar otros medios de pago </span>
                         <a href="https://wa.me/+584126067734?text=Hola. Me gustaria conocer los medios de pago que acepta además de los indicados en la web."
-                            target="_blank" class="text-orange-600 hover:underline">Contacte al vendedor +58-4126067734
+                            target="_blank" class="text-lime-700 hover:underline">Contacte al vendedor +58-4126067734
                         </a>
                     </div>
 
@@ -171,7 +170,7 @@
                             <p>Impuestos:</p>
                             <p class=""> US$ {{ number_format(0, 2, '.', '.') }}</p>
                         </div>
-                        <div class="flex justify-between text-lg font-medium pt-4 text-orange-600">
+                        <div class="flex justify-between text-lg font-medium pt-4 text-lime-700">
                             <p>Total Pedido:</p>
                             <p class=""> US$ {{ number_format(\Cart::getSubtotal(), 2, '.', '.') }}</p>
                         </div>
@@ -195,26 +194,58 @@
                 <div class="font-bold pb-4 border-b">
                     <p>3. Registrar el pago</p>
                 </div>
-                @if (\Cart::getSubtotal() <> 0)
+                @if (\Cart::getSubtotal() != 0)
                     <div class="my-8">
                         <div class="mb-6 text-sm">
-                            Asegúrate de realizar tu pago por el monto exacto a la tasa del dia. 
-                            Tu pago pendiente en moneda nacional es de 
-                            <strong>  Bs. {{ number_format($bolivares, 2, '.', '.')}} </strong>
+                            Asegúrate de realizar tu pago por el monto exacto a la tasa del dia.
+                            Tu pago pendiente en moneda nacional es de
+                            <strong> Bs. {{ number_format($bolivares, 2, '.', '.') }} </strong>
                         </div>
                         @livewire('compras.registrar-pago')
                     </div>
                 @else
-                <div class="my-6 text-sm pl-4">
-                    <p class="font-medium mb-4 text-orange-600">Sin pagos pendientes</p>
-                    <p>Llena tu carrito con los artículos de tu preferencia, ropa, artículos para el hogar, 
-                        electrónicos, y más. Continúa comprando en <a href="{{ route('admintienda') }}"
-                        class="text-orange-600 hover:underline font-medium">tu tienda.</a></p>
-                </div>
-                    @endif
+                    <div class="my-6 text-xl pl-4">
+                        <p class="font-medium mb-4 text-lime-700">Sin pagos pendientes</p>
+                        <p class="text-base font-normal text-gray-700">Llena tu carrito con los artículos de tu
+                            preferencia, ropa, artículos para el hogar,
+                            electrónicos, y más. Continúa comprando en <a href="{{ route('admintienda') }}"
+                                class="text-lime-700 underline font-medium">tu tienda.</a></p>
+                    </div>
+                @endif
             </div>
 
         </div>
+
+        @if ($compras->count())
+
+            <div class="w-full my-12 p-4 border  min-h-0 overflow-auto rounded-lg text-base">
+
+                <table
+                    class="table-fixed bg-white w-full font-light text-base md:text-lg text-left h-auto border-collapse">
+
+                    <tbody class="text-left text-base">
+
+                        @foreach ($compras as $compra)
+                            <tr class="h-14 hover:bg-gray-100">
+                                <td class="pl-4 w-48">{{ $compra->fecha }}</td>
+                                <td class="pl-4 w-48">{{ $compra->total }}</td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
+                <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
+            </div>
+        @endif
+
+        @if ($compras->hasPages())
+            <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
+                {{ $compras->onEachSide(0)->links() }}
+            </div>
+        @endif
 
     </div>
 
@@ -268,6 +299,17 @@
 
     </x-dialog-modal>
 
+    @if (session('info') == 'ok')
+        <script>
+            Swal.fire({
+                title: '¡Gracias!',
+                text: 'Su pago ha sido registrado con éxito. La orden de despacho ya fue generada. esté atento a su correo electrónico',
+                confirmButtonColor: '#1e40af',
+                confirmButtonText: 'OK'
+            })
+        </script>
+    @endif
+
     <script>
         const input = document.getElementById("codigo");
 
@@ -280,6 +322,5 @@
             }
         });
     </script>
-
 
 </div>

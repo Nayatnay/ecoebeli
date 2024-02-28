@@ -1,5 +1,5 @@
 <div>
-    <div class="text-xs md:text-sm font-normal text-orange-600">
+    <div class="text-xs md:text-sm font-normal text-lime-700">
         <p wire:click="$set('open', true)" class="cursor-pointer inline-block  hover:underline">
             <i class="fa-regular fa-credit-card mr-4"></i>
             Agregar nueva tarjeta de crédito/débito

@@ -5,6 +5,7 @@ namespace App\Livewire\Compras;
 use App\Models\Medio;
 use App\Models\Producto;
 use App\Models\Tasa;
+use App\Models\Venta;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -81,9 +82,12 @@ class IndexCompras extends Component
             }
         }
 
-        $tasa = Tasa::first();
-        $bolivares = CartFacade::getsubtotal() * $tasa->tasa;
+        $tasa = tasa::orderBy('id', 'desc')->first();
+        
+        $bolivares = CartFacade::getsubtotal() * $tasa->valtasa;
 
-        return view('livewire.compras.index-compras', compact('medios', 'bolivares'));
+        $compras = Venta::where('id_user', '=', Auth::user()->id)->orderBy('id')->paginate(8);
+
+        return view('livewire.compras.index-compras', compact('medios', 'bolivares', 'compras'));
     }
 }

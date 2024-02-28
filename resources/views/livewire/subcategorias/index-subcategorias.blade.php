@@ -70,10 +70,11 @@
                         @endforeach
                     </tbody>
                 </table>
-            @else
-                <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
-                    <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
-                </div>
+            </div>
+        @else
+            <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
+                <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
+            </div>
         @endif
 
         @if ($subcategorias->hasPages())
@@ -100,7 +101,7 @@
                     required autofocus />
                 <x-input-error for="nombre" />
             </div>
-            
+
             <div class="hidden">
                 <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" wire:model="slug"
                     required autofocus />
