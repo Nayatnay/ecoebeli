@@ -31,6 +31,11 @@ class IndexTienda extends Component
         'precio' => [],
     ];
 
+public function updatingBuscar()
+    {
+        $this->resetPage();
+    }
+
     public function clear()
     {
         $this->filters['id_subcategoria'] = "";

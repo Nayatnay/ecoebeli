@@ -52,7 +52,7 @@
                                 <td class="pl-2 w-96 min-w-96 text-gray-600">{{ $subcategoria->categoria->nombre }}</td>
                                 <td class="w-20">
                                     <a href="#" title="Eliminar" wire:click="delete({{ $subcategoria->id }})">
-                                        <i class="fa-solid fa-trash text-orange-600"></i>
+                                        <i class="fa-solid fa-trash text-gray-500"></i>
                                     </a>
                                 </td>
                                 <td class="w-20">

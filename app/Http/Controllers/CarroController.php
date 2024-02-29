@@ -52,14 +52,30 @@ class CarroController extends Controller
             return redirect()->back();
         }
 
-        CartFacade::add(
-            $producto->id,
-            $producto->nombre,
-            $producto->precio,
-            1,
-            array("imagen" => $producto->imagen)
+        $car = CartFacade::get($producto->id);
 
-        );
+        if ($car == null) {
+            CartFacade::add(
+                $producto->id,
+                $producto->nombre,
+                $producto->precio,
+                1,
+                array("imagen" => $producto->imagen)
+            );
+        } else {
+            $catt = $car->quantity + 1;
+            if ($catt > $producto->stock) {
+                return redirect()->back();
+            } else {
+                CartFacade::add(
+                    $producto->id,
+                    $producto->nombre,
+                    $producto->precio,
+                    1,
+                    array("imagen" => $producto->imagen)
+                );
+            }
+        }
 
         return redirect()->Route('carro')->with('info', 'ok');
     }
@@ -92,7 +108,7 @@ class CarroController extends Controller
                 $producto->stock,
                 array("imagen" => $producto->imagen)
             );
-        }else{
+        } else {
             CartFacade::add(
                 $producto->id,
                 $producto->nombre,
@@ -100,7 +116,7 @@ class CarroController extends Controller
                 $request->cant,
                 array("imagen" => $producto->imagen)
             );
-        }     
+        }
 
         return redirect()->Route('carro')->with('actualizado', 'ok');
     }
@@ -117,14 +133,30 @@ class CarroController extends Controller
             return redirect()->back();
         }
 
-        CartFacade::add(
-            $producto->id,
-            $producto->nombre,
-            $producto->precio,
-            1,
-            array("imagen" => $producto->imagen)
+        $car = CartFacade::get($producto->id);
 
-        );
+        if ($car == null) {
+            CartFacade::add(
+                $producto->id,
+                $producto->nombre,
+                $producto->precio,
+                1,
+                array("imagen" => $producto->imagen)
+            );
+        } else {
+            $catt = $car->quantity + 1;
+            if ($catt > $producto->stock) {
+                return redirect()->back();
+            } else {
+                CartFacade::add(
+                    $producto->id,
+                    $producto->nombre,
+                    $producto->precio,
+                    1,
+                    array("imagen" => $producto->imagen)
+                );
+            }
+        }
 
         return redirect()->Route('admincom');
     }
