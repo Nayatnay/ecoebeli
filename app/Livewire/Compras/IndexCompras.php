@@ -97,7 +97,7 @@ class IndexCompras extends Component
         //dd($ventas);
         //Productos comprados por el usuario
         $producto_comprado = Detalleventa::whereIn('id_venta', $ventas)->orderBy('id', 'desc')
-            ->paginate(15, ['*'], 'inscribirbs');
+            ->paginate(6, ['*'], 'inscribirbs');
 
         return view('livewire.compras.index-compras', compact('medios', 'bolivares', 'compras', 'producto_comprado'));
     }

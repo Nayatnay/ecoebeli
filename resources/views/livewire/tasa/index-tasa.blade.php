@@ -31,9 +31,14 @@
                     <tbody class="text-left text-base">
 
                         @foreach ($tasas as $tasa)
+
+                        @php 
+                        $fecha = $tasa->created_at;
+                        $fecha->setTimezone(new DateTimeZone('America/Caracas'));
+@endphp
                             <tr class="h-8 hover:bg-gray-100 odd:bg-gray-100">
                                 <td class="pl-4 w-48">{{ $tasa->id }}</td>
-                                <td class="pl-4 w-48">{{ date('d-m-Y H:i:s', strtotime($tasa->created_at)) }}</td>
+                                <td class="pl-4 w-48">{{ date('d-m-Y H:i:s', strtotime($fecha)) }}</td>
                                 <td class="pl-2 w-96 min-w-96 text-gray-600">Bs. {{ $tasa->valtasa }}</td>
 
                             </tr>

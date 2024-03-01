@@ -61,7 +61,7 @@
 
         <div class="mt-6 border-t border-gray-600 py-2 text-center text-sm font-light">
             <p class="mb-2 text-xs text-gray-400">¿Eres nuevo en Ebeli?</p>
-            <a class="text-sm hover:underline bg-zinc-500 text-gray-100 border border-gray-500 rounded block w-full p-2 ring-zinc-500 focus:ring"
+            <a class="text-sm hover:underline bg-gray-400 text-black border border-gray-500 rounded block w-full p-2 ring-zinc-500 focus:ring"
              href="{{ route('register') }}">
                 Crea tu cuenta de Ebeli
             </a>
