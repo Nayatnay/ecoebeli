@@ -4,6 +4,7 @@ namespace App\Livewire\Productos;
 
 use App\Models\Cart as ModelsCart;
 use App\Models\Categoria;
+use App\Models\Detalleventa;
 use App\Models\Producto;
 use App\Models\Subcategoria;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -23,6 +24,9 @@ class IndexProductos extends Component
     public $open_crear = false;
     public $open_delete = false;
     public $open_edit = false;
+    public $msg = false;
+    public $msgedit = false;
+    public $bloqueo;
     public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla;
     public $descripcion, $imagen, $precio, $stock, $imagenva;
     public $categoria, $subcategoria, $producto;
@@ -56,7 +60,12 @@ class IndexProductos extends Component
     public function delete(Producto $producto)
     {
         $this->producto = $producto;
-        $this->open_delete = true;
+        $prod_search = Detalleventa::where('id_producto', '=', $producto->id)->first();
+        if ($prod_search == null) {
+            $this->open_delete = true;
+        } else {
+            $this->msg = true;
+        }
     }
 
     public function destroy()
@@ -68,6 +77,40 @@ class IndexProductos extends Component
 
     public function edit(Producto $producto)
     {
+        $prod_search = Detalleventa::where('id_producto', '=', $producto->id)->first();
+        if ($prod_search == null) {
+            
+            $this->bloqueo = 0;
+            
+            $this->producto = $producto;
+            $this->codigo = $producto->codigo;
+            $this->id_categoria = $producto->id_categoria;
+            $this->id_subcategoria = $producto->id_subcategoria;
+            $this->nombre = $producto->nombre;
+            $this->slug = $producto->slug;
+            $this->marca = $producto->marca;
+            $this->color = $producto->color;
+            $this->talla = $producto->talla;
+            $this->descripcion = $producto->descripcion;
+            $this->imagen = $producto->imagen;
+            $this->precio = $producto->precio;
+            $this->stock = $producto->stock;
+
+            $this->imagenva = null;
+
+            $this->open_edit = true;
+
+        } else {
+            $this->msgedit = true;
+        }
+        
+    }
+
+    public function editar(Producto $producto){
+        
+        $this->msgedit = false;
+        $this->bloqueo = 1;
+            
         $this->producto = $producto;
         $this->codigo = $producto->codigo;
         $this->id_categoria = $producto->id_categoria;
@@ -85,6 +128,7 @@ class IndexProductos extends Component
         $this->imagenva = null;
 
         $this->open_edit = true;
+
     }
 
     public function update()
@@ -99,7 +143,7 @@ class IndexProductos extends Component
             $this->imagen = $fileName;
 
             $this->producto->slug = Str::slug($this->nombre, '-');
-            
+
             $validatedData = $this->validate();
             $this->producto->update($validatedData);
         } else {
@@ -116,8 +160,6 @@ class IndexProductos extends Component
             $this->producto->precio = $this->precio;
             $this->producto->update();
         }
-
-
 
         $this->imagenva = null;
 

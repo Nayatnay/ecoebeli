@@ -17,13 +17,11 @@ class Detalleventa extends Model
         'descuento',
     ];
 
-    //Relacion uno a muchos (inversa)
+    //Relaciones uno a muchos (inversa)
 
     public function venta(){
         return $this->belongsTo('App\Models\Venta', 'id_venta');
     }
-
-    //Relacion uno a muchos (inversa)
 
     public function producto(){
         return $this->belongsTo('App\Models\Producto', 'id_producto');

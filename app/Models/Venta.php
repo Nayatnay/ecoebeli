@@ -22,7 +22,7 @@ class Venta extends Model
         'estado',
     ];
 
-    //Relaciones uno a muchos
+    //Relacion uno a muchos
 
     public function detalleventas()
     {

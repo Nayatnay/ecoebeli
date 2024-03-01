@@ -3,7 +3,7 @@
 
     <div class="bg-white shadow">
 
-        <div class="flex items-center justify-between p-4 max-w-screen-xl mx-auto">
+        <div class="flex flex-col sm:flex-row items-center justify-between p-4 max-w-screen-xl mx-auto">
             @if ($ultimatasa <> null)
                 <h2 class="font-semibold md:text-2xl text-lime-700 leading-tight">
                     Tasa dolar del Día: {{ $ultimatasa->valtasa }}<strong class="text-sm font-normal text-gray-600">
@@ -14,6 +14,7 @@
                     Tasa dolar del Día: <strong class="text-sm font-normal text-gray-600"> BS/USD</strong>
                 </h2>
             @endif
+
             @livewire('tasa.crear-tasa')
 
         </div>

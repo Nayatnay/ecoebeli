@@ -65,8 +65,8 @@ class IndexConciliacion extends Component
         $mm = date('m', strtotime($nuevafecha));  //obtener mes
         $yy = date('Y', strtotime($nuevafecha)); // obtener año
 
-        $ventassin = Venta::where('estado', '=', 0)->orderBy('id', 'desc')->paginate(15, ['*'], 'vsin');
-        $ventascon = Venta::where('estado', '=', 1)->orderBy('id', 'desc')->paginate(15, ['*'], 'vcon');
+        $ventassin = Venta::where('estado', '=', 0)->orderBy('id', 'desc')->paginate(12, ['*'], 'vsin');
+        $ventascon = Venta::where('estado', '=', 1)->orderBy('id', 'desc')->paginate(12, ['*'], 'vcon');
 
         $ventassinmes = Venta::whereMonth('fecha', $mm)->whereYear('fecha', $yy) //Total ventas del mes sin conciliar
             ->where('estado', '=', 0)->get()->sum('total');

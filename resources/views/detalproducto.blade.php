@@ -44,7 +44,7 @@
             </div>
             <div class="flex items-center md:justify-end w-[30%]">
 
-                <p class="text-sm font-normal mr-6"><i class="fa-solid fa-store text-yellow-300 md:text-lime-400"></i>
+                <p class="text-sm font-normal md:mr-6"><i class="fa-solid fa-store text-yellow-300 md:text-lime-400"></i>
                     {{ $producto->stock }}+
                 </p>
 

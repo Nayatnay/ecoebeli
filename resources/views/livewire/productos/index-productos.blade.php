@@ -112,6 +112,46 @@
 
     </div>
 
+    <!--Modal MSG -->
+
+    <x-confirm-modal wire:model="msg">
+
+        <x-slot name="title">
+            Únicas acciones permitidas para este producto
+        </x-slot>
+
+        <x-slot name="content">
+            Actualización de precio y existencias
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$set('msg', false)">
+                Cerrar
+            </x-secondary-button>
+
+        </x-slot>
+    </x-confirm-modal>
+
+    <!--Modal MSG -->
+
+    <x-confirm-modal wire:model="msgedit">
+
+        <x-slot name="title">
+            Únicas acciones permitidas para este producto
+        </x-slot>
+
+        <x-slot name="content">
+            Actualización de precio y existencias
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="editar({{ $producto }})">
+                Continuar
+            </x-secondary-button>
+
+        </x-slot>
+    </x-confirm-modal>
+
     <!--Modal delete -->
 
     <x-confirmation-modal wire:model="open_delete">
@@ -145,103 +185,204 @@
 
         <x-slot name="content">
 
-            <div class=" mb-4">
-                <x-label for="nombre" value="{{ __('Nombre') }}" class="text-zinc-800" />
-                <x-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" wire:model="nombre"
-                    required autofocus />
-                <x-input-error for="nombre" />
-            </div>
-            <div class="hidden">
-                <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" wire:model="slug"
-                    required autofocus />
-            </div>
-            <div class="flex">
+            @if ($this->bloqueo == 1)
                 <div class=" mb-4">
-                    <x-label for="marca" value="{{ __('Marca') }}" class="text-zinc-800" />
-                    <x-input id="marca" class="block mt-1 w-full" type="text" name="marca"
-                        wire:model="marca" required autofocus />
-                    <x-input-error for="marca" />
+                    <x-label for="nombre" value="{{ __('Nombre') }}" class="text-zinc-800" />
+                    <x-input id="nombre" class="block mt-1 w-full" type="text" name="nombre" wire:model="nombre"
+                        required autofocus disabled />
+                    <x-input-error for="nombre" />
                 </div>
-                <div class=" mb-4 mx-2">
-                    <x-label for="color" value="{{ __('Color') }}" class="text-zinc-800" />
-                    <x-input id="color" class="block mt-1 w-full" type="text" name="color"
-                        wire:model="color" required autofocus />
-                    <x-input-error for="color" />
+                <div class="hidden">
+                    <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" wire:model="slug"
+                        required autofocus />
+                </div>
+                <div class="flex">
+                    <div class=" mb-4">
+                        <x-label for="marca" value="{{ __('Marca') }}" class="text-zinc-800" />
+                        <x-input id="marca" class="block mt-1 w-full" type="text" name="marca"
+                            wire:model="marca" required autofocus disabled />
+                        <x-input-error for="marca" />
+                    </div>
+                    <div class=" mb-4 mx-2">
+                        <x-label for="color" value="{{ __('Color') }}" class="text-zinc-800" />
+                        <x-input id="color" class="block mt-1 w-full" type="text" name="color"
+                            wire:model="color" required autofocus disabled />
+                        <x-input-error for="color" />
+                    </div>
+                    <div class=" mb-4">
+                        <x-label for="talla" value="{{ __('Talla') }} (Op)" class="text-zinc-800" />
+                        <x-input id="talla" class="block mt-1 w-full" type="text" name="talla"
+                            wire:model="talla" required autofocus disabled />
+                        <x-input-error for="talla" />
+                    </div>
                 </div>
                 <div class=" mb-4">
-                    <x-label for="talla" value="{{ __('Talla') }} (Si aplica)" class="text-zinc-800" />
-                    <x-input id="talla" class="block mt-1 w-full" type="text" name="talla"
-                        wire:model="talla" required autofocus />
-                    <x-input-error for="talla" />
+                    <x-label for="descripcion" value="{{ __('descripcion') }}" class="text-zinc-800" />
+                    <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"
+                        wire:model="descripcion" required autofocus disabled />
+                    <x-input-error for="descripcion" />
                 </div>
-            </div>
-            <div class=" mb-4">
-                <x-label for="descripcion" value="{{ __('descripcion') }}" class="text-zinc-800" />
-                <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"
-                    wire:model="descripcion" required autofocus />
-                <x-input-error for="descripcion" />
-            </div>
 
-            <div class=" mb-4">
-                <x-label for="id_subcategoria" value="{{ __('Categoría') }}" class="text-zinc-800" />
-                <select name="id_subcategoria" wire:model="id_subcategoria"
-                    class="w-full px-2 py-3 text-sm rounded-md border border-gray-200 focus:border-gray-300 focus:ring-0 text-zinc-800">
-                    <option value="">Seleccionar categoría</option>
-                    @foreach ($subcategorias as $subcategoria)
-                        <option value="{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</option>
-                    @endforeach
-                </select>
-                <x-input-error for="id_subcategoria" />
-            </div>
-            <div class="flex flex-col sm:flex-row items-start justify-between w-full">
-                <div class="basis-1/2 mb-4 w-full mr-4">
-                    <div class="mb-4">
-                        <x-label for="codigo" value="{{ __('Código') }}" class="text-zinc-800" />
-                        <x-input id="codigo" class="block mt-1" type="text" name="codigo"
-                            wire:model="codigo" required autofocus />
-                        <x-input-error for="codigo" />
-                    </div>
-                    <div class="mb-4">
-                        <x-label for="stock" value="{{ __('Existencias') }}" class="text-zinc-800" />
-                        <x-input id="stock"
-                            class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            type="number" step="any" name="stock" wire:model="stock" required autofocus />
-                        <x-input-error for="stock" />
-                    </div>
-                    <div class="mb-4">
-                        <x-label for="precio" value="{{ __('Precio') }}" class="text-zinc-800" />
-                        <x-input id="precio"
-                            class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                            type="number" step="any" name="precio" wire:model="precio" required autofocus />
-                        <x-input-error for="precio" />
-                    </div>
+                <div class=" mb-4">
+                    <x-label for="id_subcategoria" value="{{ __('Categoría') }}" class="text-zinc-800" />
+                    <select name="id_subcategoria" wire:model="id_subcategoria" disabled
+                        class="w-full px-2 py-3 text-sm rounded-md border border-gray-200 focus:border-gray-300 focus:ring-0 text-zinc-800">
+                        <option value="">Seleccionar categoría</option>
+                        @foreach ($subcategorias as $subcategoria)
+                            <option value="{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="id_subcategoria" />
                 </div>
-                <div class="basis-1/2 w-full">
-                    <p class="text-zinc-800">Imagen del Producto</p>
-
-                    <div class="flex justify-between items-end mt-4">
-                        @if ($imagenva)
-                            <img src="{{ $imagenva->temporaryUrl() }}" class="p-4 border border-zinc-500 rounded"
-                                width="240">
-                        @else
-                            <img src="{{ asset('../storage/productos/' . $imagen) }}" alt="" title=""
-                                class="p-4 border border-zinc-500 rounded" width="240">
-                        @endif
+                <div class="flex flex-col sm:flex-row items-start justify-between w-full">
+                    <div class="basis-1/2 mb-4 w-full mr-4">
+                        <div class="mb-4">
+                            <x-label for="codigo" value="{{ __('Código') }}" class="text-zinc-800" />
+                            <x-input id="codigo" class="block mt-1" type="text" name="codigo"
+                                wire:model="codigo" required autofocus disabled />
+                            <x-input-error for="codigo" />
+                        </div>
+                        <div class="mb-4">
+                            <x-label for="stock" value="{{ __('Existencias') }}" class="text-zinc-800" />
+                            <x-input id="stock"
+                                class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                type="number" step="any" name="stock" wire:model="stock" required
+                                autofocus />
+                            <x-input-error for="stock" />
+                        </div>
+                        <div class="mb-4">
+                            <x-label for="precio" value="{{ __('Precio') }}" class="text-zinc-800" />
+                            <x-input id="precio"
+                                class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                type="number" step="any" name="precio" wire:model="precio" required
+                                autofocus />
+                            <x-input-error for="precio" />
+                        </div>
                     </div>
+                    <div class="basis-1/2 w-full">
+                        <p class="text-zinc-800">Imagen del Producto</p>
 
-                    <div class="text-zinc-800 text-xs text-left lg:text-sm ">
-                        <label for="{{ $identificador }}" class="cursor-pointer hover:underline">Seleccionar nueva
-                            Imagen</label>
-                        <input id="{{ $identificador }}" type="file" style="visibility:hidden;" name="imagenva"
-                            wire:model="imagenva" required />
-                        <x-input-error for="imagenva" />
-                    </div>
+                        <div class="flex justify-between items-end mt-4">
+                            @if ($imagenva)
+                                <img src="{{ $imagenva->temporaryUrl() }}" class="p-4 border border-zinc-500 rounded"
+                                    width="240">
+                            @else
+                                <img src="{{ asset('../storage/productos/' . $imagen) }}" alt=""
+                                    title="" class="p-4 border border-zinc-500 rounded" width="240">
+                            @endif
+                        </div>
 
-                    <div wire:loading wire:target="imagenva" class="w-full text-xs font-semibold">
-                        <p>¡Cargando imagen!...</p>
+                        <div class="text-zinc-800 text-xs text-left lg:text-sm ">
+                            <label for="{{ $identificador }}" class="cursor-pointer hover:underline"></label>
+                            <input id="{{ $identificador }}" type="file" style="visibility:hidden;"
+                                name="imagenva" wire:model="imagenva" required disabled />
+                            <x-input-error for="imagenva" />
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            @else
+                <div class=" mb-4">
+                    <x-label for="nombre" value="{{ __('Nombre') }}" class="text-zinc-800" />
+                    <x-input id="nombre" class="block mt-1 w-full" type="text" name="nombre"
+                        wire:model="nombre" required autofocus />
+                    <x-input-error for="nombre" />
+                </div>
+                <div class="hidden">
+                    <x-input id="slug" class="block mt-1 w-full" type="text" name="slug"
+                        wire:model="slug" required autofocus />
+                </div>
+                <div class="flex">
+                    <div class=" mb-4">
+                        <x-label for="marca" value="{{ __('Marca') }}" class="text-zinc-800" />
+                        <x-input id="marca" class="block mt-1 w-full" type="text" name="marca"
+                            wire:model="marca" required autofocus />
+                        <x-input-error for="marca" />
+                    </div>
+                    <div class=" mb-4 mx-2">
+                        <x-label for="color" value="{{ __('Color') }}" class="text-zinc-800" />
+                        <x-input id="color" class="block mt-1 w-full" type="text" name="color"
+                            wire:model="color" required autofocus />
+                        <x-input-error for="color" />
+                    </div>
+                    <div class=" mb-4">
+                        <x-label for="talla" value="{{ __('Talla') }} (Op)" class="text-zinc-800" />
+                        <x-input id="talla" class="block mt-1 w-full" type="text" name="talla"
+                            wire:model="talla" required autofocus />
+                        <x-input-error for="talla" />
+                    </div>
+                </div>
+                <div class=" mb-4">
+                    <x-label for="descripcion" value="{{ __('descripcion') }}" class="text-zinc-800" />
+                    <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"
+                        wire:model="descripcion" required autofocus />
+                    <x-input-error for="descripcion" />
+                </div>
+
+                <div class=" mb-4">
+                    <x-label for="id_subcategoria" value="{{ __('Categoría') }}" class="text-zinc-800" />
+                    <select name="id_subcategoria" wire:model="id_subcategoria"
+                        class="w-full px-2 py-3 text-sm rounded-md border border-gray-200 focus:border-gray-300 focus:ring-0 text-zinc-800">
+                        <option value="">Seleccionar categoría</option>
+                        @foreach ($subcategorias as $subcategoria)
+                            <option value="{{ $subcategoria->id }}">{{ $subcategoria->nombre }}</option>
+                        @endforeach
+                    </select>
+                    <x-input-error for="id_subcategoria" />
+                </div>
+                <div class="flex flex-col sm:flex-row items-start justify-between w-full">
+                    <div class="basis-1/2 mb-4 w-full mr-4">
+                        <div class="mb-4">
+                            <x-label for="codigo" value="{{ __('Código') }}" class="text-zinc-800" />
+                            <x-input id="codigo" class="block mt-1" type="text" name="codigo"
+                                wire:model="codigo" required autofocus />
+                            <x-input-error for="codigo" />
+                        </div>
+                        <div class="mb-4">
+                            <x-label for="stock" value="{{ __('Existencias') }}" class="text-zinc-800" />
+                            <x-input id="stock"
+                                class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                type="number" step="any" name="stock" wire:model="stock" required
+                                autofocus />
+                            <x-input-error for="stock" />
+                        </div>
+                        <div class="mb-4">
+                            <x-label for="precio" value="{{ __('Precio') }}" class="text-zinc-800" />
+                            <x-input id="precio"
+                                class="block mt-1 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                type="number" step="any" name="precio" wire:model="precio" required
+                                autofocus />
+                            <x-input-error for="precio" />
+                        </div>
+                    </div>
+                    <div class="basis-1/2 w-full">
+                        <p class="text-zinc-800">Imagen del Producto</p>
+
+                        <div class="flex justify-between items-end mt-4">
+                            @if ($imagenva)
+                                <img src="{{ $imagenva->temporaryUrl() }}" class="p-4 border border-zinc-500 rounded"
+                                    width="240">
+                            @else
+                                <img src="{{ asset('../storage/productos/' . $imagen) }}" alt=""
+                                    title="" class="p-4 border border-zinc-500 rounded" width="240">
+                            @endif
+                        </div>
+
+                        <div class="text-zinc-800 text-xs text-left lg:text-sm ">
+                            <label for="{{ $identificador }}" class="cursor-pointer hover:underline">Seleccionar
+                                nueva
+                                Imagen</label>
+                            <input id="{{ $identificador }}" type="file" style="visibility:hidden;"
+                                name="imagenva" wire:model="imagenva" required />
+                            <x-input-error for="imagenva" />
+                        </div>
+
+                        <div wire:loading wire:target="imagenva" class="w-full text-xs font-semibold">
+                            <p>¡Cargando imagen!...</p>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </x-slot>
 
         <x-slot name="footer">

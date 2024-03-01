@@ -72,7 +72,7 @@ class User extends Authenticatable
     ];
 
     //Relaciones uno a muchos
-    
+
     public function medios()
     {
         return $this->hasMany('App\Models\Medio', 'id_user');
@@ -82,6 +82,8 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Venta', 'id_user');
     }
+
+    //Contro, de atributos
 
     public function name(): Attribute
     {

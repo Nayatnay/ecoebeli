@@ -1,5 +1,5 @@
 <div>
-    <div class="text-sm cursor-point font-light ">
+    <div class="text-sm cursor-point font-light mt-2 sm:mt-0">
         <p wire:click="$set('open', true)" class="cursor-pointer">Nueva tasa</p>
     </div>
 

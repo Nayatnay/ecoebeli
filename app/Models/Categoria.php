@@ -60,7 +60,7 @@ class Categoria extends Model
     }
 
     */
-    
+
     //Relaciones uno a muchos
 
     public function productos()
@@ -68,12 +68,12 @@ class Categoria extends Model
         return $this->hasMany('App\Models\Producto', 'id_categoria');
     }
 
-    //Relaciones uno a muchos
-
     public function subcategorias()
     {
         return $this->hasMany('App\Models\Subcategoria', 'id_categoria');
     }
+
+    //Control de atributos
 
     public function nombre(): Attribute
     {

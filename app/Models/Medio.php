@@ -25,6 +25,8 @@ class Medio extends Model
         return $this->belongsTo('App\Models\user', 'id_user');
     }
 
+    //Control de atributos
+    
     public function nombre(): Attribute
     {
         return new Attribute(

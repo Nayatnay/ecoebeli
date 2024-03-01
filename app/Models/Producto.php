@@ -45,14 +45,12 @@ class Producto extends Model
     }
 */
 
-    //Relaciones uno a muchos
+    //Relacion uno a muchos
 
     public function detalleventas()
     {
         return $this->hasMany('App\Models\Detalleventa', 'id_producto');
     }
-
-
 
     //Relacion uno a muchos (inversa)
 
