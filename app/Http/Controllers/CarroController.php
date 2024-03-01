@@ -143,7 +143,8 @@ class CarroController extends Controller
                 1,
                 array("imagen" => $producto->imagen)
             );
-        } else {
+        } 
+        /*else {
             $catt = $car->quantity + 1;
             if ($catt > $producto->stock) {
                 return redirect()->back();
@@ -156,7 +157,8 @@ class CarroController extends Controller
                     array("imagen" => $producto->imagen)
                 );
             }
-        }
+            
+        }*/
 
         return redirect()->Route('admincom');
     }

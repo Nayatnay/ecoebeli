@@ -47,6 +47,12 @@ class RegistrarPago extends Component
             $this->codigo = 0;
             $this->telf = 0;
         }
+        if ($this->tipo_pago == 1) {
+            if ($this->codigo == 0 || $this->telf == 0) {
+                $this->codigo = null;
+                $this->telf = null;
+            }
+        }
 
         $this->validate();
 

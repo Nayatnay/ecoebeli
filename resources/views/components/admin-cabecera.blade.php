@@ -95,6 +95,13 @@
                                         <span class="ml-2">Tasa del día</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('conciliaciones') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                        <i class="fa-solid fa-building-columns"></i>
+                                        <span class="ml-2">Conciliaciones</span>
+                                    </a>
+                                </li>
                             @endcan
                             <li class="mt-3 border-t">
                                 <form method="POST" action="{{ route('logout') }}" x-data>

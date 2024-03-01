@@ -38,8 +38,10 @@
                 @foreach ($categorias as $categoria)
                     <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-white">
                         <div class="w-full">
-                            <img src="{{ asset('/storage/categorias/' . $categoria->imagen) }}" alt=""
-                                title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                            <a href="{{ route('productosporcategoria', $categoria->slug) }}">
+                                <img src="{{ asset('/storage/categorias/' . $categoria->imagen) }}" alt=""
+                                    title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                            </a>
                         </div>
 
                         <div class="w-full">
@@ -86,7 +88,7 @@
         @endif
 
         @if ($categorias->hasPages())
-            <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
+            <div class="px-4 py-2 text-center mt-10">
                 {{ $categorias->onEachSide(0)->links() }}
             </div>
         @endif

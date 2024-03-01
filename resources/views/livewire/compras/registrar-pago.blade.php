@@ -44,31 +44,31 @@
                     class=" text-sm pl-4 block mt-1 w-full text-gray-800 border-gray-200 focus:border-gray-300 focus:ring-0 rounded-md shadow-sm'"
                     type="text" name="banco" :value="old('banco')" required autocomplete="banco">
                     <option value="">Banco</option>
-                    <option value="0001">0001 - Banco Central de Venezuela</option>
-                    <option value="0102">0102 - Banco de Venezuela S.A. Banco Universal</option>
-                    <option value="0104">0104 - Venezolano de Crédito S.A. Banco Universal</option>
-                    <option value="0105">0105 - Banco Mercantil, C.A Banco Universal</option>
-                    <option value="0108">0108 - Banco Provincial, S.A. Banco Universal</option>
-                    <option value="0114">0114 - Bancaribe C.A. Banco Universal</option>
-                    <option value="0115">0115 - Banco Exterior C.A. Banco Universal</option>
-                    <option value="0128">0128 - Banco Caroní C.A. Banco Universal</option>
-                    <option value="0134">0134 - Banesco S.A.C.A. Banco Universal</option>
-                    <option value="0137">0137 - Banco Sofitasa C.A. Banco Universal</option>
-                    <option value="0151">0151 - BFC Banco Fondo Común C.A. Banco Universal</option>
-                    <option value="0156">0156 - 100% Banco, C.A. Banco Universal</option>
-                    <option value="0157">0157 - DelSur, C.A. Banco Universal</option>
-                    <option value="0163">0163 - Banco del Tesoro, C.A. Banco Universal</option>
-                    <option value="0166">0166 - Banco Agrícola de Venezuela, C.A Banco Universal</option>
-                    <option value="0168">0168 - Bancrecer, S.A. Banco Microfinanciero</option>
-                    <option value="0172">0172 - Bancamiga, C.A. Banco Microfinanciero</option>
-                    <option value="0174">0174 - Banplus, C.A. Banco Universal</option>
-                    <option value="0175">0175 - Banco Bicentenario C.A. Banco Universal</option>
-                    <option value="0177">0177 - Banco de la Fuerza Armada Nacional Bolivariana BANFANB
+                    <option value="0001-BCV">0001 - Banco Central de Venezuela</option>
+                    <option value="0102-BDV">0102 - Banco de Venezuela S.A. Banco Universal</option>
+                    <option value="0104-BVC">0104 - Venezolano de Crédito S.A. Banco Universal</option>
+                    <option value="0105-MERCANTIL">0105 - Banco Mercantil, C.A Banco Universal</option>
+                    <option value="0108-BBVA">0108 - Banco Provincial, S.A. Banco Universal</option>
+                    <option value="0114-BANCARIBE">0114 - Bancaribe C.A. Banco Universal</option>
+                    <option value="0115-BE-EXTERIOR">0115 - Banco Exterior C.A. Banco Universal</option>
+                    <option value="0128-CARONI">0128 - Banco Caroní C.A. Banco Universal</option>
+                    <option value="0134-BANESCO">0134 - Banesco S.A.C.A. Banco Universal</option>
+                    <option value="0137-SOFITASA">0137 - Banco Sofitasa C.A. Banco Universal</option>
+                    <option value="0151-BFC">0151 - BFC Banco Fondo Común C.A. Banco Universal</option>
+                    <option value="0156-100%BANCO">0156 - 100% Banco, C.A. Banco Universal</option>
+                    <option value="0157-DELSUR">0157 - DelSur, C.A. Banco Universal</option>
+                    <option value="0163-DELTESORO">0163 - Banco del Tesoro, C.A. Banco Universal</option>
+                    <option value="0166-AGRICOLA">0166 - Banco Agrícola de Venezuela, C.A Banco Universal</option>
+                    <option value="0168-BANCRECER">0168 - Bancrecer, S.A. Banco Microfinanciero</option>
+                    <option value="0172-BANCAMIGA">0172 - Bancamiga, C.A. Banco Microfinanciero</option>
+                    <option value="0174-BANPLUS">0174 - Banplus, C.A. Banco Universal</option>
+                    <option value="0175-BICENTENARIO">0175 - Banco Bicentenario C.A. Banco Universal</option>
+                    <option value="0177-BANFANB">0177 - Banco de la Fuerza Armada Nacional Bolivariana BANFANB
                         Banco
                         Universal</option>
-                    <option value="0190">0190 - Citibank N.A. Banco Universal</option>
-                    <option value="0191">0191 - Banco Nacional de Crédito, C.A. Banco Universal</option>
-                    <option value="0601">0601 - Instituto Municipal de Crédito Popular Institución
+                    <option value="0190-CITIBANK">0190 - Citibank N.A. Banco Universal</option>
+                    <option value="0191-BNC">0191 - Banco Nacional de Crédito, C.A. Banco Universal</option>
+                    <option value="0601-IMCP">0601 - Instituto Municipal de Crédito Popular Institución
                         Financiera
                     </option>
                 </select>

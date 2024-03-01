@@ -282,7 +282,7 @@
             @endif
 
             @if ($productos->hasPages())
-                <div class="mx-4 px-4 py-2 border border-gray-300 rounded-md text-center my-10">
+                <div class="mx-4 px-4 py-2 text-center my-10">
                     {{ $productos->onEachSide(0)->links() }}
                 </div>
             @endif

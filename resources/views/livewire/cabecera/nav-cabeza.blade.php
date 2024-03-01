@@ -34,7 +34,7 @@
                         <i class="fas fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
-                
+
             </div>
 
             <!-- Cuenta / carrito y menu dropdown -->
@@ -55,12 +55,12 @@
                             </button>
                         </a>
 
-                         <!-- MENU -->
+                        <!-- MENU -->
 
                         <div class="flex items-center px-2">
-                             
+
                             <!-- Boton Dropdown menu -->
-                             <button type="button"
+                            <button type="button"
                                 class="flex items-center justify-center text-xl font-medium w-10 h-10 text-lime-500 hover:border-2 border-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg"
                                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                                 data-dropdown-placement="bottom" title="Bienvenido {{ ucwords(Auth::user()->name) }}">
@@ -131,8 +131,16 @@
                                         <li>
                                             <a href="{{ route('tasa') }}"
                                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
-                                                <i class="fa-solid fa-dollar-sign py-0.5 px-1 bg-gray-700 rounded-sm text-white"></i>
+                                                <i
+                                                    class="fa-solid fa-dollar-sign py-0.5 px-1 bg-gray-700 rounded-sm text-white"></i>
                                                 <span class="ml-2">Tasa del día</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('conciliaciones') }}"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                                <i class="fa-solid fa-building-columns"></i>
+                                                <span class="ml-2">Conciliaciones</span>
                                             </a>
                                         </li>
                                     @endcan

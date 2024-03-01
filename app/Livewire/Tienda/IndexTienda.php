@@ -31,9 +31,9 @@ class IndexTienda extends Component
         'precio' => [],
     ];
 
-public function updatingBuscar()
+public function updatingFilters()
     {
-        $this->resetPage();
+        $this->resetPage('prodlink');
     }
 
     public function clear()
@@ -57,6 +57,8 @@ public function updatingBuscar()
 
     public function order()
     {
+        $this->resetPage();
+
         if ($this->filtro == 0) {
             $this->sort = 'id';
             $this->direc = 'asc';

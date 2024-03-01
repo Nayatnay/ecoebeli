@@ -116,6 +116,7 @@
             </div>
         </div>
         <div class="w-full">
+            
             @if ($productos->count())
 
                 <div
@@ -174,8 +175,7 @@
 
     <div class="max-w-screen-xl mx-auto px-4 py-2 my-4">
         @if ($productos->hasPages())
-            <div class="sm:border border-gray-300 rounded-md text-center px-4 py-2">
-
+            <div class="text-center px-4 py-2">
                 {{ $productos->onEachSide(0)->links() }}
 
             </div>

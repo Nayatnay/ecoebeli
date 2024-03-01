@@ -110,6 +110,12 @@
                 <span>0 resultados para </span> <span class="text-orange-700"> "{{ $buscar }}" </span>
             </div>
         @endif
+
+        @if ($categorias->hasPages())
+            <div class="mx-4 md:mx-8 px-4 py-2 text-center my-10">
+                {{ $categorias->onEachSide(0)->links() }}
+            </div>
+        @endif
     </div>
 
     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->

@@ -60,6 +60,10 @@ Route::get('admincom', function () {
     return view('admincom');
 })->Middleware('can:admincom')->name('admincom');
 
+Route::get('conciliaciones', function () {
+    return view('conciliaciones');
+})->Middleware('can:conciliaciones')->name('conciliaciones');
+
 Route::get('categorias', IndexCategorias::class)->Middleware('can:categorias')->name('categorias');
 Route::get('productos', IndexProductos::class)->Middleware('can:productos')->name('productos');
 Route::get('carro', [CarroController::class, 'index'])->name('carro');

@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <div class="p-4 max-w-screen-xl mx-auto">
+    <div class="my-8 p-4 max-w-screen-xl mx-auto">
 
         <!-- formulario de busqueda -->
 
@@ -38,8 +38,10 @@
                 @foreach ($productos as $producto)
                     <div class="flex flex-col items-center justify-between border border-gray-200 rounded-lg bg-white">
                         <div class="w-full">
-                            <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
-                                title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                            <a href="{{ route('detalleproducto', $producto->slug) }} ">
+                                <img src="{{ asset('/storage/productos/' . $producto->imagen) }}" alt=""
+                                    title="" class="w-full rounded-tl-lg rounded-tr-lg" width="">
+                            </a>
                         </div>
 
                         <div class="w-full">
@@ -60,7 +62,8 @@
                                         $decimal = substr($producto->precio, -2);
                                     @endphp
 
-                                    <span class="mt-0.5 ml-0.5 text-base font-light">{{ substr($producto->precio, -2) }}</span>
+                                    <span
+                                        class="mt-0.5 ml-0.5 text-base font-light">{{ substr($producto->precio, -2) }}</span>
 
                                 </div>
                             </div>
@@ -79,7 +82,7 @@
                                             d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                                     </svg>
                                 </a>
-                                <a href="#" wire:click="edit({{$producto}})" title="Editar"
+                                <a href="#" wire:click="edit({{ $producto }})" title="Editar"
                                     class="group text-center px-2">
                                     <span
                                         class="h-2 w-2 bg-lime-600 rounded-full inline-block group-hover:bg-orange-600"></span>
@@ -102,7 +105,7 @@
         @endif
 
         @if ($productos->hasPages())
-            <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
+            <div class="px-4 py-2 text-center mt-10">
                 {{ $productos->onEachSide(0)->links() }}
             </div>
         @endif
@@ -150,25 +153,25 @@
             </div>
             <div class="hidden">
                 <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" wire:model="slug"
-                    required autofocus />    
+                    required autofocus />
             </div>
             <div class="flex">
                 <div class=" mb-4">
                     <x-label for="marca" value="{{ __('Marca') }}" class="text-zinc-800" />
-                    <x-input id="marca" class="block mt-1 w-full" type="text" name="marca" wire:model="marca"
-                        required autofocus />
+                    <x-input id="marca" class="block mt-1 w-full" type="text" name="marca"
+                        wire:model="marca" required autofocus />
                     <x-input-error for="marca" />
                 </div>
                 <div class=" mb-4 mx-2">
                     <x-label for="color" value="{{ __('Color') }}" class="text-zinc-800" />
-                    <x-input id="color" class="block mt-1 w-full" type="text" name="color" wire:model="color"
-                        required autofocus />
+                    <x-input id="color" class="block mt-1 w-full" type="text" name="color"
+                        wire:model="color" required autofocus />
                     <x-input-error for="color" />
                 </div>
                 <div class=" mb-4">
                     <x-label for="talla" value="{{ __('Talla') }} (Si aplica)" class="text-zinc-800" />
-                    <x-input id="talla" class="block mt-1 w-full" type="text" name="talla" wire:model="talla"
-                        required autofocus />
+                    <x-input id="talla" class="block mt-1 w-full" type="text" name="talla"
+                        wire:model="talla" required autofocus />
                     <x-input-error for="talla" />
                 </div>
             </div>
@@ -178,7 +181,7 @@
                     wire:model="descripcion" required autofocus />
                 <x-input-error for="descripcion" />
             </div>
-            
+
             <div class=" mb-4">
                 <x-label for="id_subcategoria" value="{{ __('Categoría') }}" class="text-zinc-800" />
                 <select name="id_subcategoria" wire:model="id_subcategoria"
@@ -214,7 +217,7 @@
                     </div>
                 </div>
                 <div class="basis-1/2 w-full">
-                    <p class="text-zinc-800">Imagen de la Categoría</p>
+                    <p class="text-zinc-800">Imagen del Producto</p>
 
                     <div class="flex justify-between items-end mt-4">
                         @if ($imagenva)

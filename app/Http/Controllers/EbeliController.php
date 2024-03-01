@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class EbeliController extends Controller
 {
-    use WithPagination;
-
-    protected $listeners = ['render'];
 
     public function updatingBuscar()
     {
@@ -21,7 +18,7 @@ class EbeliController extends Controller
     {
         $buscar = $request->buscar;
         $categ = Categoria::all()->sortBy('nombre');
-        $categorias = Categoria::all()->sortBy('nombre');
+        $categorias = Categoria::orderBy('nombre')->paginate(12);
 
         return view('ebeli', compact('categ', 'buscar', 'categorias'));
     }

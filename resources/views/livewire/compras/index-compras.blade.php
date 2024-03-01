@@ -226,26 +226,44 @@
                 <div class="grid gap-4 grid-cols-1 md:grid-cols-2 p-4">
 
                     @foreach ($producto_comprado as $product)
+                        <div class="border border-gray-300 ">
+                            <div class="flex items-center bg-white ">
 
-                        <div class="flex items-center bg-white border border-gray-300 ">
-
-                            <div class="w-[160px] mr-2 md:mr-4 p-2 md:p-4 bg-gray-300">
-                                <img src="{{ asset('/storage/productos/' . $product->producto->imagen) }}"
-                                    alt="" title="" class="rounded md:w-[160px]">
-                            </div>
-
-                            <div class="">
-                                <p class="inline-block bg-lime-700 text-white rounded font-bold text-center text-sm md:text-lg px-2 mb-2 capitalize">
-                                    {{ $product->producto->nombre }}</p>
-                                <div class="text-xs md:text-sm">
-                                    <p class="hidden md:block">{{ $product->producto->descripcion }}</p>
-                                    <p>{{ $product->cantidad }} unidades / <strong
-                                            class="text-lime-700">{{ $product->precio }} USD por unidad</strong></p>
+                                <div class="w-[160px] mr-2 md:mr-4 p-2 md:p-4 bg-gray-300">
+                                    <img src="{{ asset('/storage/productos/' . $product->producto->imagen) }}"
+                                        alt="" title="" class="rounded md:w-[160px]">
                                 </div>
 
+                                <div class="">
+                                    <p
+                                        class="inline-block bg-lime-700 text-white rounded font-bold text-center text-sm md:text-lg px-2 mb-2 capitalize">
+                                        {{ $product->producto->nombre }}</p>
+                                    <div class="text-xs md:text-sm">
+                                        <p class="hidden md:block">{{ $product->producto->descripcion }}</p>
+                                        <p>{{ $product->cantidad }} unidades / <strong
+                                                class="text-lime-700">{{ $product->precio }} USD por unidad</strong>
+                                        </p>
+                                    </div>
+
+
+                                </div>
 
                             </div>
+                            <div class="p-2 md:px-4 text-xs">
+                                <p class="font-medium text-sm">Detalles del pago</p>
+                                @if ($product->venta->tipo_pago == 0)
+                                    <p>Transferencia Bancaria - Ref. {{ $product->venta->referencia }}</p>
+                                @else
+                                    <p>Pago Móvil Bancario - Ref. {{ $product->venta->referencia }}</p>
+                                @endif
+                                <p>Banco {{ $product->venta->banco }}</p>
+                                @if ($product->venta->tipo_pago == 1)
+                                <p>Teléfono: {{ $product->venta->codigo }}-{{ $product->venta->telf }}</p>
+                                @endif
+                                <p>Registrado el {{ date('d-m-Y', strtotime($product->venta->fecha)) }}</p>
 
+                                <p>Total Orden de compra Bs. {{ number_format($product->venta->total, 2, ',', '.') }}</p>
+                            </div>
                         </div>
                     @endforeach
 
@@ -257,16 +275,16 @@
             @endif
 
             @if ($producto_comprado->hasPages())
-                <div class="w-1/2 mx-auto px-4 py-2 border-2 rounded-lg text-center my-20">
+                <div class="w-1/2 mx-auto px-4 py-2 text-center my-20">
                     {{ $producto_comprado->onEachSide(0)->links() }}
                 </div>
             @endif
         </div>
     </div>
 
-     <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
+    <!--            IDENTIFICACION Y/O REGISTRO DEL CLIENTE               -->
 
-     <x-Identificate></x-Identificate>
+    <x-Identificate></x-Identificate>
 
 
     <!--            pie de pagina FOOTER               -->
@@ -323,7 +341,7 @@
         <script>
             Swal.fire({
                 title: '¡Gracias!',
-                text: 'Su pago ha sido registrado con éxito. La orden de despacho ya fue generada. esté atento a su correo electrónico',
+                text: 'Su pago ha sido registrado con éxito. La orden de despacho ya fue generada. Esté atento a su correo electrónico.',
                 confirmButtonColor: '#1e40af',
                 confirmButtonText: 'OK'
             })

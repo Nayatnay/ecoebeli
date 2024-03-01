@@ -78,7 +78,7 @@
         @endif
 
         @if ($subcategorias->hasPages())
-            <div class="px-4 py-2 border-2 rounded-lg text-center mt-10">
+            <div class="px-4 py-2 text-center mt-10">
                 {{ $subcategorias->onEachSide(0)->links() }}
             </div>
         @endif
