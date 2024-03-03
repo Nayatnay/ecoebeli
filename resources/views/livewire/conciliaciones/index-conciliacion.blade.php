@@ -111,8 +111,8 @@
                     </table>
                 </div>
             @else
-                <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
-                    <span>Sin resultados </span>
+                <div class="mt-4 bg-white text-sm font-semibold sm:px-10 px-5 py-2 shadow">
+                    <span>No hay pagos por conciliar </span>
                 </div>
             @endif
 

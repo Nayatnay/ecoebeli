@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subcategorias', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_categoria');
-            $table->string('nombre');
+            $table->string('nombre')->unique();;
             $table->string('slug');
             $table->timestamps();
             // Llave foranea

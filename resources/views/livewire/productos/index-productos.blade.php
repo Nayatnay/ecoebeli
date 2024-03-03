@@ -132,7 +132,7 @@
         </x-slot>
     </x-confirm-modal>
 
-    <!--Modal MSG -->
+    <!--Modal MSGedit -->
 
     <x-confirm-modal wire:model="msgedit">
 
@@ -145,9 +145,10 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="editar({{ $producto }})">
+            <x-secondary-button wire:click="editar({{$this->producto}})">
                 Continuar
             </x-secondary-button>
+
 
         </x-slot>
     </x-confirm-modal>
@@ -217,12 +218,17 @@
                     </div>
                 </div>
                 <div class=" mb-4">
-                    <x-label for="descripcion" value="{{ __('descripcion') }}" class="text-zinc-800" />
+                    <x-label for="descripcion" value="{{ __('Descripción') }}" class="text-zinc-800" />
                     <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"
                         wire:model="descripcion" required autofocus disabled />
                     <x-input-error for="descripcion" />
                 </div>
-
+                <div class=" mb-4">
+                    <x-label for="acercade" value="{{ __('Indicaciones sobre el producto') }}" class="text-zinc-800" />
+                    <x-input id="acercade" class="block mt-1 w-full" type="text" name="acercade"
+                        wire:model="acercade" required autofocus disabled />
+                    <x-input-error for="acercade" />
+                </div>
                 <div class=" mb-4">
                     <x-label for="id_subcategoria" value="{{ __('Categoría') }}" class="text-zinc-800" />
                     <select name="id_subcategoria" wire:model="id_subcategoria" disabled
@@ -318,7 +324,12 @@
                         wire:model="descripcion" required autofocus />
                     <x-input-error for="descripcion" />
                 </div>
-
+                <div class=" mb-4">
+                    <x-label for="acercade" value="{{ __('Indicaciones sobre el producto') }}" class="text-zinc-800" />
+                    <x-input id="acercade" class="block mt-1 w-full" type="text" name="acercade"
+                        wire:model="acercade" required autofocus />
+                    <x-input-error for="acercade" />
+                </div>
                 <div class=" mb-4">
                     <x-label for="id_subcategoria" value="{{ __('Categoría') }}" class="text-zinc-800" />
                     <select name="id_subcategoria" wire:model="id_subcategoria"

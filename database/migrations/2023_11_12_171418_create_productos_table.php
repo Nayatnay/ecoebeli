@@ -16,13 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('id_categoria');
             $table->integer('id_subcategoria'); 
             $table->string('codigo')->unique();
-            $table->string('nombre');
+            $table->string('nombre')->unique();
             $table->string('slug');
             $table->string('descripcion');
             $table->string('imagen', 2048);
             $table->decimal('precio', 8, 2);
             $table->string('marca');
             $table->string('color');
+            $table->string('acercade');
             $table->string('talla')->nullable();
             $table->integer('stock'); 
             $table->timestamps();

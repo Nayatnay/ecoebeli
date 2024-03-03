@@ -22,7 +22,7 @@
     <div class="min-h-screen">
 
 
-        <div class="max-w-screen-xl mx-auto p-4 flex flex-col md:flex-row justify-between my-4">
+        <div class="max-w-screen-xl mx-auto p-4 flex flex-col md:flex-row justify-between mt-8 mb-4">
 
             <div class="w-full md:mr-2 p-2 md:p-4 rounded-lg bg-white border border-gray-200">
 
@@ -187,7 +187,7 @@
 
         <!-- Registro de pago -->
 
-        <div class="max-w-screen-xl mx-auto p-4 my-4">
+        <div class="max-w-screen-xl mx-auto p-4 my-6">
 
             <div class="w-full p-6 md:p-8 rounded-lg bg-white border border-gray-200">
 
@@ -217,19 +217,56 @@
 
         </div>
 
-        <div class="max-w-screen-xl mx-auto mt-8 mb-20">
+        <!-- Historial de compras -->
 
-            <p class="mb-4 px-4 text-2xl font-bold">Historial de Compras</p>
+        <div class="max-w-screen-xl mx-auto md:mt-6 mb-20 p-4">
 
-            @if ($producto_comprado->count())
+            <div class="bg-white rounded-lg p-4">
 
-                <div class="grid gap-4 grid-cols-1 md:grid-cols-2 p-4">
+                <p class="mb-4 px-2 md:px-4 text-2xl font-bold">Historial de Compras</p>
 
-                    @foreach ($producto_comprado as $product)
-                        <div class="border border-gray-300 ">
-                            <div class="flex items-center bg-white ">
+                @if ($producto_comprado->count())
 
-                                <div class="w-[160px] mr-2 md:mr-4 p-2 md:p-4 bg-gray-300">
+                    <div class="md:p-4">
+                        @php
+                            $idcompra = 0;
+                        @endphp
+                        @foreach ($producto_comprado as $product)
+                            @if ($idcompra != $product->id_venta)
+                                @php
+                                    $idcompra = $product->id_venta;
+                                @endphp
+
+                                <p class="font-medium text-sm pt-4 ml-2 border-t">Detalles del pago</p>
+
+                                <div class="mb-4">
+                                    <div class="mt-1 flex flex-wrap text-xs">
+
+                                        @if ($product->venta->tipo_pago == 0)
+                                            <p class="font-medium ml-2">Transferencia Bancaria - Ref.
+                                                {{ $product->venta->referencia }}</p>
+                                        @else
+                                            <p class="font-medium ml-2">Pago Móvil Bancario - Ref.
+                                                {{ $product->venta->referencia }}</p>
+                                        @endif
+                                        <p class="ml-2">desde el banco {{ $product->venta->banco }}.</p>
+                                        @if ($product->venta->tipo_pago == 1)
+                                            <p class="ml-2">Teléfono:
+                                                {{ $product->venta->codigo }}-{{ $product->venta->telf }}.</p>
+                                        @endif
+                                        <p class="ml-2">Registrado el día
+                                            {{ date('d-m-Y', strtotime($product->venta->fecha)) }}</p>
+                                    </div>
+                                    <p class="text-sm ml-2 text-lime-700 font-bold mt-1">Total pagado Bs.
+                                        {{ number_format($product->venta->total, 2, ',', '.') }}
+                                    </p>
+                                </div>
+                            @endif
+
+
+                            <div class="flex items-center ml-2 my-8">
+
+                                <div class="w-[160px] mr-2 md:mr-4 ">
                                     <img src="{{ asset('/storage/productos/' . $product->producto->imagen) }}"
                                         alt="" title="" class="rounded md:w-[160px]">
                                 </div>
@@ -241,7 +278,8 @@
                                     <div class="text-xs md:text-sm">
                                         <p class="hidden md:block">{{ $product->producto->descripcion }}</p>
                                         <p>{{ $product->cantidad }} unidades / <strong
-                                                class="text-lime-700">{{ $product->precio }} USD por unidad</strong>
+                                                class="text-lime-700">{{ $product->precio }} USD por
+                                                unidad</strong>
                                         </p>
                                     </div>
 
@@ -249,36 +287,21 @@
                                 </div>
 
                             </div>
-                            <div class="p-2 md:px-4 text-xs">
-                                <p class="font-medium text-sm">Detalles del pago</p>
-                                @if ($product->venta->tipo_pago == 0)
-                                    <p>Transferencia Bancaria - Ref. {{ $product->venta->referencia }}</p>
-                                @else
-                                    <p>Pago Móvil Bancario - Ref. {{ $product->venta->referencia }}</p>
-                                @endif
-                                <p>Banco {{ $product->venta->banco }}</p>
-                                @if ($product->venta->tipo_pago == 1)
-                                <p>Teléfono: {{ $product->venta->codigo }}-{{ $product->venta->telf }}</p>
-                                @endif
-                                <p>Registrado el {{ date('d-m-Y', strtotime($product->venta->fecha)) }}</p>
+                        @endforeach
 
-                                <p>Total Orden de compra Bs. {{ number_format($product->venta->total, 2, ',', '.') }}</p>
-                            </div>
-                        </div>
-                    @endforeach
+                    </div>
+                @else
+                    <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
+                        <span>Sin resultados </span>
+                    </div>
+                @endif
 
-                </div>
-            @else
-                <div class="mt-4 bg-white text-base font-semibold sm:px-10 px-5 py-2 shadow">
-                    <span>Sin resultados </span>
-                </div>
-            @endif
-
-            @if ($producto_comprado->hasPages())
-                <div class="w-1/2 mx-auto px-4 py-2 text-center my-20">
-                    {{ $producto_comprado->onEachSide(0)->links() }}
-                </div>
-            @endif
+                @if ($producto_comprado->hasPages())
+                    <div class="md:w-1/2 mx-auto px-4 py-2 text-center my-20">
+                        {{ $producto_comprado->onEachSide(0)->links() }}
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
 
@@ -342,7 +365,7 @@
             Swal.fire({
                 title: '¡Gracias!',
                 text: 'Su pago ha sido registrado con éxito. La orden de despacho ya fue generada. Esté atento a su correo electrónico.',
-                confirmButtonColor: '#1e40af',
+                confirmButtonColor: '#4b7b18',
                 confirmButtonText: 'OK'
             })
         </script>

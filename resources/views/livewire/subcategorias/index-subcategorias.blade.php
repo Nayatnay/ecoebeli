@@ -85,6 +85,26 @@
 
     </div>
 
+    <!--Modal MSG -->
+
+    <x-confirm-modal wire:model="msg">
+
+        <x-slot name="title">
+            Esta subcategoría no puede ser eliminada
+        </x-slot>
+
+        <x-slot name="content">
+            Única acción permitida: Edicion de datos
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$set('msg', false)">
+                Cerrar
+            </x-secondary-button>
+
+        </x-slot>
+    </x-confirm-modal>
+
     <!--Modal edit -->
 
     <x-dialog-modal wire:model="open_edit">
@@ -146,7 +166,7 @@
         </x-slot>
 
         <x-slot name="content">
-            ¿Está seguro de proceder con la eliminación de la Subcategoría?
+            ¿Está seguro de proceder con la eliminación de esta Subcategoría?
         </x-slot>
 
         <x-slot name="footer">

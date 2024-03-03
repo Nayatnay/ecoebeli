@@ -32,7 +32,7 @@
                     <x-input-error for="color" />
                 </div>
                 <div class=" mb-4">
-                    <x-label for="talla" value="{{ __('Talla') }} (Si aplica)" class="text-zinc-800" />
+                    <x-label for="talla" value="{{ __('Talla') }} (Op)" class="text-zinc-800" />
                     <x-input id="talla" class="block mt-1 w-full" type="text" name="talla"
                         wire:model.defer="talla" required autofocus />
                     <x-input-error for="talla" />
@@ -43,6 +43,12 @@
                 <x-input id="descripcion" class="block mt-1 w-full" type="text" name="descripcion"
                     wire:model.defer="descripcion" required autofocus />
                 <x-input-error for="descripcion" />
+            </div>
+            <div class=" mb-4">
+                <x-label for="acercade" value="{{ __('Indicaciones sobre el producto') }}" class="text-zinc-800" />
+                <x-input id="acercade" class="block mt-1 w-full" type="text" name="acercade"
+                    wire:model.defer="acercade" required autofocus />
+                <x-input-error for="acercade" />
             </div>
             
             <div class=" mb-4">
@@ -111,7 +117,7 @@
                     Cancelar
                 </x-secondary-button>
 
-                <x-button wire:click="save" wire:loading.attr="disabled" wire:target="save">
+                <x-button wire:click="save" wire:loading.attr="disabled" wire:target="save, imagen">
                     Aceptar
                 </x-button>
             </div>

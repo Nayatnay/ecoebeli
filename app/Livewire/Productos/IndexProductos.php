@@ -27,7 +27,7 @@ class IndexProductos extends Component
     public $msg = false;
     public $msgedit = false;
     public $bloqueo;
-    public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla;
+    public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla, $acercade;
     public $descripcion, $imagen, $precio, $stock, $imagenva;
     public $categoria, $subcategoria, $producto;
     public $slug;
@@ -40,12 +40,13 @@ class IndexProductos extends Component
             'codigo' => 'required|unique:productos,codigo,' . $this->producto->id,
             'id_categoria' => 'required',
             'id_subcategoria' => 'required',
-            'nombre' => 'required',
+            'nombre' => 'required|unique:productos,nombre,' . $this->producto->id,
             'marca' => 'required',
             'color' => 'required',
             'descripcion' => 'required',
+            'acercade' => 'required',
             'imagen' => 'required',
-            'imagenva' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048',
+            //'imagenva' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048',
             'precio' => 'required',
             'stock' => 'required',
         ];
@@ -77,12 +78,13 @@ class IndexProductos extends Component
 
     public function edit(Producto $producto)
     {
+        $this->producto = $producto;
+
         $prod_search = Detalleventa::where('id_producto', '=', $producto->id)->first();
         if ($prod_search == null) {
-            
+
             $this->bloqueo = 0;
-            
-            $this->producto = $producto;
+
             $this->codigo = $producto->codigo;
             $this->id_categoria = $producto->id_categoria;
             $this->id_subcategoria = $producto->id_subcategoria;
@@ -90,6 +92,7 @@ class IndexProductos extends Component
             $this->slug = $producto->slug;
             $this->marca = $producto->marca;
             $this->color = $producto->color;
+            $this->acercade = $producto->acercade;
             $this->talla = $producto->talla;
             $this->descripcion = $producto->descripcion;
             $this->imagen = $producto->imagen;
@@ -99,18 +102,16 @@ class IndexProductos extends Component
             $this->imagenva = null;
 
             $this->open_edit = true;
-
         } else {
             $this->msgedit = true;
         }
-        
     }
 
-    public function editar(Producto $producto){
-        
+    public function editar(Producto $producto)
+    {
         $this->msgedit = false;
         $this->bloqueo = 1;
-            
+
         $this->producto = $producto;
         $this->codigo = $producto->codigo;
         $this->id_categoria = $producto->id_categoria;
@@ -121,6 +122,7 @@ class IndexProductos extends Component
         $this->color = $producto->color;
         $this->talla = $producto->talla;
         $this->descripcion = $producto->descripcion;
+        $this->acercade = $producto->acercade;
         $this->imagen = $producto->imagen;
         $this->precio = $producto->precio;
         $this->stock = $producto->stock;
@@ -128,7 +130,6 @@ class IndexProductos extends Component
         $this->imagenva = null;
 
         $this->open_edit = true;
-
     }
 
     public function update()
@@ -136,30 +137,17 @@ class IndexProductos extends Component
         $subycat = Subcategoria::where('id', '=', $this->id_subcategoria,)->first();
         $this->id_categoria = $subycat->id_categoria;
 
+        $this->producto->slug = Str::slug($this->nombre, '-');
+
         if ($this->imagenva <> null) {
             $this->imagen = $this->imagenva;
             $fileName = time() . '.' . $this->imagen->extension();
             $this->imagen->storeAs('public/productos', $fileName);
             $this->imagen = $fileName;
-
-            $this->producto->slug = Str::slug($this->nombre, '-');
-
-            $validatedData = $this->validate();
-            $this->producto->update($validatedData);
-        } else {
-            $this->producto->codigo = $this->codigo;
-            $this->producto->id_categoria = $this->id_categoria;
-            $this->producto->id_subcategoria = $this->id_subcategoria;
-            $this->producto->nombre = $this->nombre;
-            $this->producto->slug = Str::slug($this->nombre, '-');
-            $this->producto->marca = $this->marca;
-            $this->producto->color = $this->color;
-            $this->producto->talla = $this->talla;
-            $this->producto->descripcion = $this->descripcion;
-            $this->producto->stock = $this->stock;
-            $this->producto->precio = $this->precio;
-            $this->producto->update();
         }
+
+        $validatedData = $this->validate();
+        $this->producto->update($validatedData);
 
         $this->imagenva = null;
 

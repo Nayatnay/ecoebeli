@@ -23,6 +23,7 @@ class Producto extends Model
         'color',
         'talla',
         'descripcion',
+        'acercade',
         'imagen',
         'precio',
         'stock',
@@ -60,6 +61,14 @@ class Producto extends Model
     }
 
     public function nombre(): Attribute
+    {
+        return new Attribute(
+            $get = fn ($value) => ucfirst($value),
+            $set = fn ($value) => strtolower($value)
+        );
+    }
+
+    public function descripcion(): Attribute
     {
         return new Attribute(
             $get = fn ($value) => ucfirst($value),

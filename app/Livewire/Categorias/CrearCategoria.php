@@ -20,7 +20,7 @@ class CrearCategoria extends Component
     protected $listeners = ['render'];
 
     protected $rules = [
-        'nombre' => 'required',
+        'nombre' => 'required|unique:categorias',
         'descripcion' => 'required',
         'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048'
     ];
@@ -32,6 +32,7 @@ class CrearCategoria extends Component
 
     public function save()
     {
+        //dd($this->imagen);
         $this->validate();
 
         $fileName = time() . '.' . $this->imagen->extension();

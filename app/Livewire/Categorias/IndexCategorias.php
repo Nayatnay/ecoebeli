@@ -3,6 +3,7 @@
 namespace App\Livewire\Categorias;
 
 use App\Models\Categoria;
+use App\Models\Producto;
 use BaconQrCode\Renderer\Path\Path;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Livewire\Component;
@@ -18,6 +19,7 @@ class IndexCategorias extends Component
 
     public $open_delete = false;
     public $open_edit = false;
+    public $msg = false;
     public $categoria, $imagen, $nombre, $descripcion, $identificador, $imagenva;
     public $slug;
 
@@ -32,17 +34,22 @@ class IndexCategorias extends Component
     protected function rules()
     {
         return [
-            'nombre' => 'required',
+            'nombre' => 'required|unique:categorias,nombre,' . $this->categoria->id,
             'descripcion' => 'required',
             'imagen' => 'required',
-            'imagenva' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048'
+            //'imagenva' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048' . $this->categoria->id,
         ];
     }
 
     public function delete(Categoria $categoria)
     {
         $this->categoria = $categoria;
-        $this->open_delete = true;  
+        $cat_search = Producto::where('id_categoria', '=', $categoria->id)->first();
+        if ($cat_search == null) {
+            $this->open_delete = true;
+        } else {
+            $this->msg = true;
+        }
     }
 
     public function destroy()
@@ -54,7 +61,7 @@ class IndexCategorias extends Component
 
     public function edit(Categoria $categoria)
     {
-        
+
         $this->categoria = $categoria;
         $this->nombre = $categoria->nombre;
         $this->slug = $categoria->slug;
@@ -68,23 +75,19 @@ class IndexCategorias extends Component
 
     public function update()
     {
+
+        $this->categoria->slug = Str::slug($this->nombre, '-');
+
         if ($this->imagenva <> null) {
             $this->imagen = $this->imagenva;
             $fileName = time() . '.' . $this->imagen->extension();
             $this->imagen->storeAs('public/categorias', $fileName);
             $this->imagen = $fileName;
-
-            $this->categoria->slug = Str::slug($this->nombre, '-');
-
-            $validatedData = $this->validate();
-            $this->categoria->update($validatedData);
-        } else {
-            $this->categoria->nombre = $this->nombre;
-            $this->categoria->slug = Str::slug($this->nombre, '-');
-            $this->categoria->descripcion = $this->descripcion;
-            $this->categoria->update();
         }
-
+        
+        $validatedData = $this->validate();
+        $this->categoria->update($validatedData);
+        
         $this->imagenva = null;
 
         $this->reset(['open_edit', 'nombre', 'descripcion', 'imagen']);  //cierra el modal y limpia los campos del formulario

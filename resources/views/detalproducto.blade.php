@@ -107,12 +107,7 @@
                 <p>Acerca de este Producto</p>
             </div>
             <div class="mt-2">
-                <p class="text-justify">▪ Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reprehenderit sapiente harum
-                    delectus deleniti quasi quo consequatur recusandae cupiditate corrupti soluta impedit, ea cum enim
-                    quia, repellat ullam ad eius.</p>
-                <p class="text-justify">▪ Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur reprehenderit sapiente harum
-                    delectus deleniti quasi quo consequatur recusandae cupiditate corrupti soluta impedit, ea cum enim
-                    quia, repellat ullam ad eius.</p>
+                <p class="text-justify"><strong class="mr-2">▪</strong>{{$producto->acercade}} </p>
             </div>
         </div>
 

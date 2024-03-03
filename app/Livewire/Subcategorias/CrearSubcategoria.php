@@ -17,7 +17,7 @@ class CrearSubcategoria extends Component
     protected $listeners = ['render'];
 
     protected $rules = [
-        'nombre' => 'required',
+        'nombre' => 'required|unique:subcategorias',
         'id_categoria' => 'required',
     ];
 

@@ -16,7 +16,7 @@ class CrearProducto extends Component
     use WithFileUploads;
 
     public $open_crear = false;
-    public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla;
+    public $identificador, $codigo, $id_categoria, $id_subcategoria, $nombre, $marca, $color, $talla, $acercade;
     public $descripcion, $imagen, $precio, $stock, $catbuscada;
     public $slug;
 
@@ -30,10 +30,11 @@ class CrearProducto extends Component
         'codigo' => 'required|unique:productos',
         
         'id_subcategoria' => 'required',
-        'nombre' => 'required',
+        'nombre' => 'required|unique:productos',
         'marca' => 'required',
         'color' => 'required',
         'descripcion' => 'required',
+        'acercade' => 'required',
         'imagen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|dimensions:min_width=100,min_height=100,max_width=640,max_height=480|max:2048',
         'precio' => 'required',
         'stock' => 'required',
@@ -75,19 +76,20 @@ class CrearProducto extends Component
             'color' => $this->color,
             'talla' => $this->talla,
             'descripcion' => $this->descripcion,
+            'acercade' => $this->acercade,
             'imagen' => $fileName,
             'precio' => $this->precio,
             'stock' => $this->stock,
         ]);
 
-        $this->reset(['open_crear', 'codigo', 'id_categoria', 'id_subcategoria', 'nombre', 'marca', 'color', 'talla', 'descripcion', 'imagen', 'precio', 'stock']);
+        $this->reset(['open_crear', 'codigo', 'id_categoria', 'id_subcategoria', 'acercade', 'nombre', 'marca', 'color', 'talla', 'descripcion', 'imagen', 'precio', 'stock']);
         $this->identificador = rand(); // reemplaza el valor del identificador. Reseteará el nombre de la imagen seleccionada anteriormente
         return redirect()->route('adminpro')->with('creado', 'ok');
     }
 
     public function cancelar()
     {
-        $this->reset(['open_crear', 'codigo', 'id_categoria', 'id_subcategoria', 'nombre', 'marca', 'color', 'talla', 'descripcion', 'imagen', 'precio', 'stock']);
+        $this->reset(['open_crear', 'codigo', 'id_categoria', 'id_subcategoria', 'nombre', 'marca', 'color', 'talla', 'acercade', 'descripcion', 'imagen', 'precio', 'stock']);
         $this->identificador = rand();
     }
 

@@ -22,7 +22,7 @@ class CarroController extends Controller
 
         $categ = Categoria::all()->sortBy('nombre');
         $productos = Producto::orderBy('nombre')->paginate(6);
-        $produc = Producto::where('precio', '<>', 0)->inRandomOrder()->limit(8)->get();
+        $produc = Producto::where('precio', '<', 50)->inRandomOrder()->limit(4)->get();
 
         //actualizar precios de los productos que estan en el carrito de compras
 

@@ -3,6 +3,7 @@
 namespace App\Livewire\Subcategorias;
 
 use App\Models\Categoria;
+use App\Models\Producto;
 use App\Models\Subcategoria;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -15,6 +16,7 @@ class IndexSubcategorias extends Component
 
     public $open_delete = false;
     public $open_edit = false;
+    public $msg = false;
     public $categoria, $subcategoria, $nombre, $id_categoria, $slug;
 
     public function mount(Categoria $categoria)
@@ -27,7 +29,7 @@ class IndexSubcategorias extends Component
     protected function rules()
     {
         return [
-            'nombre' => 'required',
+            'nombre' => 'required|unique:subcategorias,nombre,' . $this->subcategoria->id,
             'id_categoria' => 'required',
         ];
     }
@@ -35,7 +37,13 @@ class IndexSubcategorias extends Component
     public function delete(Subcategoria $subcategoria)
     {
         $this->subcategoria = $subcategoria;
-        $this->open_delete = true;
+        $cat_search = Producto::where('id_subcategoria', '=', $subcategoria->id)->first();
+        if ($cat_search == null) {
+            $this->open_delete = true;
+        } else {
+            $this->subcategoria = $subcategoria;
+            $this->msg = true;
+        }
     }
 
     public function destroy()
@@ -59,8 +67,25 @@ class IndexSubcategorias extends Component
     {
         $this->subcategoria->slug = Str::slug($this->nombre, '-');
 
-        $validatedData = $this->validate();
-        $this->subcategoria->update($validatedData);
+        if ($this->subcategoria->id_categoria <> $this->id_categoria) {
+
+            $validatedData = $this->validate();
+            $this->subcategoria->update($validatedData);
+
+            $prodnvo = Producto::where('id_subcategoria', '=', $this->subcategoria->id)->get();
+            if ($prodnvo == null) {
+                $this->reset(['open_edit', 'nombre', 'categoria']);  //cierra el modal y limpia los campos del formulario
+                $this->dispatch('index-subcategorias');
+            } else {
+                foreach ($prodnvo as $pron) {
+                    $pron->id_categoria = $this->subcategoria->id_categoria;
+                    $pron->update();
+                }
+            }
+        }else{
+            $validatedData = $this->validate();
+            $this->subcategoria->update($validatedData);
+        }
 
         $this->reset(['open_edit', 'nombre', 'categoria']);  //cierra el modal y limpia los campos del formulario
         $this->dispatch('index-subcategorias');
