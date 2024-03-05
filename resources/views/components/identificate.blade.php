@@ -2,20 +2,40 @@
     @if (Route::has('login'))
         @auth
             <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-sm font-semibold">
-                <p class="px-10 py-2 border-b border-gray-400 mb-1 uppercase font-semibold text-lg">{{ucwords(Auth::user()->name)}}</p>
-                
-                <div class="text-center px-4 py-2 font-light">
-                    <p>Una manera sencilla de navegar en tu tienda. <a href="{{ route('admintienda') }}" class="text-orange-600 font-normal hover:underline">Visualiza aquí.</a></p>
+
+                <div class="flex items-center text-xs md:text-sm font-normal">
+                    @php
+                        $partes = explode(' ', ucwords(Auth::user()->name));
+                    @endphp
+                    <p class="bg-zinc-900 py-2 px-4 text-white rounded-tl-md rounded-bl-md"><i
+                            class="fa-solid fa-toggle-on mr-2"></i>Cta Ebeli iniciada</p>
+                    <p class="bg-lime-600 font-semibold text-white uppercase py-2 px-4 rounded-tr-md rounded-br-md">
+                        {{ $partes[0] }}
+                    </p>
+                </div>
+
+                <div class="text-center mt-4 px-4 font-normal text-xs">
+                    <p class="text-gray-700 mb-2">Una manera sencilla de navegar en tu tienda</p>
+                    <p>
+                        <a href="{{ route('admintienda') }}" class="text-lime-600 font-medium hover:underline">Visualiza
+                            aquí</a>
+                    </p>
                 </div>
             </div>
         @else
-            <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-xs font-semibold">
-                <a href="{{ route('login') }}" class="rounded-md px-20 py-2 bg-lime-500 mb-1">Identifícate</a>
-                <div class="text-xs">
-                    <span>¿Eres un cliente nuevo?</span>
-                    <a href="{{ route('register') }}" class="text-orange-600 hover:underline">Empieza aquí.</a>
-                </div>
+        <div class="mb-8 border-y border-zinc-300  py-10 flex flex-col items-center text-sm">
+            <div class="flex items-center text-sm font-normal text-white">
+                <p class="bg-zinc-900 py-2 px-4 rounded-tl-md rounded-bl-md"><i
+                        class="fa-solid fa-user"></i></p>
+                <a href="{{ route('login') }}" class="text-black rounded-tr-md rounded-br-md px-8 py-2
+                 bg-lime-600 hover:bg-lime-500">Identifícate
+                </a>
             </div>
+            <div class="text-center text-xs font-medium mt-6">
+                <span class="text-gray-800 mb-2">¿Eres un cliente nuevo?</span>
+                <span><a href="{{ route('register') }}" class="text-lime-600 hover:underline">Empieza aquí.</a></span>
+            </div>
+        </div>
         @endauth
     @endif
 </div>

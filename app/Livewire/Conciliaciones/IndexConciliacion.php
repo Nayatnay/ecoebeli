@@ -30,6 +30,11 @@ class IndexConciliacion extends Component
         $this->dispatch('index-conciliacion');
     }
 
+    public function contactar(Venta $ventas)
+    {
+        dd($ventas);
+    }
+
     public function consultar()
     {
         $this->mes = date('m', strtotime($this->fecha));

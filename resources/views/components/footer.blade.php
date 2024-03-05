@@ -1,19 +1,17 @@
 <div>
     <footer class="bg-zinc-900 text-white text-xs p-8 text-center">
         <p class="mb-4 text-sm font-semibold">Síguenos</p>
-        <div class="mb-10 text-white font-normal flex justify-center">
+        <div class="mb-10 text-sm text-white font-normal flex justify-center">
 
             <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank"
-                class="flex items-end font-light hover:font-normal">
-                <img src="{{ asset('img/facebook.png') }}" width="24" height="auto" title=""
-                    alt="facebook">
-                <p class="w-20 text-left ml-2 text-sm">Facebook</p>
+                class="flex items-center font-light hover:font-normal">
+                <i class="fa-brands fa-facebook text-xl"></i>
+                <p class="w-20 text-left ml-2">Facebook</p>
             </a>
             <a href="https://www.facebook.com/ospnetsistemas-106305848174358" , target="blank"
-                class="flex items-end font-light hover:font-normal">
-                <img src="{{ asset('img/instagram.png') }}" width="24" height="auto" title=""
-                    alt="instagram">
-                <p class="w-20 text-left ml-2 text-sm">Instagram</p>
+                class="flex items-center font-light hover:font-normal">
+                <i class="fa-brands fa-instagram text-xl"></i>
+                <p class="w-20 text-left ml-2">Instagram</p>
             </a>
         </div>
 

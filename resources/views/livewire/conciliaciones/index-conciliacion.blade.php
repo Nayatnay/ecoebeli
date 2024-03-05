@@ -46,10 +46,17 @@
                                         {{ number_format($ventas->total, 2, ',', '.') }} BS.
                                     </td>
                                     <td
-                                        class="bg-lime-600 border border-gray-300 text-white px-2 w-40 text-sm font-medium text-center">
+                                        class="bg-lime-600 border border-gray-300 text-white px-2 w-32 text-sm font-medium text-center">
                                         <a href="#" wire:click="alerta({{ $ventas }})"
                                             title="Marcar como conciliado" class="hover:underline">
                                             Conciliar
+                                        </a>
+                                    </td>
+                                    <td
+                                        class="bg-lime-600 border border-gray-300 text-white px-1 w-10 text-sm font-medium text-center">
+                                        <a href="#" wire:click="contactar({{ $ventas }})"
+                                            title="Contactar" class="hover:text-zinc-700">
+                                            <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -112,7 +119,7 @@
                 </div>
             @else
                 <div class="mt-4 bg-white text-sm font-semibold sm:px-10 px-5 py-2 shadow">
-                    <span>No hay pagos por conciliar </span>
+                    <span>No hay pagos conciliados </span>
                 </div>
             @endif
 

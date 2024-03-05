@@ -1,7 +1,7 @@
 <div>
-    <div class="text-xs md:text-sm font-normal text-lime-700">
+    <div class="text-base md:text-lg font-medium text-lime-700">
         <p wire:click="$set('open', true)" class="cursor-pointer inline-block  hover:underline">
-            <i class="fa-solid fa-money-bill mr-4"></i>
+            <i class="fa-solid fa-money-bill mr-1"></i>
             Agregar información del pago
         </p>
     </div>

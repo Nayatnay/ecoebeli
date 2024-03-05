@@ -133,10 +133,10 @@
                 </div>
 
                 <div class="p-4 border-t text-sm text-justify">
-                    <p>Para tramitar su pago <strong>desde Venezuela</strong> hágalo a través de la Banca
-                        <strong>Banesco Banca Universal,</strong> con transferencia
-                        a la cuenta 0134-0426-77-5236-541234
-                        a nombre de <strong>Ebeli, C.A. </strong> Registro de Identificación Fiscal J-30621425-8.
+                    <p>Para <strong>tramitar su pago desde Venezuela</strong> hágalo a través de la Banca
+                        <strong>Banesco Banca Universal,</strong> con transferencia o pago móvil
+                        a la cuenta 0134-0426-77-5236-541234, Telf. 0414.1823819. Titular de la cuenta
+                        <strong>Ebeli, C.A. </strong> Registro de Identificación Fiscal J-30621425-8.
                     </p>
                     <div class="mt-4 text-xs font-medium">
                         <span>Para utilizar otros medios de pago </span>
@@ -190,29 +190,44 @@
         <div class="max-w-screen-xl mx-auto p-4 my-6">
 
             <div class="w-full p-6 md:p-8 rounded-lg bg-white border border-gray-200">
-
-                <div class="font-bold pb-4 border-b">
-                    <p>3. Registrar el pago</p>
-                </div>
                 @if (\Cart::getSubtotal() != 0)
-                    <div class="my-8">
-                        <div class="mb-6 text-sm">
-                            Asegúrate de realizar tu pago por el monto exacto a la tasa del dia.
-                            Tu pago pendiente en moneda nacional es de
-                            <strong> Bs. {{ number_format($bolivares, 2, '.', '.') }} </strong>
+                    @if ($bolivares == 0)
+                        <div class="font-bold pb-4 border-b">
+                            <p>3. Registrar el pago <i class="fa-regular fa-bell text-orange-600 ml-4"></i></p>
                         </div>
-                        @livewire('compras.registrar-pago')
-                    </div>
+                        <div class="my-4 text-sm">
+                            <p>La opción para registrar su pago estará activa en pocos minutos.</p>
+                        </div>
+                    @else
+                        <div class="font-bold pb-4 border-b">
+                            <p>3. Registrar el pago</p>
+                        </div>
+
+                        <div class="my-8">
+                            <div class="mb-6 text-sm">
+                                Asegúrate de realizar tu pago por el monto exacto a la tasa del día.
+                                Tu pago pendiente en moneda nacional es de
+                                <strong> Bs. {{ number_format($bolivares, 2, '.', '.') }} </strong>
+                            </div>
+                            @livewire('compras.registrar-pago')
+                        </div>
+                    @endif
                 @else
+                    <div class="font-bold pb-4 border-b">
+                        <p>3. Registrar el pago</p>
+                    </div>
+
                     <div class="my-6 text-base md:text-xl md:pl-4">
                         <p class="font-medium mb-4 text-lime-700">Sin pagos pendientes</p>
-                        <p class="text-xs md:text-base font-normal text-gray-700 text-justify">Llena tu carrito con los
+                        <p class="text-xs md:text-base font-normal text-gray-700 text-justify">Llena tu carrito con
+                            los
                             artículos de tu
                             preferencia, ropa, artículos para el hogar,
                             electrónicos, y más. Continúa comprando en <a href="{{ route('admintienda') }}"
                                 class="text-lime-700 underline font-medium">tu tienda.</a></p>
                     </div>
                 @endif
+
             </div>
 
         </div>
@@ -223,7 +238,7 @@
 
             <div class="bg-white rounded-lg p-4">
 
-                <p class="mb-4 px-2 md:px-4 text-2xl font-bold">Historial de Compras</p>
+                <p class="mt-4 px-2 md:px-4 text-2xl font-bold">Historial de Compras</p>
 
                 @if ($producto_comprado->count())
 
@@ -237,10 +252,8 @@
                                     $idcompra = $product->id_venta;
                                 @endphp
 
-                                <p class="font-medium text-sm pt-4 ml-2 border-t">Detalles del pago</p>
-
-                                <div class="mb-4">
-                                    <div class="mt-1 flex flex-wrap text-xs">
+                                <div class="pt-4 border-t mt-8">
+                                    <div class="flex flex-wrap text-xs">
 
                                         @if ($product->venta->tipo_pago == 0)
                                             <p class="font-medium ml-2">Transferencia Bancaria - Ref.
@@ -257,14 +270,19 @@
                                         <p class="ml-2">Registrado el día
                                             {{ date('d-m-Y', strtotime($product->venta->fecha)) }}</p>
                                     </div>
-                                    <p class="text-sm ml-2 text-lime-700 font-bold mt-1">Total pagado Bs.
-                                        {{ number_format($product->venta->total, 2, ',', '.') }}
-                                    </p>
+                                    <div class="flex items-center justify-between font-bold text-sm ">
+                                        <p class="ml-2 text-lime-700">Total pagado Bs.
+                                            {{ number_format($product->venta->total, 2, ',', '.') }}
+                                        </p>
+                                        <p class="font-medium text-xs text-orange-600 hover:underline cursor-pointer">
+                                            <i class="fa-regular fa-message mr-2"></i>Informar problema con esta compra
+                                        </p>
+                                    </div>
                                 </div>
                             @endif
 
 
-                            <div class="flex items-center ml-2 my-8">
+                            <div class="flex items-center ml-2 my-4">
 
                                 <div class="w-[160px] mr-2 md:mr-4 ">
                                     <img src="{{ asset('/storage/productos/' . $product->producto->imagen) }}"
