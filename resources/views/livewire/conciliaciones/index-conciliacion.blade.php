@@ -53,9 +53,9 @@
                                         </a>
                                     </td>
                                     <td
-                                        class="bg-lime-600 border border-gray-300 text-white px-1 w-10 text-sm font-medium text-center">
-                                        <a href="#" wire:click="contactar({{ $ventas }})"
-                                            title="Contactar" class="hover:text-zinc-700">
+                                        class="bg-zinc-800 border-b border-gray-300 text-lime-500 px-1 w-10 text-sm font-medium text-center">
+                                        <a href="#" wire:click="contactar({{ $ventas }})" title="Contactar"
+                                            class="hover:text-lime-400">
                                             <i class="fa-solid fa-envelope"></i>
                                         </a>
                                     </td>
@@ -138,15 +138,15 @@
 
             <div class="flex flex-col md:flex-row justify-around py-4 border-b">
                 <div>
-                    <p class="text-2xl text-lime-700 font-medium">{{number_format($ventasconmes, 2, ',', '.') }}</p>
+                    <p class="text-2xl text-lime-700 font-medium">{{ number_format($ventasconmes, 2, ',', '.') }}</p>
                     <p class="text-xs text-gray-500 font-medium">CONCILIADAS</p>
                 </div>
                 <div class="my-4 md:my-0">
-                    <p class="text-2xl text-lime-700 font-medium">{{number_format($ventassinmes, 2, ',', '.') }}</p>
+                    <p class="text-2xl text-lime-700 font-medium">{{ number_format($ventassinmes, 2, ',', '.') }}</p>
                     <p class="text-xs text-gray-500 font-medium">PENDIENTES DE CONCILIACION</p>
                 </div>
                 <div>
-                    <p class="text-2xl text-lime-700 font-medium">{{number_format($totproductos, 0, ',', '.') }}</p>
+                    <p class="text-2xl text-lime-700 font-medium">{{ number_format($totproductos, 0, ',', '.') }}</p>
                     <p class="text-xs text-gray-500 font-medium">PRODUCTOS</p>
                 </div>
             </div>
@@ -154,7 +154,7 @@
 
 
         <div class="max-w-screen-xl mx-auto w-full my-14">
-            
+
             <form action="" wire:submit="consultar" class="flex flex-col items-center p-2 rounded">
                 <p class="px-4">CONSULTA OTROS TOTALES</p>
                 <input type="month" name="fecha" id="fecha" value="" wire:model="fecha"
@@ -203,11 +203,11 @@
         </x-slot>
 
         <x-slot name="content">
-            
+
             <div class="flex flex-col md:flex-row justify-around text-center">
                 <div>
                     <p class="text-xl font-bold text-lime-700">{{ number_format($this->totalescon, 2, ',', '.') }}</p>
-                    <p class="text-xs text-gray-500 font-medium">CONCILIADAS</p>                
+                    <p class="text-xs text-gray-500 font-medium">CONCILIADAS</p>
                 </div>
                 <div class="my-4 md:my-0 mx-6 md:border-x px-4">
                     <p class="text-xl font-bold text-lime-700">{{ number_format($this->totalessin, 2, ',', '.') }}</p>
@@ -215,10 +215,10 @@
                 </div>
                 <div>
                     <p class="text-xl font-bold text-lime-700">{{ number_format($this->totalespro, 0, ',', '.') }}</p>
-                    <p class="text-xs text-gray-500 font-medium">PRODUCTOS</p>                
+                    <p class="text-xs text-gray-500 font-medium">PRODUCTOS</p>
                 </div>
             </div>
-            
+
         </x-slot>
 
         <x-slot name="footer">
@@ -228,5 +228,63 @@
 
         </x-slot>
     </x-confirm-modal>
+
+    <!--Modal reporte -->
+
+    <x-reportar-modal wire:model="open_reporte">
+
+        <x-slot name="title">
+            <p>Reportar un problema</p>
+            <p class="text-xs font-extrabold cursor-pointer" wire:click="cancelar"><i class="fa-solid fa-x"></i></p>
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="mb-4">
+                <x-label for="problema" value="{{ __('¿Cuál es el problema con este pago?') }}"
+                    class="text-zinc-800 font-medium " />
+                <select name="problema" id="problema" wire:model="problema" onchange="fntnpro()"
+                    class="w-full mt-2 p-2 text-xs rounded-md border font-medium text-zinc-600 border-gray-200 focus:border-gray-300 focus:ring-0">
+                    <option class="text-xs md:text-sm bg-gray-100" value="0">Selecciona el tipo de problema
+                    </option>
+                    <option class="text-xs md:text-sm" value="1">El pago no está registrado en nuestras cuentas
+                    </option>
+                    <option class="text-xs md:text-sm" value="2">El pago fue hecho por un monto inferior al
+                        indicado en la orden</option>
+                    <option class="text-xs md:text-sm" value="3">Otro</option>
+                </select>
+                <x-input-error for="problema" />
+            </div>
+
+            <div id="detalleprob" class="hidden w-full">
+                <x-label for="detalle" value="{{ __('Explique el problema con este pago') }}" class="text-zinc-800 font-medium " />
+                
+                    <textarea name="detalle" wire:model="detalle"
+                    class="mt-2 w-full text-xs rounded-md border-l-8 
+                     text-zinc-600 focus:ring-0">
+                    </textarea>
+                
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+            <button wire:click="cancelar"
+                class="px-4 py-1 rounded-md ring-2 ring-lime-500 hover:ring">
+                Enviar
+            </button>
+        </x-slot>
+
+    </x-reportar-modal>
+    <script>
+        function fntnpro() {
+            var opcion = document.getElementById("problema").value;
+            if (opcion == 3) {
+                document.getElementById("detalleprob").style.display = "block";
+            } else {
+                document.getElementById("detalleprob").style.display = "none";
+            }
+        }
+    </script>
 
 </div>

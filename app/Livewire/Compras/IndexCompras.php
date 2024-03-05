@@ -17,6 +17,9 @@ class IndexCompras extends Component
     public $open_edit = false;
     public $medio, $vencimiento, $mes, $ano;
 
+    public $open_reporte = false;
+    public $problema, $detalle, $venta;
+
     protected $listeners = ['render'];
 
     protected function rules()
@@ -48,6 +51,18 @@ class IndexCompras extends Component
 
         $this->reset(['open_edit', 'mes', 'ano']);  //cierra el modal y limpia los campos del formulario
         $this->dispatch('index-compras');
+    }
+
+    public function cancelar()
+    {
+        $this->reset(['open_reporte', 'problema', 'detalle']);  //cierra el modal     
+        $this->dispatch('index-compras');
+    }
+
+    public function contactar(Venta $venta)
+    {
+        $this->venta = $venta;
+        $this->open_reporte = true;
     }
 
     public function render()

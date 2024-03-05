@@ -274,7 +274,7 @@
                                         <p class="ml-2 text-lime-700">Total pagado Bs.
                                             {{ number_format($product->venta->total, 2, ',', '.') }}
                                         </p>
-                                        <p class="font-medium text-xs text-orange-600 hover:underline cursor-pointer">
+                                        <p class="text-xs text-orange-600 hover:underline cursor-pointer" wire:click="contactar({{ $product->id_venta }})">
                                             <i class="fa-regular fa-message mr-2"></i>Informar problema con esta compra
                                         </p>
                                     </div>
@@ -377,6 +377,62 @@
         </x-slot>
 
     </x-dialog-modal>
+
+    <!--Modal reporte -->
+
+    <x-reportar-modal wire:model="open_reporte">
+
+        <x-slot name="title">
+            <p>Informar un problema</p>
+            <p class="text-xs font-extrabold cursor-pointer" wire:click="cancelar"><i class="fa-solid fa-x"></i></p>
+        </x-slot>
+
+        <x-slot name="content">
+
+            <div class="mb-4">
+                <x-label for="problema" value="{{ __('¿Cuál es el problema con esta compra?') }}"
+                    class="text-zinc-800 font-medium " />
+                <select name="problema" id="problema" wire:model="problema" onchange="fntnpro()"
+                    class="w-full mt-2 p-2 text-xs rounded-md border font-medium text-zinc-600 border-gray-200 focus:border-gray-300 focus:ring-0">
+                    <option class="text-xs md:text-sm bg-gray-100" value="0">Selecciona el tipo de problema
+                    </option>
+                    <option class="text-xs md:text-sm" value="1">No he recibido el producto</option>
+                    <option class="text-xs md:text-sm" value="2">El producto llegó dañado</option>
+                    <option class="text-xs md:text-sm" value="3">Otro</option>
+                </select>
+                <x-input-error for="problema" />
+            </div>
+
+            <div id="detalleprob" class="hidden w-full">
+                <x-label for="detalle" value="{{ __('Explique el problema con esta compra') }}" class="text-zinc-800 font-medium " />
+                
+                    <textarea name="detalle" wire:model="detalle"
+                    class="mt-2 w-full text-xs rounded-md border-l-8 
+                     text-zinc-600 focus:ring-0">
+                    </textarea>
+                
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+            <button wire:click="cancelar"
+                class="px-4 py-1 rounded-md ring-2 ring-lime-500 hover:ring">
+                Enviar
+            </button>
+        </x-slot>
+
+    </x-reportar-modal>
+    <script>
+        function fntnpro() {
+            var opcion = document.getElementById("problema").value;
+            if (opcion == 3) {
+                document.getElementById("detalleprob").style.display = "block";
+            } else {
+                document.getElementById("detalleprob").style.display = "none";
+            }
+        }
+    </script>
 
     @if (session('info') == 'ok')
         <script>

@@ -11,7 +11,9 @@ class IndexConciliacion extends Component
 {
     public $open = false;
     public $open_totales = false;
+    public $open_reporte = false;
     public $ventas, $fecha, $totalescon, $totalessin, $totalespro, $fechita, $mes, $ano;
+    public $problema, $detalle;
 
     protected $listeners = ['render'];
 
@@ -20,6 +22,13 @@ class IndexConciliacion extends Component
         $this->ventas = $ventas;
         $this->open = true;
     }
+
+    public function cancelar()
+    {
+        $this->reset(['open_reporte', 'problema', 'detalle']);  //cierra el modal     
+        $this->dispatch('index-conciliacion');
+    }
+
 
     public function conciliar()
     {
@@ -32,7 +41,8 @@ class IndexConciliacion extends Component
 
     public function contactar(Venta $ventas)
     {
-        dd($ventas);
+        $this->ventas = $ventas;
+        $this->open_reporte = true;
     }
 
     public function consultar()
