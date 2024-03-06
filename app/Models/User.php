@@ -83,6 +83,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Venta', 'id_user');
     }
 
+    //Relacion uno a muchos
+
+    public function reportesc()
+    {
+        return $this->hasMany('App\Models\Reportesc', 'id_user');
+    }
+
     //Contro, de atributos
 
     public function name(): Attribute

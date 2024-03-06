@@ -20,6 +20,7 @@ class Venta extends Model
         'impuesto',
         'total',
         'estado',
+        'reporte',
     ];
 
     //Relacion uno a muchos
@@ -29,10 +30,17 @@ class Venta extends Model
         return $this->hasMany('App\Models\Detalleventa', 'id_venta');
     }
 
-    //Relacion uno a muchos (inversa)
+    //Relacion uno a muchos
 
-    public function user(){
-        return $this->belongsTo('App\Models\User', 'id_user');
+    public function reportesc()
+    {
+        return $this->hasMany('App\Models\Reportesc', 'id_venta');
     }
 
+    //Relacion uno a muchos (inversa)
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'id_user');
+    }
 }

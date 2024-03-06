@@ -67,6 +67,7 @@ class RegistrarPago extends Component
             'total' => $this->total,
             'impuesto' => 0,
             'estado' => 0,
+            'reporte' => 0,
         ]);
 
         $venta = Venta::orderBy('id', 'desc')->first();

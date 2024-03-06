@@ -5,6 +5,7 @@ namespace App\Livewire\Compras;
 use App\Models\Detalleventa;
 use App\Models\Medio;
 use App\Models\Producto;
+use App\Models\Reportesc;
 use App\Models\Tasa;
 use App\Models\Venta;
 use Darryldecode\Cart\Facades\CartFacade;
@@ -18,7 +19,8 @@ class IndexCompras extends Component
     public $medio, $vencimiento, $mes, $ano;
 
     public $open_reporte = false;
-    public $problema, $detalle, $venta;
+    public $open_mssg = false;
+    public $problema, $detalle, $venta, $mssg;
 
     protected $listeners = ['render'];
 
@@ -64,6 +66,49 @@ class IndexCompras extends Component
         $this->venta = $venta;
         $this->open_reporte = true;
     }
+
+    public function enviar()
+    {
+
+        if ($this->problema == 0 ||  $this->problema == null) {
+            $this->reset(['open_reporte', 'problema', 'detalle']);  //cierra el modal     
+            $this->dispatch('index-compras');
+        } else {
+
+            if ($this->problema == 1) {
+                $msg = 'No he recibido el producto';
+            }
+            if ($this->problema == 2) {
+                $msg = 'El producto llegó dañado';
+            }
+            if ($this->problema == 3) {
+                $msg = $this->detalle;
+            }
+
+            Reportesc::create([
+                'id_venta' => $this->venta->id,
+                'id_user' => $this->venta->id_user,
+                'mensaje' => $msg,
+                'estado' => 0, //problema sin resolver
+            ]);
+
+            $vta = venta::where('id', '=', $this->venta->id)->first(); //busco la venta 
+            if ($vta <> null) {
+                $vta->reporte = 1; //para indicar que se ha generado reporte
+                $vta->update();
+            }
+
+            return redirect()->route('admincom');
+        }
+    }
+
+    public function vereport($venta)
+    {
+        $msgreport = Reportesc::where('id_venta', '=', $venta)->first();
+        $this->mssg = $msgreport->mensaje;
+        $this->open_mssg = true;
+    }
+
 
     public function render()
     {
@@ -113,6 +158,7 @@ class IndexCompras extends Component
         //Productos comprados por el usuario
         $producto_comprado = Detalleventa::whereIn('id_venta', $ventas)->orderBy('id', 'desc')
             ->paginate(6, ['*'], 'inscribirbs');
+
 
         return view('livewire.compras.index-compras', compact('medios', 'bolivares', 'compras', 'producto_comprado'));
     }

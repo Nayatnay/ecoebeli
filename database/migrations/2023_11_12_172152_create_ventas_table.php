@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('impuesto', 8, 2);
             $table->decimal('total', 8, 2); 
             $table->integer('estado');  
+            $table->integer('reporte'); 
             $table->timestamps();
 
              // Llave foranea

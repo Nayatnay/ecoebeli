@@ -271,12 +271,23 @@
                                             {{ date('d-m-Y', strtotime($product->venta->fecha)) }}</p>
                                     </div>
                                     <div class="flex items-center justify-between font-bold text-sm ">
-                                        <p class="ml-2 text-lime-700">Total pagado Bs.
+                                        <p class="mx-2 text-lime-700">Total pagado Bs.
                                             {{ number_format($product->venta->total, 2, ',', '.') }}
                                         </p>
-                                        <p class="text-xs text-orange-600 hover:underline cursor-pointer" wire:click="contactar({{ $product->id_venta }})">
-                                            <i class="fa-regular fa-message mr-2"></i>Informar problema con esta compra
-                                        </p>
+                                        @if ($product->venta->reporte == 1)
+                                            <p class="text-xs rounded-md p-2 font-normal hover:underline cursor-pointer"
+                                                wire:click="vereport({{ $product->id_venta }})">
+                                                <i class="fa-solid fa-star mr-1 text-orange-600"></i>
+                                                Reporte en Proceso
+                                            </p>
+                                        @else
+                                            <p class="text-xs md:text-black text-orange-600 font-normal hover:underline cursor-pointer"
+                                                wire:click="contactar({{ $product->id_venta }})">
+                                                <i class="fa-regular fa-message mr-1"></i>
+                                                Informar problema con esta compra
+                                            </p>
+                                        @endif
+
                                     </div>
                                 </div>
                             @endif
@@ -392,7 +403,7 @@
             <div class="mb-4">
                 <x-label for="problema" value="{{ __('¿Cuál es el problema con esta compra?') }}"
                     class="text-zinc-800 font-medium " />
-                <select name="problema" id="problema" wire:model="problema" onchange="fntnpro()"
+                <select name="problema" id="problema" wire:model="problema" onchange="fntnpro()" required
                     class="w-full mt-2 p-2 text-xs rounded-md border font-medium text-zinc-600 border-gray-200 focus:border-gray-300 focus:ring-0">
                     <option class="text-xs md:text-sm bg-gray-100" value="0">Selecciona el tipo de problema
                     </option>
@@ -404,25 +415,46 @@
             </div>
 
             <div id="detalleprob" class="hidden w-full">
-                <x-label for="detalle" value="{{ __('Explique el problema con esta compra') }}" class="text-zinc-800 font-medium " />
-                
-                    <textarea name="detalle" wire:model="detalle"
+                <x-label for="detalle" value="{{ __('Explique el problema con esta compra') }}"
+                    class="text-zinc-800 font-medium " />
+
+                <textarea name="detalle" wire:model="detalle"
                     class="mt-2 w-full text-xs rounded-md border-l-8 
                      text-zinc-600 focus:ring-0">
                     </textarea>
-                
+
             </div>
 
         </x-slot>
 
         <x-slot name="footer">
-            <button wire:click="cancelar"
-                class="px-4 py-1 rounded-md ring-2 ring-lime-500 hover:ring">
+            <button wire:click="enviar" class="px-4 py-1 rounded-md ring-2 ring-lime-500 hover:ring">
                 Enviar
             </button>
         </x-slot>
 
     </x-reportar-modal>
+
+    <!--Modal motivo del reporte -->
+
+    <x-reportar-modal wire:model="open_mssg">
+
+        <x-slot name="title">
+            <p>Reporte realizado por usted</p>
+            <p class="text-xs font-extrabold cursor-pointer" wire:click="$set('open_mssg', false)"><i
+                    class="fa-solid fa-x"></i></p>
+        </x-slot>
+
+        <x-slot name="content">
+            <p class="text-sm text-center">{{ $this->mssg }}</p>
+        </x-slot>
+
+        <x-slot name="footer">
+            <p class="text-xs font-bold text-center">Gracias por su confianza. Pronto estaremos dándole respuesta.</p>
+        </x-slot>
+
+    </x-reportar-modal>
+
     <script>
         function fntnpro() {
             var opcion = document.getElementById("problema").value;

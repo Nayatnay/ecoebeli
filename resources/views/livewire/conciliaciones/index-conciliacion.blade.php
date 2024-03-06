@@ -247,10 +247,9 @@
                     class="w-full mt-2 p-2 text-xs rounded-md border font-medium text-zinc-600 border-gray-200 focus:border-gray-300 focus:ring-0">
                     <option class="text-xs md:text-sm bg-gray-100" value="0">Selecciona el tipo de problema
                     </option>
-                    <option class="text-xs md:text-sm" value="1">El pago no está registrado en nuestras cuentas
+                    <option class="text-xs md:text-sm" value="1">No registrado en cuenta
                     </option>
-                    <option class="text-xs md:text-sm" value="2">El pago fue hecho por un monto inferior al
-                        indicado en la orden</option>
+                    <option class="text-xs md:text-sm" value="2">Monto inferior al indicado en la orden</option>
                     <option class="text-xs md:text-sm" value="3">Otro</option>
                 </select>
                 <x-input-error for="problema" />
