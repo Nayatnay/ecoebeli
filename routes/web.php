@@ -7,6 +7,7 @@ use App\Http\Controllers\CompraController;
 use App\Http\Controllers\DetalproductosController;
 use App\Http\Controllers\EbeliController;
 use App\Http\Controllers\productosporcategoriaController;
+use App\Http\Controllers\VentaController;
 use App\Http\Controllers\VerproductosController;
 use App\Livewire\Carrito\IndexCarrito;
 use App\Livewire\Carrito\IndexCarro as CarritoIndexCarro;
@@ -15,6 +16,7 @@ use App\Livewire\IndexCarro;
 use App\Livewire\Productos\IndexProductos;
 use App\Livewire\Productos\VerProductos;
 use App\Livewire\Tienda\IndexTienda;
+use App\Livewire\Ventas\IndexVentas;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
@@ -98,6 +100,10 @@ Route::get('compra', [CompraController::class, 'index'])->Middleware('can:compra
 Route::get('verificalog', [CarroController::class, 'verificalog'])->name('verificalog');
 Route::get('adicompra/{producto}', [CarroController::class, 'adicompra'])->Middleware('can:adicompra')->name('adicompra');
 Route::get('editmedio/{medio}', [CompraController::class, 'editmedio'])->Middleware('can:editmedio')->name('editmedio');
+
+//Ventas
+Route::get('venta/{ventas}', [VentaController::class, 'index'])->Middleware('can:venta')->name('venta');
+
 
 /*Route::middleware([
     'auth:sanctum',

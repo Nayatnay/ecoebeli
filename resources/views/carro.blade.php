@@ -182,7 +182,7 @@
                     <p class="text-lg font-semibold">Recomendaciones de productos en nuestra tienda</p>
                 </div>
                 @if ($productos->count())
-                    @foreach ($produc as $product)
+                    @foreach ($productos as $product)
                         <div class="flex items-center mt-6">
                             <a href="{{ route('detalleproducto', $product->slug) }} ">
                                 <div class="min-w-[96px] mr-4">

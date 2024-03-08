@@ -20,7 +20,7 @@
 
             @if ($ventassin->count())
 
-                <div class="w-full mt-4 border border-lime-600 min-h-0 overflow-auto rounded-lg text-base">
+                <div class="w-full mt-4 border border-zinc-800 min-h-0 overflow-auto rounded-lg text-base">
 
                     <table
                         class="rounded-lg table-fixed w-full font-light text-base md:text-lg text-left h-auto border-collapse">
@@ -42,21 +42,28 @@
                                     @else
                                         <td class="pl-2 w-40">{{ $ventas->codigo }}-{{ $ventas->telf }}</td>
                                     @endif
-                                    <td class="px-2 w-48 text-right text-lime-600">
+                                    <td class="px-2 w-32 text-right text-lime-600">
                                         {{ number_format($ventas->total, 2, ',', '.') }} BS.
                                     </td>
                                     <td
-                                        class="bg-lime-600 border border-gray-300 text-white px-2 w-32 text-sm font-medium text-center">
+                                        class="px-1 w-20 text-sm font-bold text-center">
                                         <a href="#" wire:click="alerta({{ $ventas }})"
                                             title="Marcar como conciliado" class="hover:underline">
                                             Conciliar
                                         </a>
                                     </td>
                                     <td
-                                        class="bg-zinc-800 border-b border-gray-300 text-lime-500 px-1 w-10 text-sm font-medium text-center">
+                                        class="text-lime-500 px-1 w-10 text-sm font-medium text-center">
                                         <a href="#" wire:click="contactar({{ $ventas }})" title="Contactar"
-                                            class="hover:text-lime-400">
+                                            class="hover:text-lime-600">
                                             <i class="fa-solid fa-envelope"></i>
+                                        </a>
+                                    </td>
+                                    <td
+                                        class="bg-zinc-800 text-white px-1 w-8 text-sm font-medium text-center">
+                                        <a href="{{route('venta', $ventas)}}" title="Detalles"
+                                            class="hover:text-lime-400">
+                                            <i class="fa-solid fa-ellipsis-vertical p-2"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -86,7 +93,7 @@
 
             @if ($ventascon->count())
 
-                <div class="w-full mt-4 border min-h-0 overflow-auto rounded-lg text-base">
+                <div class="w-full mt-4 border border-zinc-800 min-h-0 overflow-auto rounded-lg text-base">
 
                     <table
                         class="table-fixed bg-white w-full font-light text-base md:text-lg text-left h-auto border-collapse">
@@ -94,7 +101,7 @@
                         <tbody class="text-left text-base">
 
                             @foreach ($ventascon as $ventasc)
-                                <tr class="h-8 odd:bg-gray-50">
+                                <tr class="h-10 odd:bg-gray-50">
                                     <td class="pl-2 w-28">{{ date('d-m-Y', strtotime($ventasc->fecha)) }}</td>
                                     @if ($ventasc->tipo_pago == 0)
                                         <td class="pl-2 w-48">Transferencia Bancaria</td>
@@ -111,7 +118,21 @@
                                     <td class="px-2 w-48 text-lime-600 text-right">Bs.
                                         {{ number_format($ventasc->total, 2, ',', '.') }}
                                     </td>
-                                    <td class="px-2 w-40 text-sm text-center"></td>
+                                    <td class="px-1 w-20 text-sm font-bold text-center"></td>
+                                    <td
+                                        class="text-lime-500 px-1 w-10 text-sm font-medium text-center">
+                                        <a href="#" wire:click="contactar({{ $ventasc }})" title="Contactar"
+                                            class="hover:text-lime-600">
+                                            <i class="fa-solid fa-envelope"></i>
+                                        </a>
+                                    </td>
+                                    <td
+                                        class="bg-zinc-800 text-white px-1 w-8 text-sm font-medium text-center">
+                                        <a href="{{route('venta', $ventasc)}}" title="Detalles"
+                                            class="hover:text-lime-400">
+                                            <i class="fa-solid fa-ellipsis-vertical p-2"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -188,9 +209,9 @@
                 Cancelar
             </x-secondary-button>
 
-            <x-danger-button wire:click="conciliar" wire:loading.attr="disabled" class="disabled:opacity-25 ml-2">
+            <x-advert-button wire:click="conciliar" wire:loading.attr="disabled" class="disabled:opacity-25 ml-2">
                 Sí, Conciliar el pago
-            </x-danger-button>
+            </x-advert-button>
         </x-slot>
     </x-confirmation-modal>
 
@@ -268,13 +289,13 @@
         </x-slot>
 
         <x-slot name="footer">
-            <button wire:click="cancelar"
-                class="px-4 py-1 rounded-md ring-2 ring-lime-500 hover:ring">
+            <button wire:click="enviar" class="px-4 py-1 rounded-md text-white bg-lime-600 hover:text-black hover:bg-lime-500">
                 Enviar
             </button>
         </x-slot>
 
     </x-reportar-modal>
+
     <script>
         function fntnpro() {
             var opcion = document.getElementById("problema").value;

@@ -12,6 +12,7 @@ class IndexConciliacion extends Component
     public $open = false;
     public $open_totales = false;
     public $open_reporte = false;
+    
     public $ventas, $fecha, $totalescon, $totalessin, $totalespro, $fechita, $mes, $ano;
     public $problema, $detalle;
 
@@ -43,6 +44,12 @@ class IndexConciliacion extends Component
     {
         $this->ventas = $ventas;
         $this->open_reporte = true;
+    }
+
+    public function detallar(Venta $ventas)
+    {
+        $this->ventas = $ventas;
+        return redirect()->route('venta', compact('ventas'));
     }
 
     public function consultar()
