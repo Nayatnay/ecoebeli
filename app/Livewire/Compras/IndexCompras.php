@@ -89,7 +89,7 @@ class IndexCompras extends Component
                 'id_venta' => $this->venta->id,
                 'id_user' => $this->venta->id_user,
                 'mensaje' => $msg,
-                'estado' => 0, //problema sin resolver
+                'estado' => 1, //problema sin resolver
             ]);
 
             $vta = venta::where('id', '=', $this->venta->id)->first(); //busco la venta 
@@ -104,7 +104,7 @@ class IndexCompras extends Component
 
     public function vereport($venta)
     {
-        $msgreport = Reportesc::where('id_venta', '=', $venta)->first();
+        $msgreport = Reportesc::where('id_venta', '=', $venta)->orderBy('id', 'desc')->first();
         $this->mssg = $msgreport->mensaje;
         $this->open_mssg = true;
     }
@@ -158,7 +158,6 @@ class IndexCompras extends Component
         //Productos comprados por el usuario
         $producto_comprado = Detalleventa::whereIn('id_venta', $ventas)->orderBy('id', 'desc')
             ->paginate(6, ['*'], 'inscribirbs');
-
 
         return view('livewire.compras.index-compras', compact('medios', 'bolivares', 'compras', 'producto_comprado'));
     }

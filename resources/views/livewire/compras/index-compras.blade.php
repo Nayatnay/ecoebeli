@@ -270,7 +270,7 @@
                                         <p class="ml-2">Registrado el día
                                             {{ date('d-m-Y', strtotime($product->venta->fecha)) }}</p>
                                     </div>
-                                    <div class="flex items-center justify-between font-bold text-sm ">
+                                    <div class="flex items-start justify-between font-bold text-sm ">
                                         <p class="mx-2 text-lime-700">Total pagado Bs.
                                             {{ number_format($product->venta->total, 2, ',', '.') }}
                                         </p>
@@ -280,12 +280,23 @@
                                                 <i class="fa-regular fa-star mr-1 "></i>
                                                 Reporte en Proceso
                                             </p>
-                                        @else
+                                        @endif
+                                        @if ($product->venta->reporte == 0)
                                             <p class="text-xs text-lime-700 font-normal hover:underline cursor-pointer"
                                                 wire:click="contactar({{ $product->id_venta }})">
                                                 <i class="fa-regular fa-message mr-1"></i>
                                                 Informar problema con esta compra
                                             </p>
+                                        @endif
+                                        @if ($product->venta->reporte == 2)
+                                            <div>
+                                                <p class="text-orange-600">Estatus Resuelto</p>
+                                                <p class="text-xs text-lime-700 font-normal hover:underline cursor-pointer"
+                                                    wire:click="contactar({{ $product->id_venta }})">
+                                                    <i class="fa-regular fa-message mr-1"></i>
+                                                    Informar problema con esta compra
+                                                </p>
+                                            </div>
                                         @endif
 
                                     </div>
@@ -418,20 +429,20 @@
                 <x-label for="detalle" value="{{ __('Explique el problema con esta compra') }}"
                     class="text-zinc-800 font-medium " />
 
-                    <div class="bg-red-100">
-                        <textarea name="detalle" wire:model="detalle"
-                    class="mt-2 w-full text-xs rounded-md border-l-8 
+                <div class="mt-2 border border-l-8 border-lime-700 rounded">
+                    <textarea name="detalle" wire:model="detalle" class="w-full text-xs border-none
                      text-zinc-600 focus:ring-0">
                     </textarea>
-                    </div>
-                
+                </div>
+
 
             </div>
 
         </x-slot>
 
         <x-slot name="footer">
-            <button wire:click="enviar" class="px-4 py-1 rounded-md text-white bg-lime-600 hover:text-black hover:bg-lime-500">
+            <button wire:click="enviar"
+                class="px-4 py-1 rounded-md text-white bg-lime-600 hover:text-black hover:bg-lime-500">
                 Enviar
             </button>
         </x-slot>
@@ -449,7 +460,8 @@
         </x-slot>
 
         <x-slot name="footer">
-            <p class="text-xs ">* Su solicitud <strong>{{ $this->mssg }}</strong> está siendo atendida. ¡Gracias por su confianza!</p>
+            <p class="text-xs ">* Su solicitud <strong>{{ $this->mssg }}</strong> está siendo atendida. ¡Gracias por
+                su confianza!</p>
         </x-slot>
 
     </x-reportmsg-modal>

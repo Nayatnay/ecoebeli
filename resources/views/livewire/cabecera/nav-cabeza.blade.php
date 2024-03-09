@@ -141,6 +141,23 @@
                                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
                                                 <i class="fa-solid fa-building-columns"></i>
                                                 <span class="ml-2">Conciliaciones</span>
+                                                @if ($concilia != 0)
+                                                    <span class="text-orange-600 text-xs font-semibold ml-1">
+                                                        {{ $concilia }}
+                                                    </span>
+                                                @endif
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('reclamos') }}"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200">
+                                                <i class="fa-solid fa-circle-exclamation"></i>
+                                                <span class="ml-2">Reclamos</span>
+                                                @if ($reclamos != 0)
+                                                    <span class="text-orange-600 text-xs font-semibold ml-1">
+                                                        {{ $reclamos }}
+                                                    </span>
+                                                @endif
                                             </a>
                                         </li>
                                     @endcan

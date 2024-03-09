@@ -13,7 +13,6 @@
 
         <div class="border-b border-gray-300 my-10 pb-20">
 
-
             <div class="pl-4">
                 Cociliaciones Pendientes
             </div>
@@ -45,23 +44,20 @@
                                     <td class="px-2 w-32 text-right text-lime-600">
                                         {{ number_format($ventas->total, 2, ',', '.') }} BS.
                                     </td>
-                                    <td
-                                        class="px-1 w-20 text-sm font-bold text-center">
+                                    <td class="px-1 w-20 text-sm font-bold text-center">
                                         <a href="#" wire:click="alerta({{ $ventas }})"
                                             title="Marcar como conciliado" class="hover:underline">
                                             Conciliar
                                         </a>
                                     </td>
-                                    <td
-                                        class="text-lime-500 px-1 w-10 text-sm font-medium text-center">
-                                        <a href="#" wire:click="contactar({{ $ventas }})" title="Contactar"
-                                            class="hover:text-lime-600">
-                                            <i class="fa-solid fa-envelope"></i>
+                                    <td class="text-lime-500 px-1 w-10 text-base font-medium text-center">
+                                        <a href="#" wire:click="contactar({{ $ventas }})"
+                                            title="Reportar problema" class="hover:text-lime-600">
+                                            <i class="fa-solid fa-circle-exclamation"></i>
                                         </a>
                                     </td>
-                                    <td
-                                        class="bg-zinc-800 text-white px-1 w-8 text-sm font-medium text-center">
-                                        <a href="{{route('venta', $ventas)}}" title="Detalles"
+                                    <td class="bg-zinc-800 text-white px-1 w-8 text-sm font-medium text-center">
+                                        <a href="{{ route('venta', $ventas) }}" title="Detalles"
                                             class="hover:text-lime-400">
                                             <i class="fa-solid fa-ellipsis-vertical p-2"></i>
                                         </a>
@@ -119,16 +115,14 @@
                                         {{ number_format($ventasc->total, 2, ',', '.') }}
                                     </td>
                                     <td class="px-1 w-20 text-sm font-bold text-center"></td>
-                                    <td
-                                        class="text-lime-500 px-1 w-10 text-sm font-medium text-center">
-                                        <a href="#" wire:click="contactar({{ $ventasc }})" title="Contactar"
-                                            class="hover:text-lime-600">
-                                            <i class="fa-solid fa-envelope"></i>
+                                    <td class="text-lime-500 px-1 w-10 text-base font-medium text-center">
+                                        <a href="#" wire:click="contactar({{ $ventasc }})"
+                                            title="Reportar problema" class="hover:text-lime-600">
+                                            <i class="fa-solid fa-circle-exclamation"></i>
                                         </a>
                                     </td>
-                                    <td
-                                        class="bg-zinc-800 text-white px-1 w-8 text-sm font-medium text-center">
-                                        <a href="{{route('venta', $ventasc)}}" title="Detalles"
+                                    <td class="bg-zinc-800 text-white px-1 w-8 text-sm font-medium text-center">
+                                        <a href="{{ route('venta', $ventasc) }}" title="Detalles"
                                             class="hover:text-lime-400">
                                             <i class="fa-solid fa-ellipsis-vertical p-2"></i>
                                         </a>
@@ -277,19 +271,21 @@
             </div>
 
             <div id="detalleprob" class="hidden w-full">
-                <x-label for="detalle" value="{{ __('Explique el problema con este pago') }}" class="text-zinc-800 font-medium " />
-                
-                    <textarea name="detalle" wire:model="detalle"
-                    class="mt-2 w-full text-xs rounded-md border-l-8 
+                <x-label for="detalle" value="{{ __('Explique el problema con este pago') }}"
+                    class="text-zinc-800 font-medium " />
+                <div class="mt-2 border border-l-8 border-lime-700 rounded">
+                    <textarea name="detalle" wire:model="detalle" class="w-full text-xs border-none
                      text-zinc-600 focus:ring-0">
-                    </textarea>
-                
+                        </textarea>
+                </div>
+
             </div>
 
         </x-slot>
 
         <x-slot name="footer">
-            <button wire:click="enviar" class="px-4 py-1 rounded-md text-white bg-lime-600 hover:text-black hover:bg-lime-500">
+            <button wire:click="enviar"
+                class="px-4 py-1 rounded-md text-white bg-lime-600 hover:text-black hover:bg-lime-500">
                 Enviar
             </button>
         </x-slot>

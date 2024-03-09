@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Detalleventa;
+use App\Models\Reportesc;
 use App\Models\User;
 use App\Models\Venta;
 use Illuminate\Http\Request;

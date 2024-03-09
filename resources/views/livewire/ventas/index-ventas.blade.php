@@ -6,7 +6,8 @@
             <h2 class="ml-2 font-semibold text-xl text-gray-800 leading-tight">
                 Detalles del pago
             </h2>
-            <a href="{{route('conciliaciones')}}"><i class="fa-solid fa-arrow-left mr-4"></i></a>
+            <a href="javascript: history.go(-1)" class="text-xs font-medium text-orange-600 mr-4">Volver atrás</a>
+            
         </div>
     </div>
 
@@ -38,7 +39,7 @@
 
         </div>
 
-        <div class="mt-8 md:p-4 border rounded-md">
+        <div class="mt-8 md:p-4 border rounded-md bg-gray-100">
             @foreach ($detalles as $detal)
                 <div class="flex items-center ml-2 my-4">
 

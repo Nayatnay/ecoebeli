@@ -14,7 +14,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Fonts -->
-    
+
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -23,7 +23,8 @@
 </head>
 
 <body class="antialised">
-    <x-admin-cabecera></x-admin-cabecera>
+    
+    @livewire('cabecera.admin-cabeza')
 
     <div>
         <main>

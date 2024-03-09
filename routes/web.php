@@ -66,6 +66,10 @@ Route::get('conciliaciones', function () {
     return view('conciliaciones');
 })->Middleware('can:conciliaciones')->name('conciliaciones');
 
+Route::get('reclamos', function () {
+    return view('reclamos');
+})->Middleware('can:reclamos')->name('reclamos');
+
 Route::get('categorias', IndexCategorias::class)->Middleware('can:categorias')->name('categorias');
 Route::get('productos', IndexProductos::class)->Middleware('can:productos')->name('productos');
 Route::get('carro', [CarroController::class, 'index'])->name('carro');
@@ -103,7 +107,7 @@ Route::get('editmedio/{medio}', [CompraController::class, 'editmedio'])->Middlew
 
 //Ventas
 Route::get('venta/{ventas}', [VentaController::class, 'index'])->Middleware('can:venta')->name('venta');
-
+//Route::get('venta/{ventas}', IndexVentas::class)->Middleware('can:venta')->name('venta');
 
 /*Route::middleware([
     'auth:sanctum',
